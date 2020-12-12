@@ -1,0 +1,13 @@
+{
+  "name": "애니시아",
+  "short_name": "애니시아",
+  "icons": [
+    {
+      "src": "/icon/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF"
+}
