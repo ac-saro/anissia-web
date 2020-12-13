@@ -1,14 +1,10 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router'
 
-Vue.use(Router);
-
-export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
+export default createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   scrollBehavior(to, from, savedPosition) {
     return new Promise((resolve, reject) => {
-      setTimeout(() => resolve({ x: 0, y: 0 }), 1);
+      setTimeout(() => resolve({ left: 0, top: 0 }), 1);
     });
   },
   routes: [
@@ -138,4 +134,4 @@ export default new Router({
       ],
     },
   ],
-});
+})
