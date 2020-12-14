@@ -28,10 +28,10 @@ export class DateFormat {
     if (date.endsWith('Z')) {
       date = date.substring(0, date.length - 1);
       timezoneOffset = rv.getTimezoneOffset();
-    } else if ((/[\+\-]{1}[\d]{2}\:[\d]{2}$/).test(date)) {
+    } else if ((/[+-][\d]{2}:[\d]{2}$/).test(date)) {
       date = date.substring(0, date.length - 3) + date.substr(-2);
     }
-    if ((/[\+\-]{1}[\d]{2}[\d]{2}$/).test(date)) {
+    if ((/[+-][\d]{2}[\d]{2}$/).test(date)) {
       const tz = date.substr(-5);
       const tzm = ((Number(tz.substr(1, 2)) * 60) + Number(tz.substr(3, 2))) * (tz.substr(0, 1) === '+' ? 1 : -1);
       date = date.substring(0, date.length - 5);
@@ -41,11 +41,11 @@ export class DateFormat {
     // parse
     if ((/^[\d]{4}-[\d]{2}-[\d]{2}$/).test(date)) {
       rv = new Date(Number(date.substr(0, 4)), Number(date.substr(5, 2)) - 1, Number(date.substr(8, 2)));
-    } else if ((/^[\d]{4}-[\d]{2}-[\d]{2}T[\d]{2}\:[\d]{2}\:[\d]{2}$/).test(date)) {
+    } else if ((/^[\d]{4}-[\d]{2}-[\d]{2}T[\d]{2}:[\d]{2}:[\d]{2}$/).test(date)) {
       rv = new Date(
         Number(date.substr(0, 4)), Number(date.substr(5, 2)) - 1, Number(date.substr(8, 2)),
         Number(date.substr(11, 2)), Number(date.substr(14, 2)), Number(date.substr(17, 2)));
-    } else if ((/^[\d]{4}-[\d]{2}-[\d]{2}T[\d]{2}\:[\d]{2}\:[\d]{2}\.[\d]{1,7}$/).test(date)) {
+    } else if ((/^[\d]{4}-[\d]{2}-[\d]{2}T[\d]{2}:[\d]{2}:[\d]{2}\.[\d]{1,7}$/).test(date)) {
       if (date.length > 23) {
         date = date.substring(0, 23);
       }

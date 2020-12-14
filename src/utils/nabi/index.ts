@@ -35,7 +35,7 @@ export default class Nabi {
     if (length && email.length > length) {
       return false;
     }
-    return (/^[_a-z0-9\-]+(\.[_a-z0-9\-])*@([_a-z0-9\-]+\.)+[a-z]{2,}$/).test(email);
+    return (/^[_a-z0-9-]+(\.[_a-z0-9-])*@([_a-z0-9-]+\.)+[a-z]{2,}$/).test(email);
   }
 
   public static zerofill(no: number, length: number): string {
@@ -78,7 +78,7 @@ export default class Nabi {
     }
   }
 
-  public static address(setNowAddress: boolean = true): Address {
+  public static address(setNowAddress = true): Address {
     return new Address(setNowAddress);
   }
 }
