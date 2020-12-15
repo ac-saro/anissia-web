@@ -1,2 +1,138 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="147" height="28" version="1.1" viewBox="0 0 38.894 7.4083" xmlns="http://www.w3.org/2000/svg"><g display="none"><rect width="38.894" height="7.4083" fill="#111" stroke-width=".045"/></g><g><g fill="#a04040" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal" aria-label="DH"><path d="m0 1.1083e-7h1.465q1.4185 0 1.9162.13022.50229.13022.76274.42788t.32556.66508q.065112.36277.065112 1.4325v2.637q0 1.0139-.097668 1.3581-.093018.33951-.33021.53485-.23719.19069-.58601.26975-.34882.074414-1.0511.074414h-2.4696zm1.958 1.2883v4.9532q.42323 0 .5209-.16743.097668-.17208.097668-.92552v-2.9254q0-.5116-.032556-.65577-.032556-.14418-.14883-.20929-.11627-.069763-.43718-.069763z"/><path d="m9.7668 1.1083e-7v7.5298h-1.958v-3.1626h-.58601v3.1626h-1.958v-7.5298h1.958v2.6929h.58601v-2.6929z"/></g></g><g><g fill="#4a5491" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal" aria-label="ANT"><path d="m13.928 1.1083e-7 1.1209 7.5298h-2.0045l-.097668-1.3534h-.70228l-.11627 1.3534h-2.0278l.99529-7.5298zm-1.0371 4.8416q-.14883-1.279-.29766-3.1579-.29766 2.158-.37207 3.1579z"/><path d="m19.755 1.1083e-7v7.5298h-1.7162l-1.0185-3.423v3.423h-1.6371v-7.5298h1.6371l1.0976 3.3905v-3.3905z"/><path d="m24.481 1.1083e-7v1.5069h-1.1627v6.0229h-1.958v-6.0229h-1.1581v-1.5069z"/></g></g><g><g transform="scale(.99998 1)" fill="#585858" stroke-width=".265" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal" aria-label=".NET"><path d="m25.419 5.9951v1.5348h-1.4185v-1.5348z"/><path d="m30.363 2.7739e-6v7.5299h-1.7162l-1.0186-3.4231v3.4231h-1.6371v-7.5299h1.6371l1.0976 3.3905v-3.3905z"/><path d="m31.144 2.7739e-6h3.265v1.5069h-1.3069v1.4278h1.2232v1.4325h-1.2232v1.6557h1.4371v1.5069h-3.3952z"/><path d="m39.051 2.7739e-6v1.5069h-1.1627v6.023h-1.958v-6.023h-1.1581v-1.5069z"/></g></g><g display="none"><text x="-0.39067382" y="7.5297728" fill="#af3232" font-family="Impact" font-size="9.525px" letter-spacing="0px" stroke-width=".26458" word-spacing="0px" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="-0.39067382" y="7.5297728">DH</tspan></text></g><g display="none"><g fill="#3f52ad" stroke-width=".26458" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal" aria-label="ANT"><path d="m13.928 1.1083e-7 1.1209 7.5298h-2.0045l-.097668-1.3534h-.70228l-.11627 1.3534h-2.0278l.99529-7.5298zm-1.0371 4.8416q-.14883-1.279-.29766-3.1579-.29766 2.158-.37207 3.1579z"/><path d="m19.755 1.1083e-7v7.5298h-1.7162l-1.0185-3.423v3.423h-1.6371v-7.5298h1.6371l1.0976 3.3905v-3.3905z"/><path d="m24.481 1.1083e-7v1.5069h-1.1627v6.0229h-1.958v-6.0229h-1.1581v-1.5069z"/></g></g><g display="none"><g transform="scale(.99998 1)" fill="#3d3d3d" stroke-width=".265" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal" aria-label=".NET"><path d="m25.419 5.9951v1.5348h-1.4185v-1.5348z"/><path d="m30.363 2.7739e-6v7.5299h-1.7162l-1.0186-3.4231v3.4231h-1.6371v-7.5299h1.6371l1.0976 3.3905v-3.3905z"/><path d="m31.144 2.7739e-6h3.265v1.5069h-1.3069v1.4278h1.2232v1.4325h-1.2232v1.6557h1.4371v1.5069h-3.3952z"/><path d="m39.051 2.7739e-6v1.5069h-1.1627v6.023h-1.958v-6.023h-1.1581v-1.5069z"/></g></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="147"
+   height="28"
+   version="1.1"
+   viewBox="0 0 38.894 7.4083"
+   id="svg2566"
+   sodipodi:docname="logo-dark.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata2572">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs2570" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1988"
+     inkscape:window-height="823"
+     id="namedview2568"
+     showgrid="false"
+     inkscape:zoom="7.2312925"
+     inkscape:cx="73.5"
+     inkscape:cy="14"
+     inkscape:window-x="809"
+     inkscape:window-y="1079"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2566" />
+  <g
+     display="none"
+     id="g2506">
+    <rect
+       width="38.894"
+       height="7.4083"
+       fill="#111"
+       stroke-width=".045"
+       id="rect2504" />
+  </g>
+  <g
+     display="none"
+     id="g2542">
+    <text
+       x="-0.39067382"
+       y="7.5297728"
+       fill="#af3232"
+       font-family="Impact"
+       font-size="9.525px"
+       letter-spacing="0px"
+       stroke-width=".26458"
+       word-spacing="0px"
+       style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25"
+       xml:space="preserve"
+       id="text2540"><tspan
+         x="-0.39067382"
+         y="7.5297728"
+         id="tspan2538">DH</tspan></text>
+  </g>
+  <g
+     display="none"
+     id="g2552">
+    <g
+       fill="#3f52ad"
+       stroke-width=".26458"
+       style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal"
+       aria-label="ANT"
+       id="g2550">
+      <path
+         d="m13.928 1.1083e-7 1.1209 7.5298h-2.0045l-.097668-1.3534h-.70228l-.11627 1.3534h-2.0278l.99529-7.5298zm-1.0371 4.8416q-.14883-1.279-.29766-3.1579-.29766 2.158-.37207 3.1579z"
+         id="path2544" />
+      <path
+         d="m19.755 1.1083e-7v7.5298h-1.7162l-1.0185-3.423v3.423h-1.6371v-7.5298h1.6371l1.0976 3.3905v-3.3905z"
+         id="path2546" />
+      <path
+         d="m24.481 1.1083e-7v1.5069h-1.1627v6.0229h-1.958v-6.0229h-1.1581v-1.5069z"
+         id="path2548" />
+    </g>
+  </g>
+  <g
+     display="none"
+     id="g2564">
+    <g
+       transform="scale(.99998 1)"
+       fill="#3d3d3d"
+       stroke-width=".265"
+       style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal"
+       aria-label=".NET"
+       id="g2562">
+      <path
+         d="m25.419 5.9951v1.5348h-1.4185v-1.5348z"
+         id="path2554" />
+      <path
+         d="m30.363 2.7739e-6v7.5299h-1.7162l-1.0186-3.4231v3.4231h-1.6371v-7.5299h1.6371l1.0976 3.3905v-3.3905z"
+         id="path2556" />
+      <path
+         d="m31.144 2.7739e-6h3.265v1.5069h-1.3069v1.4278h1.2232v1.4325h-1.2232v1.6557h1.4371v1.5069h-3.3952z"
+         id="path2558" />
+      <path
+         d="m39.051 2.7739e-6v1.5069h-1.1627v6.023h-1.958v-6.023h-1.1581v-1.5069z"
+         id="path2560" />
+    </g>
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.3473px;line-height:1.25;font-family:Gabriola;-inkscape-font-specification:'Gabriola, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#343434;fill-opacity:1;stroke:none;stroke-width:0.264585"
+     x="0.38155836"
+     y="7.1659322"
+     id="text234"><tspan
+       sodipodi:role="line"
+       id="tspan232"
+       x="0.38155836"
+       y="7.1659322"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.3473px;font-family:Gabriola;-inkscape-font-specification:'Gabriola, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#343434;fill-opacity:1;stroke-width:0.264585"><tspan
+         style="fill:#428ee1;fill-opacity:1;stroke-width:0.264585"
+         id="tspan2471">Ani</tspan><tspan
+         style="fill:#65a5c4;fill-opacity:1;stroke-width:0.264585"
+         id="tspan2611">ssia</tspan></tspan></text>
+</svg>
