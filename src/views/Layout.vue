@@ -173,7 +173,7 @@ input { outline: none }
 #nav .menu div { margin:0 12px; border-bottom: 2px solid transparent; cursor: pointer; transition: all .4s }
 #nav .menu div img { width:24px; height:24px; margin: 16px 16px 14px; filter:grayscale(1); transition: all .6s }
 #nav .menu div.active,
-#nav .menu div:hover{ border-color: #4ea998 }
+#nav .menu div:hover{ border-color: #276998 }
 #nav .menu div.active img,
 #nav .menu div:hover img{ filter:grayscale(0); transition: all 1.2s; }
 #nav .tool div img { width:28px; height:28px; margin:14px }
@@ -181,7 +181,7 @@ input { outline: none }
 
 #nav-tool { position: fixed; overflow-y: auto; user-select: none; backdrop-filter: blur(10px); }
 #nav-tool a { text-decoration: none; }
-#nav-tool .title { font-size:20px; border-bottom:1px solid #4ea998; color:#4ea998; padding:8px; margin:8px 8px 8px; }
+#nav-tool .title { font-size:20px; border-bottom:1px solid #276998; color:#276998; padding:8px; margin:8px 8px 8px; }
 #nav-tool .sign { font-weight: bold; padding:48px 0; text-align:center; font-size:14px; cursor: default; }
 #nav-tool ruby { transition:all .5s }
 #nav-tool rt { transition:all 1s }
@@ -191,7 +191,7 @@ input { outline: none }
 #nav-tool .sign:hover .net { color:#555 }
 #nav-tool .nav-tool-item { line-height: 24px; padding:12px 16px; margin-top:4px; display:inline-block; cursor: pointer }
 #nav-tool .nav-tool-item img { width:20px; height:20px; margin:0 8px 0 0; vertical-align: top; filter:grayscale(1); }
-#nav-tool .nav-tool-item:hover { color:#4ea998; transition: all .4s; }
+#nav-tool .nav-tool-item:hover { color:#276998; transition: all .4s; }
 #nav-tool .nav-tool-item:hover img { filter:grayscale(0); transition: all 1.5s; transform: rotateY(360deg) }
 #nav-tool .color-scheme .color-scheme-st { font-weight: bold; float: right; text-align: right; padding:16px; }
 #nav-tool .color-scheme .color-scheme-st.st-light { color:#bbb }
@@ -276,7 +276,7 @@ html.light .mono-area input[type=password]:-webkit-autofill {
 }
 html.light .mono-area input[type=button] { background: #4f5677; color:#fff }
 html.light .x-tag { color:#333; border-color:#eee; }
-html.light .popup-background .popup-box { background: #fff; border:1px solid #4ea998; }
+html.light .popup-background .popup-box { background: #fff; border:1px solid #276998; }
 html.light .popup-background .popup-box input[type=password] { border:1px solid #ddd }
 
 /* dark mode */
@@ -300,7 +300,7 @@ html.dark .mono-area input[type=password]:-webkit-autofill {
 }
 html.dark .mono-area input[type=button] { background: #999; color:#000; }
 html.dark .x-tag { color:#999; border-color:#191919; }
-html.dark .popup-background .popup-box { background: #000; border:1px solid #4ea998; }
+html.dark .popup-background .popup-box { background: #000; border:1px solid #276998; }
 html.dark .popup-background .popup-box input[type=password] { border:1px solid #333 }
 
 </style>

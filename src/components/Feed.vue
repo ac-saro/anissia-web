@@ -259,7 +259,7 @@ export default class Feed extends Vue {
 
 html.light .feed textarea,
 html.light .feed input { color:#000; }
-html.light .feed input[type=button] { background: #4ea998; color:#fff }
+html.light .feed input[type=button] { background: #276998; color:#fff }
 html.light .feed .article-write .article-writer { border-bottom: 1px solid #ddd }
 html.light .feed .article textarea { border: 1px solid #ddd }
 html.light .feed .vote-up { color:#af3232; }
@@ -268,7 +268,7 @@ html.light .feed .article .article-info .article-tags a { color:#3b988b }
 
 html.dark .feed textarea,
 html.dark .feed input { background: transparent; color:#bbb; }
-html.dark .feed input[type=button] { background: #111; color:#4ea998 }
+html.dark .feed input[type=button] { background: #111; color:#276998 }
 html.dark .feed .article-write .article-writer { border-bottom: 1px solid #333 }
 html.dark .feed .article textarea { border: 1px solid #333 }
 html.dark .feed img.member-icon { opacity: .5 }
