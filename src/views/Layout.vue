@@ -57,12 +57,6 @@
           </div>
         </div>
 
-        <div class="sign">
-          <ruby class="dh">동학<rt>DH</rt></ruby>
-          <ruby class="ant">개미<rt>ANT</rt></ruby>
-          <ruby class="net">네트워크<rt>.NET</rt></ruby>
-        </div>
-
       </div>
     </nav>
   </div>
@@ -185,10 +179,6 @@ input { outline: none }
 #nav-tool .sign { font-weight: bold; padding:48px 0; text-align:center; font-size:14px; cursor: default; }
 #nav-tool ruby { transition:all .5s }
 #nav-tool rt { transition:all 1s }
-#nav-tool .sign:not(:hover) rt { opacity: 0 }
-#nav-tool .sign:hover .dh { color:#af3232 }
-#nav-tool .sign:hover .ant { color:#3f52ad }
-#nav-tool .sign:hover .net { color:#555 }
 #nav-tool .nav-tool-item { line-height: 24px; padding:12px 16px; margin-top:4px; display:inline-block; cursor: pointer }
 #nav-tool .nav-tool-item img { width:20px; height:20px; margin:0 8px 0 0; vertical-align: top; filter:grayscale(1); }
 #nav-tool .nav-tool-item:hover { color:#276998; transition: all .4s; }

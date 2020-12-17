@@ -3,9 +3,7 @@
     <div>
 
       <div class="anissia">
-        <ruby class="dh">DH<rt>동학</rt></ruby>
-        <ruby class="ant">ANT<rt>개미</rt></ruby>
-        <ruby class="net">.NET<rt>네트워크</rt></ruby>
+        애니시아 로그인
       </div>
 
       <div class="base-mat login-box">
@@ -33,12 +31,7 @@
 #login .account { padding:12px 24px 0; }
 #login .account > div { padding:6px 0 4px; }
 #login .account > div a { font-size:14px; }
-#login .anissia { font-weight: bold; padding:48px 0; text-align:center; font-size:30px; cursor: default; }
-#login .anissia ruby { transition:all .5s }
-#login .anissia rt { transition:all 1s }
-#login .anissia .dh { color:#af3232 }
-#login .anissia .ant { color:#3f52ad }
-#login .anissia .net { color:#555 }
+#login .anissia { padding:48px 0; text-align:center; font-size:30px; cursor: default; color:#555 }
 
 #login .auto-auth { text-align: right; font-size:15px; color:#777 }
 #login .auto-auth label { cursor: pointer }
