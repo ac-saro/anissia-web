@@ -14,7 +14,7 @@
 ```
 https://anissia.net/api/anime/schedule/<week>
 ```
-
+t
 * **week**: text(1)
 
    |0|1|2|3|4|5|6|7|8|
@@ -45,7 +45,7 @@ https://anissia.net/api/anime/schedule/<week>
 # 애니메이션 자막 정보
 ### 요청
 ```
-https://anissia.net/api/anime/caption/<animeNo>
+https://anissia.net/api/anime/caption/animeNo/<animeNo>
 ```
 
 * **animeNo**: int(20) = 애니등록번호 (위 애니메이션 목록 참고)
@@ -75,9 +75,9 @@ https://anissia.net/api/anime/caption/<animeNo>
    // 이 예제는 간결한 소스코드상 fetch를 사용하였지만, fetch는 IE에서 지원되지 않음으로 다른 라이브러리 사용권장
    // 브라우저의 개발자도구를 열고 간단하게 아래 예제를 실행할 수 있음.
    // - GitHub는 기본정책이 Cross Origin 차단임으로 새탭을 열어서 개발자도구 사용.
-   fetch('https://anissia.net/api/anime/timetable/0') // 0: 일요일
+   fetch('https://anissia.net/api/anime/schedule/0') // 0: 일요일
        .then(e => e.json())
-       .then(list => list.forEach(node => console.log(`${node.bcTimeOrDate} ${node.subject}`)));
+       .then(list => list.forEach(node => console.log(`${node.time} ${node.subject}`)));
    ```
 
 <br/><br/>
