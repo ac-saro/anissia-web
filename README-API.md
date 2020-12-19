@@ -31,11 +31,11 @@ t
 |-|-|-|-|-|-|
 |animeNo|int(20)|X|애니등록번호|123|애니자막 호출시 사용|
 |status|int(1)|X|ON: 반영중, OFF: 결방|ON|OFF일경우 제목앞에 [결방] 표시 권장|
-|time|text(10)|O|week 0-6: 시간 <br/> week 7-8: 날짜|00:00 <br/> 2019-08-01|날짜 `yyyy-99-99` -> `yyyy` 치환권장 <br/> 공백 -> `미정` 치환권장|
+|time|text(10)|O|week 0-6: 시간 <br/> week 7-8: 날짜|00:00 <br/> 2019-08-01|날짜 `yyyy-99-99` -> `yyyy` 치환권장 <br/> 공백 -> 'N/A' 치환권장|
 |subject|text(100)|X|제목|애니메이션 제목|-|
 |genres|text(64)|X|장르 (다중값)|모험,판타지| **공백없는쉼표**로 구분되며 치환사용을 권장|
-|startDate|text(10)|O|시작일|2019-01-02|공백아님 + week(0-6) + 미래: 제목앞에 [01/02] 처럼 표기 권장|
-|endDate|text(10)|O|종료일|2019-08-16|공백아님 + week(0-6) + 과거: 제목앞에 [完] 표기 권장|
+|startDate|text(10)|O|시작일|2019-01-02|공백아님 + week(0-6) + startDate >= 금일: 제목앞에 [01/02] 처럼 표기 권장|
+|endDate|text(10)|O|종료일|2019-08-16|공백아님 + week(0-6) + endDate <= 금일: 제목앞에 [完] 표기 권장|
 |website|text(128)|O|공식사이트|https://anissia.net|-|
 
 - 기본적으로 모든 날짜/시간은 타임존 Asia/Seoul(+09:00)이 적용됨
@@ -58,7 +58,7 @@ https://anissia.net/api/anime/caption/animeNo/<animeNo>
 
 |변수명|타입|빈값|설명|예제값|비고|
 |-|-|-|-|-|-|
-|episode|text(10)|O|회차<br/>소수점1자리 가능|0<br/>30 <br/> 12.3|공백 -> 단편|
+|episode|text(10)|X|회차<br/>소수점1자리 가능|0<br/>30 <br/> 12.3|0 -> 단편|
 |updDt|text(19)|X|자막등록시간|2012-02-01 00:00:00|타임존 Asia/Seoul(+09:00)이 적용됨|
 |website|text(512)|O|자막링크주소|https://anissia.net|공백 -> 준비중|
 |name|text(32)|X|자막제작자이름|박용서|-|

@@ -1,8 +1,31 @@
 import Nabi from '@/utils/nabi';
+import {DateFormat} from "@/utils/nabi/DateFormat";
 /**
  * Anissia Util
  */
 export default class AnissiaUtil {
+
+  /**
+   * pure week: 0:sun,1:mon...6:sat
+   * week extension: 7:other, 8:new
+   */
+  public static isPureWeek(week: number): boolean {
+    return [7, 8].indexOf(week) === -1;
+  }
+
+  public static getSubjectPrefix(week: string, status: string, startDate: string, endDate: string) {
+    const today = new DateFormat().format("yyyy-MM-dd"); // ex) 1988-10-17
+    if (AnissiaUtil.isPureWeek(Number(week))) { // is not status
+      if (status === 'OFF') { // is not status
+        return '결방';
+      } else if (today.localeCompare(startDate) <= 0) { // not yet start anime
+        return startDate;
+      } else if (AnissiaUtil.animeIsEnded(endDate)) { // anime end
+        return '完';
+      }
+    }
+    return '';
+  }
 
   /**
    * date to ymd or dynamic ago
@@ -13,8 +36,8 @@ export default class AnissiaUtil {
   }
 
   public static animeIsEnded(endDate: string): boolean {
-    const today = new Date().toISOString().substring(0, 10); // ex) 1988-10-17
-    return endDate !== '0000-00-00' && today.localeCompare(endDate) > 0;
+    const today = new DateFormat().format("yyyy-MM-dd"); // ex) 1988-10-17
+    return endDate !== '' && today.localeCompare(endDate) >= 0;
   }
 
   public static formatOrDynamicAgo(isoDate: string, format: string): string {
