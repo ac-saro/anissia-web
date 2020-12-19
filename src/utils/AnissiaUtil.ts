@@ -40,6 +40,29 @@ export default class AnissiaUtil {
     return endDate !== '' && today.localeCompare(endDate) >= 0;
   }
 
+  public static animePeriod(week: string, startDate: string, endDate: string): string {
+    if (startDate !== '' || endDate !== '') {
+      const sd = startDate.replace(/-99/g, '');
+      const ed = endDate.replace(/-99/g, '');
+      let rv = '';
+      if (sd && ed) { // exist both
+        rv = sd === ed ? sd : `${sd} ~ ${ed}`;
+      } else { // exist only one side
+        rv = sd + ed;
+        if (AnissiaUtil.isPureWeek(Number(week)) && sd) { // is day and exsit only start date
+          rv += ' ~ 진행중';
+        }
+      }
+      // change date format : yyyy-MM-dd -> yyyy년 MM월 dd일
+      return (`${rv} `
+          .replace(/([\d]{4})-([\d]{2})-([\d]{2})/g, '$1년 $2월 $3일')
+          .replace(/([\d]{4})-([\d]{2})/g, '$1년 $2월')
+          .replace(/([\d]{4}) /g, '$1년'))
+          .trim();
+    }
+    return '';
+  }
+
   public static formatOrDynamicAgo(isoDate: string, format: string): string {
     if (isoDate == null) {
       return '';

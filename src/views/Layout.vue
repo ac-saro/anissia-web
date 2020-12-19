@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div id="area-under-nav">
       <router-view :key="this.$route.fullPath"/>
     </div>
 
@@ -151,12 +151,10 @@ export default class Layout extends Vue {
 </script>
 
 <style>
-body { margin:56px 0 0; padding:0; }
 a { text-decoration: none }
 a:hover { text-decoration: underline }
-input { outline: none }
-::-webkit-scrollbar{width:4px;height:4px }
 
+#area-under-nav { padding-top:56px; }
 #nav { height:56px; position: fixed; top:0; left:0; right:0; user-select: none; }
 #nav div.inline { display:inline-block; }
 #nav img { vertical-align: top }

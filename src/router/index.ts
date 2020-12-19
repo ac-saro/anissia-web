@@ -8,11 +8,11 @@ export default createRouter({
     });
   },
   routes: [
-    // {
-    //   path: '/schedule/2015',
-    //   component: () => import('@/views/schedule/2015.vue'),
-    //   meta: { title: '애니편성표 2015' },
-    // },
+    {
+      path: '/schedule/2015',
+      component: () => import('@/views/schedule/2015.vue'),
+      meta: { title: '애니편성표 2015' },
+    },
     {
       path: '/schedule/2009',
       component: () => import('@/views/schedule/2009.vue'),

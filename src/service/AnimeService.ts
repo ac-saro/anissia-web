@@ -16,6 +16,7 @@ export default class AnimeService {
     fetch(`/api/anime/schedule/${week}`).then(e => e.json()).then(list => callback(list.map((e: any) => {
       e.subjectPrefix = AnissiaUtil.getSubjectPrefix(week, e.status, e.startDate, e.endDate);
       e.time = e.time != '' ? e.time.replace('-99-99', '') : 'N/A';
+      e.period = AnissiaUtil.animePeriod(week, e.startDate, e.endDate);
       return e;
     })));
   }
