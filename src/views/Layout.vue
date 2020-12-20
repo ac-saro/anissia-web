@@ -14,38 +14,38 @@
         <div id="nav-tool-toggle" class="inline" @click="onTool = !onTool"><img src="@/assets/layout/nav/tool-off.svg" alt="tool"/></div>
       </div>
       <div class="menu">
-        <router-link to="/dashboard">
-          <div class="inline" :class="{active: inPath('/dashboard')}"><img src="@/assets/layout/nav/dashboard.svg" alt=""/></div>
+        <router-link to="/schedule">
+          <div class="inline" :class="{active: inPath('/schedule')}"><img src="@/assets/layout/nav/schedule.svg" alt=""/></div>
         </router-link>
         <router-link to="/">
           <div class="inline" :class="{active: inPath('/')}"><img src="@/assets/layout/nav/home.svg" alt=""/></div>
         </router-link>
-        <router-link to="/stock">
-          <div class="inline" :class="{active: inPath('/stock')}"><img src="@/assets/layout/nav/stock.svg" alt=""/></div>
+        <router-link to="/anime">
+          <div class="inline" :class="{active: inPath('/anime')}"><img src="@/assets/layout/nav/anime.svg" alt=""/></div>
         </router-link>
       </div>
     </nav>
     <nav id="nav-tool" v-if="onTool">
       <div>
 
-        <div class="title">메뉴</div>
-        <div class="menu">
-          <div><router-link to="/">
-            <div class="nav-tool-item"><img src="@/assets/layout/nav/home.svg" alt=""/> 메인화면</div>
-          </router-link></div>
-          <div><router-link to="/dashboard">
-            <div class="nav-tool-item"><img src="@/assets/layout/nav/dashboard.svg" alt=""/> 대시보드</div>
-          </router-link></div>
-          <div><router-link to="/docs">
-            <div class="nav-tool-item"><img src="@/assets/layout/nav/stock.svg" alt=""/> 종목문서</div>
-          </router-link></div>
-        </div>
-
         <div class="title">계정</div>
         <div class="menu">
           <div v-if="!isLogin"><div @click="login"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-login.svg" alt=""/> 로그인</div></div></div>
-          <div v-if="isLogin"><router-link to="/user"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-user.svg" alt=""/> 회원정보</div></router-link></div>
+          <div v-if="isLogin"><router-link to="/account"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-user.svg" alt=""/> 회원정보</div></router-link></div>
           <div v-if="isLogin"><div @click="logout" class="nav-tool-item"><img src="@/assets/layout/nav/tool-logout.svg" alt=""/> 로그아웃</div></div>
+        </div>
+
+        <div class="title">애니메이션</div>
+        <div class="menu">
+          <div><router-link to="/schedule"><div class="nav-tool-item"><img src="@/assets/layout/nav/home.svg" alt=""/> 애니 편성표</div></router-link></div>
+          <div><router-link to="/anime"><div class="nav-tool-item"><img src="@/assets/layout/nav/home.svg" alt=""/> 애니 정보</div></router-link></div>
+        </div>
+
+        <div class="title">일반메뉴</div>
+        <div class="menu">
+          <div><router-link to="/introduce"><div class="nav-tool-item"><img src="@/assets/layout/nav/home.svg" alt=""/> 애니시아 소개</div></router-link></div>
+          <div><router-link to="/news"><div class="nav-tool-item"><img src="@/assets/layout/nav/home.svg" alt=""/> 공지사항</div></router-link></div>
+          <div><router-link to="/inquiry"><div class="nav-tool-item"><img src="@/assets/layout/nav/home.svg" alt=""/> 문의 게시판</div></router-link></div>
         </div>
 
         <div class="title">화면</div>
@@ -179,7 +179,7 @@ a:hover { text-decoration: underline }
 #nav-tool rt { transition:all 1s }
 #nav-tool .nav-tool-item { line-height: 24px; padding:12px 16px; margin-top:4px; display:inline-block; cursor: pointer }
 #nav-tool .nav-tool-item img { width:20px; height:20px; margin:0 8px 0 0; vertical-align: top; filter:grayscale(1); }
-#nav-tool .nav-tool-item:hover { color:#276998; transition: all .4s; }
+#nav-tool .nav-tool-item:hover { color:#276998; transition: all .2s; }
 #nav-tool .nav-tool-item:hover img { filter:grayscale(0); transition: all 1.5s; transform: rotateY(360deg) }
 #nav-tool .color-scheme .color-scheme-st { font-weight: bold; float: right; text-align: right; padding:16px; }
 #nav-tool .color-scheme .color-scheme-st.st-light { color:#bbb }

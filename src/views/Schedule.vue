@@ -12,7 +12,9 @@
         </div>
       </div>
       <div class="basic-layout-main">
-        스케줄
+        <form class="base-mat">
+          asdfasdf
+        </form>
       </div>
     </div>
 
