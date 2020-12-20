@@ -28,24 +28,29 @@ export default createRouter({
           component: () => import('@/views/Home.vue'),
         },
         {
-          path: '/stock/:id/wiki',
+          path: '/schedule',
           meta: { title: '애니시아' },
-          component: () => import('@/views/StockWiki.vue'),
+          component: () => import('@/views/Schedule.vue'),
         },
         {
-          path: '/stock/:id/feed',
+          path: '/anime',
           meta: { title: '애니시아' },
-          component: () => import('@/views/StockFeed.vue'),
+          component: () => import('@/views/Anime.vue'),
         },
         {
-          path: '/stock',
+          path: '/introduce',
           meta: { title: '애니시아' },
-          component: () => import('@/views/Stock.vue'),
+          component: () => import('@/views/Introduce.vue'),
         },
         {
-          path: '/dashboard',
+          path: '/news',
           meta: { title: '애니시아' },
-          component: () => import('@/views/Dashboard.vue'),
+          component: () => import('@/views/News.vue'),
+        },
+        {
+          path: '/inquiry',
+          meta: { title: '애니시아' },
+          component: () => import('@/views/Inquiry.vue'),
         },
         {
           path: '/login',
@@ -68,9 +73,9 @@ export default createRouter({
           component: () => import('@/views/Lost.vue'),
         },
         {
-          path: '/user',
+          path: '/account',
           meta: { title: '애니시아' },
-          component: () => import('@/views/User.vue'),
+          component: () => import('@/views/Account.vue'),
         }
       ]
     },

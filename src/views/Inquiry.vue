@@ -12,21 +12,29 @@
         </div>
       </div>
       <div class="basic-layout-main">
-        <div class="base-mat">
-          종목문서 {{$route.params.id}}
-        </div>
+        문의
       </div>
     </div>
+
   </div>
 </template>
 
+<style>
+
+
+</style>
+
 <script lang="ts">
+import Feed from "@/components/Feed.vue";
 import LatestDocs from "@/components/LatestDocs.vue";
 import RankBoard from "@/components/RankBoard.vue";
 import {Options, Vue} from "vue-class-component";
 
 @Options({
+  computed: {
+  },
   components: {
+    Feed,
     LatestDocs,
     RankBoard
   },
@@ -34,6 +42,9 @@ import {Options, Vue} from "vue-class-component";
   }
 })
 
-export default class StockWiki extends Vue {
+export default class Inquiry extends Vue {
+  data() {
+    return {};
+  }
 }
 </script>

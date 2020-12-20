@@ -14,6 +14,6 @@ import {Options, Vue} from "vue-class-component";
   methods: {
   }
 })
-export default class User extends Vue {
+export default class Account extends Vue {
 }
 </script>
