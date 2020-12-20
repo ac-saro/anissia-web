@@ -11,7 +11,7 @@ export default createRouter({
     {
       path: '/schedule/2015',
       component: () => import('@/views/schedule/2015.vue'),
-      meta: { title: '애니편성표 2015' },
+      meta: { title: '애니편성표' },
     },
     {
       path: '/schedule/2009',
