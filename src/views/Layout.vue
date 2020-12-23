@@ -154,7 +154,7 @@ export default class Layout extends Vue {
 a { text-decoration: none }
 a:hover { text-decoration: underline }
 
-#area-under-nav { padding-top:56px; }
+#area-under-nav { padding:56px 0 12px; }
 #nav { height:56px; position: fixed; top:0; left:0; right:0; user-select: none; }
 #nav div.inline { display:inline-block; }
 #nav img { vertical-align: top }

@@ -17,7 +17,7 @@
       </div>
 
       <div class="base-mat lost-result" v-if="mode == 'pass'">
-        <div class="icon"><img src="@/assets/layout/page/ac-pass.svg" /></div>
+        <div class="icon"><img src="@/assets/page/account-pass.svg" /></div>
           <div class="title">암호가 변경되었습니다.</div>
           <div class="desc">
             <router-link to="/login">로그인</router-link> 페이지로 이동하여 로그인해주세요.
@@ -25,7 +25,7 @@
       </div>
 
       <div class="base-mat lost-result" v-if="mode == 'fail'">
-        <div class="icon"><img src="@/assets/layout/page/ac-fail.svg" /></div>
+        <div class="icon"><img src="@/assets/page/account-fail.svg" /></div>
         <div class="title">회원가입에 실패하였습니다</div>
         <div v-if="failMessage">
           <div class="desc">{{failMessage}}</div>
@@ -36,7 +36,7 @@
       </div>
 
       <div class="base-mat lost-result" v-if="mode == 'wait'">
-        <div class="icon"><img src="@/assets/layout/page/ac-wait.svg" /></div>
+        <div class="icon"><img src="@/assets/page/account-wait.svg" /></div>
         <div class="title">이메일 인증확인중</div>
         <div class="desc">
           이메일 인증을 확인하는 중입니다...

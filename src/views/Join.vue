@@ -15,13 +15,13 @@
       </div>
 
       <div class="base-mat join-result" v-if="mode == 'needMailAuth'">
-        <div class="icon"><img src="@/assets/layout/page/ac-pass.svg" /></div>
+        <div class="icon"><img src="@/assets/page/account-pass.svg" /></div>
         <div class="title">이메일 인증</div>
         <div class="desc-title">이메일 인증을 완료해주세요.</div>
       </div>
 
       <div class="base-mat join-result" v-if="mode == 'pass'">
-        <div class="icon"><img src="@/assets/layout/page/ac-pass.svg" /></div>
+        <div class="icon"><img src="@/assets/page/account-pass.svg" /></div>
         <div class="title">축하합니다!</div>
         <div class="desc-title">회원가입이 완료되었습니다.</div>
         <div class="desc">
@@ -30,7 +30,7 @@
       </div>
 
       <div class="base-mat join-result" v-if="mode == 'fail'">
-        <div class="icon"><img src="@/assets/layout/page/ac-fail.svg" /></div>
+        <div class="icon"><img src="@/assets/page/account-fail.svg" /></div>
         <div class="title">회원가입에 실패하였습니다</div>
         <div v-if="message">
           <div class="desc">{{message}}</div>
@@ -41,7 +41,7 @@
       </div>
 
       <div class="base-mat join-result" v-if="mode == 'wait'">
-        <div class="icon"><img src="@/assets/layout/page/ac-wait.svg" /></div>
+        <div class="icon"><img src="@/assets/page/account-wait.svg" /></div>
         <div class="title">이메일 인증확인중</div>
         <div class="desc">
           이메일 인증을 확인하는 중입니다...

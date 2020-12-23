@@ -7,7 +7,6 @@
           <input type="button" value="작성완료" title="Ctrl + Enter" @click="this.addArticle()"/>
         </div>
         <div v-if="this.isLogin" class="article-writer-info">
-          <img class="member-icon" src="@/assets/pub/member.svg" alt="member" />
           <b>{{$store.state.user.name}}</b>
         </div>
         <div v-else class="article-writer-info">
@@ -28,7 +27,6 @@
             <span @click="this.deleteArticle(index)"><span class="bar"> | </span>삭제</span>
           </div>
           <div class="article-writer-info">
-            <img v-if="node.member" class="member-icon" src="@/assets/pub/member.svg" alt="member" />
             <b>{{node.name}}</b>
             <span v-if="!node.member">&nbsp;({{node.ip}})</span>
           </div>
