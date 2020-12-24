@@ -10,6 +10,9 @@ input, textarea { outline: none; }
 html { height: 100%; }
 body { height: 100%; margin: 0; padding: 0; }
 ::-webkit-scrollbar{width:4px;height:4px }
+
+a { color:#31af98 }
+a:hover { text-decoration: underline }
 </style>
 
 <script lang="ts">

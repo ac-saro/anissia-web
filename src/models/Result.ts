@@ -1,7 +1,7 @@
 import PageData from "@/models/PageData";
 
 export default class Result<T> {
-  constructor(st: string = '', msg: string = '', data: T | null = null) {
+  constructor(st= '', msg = '', data: T | null = null) {
     this.st = st;
     this.msg = msg;
     this.data = data;

@@ -244,7 +244,7 @@ html.modding #nav,
 html.modding #nav-tool { transition: background .4s }
 
 /* light mode */
-html.light body { background: #f4f4f4; color:#000 }
+html.light body { background: #f4f4f4; color:#333 }
 html.light ::-webkit-scrollbar-track{background-color:#fafafa}
 html.light ::-webkit-scrollbar-thumb{background-color:rgba(197, 197, 197, 0.3)}
 html.light ::-webkit-scrollbar-thumb:hover{background-color:rgb(202, 202, 202)}

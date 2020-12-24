@@ -71,9 +71,9 @@ import store from "@/store";
   mounted() {
     this.selectAnimeList(new Date().getDay());
     // custom theme
-    ((window as any).repaint = (() => {
-      const c: string[] = location.hash.match(/[0-9a-f]{6}/ig) || [];
-      if (c.filter((e: string) => /^[0-9a-f]{6}$/i.test(e)).length === 12) {
+    ((window as any).repaint = ((colors: string) => {
+      const c: string[] = colors.match(/[0-9a-f]{6}/ig) || [];
+      if (c.filter((e: string) => /^[0-9a-f]{6}$/i.test(e)).length === 24) {
         /**
          * c[0]  body background color
          * c[1]  subject background color
@@ -89,18 +89,27 @@ import store from "@/store";
          * c[11] subject prefix front color
          */
         (document.getElementById('user-style') as any).innerHTML = `<style>
-        #sc2015 .main, #sc2015 .popup .box { background: #${c[0]} }
-        #sc2015 .title, #sc2015 .popup .box .subject { background: #${c[1]} }
-        #sc2015 .title a, #sc2015 .popup .box .subject { color: #${c[2]} }
-        #sc2015 .nav th, #sc2015 .popup .box .date { background: #${c[3]}; color: #${c[4]} }
-        #sc2015 .nav th:hover, #sc2015 .nav th.sel { background: #${c[5]}; color: #${c[6]} }
-        #sc2015 .list td, #sc2015 .popup .box .node,
-        #sc2015 .popup .box .node-empty { background: #${c[7]}; color:#${c[8]}; }
-        #sc2015 .list tr:hover td, #sc2015 .popup .box .node:hover { background: #${c[9]}; color:#${c[10]}; }
-        #sc2015 .list tr:not(:hover) td .prefix b { color:#${c[11]} }
+        #sc2015.light .main, #sc2015.light .popup .box { background: #${c[0]} }
+        #sc2015.light .title, #sc2015.light .popup .box .subject { background: #${c[1]} }
+        #sc2015.light .title a, #sc2015.light .popup .box .subject { color: #${c[2]} }
+        #sc2015.light .title svg { fill:#${c[2]} }
+        #sc2015.light .nav th, #sc2015.light .popup .box .date { background: #${c[3]}; color: #${c[4]} }
+        #sc2015.light .nav th:hover, #sc2015.light .nav th.sel { background: #${c[5]}; color: #${c[6]} }
+        #sc2015.light .list td, #sc2015.light .popup .box .node, #sc2015.light .popup .box .node-empty { background: #${c[7]}; color:#${c[8]}; }
+        #sc2015.light .list tr:hover td, #sc2015.light .popup .box .node:hover { background: #${c[9]}; color:#${c[10]}; }
+        #sc2015.light .list tr:not(:hover) td .prefix b { color:#${c[11]} }
+        #sc2015.dark .main, #sc2015.dark .popup .box { background: #${c[12]} }
+        #sc2015.dark .title, #sc2015.dark .popup .box .subject { background: #${c[13]} }
+        #sc2015.dark .title a, #sc2015.dark .popup .box .subject { color: #${c[14]} }
+        #sc2015.dark .title svg { fill:#${c[14]} }
+        #sc2015.dark .nav th, #sc2015.dark .popup .box .date { background: #${c[15]}; color: #${c[16]} }
+        #sc2015.dark .nav th:hover, #sc2015.dark .nav th.sel { background: #${c[17]}; color: #${c[18]} }
+        #sc2015.dark .list td, #sc2015.dark .popup .box .node, #sc2015.dark .popup .box .node-empty { background: #${c[19]}; color:#${c[20]}; }
+        #sc2015.dark .list tr:hover td, #sc2015.dark .popup .box .node:hover { background: #${c[21]}; color:#${c[22]}; }
+        #sc2015.dark .list tr:not(:hover) td .prefix b { color:#${c[23]} }
         </style>`;
       }
-    }))();
+    }))(location.hash);
   },
   created() {
     this.applyColorMode(null);

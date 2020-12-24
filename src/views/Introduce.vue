@@ -216,7 +216,7 @@ export default class Introduce extends Vue {
 </script>
 
 <style>
-#introduce { font-family: "Noto Sans KR", "Malgun Gothic", "Dotum"; }
+#introduce { font-family: "Malgun Gothic", "Dotum"; }
 #introduce .base-mat { padding:8px; }
 #introduce .doc-title {
   font-size: 20px;
