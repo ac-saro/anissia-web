@@ -71,24 +71,25 @@ import AnimeService from "@/service/AnimeService";
 @Options({
   mounted() {
     this.selectAnimeList(new Date().getDay());
-    const theme = location.hash.length > 1 ? location.hash : 'FFFFFF44A59BFFFFFF38988E8ED6CE1A6F66FFFFFFFFFFFF555555FDFFE5248278CE2A6D000000000000777777111111AAAAAA1111119C9937070707999999000000CCCCCC5EB982';
+    const theme = location.hash.length > 1 ? location.hash : 'ffffff44a59bffffff38988e8ed6ce1a6f66ffffffffffff555555fdffe5248278ce2a6d000000000000777777111111aaaaaa1111119c9937070707999999000000cccccc5eb982';
     // custom theme
     ((window as any).repaint = ((colors: string) => {
       const c: string[] = colors.match(/[0-9a-f]{6}/ig) || [];
       if (c.filter((e: string) => /^[0-9a-f]{6}$/i.test(e)).length === 24) {
         /**
-         * c[0]  body background color
-         * c[1]  subject background color
-         * c[2]  subject front color
-         * c[3]  navigator background color
-         * c[4]  navigator front color
-         * c[5]  bc-type[week-more] background color
-         * c[6]  bc-type[week-more] front color
-         * c[7]  list background color
-         * c[8]  list front color
-         * c[9]  list:hover background color
-         * c[10] list:hover front color
-         * c[11] subject prefix front color
+         * c[light/dark]  description
+         * c[0/12]    body background color
+         * c[1/13]    subject background color
+         * c[2/14]    subject front color
+         * c[3/15]    navigator background color
+         * c[4/16]    navigator front color
+         * c[5/17]    week background color
+         * c[6/18]    week front color
+         * c[7/19]    list background color
+         * c[8/20]    list front color
+         * c[9/21]    list:hover background color
+         * c[10/22]   list:hover front color
+         * c[11/23]   subject prefix front color
          */
         (document.getElementById('user-style') as any).innerHTML = `<style>
         #sc2015.light .main, #sc2015.light .popup .box { background: #${c[0]} }
@@ -124,6 +125,8 @@ import AnimeService from "@/service/AnimeService";
     window.removeEventListener('keydown', this.closePopupKey, true);
   },
   methods: {
+    // pure week: 日,月,火,水,木,金,土 (0,1,2,3,4,5,6)
+    // week extension: 外,新 (7,8)
     isPureWeek() {
       return AnissiaUtil.isPureWeek(this.weekNow);
     },
@@ -145,7 +148,7 @@ import AnimeService from "@/service/AnimeService";
       }
     },
     closePopupKey(event: KeyboardEvent) {
-      if (this.animeNow !== null && event.keyCode === 27) {
+      if (this.animeNow !== null && event.key === 'Escape') {
         this.animeNow = null;
       }
     },

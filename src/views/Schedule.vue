@@ -3,12 +3,12 @@
     <div class="basic-layout">
       <div class="basic-layout-left">
         <div class="base-mat">
-          <LatestDocs />
+          <ActiveBoard />
         </div>
       </div>
       <div class="basic-layout-right">
         <div class="base-mat">
-          <RankBoard />
+          <AnimeRank />
         </div>
       </div>
       <div id="schedule" class="basic-layout-main">
@@ -16,22 +16,26 @@
 
           <!----------------------------------------------------- 애니편성표 소스 생성기 [시작] ----------------------------------------------------->
 
-          <div style="padding:2px 0 0; overflow: auto">
-            <div style="float:left">애니편성표: <a href="/schedule/2015" target="_blank">바로가기</a> | <a href="/schedule/2009" target="_blank">구버전</a> | <router-link to="/introduce">연혁</router-link></div>
-            <div style="text-align: right" class="mob-hide">제작 : <a href="https://gs.saro.me" target="_blank">가리사니</a></div>
+          <div class="schedule-docs-header">
+            <div class="link">애니편성표: <a href="/schedule/2015" target="_blank">바로가기</a> | <a href="/schedule/2009" target="_blank">구버전</a> | <router-link to="/introduce">연혁</router-link></div>
+            <div class="info mob-hide">제작 : <a href="https://gs.saro.me" target="_blank">가리사니</a></div>
           </div>
           <div class="html-gen">
             <div class="tool-preview">
               <iframe v-if="mode === 'html'" class="preview-border" src="/schedule/2015" ref="html" :width="htmlWidth" :height="htmlHeight"></iframe>
-              <div v-else-if="mode === 'img'" class="preview-img preview-border" :style="{width: `${img.width}px`}">
-asdf
+              <div v-else-if="mode === 'img'" class="preview-img preview-border" :style="{width: `${imgWidth}px`}">
+                <div class="img-preview" ondragstart="return false" onselectstart="return false">
+                  <div class="img-title" :style="{background: `#${imgTitleBg}`, color: `#${imgTitle}`}">애니편성표</div>
+                  <div class="img-ymd" :style="{background: `#${imgYmdBg}`, color: `#${imgYmd}`}">{{imgDataYmd}}</div>
+                  <div class="img-node" :style="{background: `#${imgListBg}`, color: `#${imgList}`}" v-for="node in imgDataList" :key="node">{{node}}</div>
+                </div>
               </div>
             </div>
             <div class="tool">
               <div class="tool-title">소스타입</div>
               <div><label title="일반적으로 html 이 가능한 모든 사이트에 삽입 가능"> <input type="radio" name="schedule-mode" v-model="mode" value="html" /> HTML</label></div>
               <div><label title="네이버 블로그 처럼 html이 금지된 경우 사용."> <input type="radio" name="schedule-mode" v-model="mode" value="img" /> 이미지 (블로그 위젯)</label></div>
-
+              <hr/>
               <div v-if="mode === 'html'" >
                 <div class="tool-title">색상 (A:활성)</div>
                 <div class="line">
@@ -83,6 +87,7 @@ asdf
                   <div v="htmlPrefixDark" :style="`background:#${htmlPrefixDark}`" @click="openColorPicker" class="color"></div>
                   <div class="color blank"></div>
                 </div>
+                <hr/>
                 <div class="tool-title">크기</div>
                 <div class="line">
                   <input type="number" min="180" max="900" v-model="htmlWidth"/>
@@ -92,15 +97,36 @@ asdf
                   <input type="number" min="240" max="780"  v-model="htmlHeight"/>
                   <input type="range" min="240" max="780" step="10" v-model="htmlHeight">
                 </div>
-
+                <hr/>
                 <div class="tool-title">소스코드</div>
-                <textarea readonly="readonly" v-model="htmlCode"></textarea>
+                <textarea readonly="readonly" v-model="htmlCode" style="height:136px;"></textarea>
               </div>
               <div v-else-if="mode === 'img'" >
-
+                <div class="line">
+                  <div class="label">제목</div>
+                  <div v="imgTitleBg" :style="`background:#${imgTitleBg}`" @click="openColorPicker" class="color"></div>
+                  <div v="imgTitle" :style="`background:#${imgTitle}`" @click="openColorPicker" class="color"></div>
+                </div>
+                <div class="line">
+                  <div class="label">날짜</div>
+                  <div v="imgYmdBg" :style="`background:#${imgYmdBg}`" @click="openColorPicker" class="color"></div>
+                  <div v="imgYmd" :style="`background:#${imgYmd}`" @click="openColorPicker" class="color"></div>
+                </div>
+                <div class="line">
+                  <div class="label">목록</div>
+                  <div v="imgListBg" :style="`background:#${imgListBg}`" @click="openColorPicker" class="color"></div>
+                  <div v="imgList" :style="`background:#${imgList}`" @click="openColorPicker" class="color"></div>
+                </div>
+                <hr/>
+                <div class="tool-title">크기</div>
+                <div class="line">
+                  <input type="number" min="150" max="900" v-model="imgWidth"/>
+                  <input type="range" min="150" max="900" step="10" v-model="imgWidth">
+                </div>
+                <hr/>
+                <div class="tool-title">소스코드</div>
+                <textarea readonly="readonly" v-model="imgCode" style="height:90px;"></textarea>
               </div>
-
-
 
             </div>
           </div>
@@ -171,12 +197,13 @@ asdf
 </template>
 
 <script lang="ts">
-import Feed from "@/components/Feed.vue";
-import LatestDocs from "@/components/LatestDocs.vue";
-import RankBoard from "@/components/RankBoard.vue";
+import ActiveBoard from "@/components/ActiveBoard.vue";
+import AnimeRank from "@/components/AnimeRank.vue";
 import { Options, Vue } from "vue-class-component";
 import Nabi from "@/utils/nabi";
 import ColorPicker from "vanilla-picker"
+import { DateFormat } from "@/utils/nabi/DateFormat";
+import AnimeService from "@/service/AnimeService";
 
 @Options({
   computed: {
@@ -191,14 +218,24 @@ import ColorPicker from "vanilla-picker"
           this.htmlBgDark + this.htmlTitleBgDark + this.htmlTitleDark + this.htmlNavBgDark + this.htmlNavDark + this.htmlNavActBgDark +
           this.htmlNavActDark + this.htmlListBgDark + this.htmlListDark + this.htmlListActBgDark + this.htmlListActDark + this.htmlPrefixDark
       );
+    },
+    imgCode() {
+      const theme = this.imgTitleBg + this.imgTitle + this.imgYmdBg + this.imgYmd + this.imgListBg + this.imgList;
+      return `<a href="${location.origin + '/schedule/2015'}" target="_blank"><img src="http://localhost:8081/api/timetable/svg/${this.imgWidth}/${theme}"/></a>`;
     }
   },
   components: {
-    LatestDocs,
-    RankBoard
+    ActiveBoard,
+    AnimeRank
     //Color
   },
   watch: {
+    mode(after: string, before: string) {
+      if (after === 'img' && this.imgDataList.length === 0) {
+        this.imgDataYmd = new DateFormat().format("yyyy년 MM월 dd일");
+        AnimeService.getSchedule(new Date().getDay().toString(), (list) => this.imgDataList = list.map(e => e.time + ' ' + e.subject));
+      }
+    }
   },
   methods: {
     // -- Color Picker -----------------------------------------------------------------------------------------
@@ -206,6 +243,8 @@ import ColorPicker from "vanilla-picker"
       this.colorPickerOpen = true;
       this.$nextTick(() => {
         const cp = this.$refs.colorPicker;
+        this.colorPicker && this.colorPicker.destroy();
+        cp.innerHTML = '';
         cp.style.top = (event.clientY + 20) + 'px';
         cp.style.left = (event.clientX - 128) + 'px';
         this.colorPickerVar = (event.target as any).getAttribute('v');
@@ -219,8 +258,6 @@ import ColorPicker from "vanilla-picker"
     },
     closeColorPicker() {
       this.colorPickerOpen = false;
-      this.colorPicker && this.colorPicker.destroy();
-      this.$refs.colorPicker.innerHTML = '';
     },
     closerColorPicker(e: Event) {
       console.log(Nabi.matchesParents(e.target, ['.color-picker', '.color-picker-closer-area']));
@@ -241,34 +278,36 @@ export default class Schedule extends Vue {
     return {
       // mode
       mode: 'html',
+      // preview error
+      previewError: null as string|null,
       // HTML - color - light mode
-      htmlBgLight: 'FFFFFF',
-      htmlTitleBgLight: '44A59B', htmlTitleLight: 'FFFFFF',
-      htmlNavBgLight: '38988E', htmlNavLight: '8ED6CE',
-      htmlNavActBgLight: '1A6F66', htmlNavActLight: 'FFFFFF',
-      htmlListBgLight: 'FFFFFF', htmlListLight: '555555',
-      htmlListActBgLight: 'FDFFE5', htmlListActLight: '248278',
-      htmlPrefixLight: 'CE2A6D',
+      htmlBgLight: 'ffffff',
+      htmlTitleBgLight: '44a59b', htmlTitleLight: 'ffffff',
+      htmlNavBgLight: '38988e', htmlNavLight: '8ed6ce',
+      htmlNavActBgLight: '1a6f66', htmlNavActLight: 'ffffff',
+      htmlListBgLight: 'ffffff', htmlListLight: '555555',
+      htmlListActBgLight: 'fdffe5', htmlListActLight: '248278',
+      htmlPrefixLight: 'ce2a6d',
       // HTML - color - dark mode
       htmlBgDark: '000000',
       htmlTitleBgDark: '000000', htmlTitleDark: '777777',
-      htmlNavBgDark: '111111', htmlNavDark: 'AAAAAA',
-      htmlNavActBgDark: '111111', htmlNavActDark: '9C9937',
+      htmlNavBgDark: '111111', htmlNavDark: 'aaaaaa',
+      htmlNavActBgDark: '111111', htmlNavActDark: '9c9937',
       htmlListBgDark: '070707', htmlListDark: '999999',
-      htmlListActBgDark: '000000', htmlListActDark: 'CCCCCC',
-      htmlPrefixDark: '5EB982',
+      htmlListActBgDark: '000000', htmlListActDark: 'cccccc',
+      htmlPrefixDark: '5eb982',
       // HTML - size
       htmlWidth: 800, htmlHeight: 600,
       // IMG - color
-      imgTitleBg: '#63A883',
-      imgTitle: '#FFFFFF',
-      imgYmdBg: '#D8D8D8',
-      imgYmd: '#000000',
-      imgListBg: '#FFFFFF',
-      imgList: '#000000',
+      imgTitleBg: '63a883',
+      imgTitle: 'ffffff',
+      imgYmdBg: 'd8d8d8',
+      imgYmd: '000000',
+      imgListBg: 'ffffff',
+      imgList: '000000',
       // IMG - size
       imgWidth: 180,
-      // IMG - date
+      // IMG - data
       imgDataList: [] as string[],
       imgDataYmd: '',
       // color picker
@@ -284,19 +323,16 @@ export default class Schedule extends Vue {
 <style>
 #schedule { font-family: "Malgun Gothic", "Dotum"; }
 #schedule .base-mat { padding:8px; }
-#schedule .doc-title {
-  font-size: 20px;
-  border-bottom: 1px solid #276998;
-  color: #276998;
-  padding: 6px 8px 8px;
-}
+#schedule .doc-title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
 #schedule .doc-desc { padding: 12px 8px; line-height: 1.8; margin-bottom: 8px }
 #schedule .doc-desc .comment { font-size:15px; }
+#schedule .schedule-docs-header { padding:2px 0 0; overflow: auto }
+#schedule .schedule-docs-header .link { float:left }
+#schedule .schedule-docs-header .info { text-align: right }
 
 #schedule .icon i { margin-right:4px; }
 #schedule table.schedule-table { margin:4px 0 0; }
 #schedule table.schedule-table th, #schedule table.schedule-table td { padding:4px 12px; font-weight: normal }
-#schedule table.schedule-table, #schedule table.schedule-table th, #schedule table.schedule-table td { border:1px solid #dde1e6; }
 #schedule table.schedule-application .pmark { width:80px; height: 80px; vertical-align: middle; margin:20px; }
 #schedule table.schedule-application td,
 #schedule table.schedule-application th { padding:8px 12px; }
@@ -306,24 +342,44 @@ export default class Schedule extends Vue {
 #schedule .html-gen .tool-preview .preview-border {  border:0; max-width:100% !important; max-height:100% !important; vertical-align: middle;  }
 #schedule .html-gen .tool-preview .preview-img { display: inline-block }
 #schedule .html-gen .tool { padding:16px 8px; margin-left:calc(100% - 208px); }
+#schedule .html-gen .tool .tool-title { color: #276998; padding: 6px 0 8px; text-align: center; font-weight: bold; font-size:14px; }
+#schedule .html-gen .tool hr { border: 0; border-bottom: 1px solid #276998; padding:0; margin:12px 0 8px; opacity: .2 }
 #schedule .html-gen .tool .line > div { display:inline-block; vertical-align: top; margin-top:2px; }
 #schedule .html-gen .tool .line .label { width:52px; height:32px; line-height: 30px; font-weight: bold }
 #schedule .html-gen .tool .line .color { width:32px; height:32px; box-sizing: border-box; margin-left:2px; }
-#schedule .html-gen .tool .line .color:not(.blank) { border:1px solid #ddd }
+#schedule .html-gen .tool label { line-height: 30px; }
+#schedule .html-gen .tool input { vertical-align: top; box-sizing: border-box }
+#schedule .html-gen .tool input[type=radio] { height:24px; }
+#schedule .html-gen .tool input[type=number] { width:50px; height:28px; text-align: center;  }
+#schedule .html-gen .tool input[type=range] { width:120px; height:28px; margin-left:8px; }
+#schedule .html-gen .tool textarea { box-sizing: border-box; width:192px; padding:4px; font-size:12px; resize: none; word-wrap: break-word; word-break: break-all; }
+
+#schedule .html-gen .img-preview { font-family: 'Malgun Gothic'; font-weight: normal; margin:0 auto; overflow: hidden; cursor:default }
+#schedule .html-gen .img-preview .img-title { font-size:13px; font-weight: bold; line-height:30px; height:30px; }
+#schedule .html-gen .img-preview .img-ymd { font-size:12px; line-height:20px; height:20px; }
+#schedule .html-gen .img-preview .img-node { font-size:13px; line-height:20px; height:20px; padding-left:2px; text-align: left; overflow: hidden; }
 
 #schedule .color-picker { position: absolute; }
 
-#schedule table.intro-table { margin:4px 0 20px; }
-#schedule table.intro-table th { color:#2a4c8c }
-#schedule table.intro-table th, #schedule table.intro-table td { padding:4px 12px; font-weight: normal }
-#schedule table.intro-table, #schedule table.intro-table th, #schedule table.intro-table td { border:1px solid #dde1e6; }
 
 @media (max-width: 600px) {
   #schedule .mob-hide { display: none; }
 }
 
-html.light #schedule .html-gen .tool-preview .preview-border { border: 4px dashed #ddd; }
+/*html.light #schedule .html-gen .tool-preview .preview-border { border: 1px dashed #ddd; }*/
+html.light #schedule .html-gen input, html.light #schedule .html-gen textarea { border:1px solid #ddd; background: #fff; color:#333 }
+html.light #schedule table.schedule-table,
+html.light #schedule table.schedule-table th,
+html.light #schedule table.schedule-table td { border:1px solid #dde1e6; }
+html.light #schedule .html-gen .tool .line .color:not(.blank) { border:1px solid #ddd }
 
-html.dark #schedule .html-gen .tool-preview .preview-border { border: 4px dashed #333; }
+/*html.dark #schedule .html-gen .tool-preview .preview-border { border: 1px dashed #333; }*/
+html.dark #schedule .html-gen input, html.dark #schedule .html-gen textarea { border:1px solid #333; background: #000; color:#aaa }
+html.dark #schedule table.schedule-table,
+html.dark #schedule table.schedule-table th,
+html.dark #schedule table.schedule-table td { border:1px solid #333; }
+html.dark #schedule .html-gen .tool .line .color:not(.blank) { border:1px solid #222 }
+
+html.dark #schedule table.schedule-application .pmark { opacity: .8 }
 
 </style>

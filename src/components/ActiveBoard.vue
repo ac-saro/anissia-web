@@ -1,14 +1,14 @@
 <template>
-  <div class="rank-board">
-    <div>종목 조회 순위</div>
+  <div class="active-board">
+    <div>최근변경</div>
     <div>
-      <div v-for="node in stocks" :key="node">종목 {{node}}</div>
+      <div v-for="node in stocks" :key="node">최근변경 {{node}}</div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-class-component';
+import { Options, Vue } from 'vue-class-component';
 
 @Options({
   methods: {
@@ -21,7 +21,7 @@ import {Options, Vue} from 'vue-class-component';
     this.load();
   },
 })
-export default class LatestDocs extends Vue {
+export default class ActiveBoard extends Vue {
   data() {
     return {
       stocks: [] as any[]
@@ -31,6 +31,6 @@ export default class LatestDocs extends Vue {
 </script>
 
 <style>
-.rank-board {}
+.active-board {}
 
 </style>

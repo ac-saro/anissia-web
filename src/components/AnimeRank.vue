@@ -1,8 +1,8 @@
 <template>
-  <div class="latest-docs">
-    <div>최근변경 문서 리스트</div>
+  <div class="anime-rank">
+    <div>애니메이션 순위</div>
     <div>
-      <div v-for="node in stocks" :key="node">최근변경 {{node}}</div>
+      <div v-for="node in stocks" :key="node">ㅁㅁㅁㅁ {{node}}</div>
     </div>
   </div>
 </template>
@@ -13,7 +13,7 @@ import {Options, Vue} from 'vue-class-component';
 @Options({
   methods: {
     load() {
-      console.log('load latest')
+      console.log('load ActiveBoard')
       this.stocks = [1,2,3,4,5,6,7];
     }
   },
@@ -21,7 +21,7 @@ import {Options, Vue} from 'vue-class-component';
     this.load();
   },
 })
-export default class LatestDocs extends Vue {
+export default class AnimeRank extends Vue {
   data() {
     return {
       stocks: [] as any[]
@@ -31,6 +31,6 @@ export default class LatestDocs extends Vue {
 </script>
 
 <style>
-.latest-docs {}
+.anime-rank {}
 
 </style>

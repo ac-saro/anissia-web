@@ -3,12 +3,12 @@
     <div class="basic-layout">
       <div class="basic-layout-left">
         <div class="base-mat">
-          <LatestDocs />
+          <ActiveBoard />
         </div>
       </div>
       <div class="basic-layout-right">
         <div class="base-mat">
-          <RankBoard />
+          <AnimeRank />
         </div>
       </div>
       <div id="introduce" class="basic-layout-main">
@@ -173,8 +173,8 @@
 
 <script lang="ts">
 import Feed from "@/components/Feed.vue";
-import LatestDocs from "@/components/LatestDocs.vue";
-import RankBoard from "@/components/RankBoard.vue";
+import ActiveBoard from "@/components/ActiveBoard.vue";
+import AnimeRank from "@/components/AnimeRank.vue";
 import {Options, Vue} from "vue-class-component";
 
 @Options({
@@ -182,8 +182,8 @@ import {Options, Vue} from "vue-class-component";
   },
   components: {
     Feed,
-    LatestDocs,
-    RankBoard
+    ActiveBoard,
+    AnimeRank
   },
   methods: {
 
