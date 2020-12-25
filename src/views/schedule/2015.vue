@@ -56,6 +56,9 @@
       </div>
     </div>
     <div id="user-style"></div>
+    <div id="sc2015-theme-error" style="display:none">
+      <table><tr><td>애니편성표의 테마코드가 잘못되었습니다.<br/><br/><a href="/schedule" target="_blank">애니시아</a>에서 재설정 하시기 바랍니다.</td></tr></table>
+    </div>
   </div>
 </template>
 
@@ -70,6 +73,7 @@ import store from "@/store";
 @Options({
   mounted() {
     this.selectAnimeList(new Date().getDay());
+    const theme = location.hash.length > 1 ? location.hash : 'FFFFFF44A59BFFFFFF38988E8ED6CE1A6F66FFFFFFFFFFFF555555FDFFE5248278CE2A6D000000000000777777111111AAAAAA1111119C9937070707999999000000CCCCCC5EB982';
     // custom theme
     ((window as any).repaint = ((colors: string) => {
       const c: string[] = colors.match(/[0-9a-f]{6}/ig) || [];
@@ -108,8 +112,10 @@ import store from "@/store";
         #sc2015.dark .list tr:hover td, #sc2015.dark .popup .box .node:hover { background: #${c[21]}; color:#${c[22]}; }
         #sc2015.dark .list tr:not(:hover) td .prefix b { color:#${c[23]} }
         </style>`;
+      } else {
+        (document.querySelector('#sc2015-theme-error') as any).style.display = '';
       }
-    }))(location.hash);
+    }))(theme);
   },
   created() {
     this.applyColorMode(null);
@@ -206,6 +212,9 @@ export default class Sc2015 extends Vue {
 #sc2015 .popup .box span.subject { text-decoration: none; display: block; text-align: center; }
 #sc2015 .popup .box .subject { font-size: 20px; line-height: 2; padding-bottom: 2px; padding: 0 12px; font-weight: 100; }
 
+#sc2015-theme-error { position: fixed; top:0; left:0; right:0; bottom:0; background: #000; }
+#sc2015-theme-error table { width:100%; height:100%; }
+#sc2015-theme-error table td { text-align: center; color:#fff; line-height: 1; font-size: 1.5em; }
 
 @media (min-width: 601px) {
   #sc2015 .main { top:106px; }
@@ -234,41 +243,4 @@ export default class Sc2015 extends Vue {
 }
 
 #sc2015.light #light-mode, #sc2015.dark #dark-mode { display: none }
-
-/** colors */
-#sc2015.light .main,
-#sc2015.light .popup .box { background: #fff }
-#sc2015.light .title,
-#sc2015.light .popup .box .subject { background: #44a59b }
-#sc2015.light .title a,
-#sc2015.light .popup .box .subject { color: #fff }
-#sc2015.light .title svg { fill:#fff }
-#sc2015.light .nav th,
-#sc2015.light .popup .box .date { background: #38988e; color: #8ed6ce }
-#sc2015.light .nav th:hover,
-#sc2015.light .nav th.sel { background: #1a6f66; color: #fff }
-#sc2015.light .list td,
-#sc2015.light .popup .box .node,
-#sc2015.light .popup .box .node-empty { background: #fff; color:#555; }
-#sc2015.light .list tr:hover td,
-#sc2015.light .popup .box .node:hover { background: #fdffe5; color:#248278; }
-#sc2015.light .list tr:not(:hover) td .prefix b { color:#ce2a6d }
-
-#sc2015.dark .main,
-#sc2015.dark .popup .box { background: #000 }
-#sc2015.dark .title,
-#sc2015.dark .popup .box .subject { background: #000 }
-#sc2015.dark .title a,
-#sc2015.dark .popup .box .subject { color: #777 }
-#sc2015.dark .title svg { fill:#777 }
-#sc2015.dark .nav th,
-#sc2015.dark .popup .box .date { background: #111; color: #aaa }
-#sc2015.dark .nav th:hover,
-#sc2015.dark .nav th.sel { background: #111; color: #9c9937 }
-#sc2015.dark .list td,
-#sc2015.dark .popup .box .node,
-#sc2015.dark .popup .box .node-empty { background: #070707; color:#999; }
-#sc2015.dark .list tr:hover td,
-#sc2015.dark .popup .box .node:hover { background: #000; color:#ccc; }
-#sc2015.dark .list tr:not(:hover) td .prefix b { color:#5eb982 }
 </style>
