@@ -1,6 +1,6 @@
 <!--
 2019-08-17 박용서: 2015년 소스를 vuejs 에 맞게 변경
-2020-12-20 박용서: 다크모드 추가 (2015 Version 유지) 
+2020-12-25 박용서: 다크모드 추가 (2015 Version 유지)
 -->
 
 <template>
@@ -57,7 +57,7 @@
     </div>
     <div id="user-style"></div>
     <div id="sc2015-theme-error" style="display:none">
-      <table><tr><td>애니편성표의 테마코드가 잘못되었습니다.<br/><br/><a href="/schedule" target="_blank">애니시아</a>에서 재설정 하시기 바랍니다.</td></tr></table>
+      <table><tr><td>애니편성표의 커스텀코드가 잘못되었습니다.<br/><br/><a href="/schedule" target="_blank">애니시아</a>에서 재설정 하시기 바랍니다.</td></tr></table>
     </div>
   </div>
 </template>
@@ -67,8 +67,6 @@ import Nabi from '@/utils/nabi';
 import AnissiaUtil from '@/utils/AnissiaUtil';
 import {Options, Vue} from "vue-class-component";
 import AnimeService from "@/service/AnimeService";
-import store from "@/store";
-
 
 @Options({
   mounted() {
