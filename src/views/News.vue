@@ -1,11 +1,6 @@
 <template>
   <div>
     <div class="basic-layout">
-      <div class="basic-layout-left">
-        <div class="base-mat">
-          2
-        </div>
-      </div>
       <div class="basic-layout-right">
         <div class="base-mat">
           1

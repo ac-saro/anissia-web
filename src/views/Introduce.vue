@@ -1,11 +1,6 @@
 <template>
   <div>
     <div class="basic-layout">
-      <div class="basic-layout-left">
-        <div class="base-mat">
-          <ActiveBoard />
-        </div>
-      </div>
       <div class="basic-layout-right">
         <div class="base-mat">
           <AnimeRank />
@@ -172,8 +167,6 @@
 
 
 <script lang="ts">
-import Feed from "@/components/Feed.vue";
-import ActiveBoard from "@/components/ActiveBoard.vue";
 import AnimeRank from "@/components/AnimeRank.vue";
 import {Options, Vue} from "vue-class-component";
 
@@ -181,8 +174,6 @@ import {Options, Vue} from "vue-class-component";
   computed: {
   },
   components: {
-    Feed,
-    ActiveBoard,
     AnimeRank
   },
   methods: {

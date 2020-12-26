@@ -1,11 +1,6 @@
 <template>
   <div class="color-picker-closer-area" @click="closerColorPicker">
     <div class="basic-layout">
-      <div class="basic-layout-left">
-        <div class="base-mat">
-          <ActiveBoard />
-        </div>
-      </div>
       <div class="basic-layout-right">
         <div class="base-mat">
           <AnimeRank />
@@ -226,7 +221,6 @@
 </template>
 
 <script lang="ts">
-import ActiveBoard from "@/components/ActiveBoard.vue";
 import AnimeRank from "@/components/AnimeRank.vue";
 import { Options, Vue } from "vue-class-component";
 import Nabi from "@/utils/nabi";
@@ -236,7 +230,6 @@ import AnimeService from "@/service/AnimeService";
 
 @Options({
   components: {
-    ActiveBoard,
     AnimeRank
     //Color
   },
