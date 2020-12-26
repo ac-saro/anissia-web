@@ -5,7 +5,7 @@
 
 <style>
 img, a { border: 0; }
-table { border-collapse: collapse; }
+table, tr, td { border-collapse: collapse; border-spacing: 0; padding:0 }
 input, textarea { outline: none; }
 html { height: 100%; }
 body { height: 100%; margin: 0; padding: 0; }

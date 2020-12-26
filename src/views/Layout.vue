@@ -197,18 +197,11 @@ a:hover { text-decoration: underline }
 .mono-area .input-unit { padding:12px 24px 10px; }
 .mono-area input { border:0; padding:8px; height:32px; width:100%; box-sizing: border-box; }
 
-@media (min-width: 1200px) {
-  .basic-layout .basic-layout-left { float:left; width:calc(20% - 24px); margin-left:12px; }
-  .basic-layout .basic-layout-right { float:right; width:calc(20% - 24px); margin-right:12px; }
-  .basic-layout .basic-layout-main { width:60%; margin:0 20%; }
-}
-@media (min-width: 1000px) and (max-width: 1199px) {
-  .basic-layout .basic-layout-left { display: none }
+@media (min-width: 1024px) {
   .basic-layout .basic-layout-right { float:right; width:calc(30% - 36px); margin-right:12px; }
   .basic-layout .basic-layout-main { width:70%; margin: 0 30% 0 12px;}
 }
 @media (max-width: 999px) {
-  .basic-layout .basic-layout-left { display: none }
   .basic-layout .basic-layout-right { display: none }
   .basic-layout .basic-layout-main { margin:0 12px; }
 }

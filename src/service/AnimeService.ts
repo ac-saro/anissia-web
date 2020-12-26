@@ -20,4 +20,15 @@ export default class AnimeService {
       return e;
     })));
   }
+
+  public static getRank(type: string, callback: (list: any[]) => void): void {
+    fetch(`/api/anime/rank/${type}`).then(e => e.json()).then(list => {
+      for (let i = list.length - 1 ; i >= 1 ; i--) {
+        if (list[i - 1].rank === list[i].rank) {
+          list[i].rank = '-';
+        }
+      }
+      callback(list);
+    });
+  }
 }
