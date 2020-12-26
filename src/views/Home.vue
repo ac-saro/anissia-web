@@ -8,7 +8,7 @@
       </div>
       <div class="basic-layout-main">
         <div class="base-mat">
-          123213
+          <AnimeRank mode="static"/>
         </div>
       </div>
     </div>
