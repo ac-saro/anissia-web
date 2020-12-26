@@ -7,7 +7,9 @@
         </div>
       </div>
       <div class="basic-layout-main">
-        애니정보
+        <div class="base-mat">
+          애니정보 홈
+        </div>
       </div>
     </div>
 

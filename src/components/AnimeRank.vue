@@ -12,7 +12,7 @@
         <tr v-for="node in list" :key="node.animeNo">
           <td class="date">{{node.rank}}</td>
           <td class="subject">
-            <router-link :to="`/anime/${node.animeNo}`">{{node.subject}}</router-link>
+            <router-link :to="`/anime?animeNo=${node.animeNo}`">{{node.subject}}</router-link>
           </td>
           <td class="diff">
             <div v-if="node.diff == null" class="diff-new" title="#100 신규진입">◆</div>
