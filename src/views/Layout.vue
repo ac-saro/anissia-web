@@ -238,9 +238,9 @@ html.modding #nav-tool { transition: background .4s }
 
 /* light mode */
 html.light body { background: #f4f4f4; color:#333 }
-html.light ::-webkit-scrollbar-track{background-color:#fafafa}
-html.light ::-webkit-scrollbar-thumb{background-color:rgba(197, 197, 197, 0.3)}
-html.light ::-webkit-scrollbar-thumb:hover{background-color:rgb(202, 202, 202)}
+html.light ::-webkit-scrollbar-track{ background-color:#fafafa }
+html.light ::-webkit-scrollbar-thumb{ background-color:rgba(197, 197, 197, 0.3) }
+html.light ::-webkit-scrollbar-thumb:hover{ background-color:rgba(80, 80, 80, 0.3); }
 html.light #nav { background: #fff }
 html.light #nav-tool { background: rgba(255, 255, 255, 0.5); }
 html.light #nav-tool .sign { color:#ccc; }
@@ -262,10 +262,10 @@ html.light .popup-background .popup-box input[type=password] { border:1px solid 
 
 /* dark mode */
 html.dark body { background: #000; color:#999 }
-html.dark ::-webkit-scrollbar-track{background-color:#111}
-html.dark ::-webkit-scrollbar-thumb{background-color:rgba(0, 64, 52, 0.4)}
-html.dark ::-webkit-scrollbar-thumb:hover{background-color:#054}
-html.dark #nav-tool { background: rgba(0, 0, 0, 0.5); }
+html.dark ::-webkit-scrollbar-track{ background-color:#111 }
+html.dark ::-webkit-scrollbar-thumb{ background-color:rgba(120, 120, 120, 0.3) }
+html.dark ::-webkit-scrollbar-thumb:hover{ background-color:rgba(180, 180, 180, 0.3) }
+html.dark #nav-tool { background: rgba(0, 0, 0, 0.45); }
 html.dark #nav { background: #151515 }
 html.dark #nav-tool .sign { color:#555; }
 html.dark #nav-tool,

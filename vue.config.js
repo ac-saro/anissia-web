@@ -14,7 +14,12 @@ module.exports = {
                 target: process.env.VUE_APP_API_HOST,
                 ws: true,
                 changeOrigin: true
-            }
+            },
+            '/anitime/list_img': {
+                target: process.env.VUE_APP_API_HOST,
+                ws: true,
+                changeOrigin: true
+            },
         }
     },
     pwa: {

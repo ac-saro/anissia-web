@@ -9,9 +9,9 @@ table, tr, td { border-collapse: collapse; border-spacing: 0; padding:0 }
 input, textarea { outline: none; }
 html { height: 100%; }
 body { height: 100%; margin: 0; padding: 0; }
-::-webkit-scrollbar{width:4px;height:4px }
+::-webkit-scrollbar { width:6px; height:6px }
 
-a { color:#31af98 }
+a { color:#48659a }
 a:hover { text-decoration: underline }
 </style>
 

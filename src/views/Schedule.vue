@@ -248,7 +248,7 @@ import AnimeService from "@/service/AnimeService";
     },
     imgCode() {
       const theme = this.imgTitleBg + this.imgTitle + this.imgYmdBg + this.imgYmd + this.imgListBg + this.imgList;
-      return `<a href="${location.origin + '/schedule/2015'}" target="_blank"><img src="http://localhost:8081/api/timetable/svg/${this.imgWidth}/${theme}"/></a>`;
+      return `<a href="${location.origin + '/schedule/2015'}" target="_blank"><img src="http://localhost:8081/api/anime/schedule/svg/${this.imgWidth}/${theme}"/></a>`;
     },
     colorScheme() {
       return this.$store.state.colorScheme;
@@ -324,20 +324,20 @@ export default class Schedule extends Vue {
       mode: 'html',
       // HTML - color - light mode
       htmlBgLight: 'ffffff',
-      htmlTitleBgLight: '44a59b', htmlTitleLight: 'ffffff',
-      htmlNavBgLight: '38988e', htmlNavLight: '8ed6ce',
-      htmlNavActBgLight: '1a6f66', htmlNavActLight: 'ffffff',
+      htmlTitleBgLight: '5987b6', htmlTitleLight: 'ffffff',
+      htmlNavBgLight: 'f2f2f2', htmlNavLight: '497ba7',
+      htmlNavActBgLight: '9cb3c7', htmlNavActLight: 'ffffff',
       htmlListBgLight: 'ffffff', htmlListLight: '555555',
-      htmlListActBgLight: 'fdffe5', htmlListActLight: '248278',
-      htmlPrefixLight: 'ce2a6d',
+      htmlListActBgLight: 'f8f8f8', htmlListActLight: '2474ce',
+      htmlPrefixLight: 'cb3434',
       // HTML - color - dark mode
       htmlBgDark: '000000',
       htmlTitleBgDark: '000000', htmlTitleDark: '777777',
-      htmlNavBgDark: '111111', htmlNavDark: 'aaaaaa',
-      htmlNavActBgDark: '111111', htmlNavActDark: '9c9937',
+      htmlNavBgDark: '111111', htmlNavDark: '777777',
+      htmlNavActBgDark: '111111', htmlNavActDark: 'c3b443',
       htmlListBgDark: '070707', htmlListDark: '999999',
       htmlListActBgDark: '000000', htmlListActDark: 'cccccc',
-      htmlPrefixDark: '5eb982',
+      htmlPrefixDark: '3a7da3',
       // HTML - size
       htmlWidth: 800, htmlHeight: 600,
       // IMG - color

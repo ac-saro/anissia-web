@@ -71,7 +71,7 @@ import AnimeService from "@/service/AnimeService";
 @Options({
   mounted() {
     this.selectAnimeList(new Date().getDay());
-    const theme = location.hash.length > 1 ? location.hash : 'ffffff44a59bffffff38988e8ed6ce1a6f66ffffffffffff555555fdffe5248278ce2a6d000000000000777777111111aaaaaa1111119c9937070707999999000000cccccc5eb982';
+    const theme = location.hash.length > 1 ? location.hash : 'ffffff5987b6fffffff2f2f2497ba79cb3c7ffffffffffff555555f8f8f82474cecb3434000000000000777777111111777777111111c3b443070707999999000000cccccc3a7da3';
     // custom theme
     ((window as any).repaint = ((colors: string) => {
       const c: string[] = colors.match(/[0-9a-f]{6}/ig) || [];
