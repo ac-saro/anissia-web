@@ -85,6 +85,16 @@ export default createRouter({
       component: () => import('@/views/Layout.vue'),
       children: [
         {
+          path: '/anitime/',
+          component: () => import('@/views/301.vue'),
+          meta: { title: '애니시아 - 주소이전' },
+        },
+        {
+          path: '/anitime/old/',
+          component: () => import('@/views/301.vue'),
+          meta: { title: '애니시아 - 주소이전' },
+        },
+        {
           path: '/:path(.*)',
           component: () => import('@/views/404.vue'),
           meta: { title: '애니시아 404' },

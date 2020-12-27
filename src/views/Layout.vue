@@ -242,7 +242,7 @@ html.light ::-webkit-scrollbar-track{ background-color:#fafafa }
 html.light ::-webkit-scrollbar-thumb{ background-color:rgba(197, 197, 197, 0.3) }
 html.light ::-webkit-scrollbar-thumb:hover{ background-color:rgba(80, 80, 80, 0.3); }
 html.light #nav { background: #fff }
-html.light #nav-tool { background: rgba(255, 255, 255, 0.5); }
+html.light #nav-tool { background: rgba(255, 255, 255, 0.4); }
 html.light #nav-tool .sign { color:#ccc; }
 html.light #nav-tool,
 html.light #nav-tool a { color:#444 }
