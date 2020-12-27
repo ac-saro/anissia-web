@@ -153,6 +153,8 @@ export default class Layout extends Vue {
 <style>
 a { text-decoration: none }
 a:hover { text-decoration: underline }
+abbr { cursor: help; text-decoration: none; }
+abbr:hover { font-style: oblique }
 
 #area-under-nav { padding:56px 0 12px; }
 #nav { height:56px; position: fixed; top:0; left:0; right:0; user-select: none; }
@@ -190,7 +192,7 @@ a:hover { text-decoration: underline }
 }
 
 
-.basic-layout { padding-top:12px; }
+.basic-layout { padding-top:12px; overflow: auto }
 
 .mono-area { margin:120px auto 0; max-width:400px; }
 .mono-area .base-mat-body { padding:20px 0; }
@@ -241,6 +243,7 @@ html.light body { background: #f4f4f4; color:#333 }
 html.light ::-webkit-scrollbar-track{ background-color:#fafafa }
 html.light ::-webkit-scrollbar-thumb{ background-color:rgba(197, 197, 197, 0.3) }
 html.light ::-webkit-scrollbar-thumb:hover{ background-color:rgba(80, 80, 80, 0.3); }
+html.light abbr { color:#ab1d1d }
 html.light #nav { background: #fff }
 html.light #nav-tool { background: rgba(255, 255, 255, 0.4); }
 html.light #nav-tool .sign { color:#ccc; }
@@ -265,6 +268,7 @@ html.dark body { background: #000; color:#999 }
 html.dark ::-webkit-scrollbar-track{ background-color:#111 }
 html.dark ::-webkit-scrollbar-thumb{ background-color:rgba(120, 120, 120, 0.3) }
 html.dark ::-webkit-scrollbar-thumb:hover{ background-color:rgba(180, 180, 180, 0.3) }
+html.dark abbr { color:#e46c6c }
 html.dark #nav-tool { background: rgba(0, 0, 0, 0.45); }
 html.dark #nav { background: #151515 }
 html.dark #nav-tool .sign { color:#555; }
