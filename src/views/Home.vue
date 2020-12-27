@@ -6,9 +6,12 @@
           <AnimeRank />
         </div>
       </div>
-      <div class="basic-layout-main">
+      <div id="home" class="basic-layout-main">
         <div class="base-mat">
-          <AnimeRank mode="static"/>
+          <div class="home-anime-rank">
+            <AnimeRank mode="static"/>
+          </div>
+asdfs
         </div>
       </div>
     </div>
@@ -16,10 +19,6 @@
   </div>
 </template>
 
-<style>
-
-
-</style>
 
 <script lang="ts">
 import AnimeRank from "@/components/AnimeRank.vue";
@@ -41,3 +40,12 @@ export default class Home extends Vue {
   }
 }
 </script>
+
+<style>
+
+
+@media (min-width: 1024px) {
+  #home .home-anime-rank { display: none; }
+}
+
+</style>
