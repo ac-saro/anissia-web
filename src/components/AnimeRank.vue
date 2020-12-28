@@ -10,7 +10,7 @@
     <div class="rank-pad">
       <table class="rank-table">
         <tr v-for="node in rank.list" :key="node.animeNo">
-          <td class="date">{{node.rank}}</td>
+          <td class="rank">{{node.rank}}</td>
           <td class="subject">
             <router-link :to="`/anime?animeNo=${node.animeNo}`">{{node.subject}}</router-link>
           </td>
@@ -75,7 +75,7 @@ export default class AnimeRank extends Vue {
 .anime-rank .rank-tab td div { text-align: center; line-height: 48px; cursor: pointer }
 .anime-rank .rank-pad { padding:4px 0 0; }
 .anime-rank .rank-table td { height: 36px; padding: 6px 0; line-height: 1.6; font-size:14px }
-.anime-rank .rank-table td.date { min-width:20px; max-width: 50px; text-align: center; padding:0 16px; font-weight: bold }
+.anime-rank .rank-table td.rank { min-width:20px; max-width: 50px; text-align: center; padding:0 16px; font-weight: bold }
 .anime-rank .rank-table td.subject { width:90%; }
 .anime-rank .rank-table td.diff { min-width:50px; text-align: right; padding-right:16px; font-weight: bold }
 

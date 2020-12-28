@@ -1,6 +1,5 @@
 export default class PageData<T> {
-
-  public static cast<T>(object: any, mapContent: (object: any) => T): PageData<T> {
+  public static cast<T>(object: any, mapContent: (object: any) => T = e => e): PageData<T> {
     const page: PageData<T> = Object.assign(new PageData<T>(), object);
     page.content = page.content.map(mapContent);
     return page;

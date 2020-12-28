@@ -1,5 +1,5 @@
 <template>
-  <div class="active-board">
+  <div class="active-panel">
     <div>최근변경</div>
     <div>
       <div v-for="node in stocks" :key="node">최근변경 {{node}}</div>
@@ -21,7 +21,7 @@ import { Options, Vue } from 'vue-class-component';
     this.load();
   },
 })
-export default class ActiveBoard extends Vue {
+export default class ActivePanel extends Vue {
   data() {
     return {
       stocks: [] as any[]
@@ -31,6 +31,6 @@ export default class ActiveBoard extends Vue {
 </script>
 
 <style>
-.active-board {}
+.active-panel {}
 
 </style>

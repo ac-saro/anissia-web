@@ -16,8 +16,10 @@
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0",
+    "markdown-it": "latest",
     "vue-color": "latest",
-    "vanilla-picker": "latest"
+    "vanilla-picker": "latest",
+    "@fortawesome/fontawesome-free": "latest"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.33.0",

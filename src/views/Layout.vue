@@ -151,6 +151,7 @@ export default class Layout extends Vue {
 </script>
 
 <style>
+@import url(~@fortawesome/fontawesome-free/css/all.min.css);
 a { text-decoration: none }
 a:hover { text-decoration: underline }
 abbr { cursor: help; text-decoration: none; }
