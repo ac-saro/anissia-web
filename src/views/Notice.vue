@@ -31,7 +31,7 @@ import {Options, Vue} from "vue-class-component";
   }
 })
 
-export default class News extends Vue {
+export default class Notice extends Vue {
   data() {
     return {};
   }

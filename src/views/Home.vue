@@ -11,17 +11,15 @@
           <div class="home-anime-rank">
             <AnimeRank mode="static"/>
           </div>
-asdfs
+            asdfs
+
+          <br/><br/><router-link to="/notice">공지사항</router-link>
+          <br/><br/><router-link to="/inquiry">문의</router-link>
+          <br/><br/>
 
 
+        <!-- <saro-markdown v-model="aaa" placeholder="aaa" />   -->
 
-          <pagination :total="3" :index="0" :unit="10" :href="href" />
-
-
-
-          <saro-markdown v-model="aaa" placeholder="aaa" />
-
-          {{aaa}}
         </div>
       </div>
     </div>
@@ -32,35 +30,22 @@ asdfs
 
 <script lang="ts">
 import AnimeRank from "@/components/AnimeRank.vue";
-import Pagination from "@/components/Pagination.vue";
-import SaroMarkdown from "@/components/SaroMarkdown.vue";
 import {Options, Vue} from "vue-class-component";
 
 @Options({
   computed: {
   },
   components: {
-    AnimeRank,
-    Pagination,
-    SaroMarkdown
+    AnimeRank
+  },
+  created() {
+    console.log('created');
   },
   methods: {
-    href(index: number) {
-      return `?page=${index}`
-    },
-    asdf() {
-
-
-    }
   }
 })
 
 export default class Home extends Vue {
-  data() {
-    return {
-      aaa: '간다ㅏ란망ㄹㄴ머리ㅏㅓ'
-    };
-  }
 }
 </script>
 

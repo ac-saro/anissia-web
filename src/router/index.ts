@@ -43,9 +43,9 @@ export default createRouter({
           component: () => import('@/views/Introduce.vue'),
         },
         {
-          path: '/news',
+          path: '/notice',
           meta: { title: '애니시아' },
-          component: () => import('@/views/News.vue'),
+          component: () => import('@/views/Notice.vue'),
         },
         {
           path: '/inquiry',
@@ -76,7 +76,12 @@ export default createRouter({
           path: '/account',
           meta: { title: '애니시아' },
           component: () => import('@/views/Account.vue'),
-        }
+        },
+        {
+          path: '/anitime/:path(.*)',
+          component: () => import('@/views/301.vue'),
+          meta: { title: '애니시아 - 주소이전' },
+        },
       ]
     },
     // 404 page not found
@@ -84,11 +89,6 @@ export default createRouter({
       path: '/:path(.*)',
       component: () => import('@/views/Layout.vue'),
       children: [
-        {
-          path: '/anitime/:path(.*)',
-          component: () => import('@/views/301.vue'),
-          meta: { title: '애니시아 - 주소이전' },
-        },
         {
           path: '/:path(.*)',
           component: () => import('@/views/404.vue'),

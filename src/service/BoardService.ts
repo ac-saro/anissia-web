@@ -1,8 +1,6 @@
-import AnissiaUtil from "@/utils/AnissiaUtil";
-import {DateFormat} from "@/utils/nabi/DateFormat";
 import PageData from "@/models/PageData";
 
-export default class AnimeService {
+export default class BoardService {
   public static getTicker(ticker: string, callback: (data: any) => void): void {
     fetch(`/api/board/ticker/${ticker}`).then(e => e.json()).then(data => callback(data));
   }
