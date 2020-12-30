@@ -11,7 +11,13 @@
         </router-link>
       </div>
       <div class="tool">
-        <div id="nav-tool-toggle" class="inline" @click="onTool = !onTool"><img src="@/assets/layout/nav/tool-off.svg" alt="tool"/></div>
+        <div v-if="user.isAdmin">
+          <router-link to="/admin/"><img src="@/assets/layout/nav/tool-admin.svg" alt="tool"/></router-link>
+        </div>
+        <div id="nav-tool-toggle" class="inline" @click="onTool = !onTool">
+          <img v-if="user.isLogin" src="@/assets/layout/nav/tool-on.svg" alt="tool"/>
+          <img v-else src="@/assets/layout/nav/tool-off.svg" alt="tool"/>
+        </div>
       </div>
       <div class="menu">
         <router-link to="/schedule">
@@ -30,9 +36,10 @@
 
         <div class="title">계정</div>
         <div class="menu">
-          <div v-if="!isLogin"><div @click="login"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-login.svg" alt=""/> 로그인</div></div></div>
-          <div v-if="isLogin"><router-link to="/account"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-user.svg" alt=""/> 회원정보</div></router-link></div>
-          <div v-if="isLogin"><div @click="logout" class="nav-tool-item"><img src="@/assets/layout/nav/tool-logout.svg" alt=""/> 로그아웃</div></div>
+          <div v-if="!user.isLogin"><div @click="login"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-login.svg" alt=""/> 로그인</div></div></div>
+          <div v-if="user.isAdmin"><router-link to="/admin/"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-admin.svg" alt=""/> 관리자</div></router-link></div>
+          <div v-if="user.isLogin"><router-link to="/account"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-user.svg" alt=""/> 회원정보</div></router-link></div>
+          <div v-if="user.isLogin"><div @click="logout" class="nav-tool-item"><img src="@/assets/layout/nav/tool-logout.svg" alt=""/> 로그아웃</div></div>
         </div>
 
         <div class="title">애니메이션</div>
@@ -89,9 +96,6 @@ import { Options, Vue } from 'vue-class-component';
   computed: {
     cs() {
       return this.$store.state.colorScheme;
-    },
-    isLogin() {
-      return this.$store.state.user.isLogin();
     },
     user() {
       return this.$store.state.user;
@@ -164,6 +168,7 @@ abbr:hover { font-style: oblique }
 #nav .logo { float:left; }
 #nav .logo img { margin:14px }
 #nav .tool { float:right; }
+#nav .tool > div { display:inline-block }
 #nav .menu { margin:0 170px 0 170px; text-align: center }
 #nav .menu div { margin:0 12px; border-bottom: 2px solid transparent; cursor: pointer; transition: all .4s }
 #nav .menu div img { width:24px; height:24px; margin: 16px 16px 14px; filter:grayscale(1); transition: all .6s }

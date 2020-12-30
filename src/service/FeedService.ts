@@ -106,7 +106,7 @@ export default class FeedService {
   }
 
   public static preTaskParameter(param: any, ifInvalid: (result: Result<void>) => void): boolean {
-    if ((param.isLogin = store.state.user.isLogin() ? 1 : 0) == 1) {
+    if ((param.isLogin = store.state.user.isLogin ? 1 : 0) == 1) {
       if (typeof param.name === 'string') { param.name = '-'; }
       if (typeof param.password === 'string') { param.password = '----'; }
     }

@@ -7,13 +7,7 @@ export default class SessionService {
 
 
   public static login(email: string, password: string, tokenLogin: number, callback: (success: boolean, message: string) => void): void {
-    if (email === '') {
-      callback(false, '계정(이메일)을 입력해주세요.');
-      return;
-    } else if (password === '') {
-      callback(false, '암호를 입력해주세요.')
-      return;
-    } else if (tokenLogin === 1 && !confirm('정말로 자동로그인을 사용하시겠습니까?\n- 로그인정보가 현 기기에 저장됩니다.\n- 공공장소에서는 절대 사용하지 마십시오.')) {
+    if (tokenLogin === 1 && !confirm('정말로 자동로그인을 사용하시겠습니까?\n- 로그인정보가 현 기기에 저장됩니다.\n- 공공장소에서는 절대 사용하지 마십시오.')) {
       callback(false, '');
       return;
     }
@@ -77,7 +71,7 @@ export default class SessionService {
       method: 'GET', credentials: 'same-origin', headers: {'Content-Type': 'application/json'}
     }).then((e) => e.json()).then((data) => {
       data = (store.state.user = UserSession.cast(data));
-      result && result(data.isLogin());
+      result && result(data.isLogin);
       this.amendPathInSession();
     });
   }
@@ -95,7 +89,7 @@ export default class SessionService {
   public static amendPathInSession(path?: string): boolean {
     path = (path ? path : location.pathname) as string;
 
-    if (store.state.user.isLogin()) {
+    if (store.state.user.isLogin) {
       if (path.startsWith('/login')) {
         const rp = location.search.replace(/^\?/, '').split('&')
             .map((e) => decodeURIComponent(e))
