@@ -7,7 +7,9 @@
         </div>
       </div>
       <div class="basic-layout-main">
-        문의
+        <div class="base-mat">
+          <Board ticker="inquiry"/>
+        </div>
       </div>
     </div>
 
@@ -21,13 +23,15 @@
 
 <script lang="ts">
 import AnimeRank from "@/components/AnimeRank.vue";
+import Board from "@/components/Board.vue";
 import {Options, Vue} from "vue-class-component";
 
 @Options({
   computed: {
   },
   components: {
-    AnimeRank
+    AnimeRank,
+    Board
   },
   methods: {
   }

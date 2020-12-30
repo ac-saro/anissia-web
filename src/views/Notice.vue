@@ -3,11 +3,13 @@
     <div class="basic-layout">
       <div class="basic-layout-right">
         <div class="base-mat">
-          1
+          <AnimeRank />
         </div>
       </div>
       <div class="basic-layout-main">
-        뉴스
+        <div class="base-mat">
+          <Board ticker="notice"/>
+        </div>
       </div>
     </div>
 
@@ -21,11 +23,13 @@
 
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
+import AnimeRank from "@/components/AnimeRank.vue";
 
 @Options({
   computed: {
   },
   components: {
+    AnimeRank,
   },
   methods: {
   }

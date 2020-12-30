@@ -56,9 +56,9 @@
         </div>
 
         <div class="title">화면</div>
-        <div class="color-scheme">
-          <div class="color-scheme-st" @click="toggleColorScheme()" :class="`st-${cs}`">{{cs == 'dark' ? 'ON' : 'OFF'}}</div>
-          <div class="nav-tool-item" @click="toggleColorScheme()">
+        <div class="color-scheme" @click="toggleColorScheme()">
+          <div class="color-scheme-st" :class="`st-${cs}`">{{cs == 'dark' ? 'ON' : 'OFF'}}</div>
+          <div class="nav-tool-item">
             <img src="@/assets/layout/nav/tool-dark-mode.svg" alt=""/>
             다크모드
           </div>
