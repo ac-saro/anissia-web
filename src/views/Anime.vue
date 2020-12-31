@@ -137,12 +137,12 @@ export default class Anime extends Vue {
 
 <style>
 
-#anime .base-mat { padding: 12px; }
+#anime .base-mat { padding: 8px; }
 #anime .doc-title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
 #anime .anime-view-error { font-size:24px; text-align: center; line-height: 2; margin:50px 0 70px; }
 
 #anime table { width:100% }
-#anime table.list { margin-top:12px }
+#anime table.list { margin-top:6px }
 #anime table.list th { height:40px;  }
 #anime table.list td { font-size:15px; padding:10px 4px; border-bottom: 1px solid #ddd }
 #anime table.list td.anime-no { text-align: center }
