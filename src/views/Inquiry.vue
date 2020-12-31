@@ -38,8 +38,5 @@ import {Options, Vue} from "vue-class-component";
 })
 
 export default class Inquiry extends Vue {
-  data() {
-    return {};
-  }
 }
 </script>

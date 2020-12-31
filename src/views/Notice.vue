@@ -24,12 +24,14 @@
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
 import AnimeRank from "@/components/AnimeRank.vue";
+import Board from "@/components/Board.vue";
 
 @Options({
   computed: {
   },
   components: {
     AnimeRank,
+    Board
   },
   methods: {
   }

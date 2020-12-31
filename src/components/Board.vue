@@ -1,7 +1,8 @@
 <template>
   <div class="bbs doc-area">
 
-    <div class="board-view" v-if="tdata.isNewMode && isWritableTopic()">
+    <!--
+    <div class="board-view" v-if="meta.isNewMode && isWritableTopic()">
       <div class="write-info">
         <div class="write-name">{{user().name}}</div>
         <div class="write-tool">
@@ -9,10 +10,10 @@
         </div>
       </div>
       <div class="edit-subject">
-        <input type="text" v-model="tdata.newSubject" placeholder="제목을 입력해주세요." />
+        <input type="text" v-model="meta.newSubject" placeholder="제목을 입력해주세요." />
       </div>
       <div class="edit-centent">
-        <md v-model="tdata.newContent" height="600px" placeholder="내용을 입력해주세요."/>
+        <md v-model="meta.newContent" height="600px" placeholder="내용을 입력해주세요."/>
       </div>
     </div>
     <div class="board-view" v-else-if="view != null">
@@ -53,7 +54,7 @@
             </div>
           </div>
           <div class="new-post-md">
-            <md v-model="tdata.newPostContent" placeholder="내용을 입력해주세요." />
+            <md v-model="meta.newPostContent" placeholder="내용을 입력해주세요." />
           </div>
         </div>
 
@@ -62,6 +63,7 @@
         존재하지 않거나 삭제된 게시물 입니다.
       </div>
     </div>
+    -->
 
     <table class="board-topics-table">
       <tr class="mob-hide">
@@ -71,11 +73,11 @@
         <th class="name">이름</th>
         <th class="date">날짜</th>
       </tr>
-      <tr v-for="node in topics.content" :key="node.bn">
-        <td class="seq mob-hide">{{node.bn}}</td>
+      <tr v-for="node in list.content" :key="node.topicNo">
+        <td class="seq mob-hide">{{node.topicNo}}</td>
         <td class="post mob-hide">{{node.postCount}}</td>
         <td class="subject">
-          <router-link :to="topicViewHref(node)">{{node.subject}}</router-link>
+          <router-link :to="hrefList(node)">{{node.topic}}</router-link>
           <div class="mob-show">댓글: {{node.postCount}} / {{node.name}} / {{node.regDt}}</div>
         </td>
         <td class="name mob-hide">{{node.name}}</td>
@@ -83,52 +85,81 @@
       </tr>
     </table>
 
-    <div v-if="isWritableTopic()" class="bt-write-wrapper">
-      <router-link :to="urlWriteTopic()" class="bt-write">글쓰기</router-link>
-    </div>
+<!--    <div v-if="isWritableTopic()" class="bt-write-wrapper">-->
+<!--      <router-link :to="urlWriteTopic()" class="bt-write">글쓰기</router-link>-->
+<!--    </div>-->
 
-    <pagination :href="hrefPage" :total="topics.totalPages" :index="topics.number" :unit="10" />
+    <pagination :href="hrefPage" :total="list.totalPages" :index="list.number" :unit="10" />
 
   </div>
 </template>
 
 <script lang="ts">
-import Nabi from '@/utils/nabi';
 import PageData from '@/models/PageData';
-import BoardService from '@/services/BoardService';
 import Pagination from '@/components/Pagination.vue';
-import UserSession from '@/models/UserSession';
 import Md from '@/components/SaroMarkdown.vue';
-import { Options, Vue} from "vue-class-component";
+import {Options, Vue} from "vue-class-component";
+import BoardService from "@/service/BoardService";
+import Nabi from "@/utils/nabi";
 
 @Options({
-  props: ['code'],
+  props: {
+    ticker: String
+  },
   components: {
     Pagination,
     Md,
   },
-  created() {
-    this.load();
+  computed: {
+    user() {
+      return this.$store.user;
+    }
   },
+  created() {
+    this.init();
+  },
+  methods: {
+    hrefList(node: any) {
+      return Nabi.address().deleteParameter('write').setParameter('topicNo', node.topicNo).href;
+    },
+    hrefPage(index: number) {
+      return Nabi.address().deleteParameter(['topicNo', 'write']).setParameter('page', index + 1).href;
+    },
+    init() {
+      console.log('1')
+      if (this.info.ticker != '') {
+        this.getView();
+        this.getList();
+      } else {
+        BoardService.getTicker(this.ticker, (info) => {
+          console.log('2')
+          this.info = info;
+          if (this.info.ticker != '') {
+            this.init();
+          }
+        });
+      }
+    },
+    getList() {
+      this.page = Number(Nabi.address().getParameter("page") || '0') - 1;
+      this.page = this.page > 0 ? this.page : 0;
+      const pageQuery = `${this.page} ${this.query}`;
+      if (this.pageQuery != pageQuery) {
+        this.pageQuery = pageQuery;
+        BoardService.getList(this.ticker, this.query, this.page, (list) => this.list = list);
+      }
+    },
+    getView() {
+
+    },
+  },
+})
+
+/*
   watch: {
     $route(to, from) {
       this.load();
     },
-  },
-  data() {
-    return {
-      info: new BoardInfo(),
-      topics: new PageData<BoardTopic>(),
-      param: '',
-      view: null as BoardContent|null,
-      md: new Md(),
-      tdata: {
-        isNewMode: false,
-        newSubject: '',
-        newContent: '',
-        newPostContent: '',
-      },
-    };
   },
   methods: {
     topicViewHref(node: BoardTopic) {
@@ -137,7 +168,7 @@ import { Options, Vue} from "vue-class-component";
     load() {
       const page: number = Number(Nabi.address().getParameter('page') || '1') - 1;
       const view: number = Number(Nabi.address().getParameter('view'));
-      this.tdata.isNewMode = Nabi.address().getParameter('write') != null;
+      this.meta.isNewMode = Nabi.address().getParameter('write') != null;
       this.loadList(this.code, isNaN(page) ? 0 : page);
       this.loadView(this.code, view);
       this.loadInfo(this.code);
@@ -175,7 +206,7 @@ import { Options, Vue} from "vue-class-component";
       return Nabi.address().deleteParameter('view').setParameter('write', 'new').href;
     },
     writeTopic() {
-      BoardService.topicWrite(this.code, this.tdata.newSubject, this.tdata.newContent, (p, m, bn) => {
+      BoardService.topicWrite(this.code, this.meta.newSubject, this.meta.newContent, (p, m, bn) => {
         if (p) {
           this.param = '';
           this.$router.push(Nabi.address().clearParameter().addParameter('view', bn).href);
@@ -207,9 +238,9 @@ import { Options, Vue} from "vue-class-component";
       });
     },
     writePost(bn: number) {
-      BoardService.postWrite(bn, this.tdata.newPostContent, (p, m) => {
+      BoardService.postWrite(bn, this.meta.newPostContent, (p, m) => {
         if (p) {
-          this.tdata.newPostContent = '';
+          this.meta.newPostContent = '';
           this.param = '';
           this.load();
         } else {
@@ -265,11 +296,30 @@ import { Options, Vue} from "vue-class-component";
     render(text: string): string {
       return this.md.render(text);
     },
-  },
-})
+  },*/
 
-export default class Baord extends Vue {
-
+export default class Board extends Vue {
+  data() {
+    return {
+      // basic
+      //md: new Md(),
+      info: { ticker:'', name: '', writeTopic: 'ROOT', writePost: 'ROOT' },
+      // param
+      query: '',
+      page: 0,
+      pageQuery: '',
+      // data
+      list: new PageData(),
+      view: null as any|null,
+      // meta
+      meta: {
+        isNewMode: false,
+        newSubject: '',
+        newContent: '',
+        newPostContent: '',
+      },
+    };
+  }
 }
 
 </script>
@@ -332,7 +382,7 @@ export default class Baord extends Vue {
 .bbs .new-post { border-bottom: 1px solid #ddd }
 .bbs .new-post .new-post-md { border: 1px solid #eee; border-width: 0 1px; }
 
-@media (min-width: 700px) {
+@media (min-width: 701px) {
   .mob-show { display: none }
 }
 

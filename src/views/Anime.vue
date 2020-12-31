@@ -104,7 +104,6 @@ import AnimeService from "@/service/AnimeService";
       this.page = Number(Nabi.address().getParameter("page") || '0') - 1;
       this.page = this.page > 0 ? this.page : 0;
       const pageQuery = `${this.page} ${this.query}`;
-      console.log(this.pageQuery, pageQuery);
       if (this.pageQuery != pageQuery) {
         this.pageQuery = pageQuery;
         //AnimeService.getList(this.query, this.page, list => this.list = list);
