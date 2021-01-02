@@ -161,6 +161,7 @@ a:hover { text-decoration: underline }
 abbr { cursor: help; text-decoration: none; }
 abbr:hover { font-style: oblique }
 
+
 #area-under-nav { padding:56px 0 12px; }
 #nav { height:56px; position: fixed; top:0; left:0; right:0; user-select: none; }
 #nav div.inline { display:inline-block; }
@@ -246,6 +247,8 @@ html.modding #nav-tool { transition: background .4s }
 
 /* light mode */
 html.light body { background: #f4f4f4; color:#333 }
+html.light table td,
+html.light table th{ border-color: #eee }
 html.light ::-webkit-scrollbar-track{ background-color:#fafafa }
 html.light ::-webkit-scrollbar-thumb{ background-color:rgba(197, 197, 197, 0.3) }
 html.light ::-webkit-scrollbar-thumb:hover{ background-color:rgba(80, 80, 80, 0.3); }
@@ -271,6 +274,8 @@ html.light .popup-background .popup-box input[type=password] { border:1px solid 
 
 /* dark mode */
 html.dark body { background: #000; color:#999 }
+html.dark table td,
+html.dark table th{ border-color: #222 }
 html.dark ::-webkit-scrollbar-track{ background-color:#111 }
 html.dark ::-webkit-scrollbar-thumb{ background-color:rgba(120, 120, 120, 0.3) }
 html.dark ::-webkit-scrollbar-thumb:hover{ background-color:rgba(180, 180, 180, 0.3) }

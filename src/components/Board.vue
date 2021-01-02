@@ -1,5 +1,5 @@
 <template>
-  <div class="bbs doc-area">
+  <div class="board">
 
     <!--
     <div class="board-view" v-if="meta.isNewMode && isWritableTopic()">
@@ -325,62 +325,64 @@ export default class Board extends Vue {
 </script>
 
 <style>
-.bbs { padding-top:10px; }
-.bbs .board-view { padding-bottom: 50px; }
-.bbs .board-view input,
-.bbs .board-view textarea,
-.bbs .board-view .content,
+.board {  }
+
+/*
+.board .board-view { padding-bottom: 50px; }
+.board .board-view input,
+.board .board-view textarea,
+.board .board-view .content,
 .saro-md .content { font-size:14px; }
-.bbs .board-view .not-exist-content { padding:160px 0 100px; text-align: center; line-height: 2; font-size: 20px; color:#555 }
-.bbs .board-view .board-title { line-height: 32px; margin:12px 6px 16px; }
-.bbs .board-view .board-title-edit { margin:12px 0; }
-.bbs .board-view .board-title-edit input { border:1px solid #eee; width:100%; box-sizing: border-box; height:40px; line-height: 40px; padding: 0 8px; }
-.bbs .board-view .board-title-text { font-size:18px; color:#52667b }
-.bbs .board-view .board-title-tool { float: right; text-align: right; color:#555; font-size:14px;  }
-.bbs .board-view .board-title-tool span.bt { cursor: pointer; }
-.bbs .board-view .board-title-tool span.bt:hover { color:#2c5cc3 }
-.bbs .board-view .board-title-tool span:not(:first-child):before { content: ' | '; color:#ccc }
+.board .board-view .not-exist-content { padding:160px 0 100px; text-align: center; line-height: 2; font-size: 20px; color:#555 }
+.board .board-view .board-title { line-height: 32px; margin:12px 6px 16px; }
+.board .board-view .board-title-edit { margin:12px 0; }
+.board .board-view .board-title-edit input { border:1px solid #eee; width:100%; box-sizing: border-box; height:40px; line-height: 40px; padding: 0 8px; }
+.board .board-view .board-title-text { font-size:18px; color:#52667b }
+.board .board-view .board-title-tool { float: right; text-align: right; color:#555; font-size:14px;  }
+.board .board-view .board-title-tool span.bt { cursor: pointer; }
+.board .board-view .board-title-tool span.bt:hover { color:#2c5cc3 }
+.board .board-view .board-title-tool span:not(:first-child):before { content: ' | '; color:#ccc }
 
-.bbs .board-view .write-info { overflow: auto; border: 1px solid #eee; border-radius: 4px 4px 0 0; }
-.bbs .board-view .write-info > div { line-height: 34px; padding: 0 8px; font-size:14px; }
-.bbs .board-view .write-info .write-name { float:left; color:#3758a0; }
-.bbs .board-view .write-info .write-tool { text-align: right; color:#555 }
-.bbs .board-view .write-info .write-tool span.bt { cursor: pointer; }
-.bbs .board-view .write-info .write-tool span.bt:hover { color:#2c5cc3 }
-.bbs .board-view .write-info .write-tool span:not(:first-child):before { content: ' | '; color:#ccc }
+.board .board-view .write-info { overflow: auto; border: 1px solid #eee; border-radius: 4px 4px 0 0; }
+.board .board-view .write-info > div { line-height: 34px; padding: 0 8px; font-size:14px; }
+.board .board-view .write-info .write-name { float:left; color:#3758a0; }
+.board .board-view .write-info .write-tool { text-align: right; color:#555 }
+.board .board-view .write-info .write-tool span.bt { cursor: pointer; }
+.board .board-view .write-info .write-tool span.bt:hover { color:#2c5cc3 }
+.board .board-view .write-info .write-tool span:not(:first-child):before { content: ' | '; color:#ccc }
 
-.bbs .edit-subject { border-bottom:1px solid #ddd; }
-.bbs .edit-subject input { line-height: 40px; height:40px; padding: 0 8px; border:0; width:100%; box-sizing: border-box }
-.bbs .board-view .content { padding-bottom: 80px; }
-.bbs .board-view .content table,
-.bbs .board-view .content table td,
-.bbs .board-view .content table th,
+.board .edit-subject { border-bottom:1px solid #ddd; }
+.board .edit-subject input { line-height: 40px; height:40px; padding: 0 8px; border:0; width:100%; box-sizing: border-box }
+.board .board-view .content { padding-bottom: 80px; }
+.board .board-view .content table,
+.board .board-view .content table td,
+.board .board-view .content table th,
 .saro-md .content table,
 .saro-md .content table td,
 .saro-md .content table th { border:1px solid #ddd }
 
-.bbs .board-topics-table { width:100%; }
-.bbs .board-topics-table tr:hover td { background: #fffffa }
-.bbs .board-topics-table th { line-height: 32px; color:#505050; font-size:12px; border-bottom: 1px solid #ccc; }
-.bbs .board-topics-table td { padding:12px 10px; color:#5b6a7f; text-align:center; font-size:14px; border-bottom: 1px solid #eee; }
-.bbs .board-topics-table td.seq { width:60px; }
-.bbs .board-topics-table td.post { width:60px; }
-.bbs .board-topics-table td.subject { padding:0 0 0 8px; text-align:left;  }
-.bbs .board-topics-table td.subject a { text-decoration: none; color:#4b5771 }
-.bbs .board-topics-table tr:hover td.subject a { color:#376298 }
-.bbs .board-topics-table td.subject a:hover { color:#2c5cc3 !important }
-.bbs .board-topics-table td.subject .mob-show { margin-top:2px; }
-.bbs .board-topics-table td.name { width:130px; color:#224f8e; }
-.bbs .board-topics-table td.date { width:130px }
+.board .board-topics-table { width:100%; }
+.board .board-topics-table tr:hover td { background: #fffffa }
+.board .board-topics-table th { line-height: 32px; color:#505050; font-size:12px; border-bottom: 1px solid #ccc; }
+.board .board-topics-table td { padding:12px 10px; color:#5b6a7f; text-align:center; font-size:14px; border-bottom: 1px solid #eee; }
+.board .board-topics-table td.seq { width:60px; }
+.board .board-topics-table td.post { width:60px; }
+.board .board-topics-table td.subject { padding:0 0 0 8px; text-align:left;  }
+.board .board-topics-table td.subject a { text-decoration: none; color:#4b5771 }
+.board .board-topics-table tr:hover td.subject a { color:#376298 }
+.board .board-topics-table td.subject a:hover { color:#2c5cc3 !important }
+.board .board-topics-table td.subject .mob-show { margin-top:2px; }
+.board .board-topics-table td.name { width:130px; color:#224f8e; }
+.board .board-topics-table td.date { width:130px }
 
-.bbs .bt-write,
-.bbs .bt-write-post { text-decoration: none; color:#333;  border:1px solid #ddd; font-size:14px; }
-.bbs .bt-write { margin:32px 4px 10px; padding:8px; display: inline-block; }
-.bbs .bt-write-post { margin:48px 0 32px; padding:8px; display:block; text-align: center }
-.bbs .bt-write-wrapper { text-align: right }
+.board .bt-write,
+.board .bt-write-post { text-decoration: none; color:#333;  border:1px solid #ddd; font-size:14px; }
+.board .bt-write { margin:32px 4px 10px; padding:8px; display: inline-block; }
+.board .bt-write-post { margin:48px 0 32px; padding:8px; display:block; text-align: center }
+.board .bt-write-wrapper { text-align: right }
 
-.bbs .new-post { border-bottom: 1px solid #ddd }
-.bbs .new-post .new-post-md { border: 1px solid #eee; border-width: 0 1px; }
+.board .new-post { border-bottom: 1px solid #ddd }
+.board .new-post .new-post-md { border: 1px solid #eee; border-width: 0 1px; }
 
 @media (min-width: 701px) {
   .mob-show { display: none }
@@ -388,7 +390,8 @@ export default class Board extends Vue {
 
 @media (max-width: 700px) {
   .mob-hide { display: none }
-  .bbs .board-topics-table td.subject { padding:8px 12px; line-height: 1.5 }
-  .bbs .board-topics-table td.subject a { font-size:18px; }
+  .board .board-topics-table td.subject { padding:8px 12px; line-height: 1.5 }
+  .board .board-topics-table td.subject a { font-size:18px; }
 }
+ */
 </style>
