@@ -184,15 +184,16 @@ export default class Sc2015 extends Vue {
   from { background-color: rgba(0, 0, 0, 0); } to { background-color: rgba(0, 0, 0, .3); }
 }
 #sc2015 { min-height: 100%; }
+#sc2015 ::-webkit-scrollbar { display: none; }
 #sc2015 a { text-decoration: none; }
 #sc2015 table { width:100%; }
 #sc2015 .title { font-size:32px; font-weight: 200; line-height: 64px; text-align: center }
-#sc2015 .title .color-mode { position: absolute; top:0; right:0; }
+#sc2015 .title .color-mode { position: absolute; top:0; right:0; height:64px; }
 #sc2015 .title svg { width:28px; height:28px; margin:18px; opacity: .4; transition: all .2s; }
 #sc2015 .title svg:hover { opacity: 1; transform: rotate(-22deg); }
 #sc2015 .nav th { line-height: 40px; cursor: pointer; transition: background-color 0.2s, color 0.2s; }
 #sc2015 .main { position: absolute; right:0; bottom:0; left:0; overflow-y:auto }
-#sc2015 .list { border-collapse: separate; border-spacing: 0 1px; font-size:16px; font-family: "Noto Sans KR", "Malgun Gothic", "Dotum"; }
+#sc2015 .list { font-size:16px; font-family: "Noto Sans KR", "Malgun Gothic", "Dotum"; }
 #sc2015 .list td { height: 48px; line-height: 1.8; padding:0; transition: background-color 0.2s, color 0.2s; }
 #sc2015 .list td.tod { width:64px; text-align: center; }
 #sc2015 .list td.genres { text-align: right; padding-right:14px; }
@@ -211,30 +212,33 @@ export default class Sc2015 extends Vue {
 #sc2015 .popup .box .node-empty { padding: 40px 0 50px; text-align: center; }
 #sc2015 .popup .box a,
 #sc2015 .popup .box span.subject { text-decoration: none; display: block; text-align: center; }
-#sc2015 .popup .box .subject { font-size: 20px; line-height: 2; padding-bottom: 2px; padding: 0 12px; font-weight: 100; }
+#sc2015 .popup .box .subject { font-size: 20px; line-height: 2; padding: 0 12px; font-weight: 100; }
 
 #sc2015-theme-error { position: fixed; top:0; left:0; right:0; bottom:0; background: #000; }
 #sc2015-theme-error table { width:100%; height:100%; }
 #sc2015-theme-error table td { text-align: center; color:#fff; line-height: 1; font-size: 1.5em; }
 
 @media (min-width: 601px) {
-  #sc2015 .main { top:106px; }
+  #sc2015 .main { top:104px; }
   #sc2015 .list td.tod.tod-date { width:106px; }
   #sc2015 .popup .box { width: 400px; margin: 120px auto 0 auto; }
 }
 
 @media (max-width: 600px) {
-  #sc2015 .main { top:94px; }
+  #sc2015 .main { top:92px; }
   #sc2015 .title { font-size:24px; line-height: 52px; }
-  #sc2015 .title svg { width:28px; height:28px; margin:12px; }
+  #sc2015 .title .color-mode { height:52px; }
+  #sc2015 .title .color-mode svg { width:28px; height:28px; margin:12px; }
   #sc2015 .mob-hide { display: none; }
   #sc2015 .popup .box { margin: 80px 24px 0; }
   #sc2015 .popup .box .subject { font-size:18px; }
 }
 
 @media (max-width: 300px) {
-  #sc2015 .main { top:94px; }
+  #sc2015 .main { top:92px; }
   #sc2015 .title { font-size:24px; line-height: 52px; }
+  #sc2015 .title .color-mode { height:52px; }
+  #sc2015 .title .color-mode svg { width:28px; height:24px; margin:14px 4px 14px 4px; }
   #sc2015 .mob-hide { display: none; }
   #sc2015 .popup .box { margin: 80px 24px 0; }
   #sc2015 .popup .box .subject { font-size:12px; padding:4px; }
