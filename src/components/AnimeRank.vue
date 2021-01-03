@@ -2,9 +2,9 @@
   <div class="anime-rank">
     <table class="rank-tab">
       <tr>
-        <td><div :class="{'select': rank.period === 'day'}" @click="selectRankType('day')">일간</div></td>
-        <td><div :class="{'select': rank.period === 'week'}" @click="selectRankType('week')">주간</div></td>
-        <td><div :class="{'select': rank.period === 'month'}" @click="selectRankType('month')">월간</div></td>
+        <td><div class="basic-border-color" :class="{'select': rank.period === 'day'}" @click="selectRankType('day')">일간</div></td>
+        <td><div class="basic-border-color" :class="{'select': rank.period === 'week'}" @click="selectRankType('week')">주간</div></td>
+        <td><div class="basic-border-color" :class="{'select': rank.period === 'month'}" @click="selectRankType('month')">월간</div></td>
       </tr>
     </table>
     <div class="rank-pad">
@@ -72,7 +72,9 @@ export default class AnimeRank extends Vue {
 .anime-rank {  }
 .anime-rank table { width:100%; }
 .anime-rank .rank-tab td { width:33.33%; }
-.anime-rank .rank-tab td div { text-align: center; line-height: 48px; cursor: pointer }
+.anime-rank .rank-tab td div { text-align: center; line-height: 48px; cursor: pointer; font-size:15px; }
+.anime-rank .rank-table td,
+.anime-rank .rank-tab td div { border-bottom-width: 1px; }
 .anime-rank .rank-pad { padding:4px 0 0; }
 .anime-rank .rank-table td { height: 36px; padding: 6px 0; line-height: 1.6; font-size:14px }
 .anime-rank .rank-table td.rank { min-width:20px; max-width: 50px; text-align: center; padding:0 16px; font-weight: bold }
@@ -86,16 +88,12 @@ export default class AnimeRank extends Vue {
 html.light .anime-rank .rank-table td.diff .diff-up { color:#d45e5e }
 html.light .anime-rank .rank-table td.diff .diff-down { color:#7490c3 }
 html.light .anime-rank .rank-table td.diff .diff-new { color:#ddd }
-html.light .anime-rank .rank-table td,
-html.light .anime-rank .rank-tab td div { border-bottom: 1px solid #eee }
 html.light .anime-rank .rank-tab td div.select { border-color: #276998 }
 html.light .anime-rank a { color:#333 }
 
 html.dark .anime-rank .rank-table td.diff .diff-up { color:#753333 }
 html.dark .anime-rank .rank-table td.diff .diff-down { color:#2a3f67 }
 html.dark .anime-rank .rank-table td.diff .diff-new { color:#333 }
-html.dark .anime-rank .rank-table td,
-html.dark .anime-rank .rank-tab td div { border-bottom: 1px solid #222 }
 html.dark .anime-rank .rank-tab td div.select { border-color: #276998 }
 html.dark .anime-rank a { color:#aaa }
 </style>

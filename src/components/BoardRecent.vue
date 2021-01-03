@@ -37,6 +37,7 @@ export default class BoardRecent extends Vue {}
 </script>
 
 <style>
+.bbs-recent { padding-top:4px; }
 .bbs-recent .topics { width:100%; }
 .bbs-recent .topics td { padding:12px 10px; font-size:14px; height:40px; line-height: 1.5; }
 .bbs-recent .topics td.title { padding:0 0 0 8px; }
@@ -47,9 +48,7 @@ export default class BoardRecent extends Vue {}
   .bbs-recent .mob-hide { display: none }
 }
 
-html.light .bbs-recent .topics td { border-bottom: 1px solid #eee; }
 html.light .bbs-recent .topics td a { color:#333 }
 
-html.dark .bbs-recent .topics td { border-bottom: 1px solid #222; }
 html.dark .bbs-recent .topics td a { color:#aaa }
 </style>

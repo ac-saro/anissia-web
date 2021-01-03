@@ -377,7 +377,7 @@ export default class Schedule extends Vue {
 #schedule table.schedule-table th, #schedule table.schedule-table td { padding:4px 12px; font-weight: normal }
 #schedule table.schedule-application .pmark { width:80px; height: 80px; vertical-align: middle; margin:20px; }
 #schedule table.schedule-application td,
-#schedule table.schedule-application th { padding:8px 12px; }
+#schedule table.schedule-application th { padding:8px 12px; border-width: 1px; }
 
 #schedule .html-gen { overflow: auto; }
 #schedule .html-gen .tool-preview { float:left; padding:16px; box-sizing: border-box; text-align:center; width:calc(100% - 208px); }
@@ -415,16 +415,10 @@ export default class Schedule extends Vue {
 
 /*html.light #schedule .html-gen .tool-preview .preview-border { border: 1px dashed #ddd; }*/
 html.light #schedule .html-gen input, html.light #schedule .html-gen textarea { border:1px solid #ddd; background: #fff; color:#333 }
-html.light #schedule table.schedule-table,
-html.light #schedule table.schedule-table th,
-html.light #schedule table.schedule-table td { border:1px solid #dde1e6; }
 html.light #schedule .html-gen .tool .line .color:not(.blank) { border:1px solid #ddd }
 
 /*html.dark #schedule .html-gen .tool-preview .preview-border { border: 1px dashed #333; }*/
 html.dark #schedule .html-gen input, html.dark #schedule .html-gen textarea { border:1px solid #333; background: #000; color:#aaa }
-html.dark #schedule table.schedule-table,
-html.dark #schedule table.schedule-table th,
-html.dark #schedule table.schedule-table td { border:1px solid #333; }
 html.dark #schedule .html-gen .tool .line .color:not(.blank) { border:1px solid #222 }
 
 html.dark #schedule table.schedule-application .pmark { opacity: .8 }

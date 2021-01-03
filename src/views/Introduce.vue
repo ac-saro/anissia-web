@@ -148,7 +148,7 @@ export default class Introduce extends Vue {
 #introduce .doc-desc { margin: 12px 8px; font-size:14px; line-height: 1.8; }
 #introduce table.intro-table { margin:16px 4px; }
 #introduce table.intro-table th { color:#2a4c8c }
-#introduce table.intro-table th, #introduce table.intro-table td { padding:6px 12px; font-weight: normal; line-height: 1.8; font-size:15px; }
+#introduce table.intro-table th, #introduce table.intro-table td { padding:6px 12px; font-weight: normal; line-height: 1.8; font-size:15px; border-width:1px; }
 
 #introduce .gallery { padding-top:12px; display: flex; justify-content: flex-start; flex-flow: row wrap; }
 #introduce .gallery div {
@@ -161,11 +161,5 @@ export default class Introduce extends Vue {
   #introduce .gallery div { flex: 0 0 48%; min-height: 120px; }
 }
 
-html.light #introduce table.intro-table, html.light #introduce table.intro-table th, html.light #introduce table.intro-table td { border:1px solid #ddd; }
-
-
-html.dark #introduce table.intro-table, html.dark #introduce table.intro-table th, html.dark #introduce table.intro-table td { border:1px solid #222; }
 html.dark #introduce .gallery div:not(:hover) { filter:grayscale(.4) }
-
-
 </style>
