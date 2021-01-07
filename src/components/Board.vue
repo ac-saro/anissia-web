@@ -65,7 +65,10 @@
     </div>
     -->
 
-    <table class="board-topics-table">
+    <div class="board-view" v-if="meta.isNewMode && isWritableTopic()">
+    </div>
+
+    <table class="board-list">
       <tr class="mob-hide">
         <th class="seq">번호</th>
         <th class="post">댓글</th>
@@ -101,6 +104,7 @@ import Md from '@/components/SaroMarkdown.vue';
 import {Options, Vue} from "vue-class-component";
 import BoardService from "@/service/BoardService";
 import Nabi from "@/utils/nabi";
+import AnimeService from "@/service/AnimeService";
 
 @Options({
   props: {
@@ -150,7 +154,12 @@ import Nabi from "@/utils/nabi";
       }
     },
     getView() {
-
+      const topicNo = Number(Nabi.address().getParameter("topicNo") || '0');
+      if (topicNo > 0) {
+        //BoardService.getList()
+      } else {
+        this.view = null;
+      }
     },
   },
 })
@@ -326,6 +335,32 @@ export default class Board extends Vue {
 
 <style>
 .board {  }
+
+
+.board .board-list { width:100%; }
+.board .board-list tr:hover td { background: #fffffa }
+.board .board-list th { line-height: 32px; color:#505050; font-size:12px; border-bottom: 1px solid #ccc; }
+.board .board-list td { padding:14px 10px; color:#5b6a7f; text-align:center; font-size:14px; border-bottom: 1px solid #eee; }
+.board .board-list td.seq { width:60px; }
+.board .board-list td.post { width:60px; }
+.board .board-list td.subject { padding:0 0 0 8px; text-align:left; line-height: 1.5 }
+.board .board-list td.subject a { text-decoration: none; color:#4b5771 }
+.board .board-list tr:hover td.subject a { color:#376298 }
+.board .board-list td.subject a:hover { color:#2c5cc3 !important }
+.board .board-list td.subject .mob-show { margin-top:2px; }
+.board .board-list td.name { width:130px; color:#224f8e; }
+.board .board-list td.date { width:130px }
+
+
+@media (min-width: 701px) {
+  .board .mob-show { display: none }
+}
+
+@media (max-width: 700px) {
+  .board .mob-hide { display: none }
+  .board .board-list td.subject { padding:8px 12px; }
+  .board .board-list td.subject a { font-size:14px; }
+}
 
 /*
 .board .board-view { padding-bottom: 50px; }
