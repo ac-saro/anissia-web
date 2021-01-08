@@ -156,7 +156,7 @@ import AnimeService from "@/service/AnimeService";
     getView() {
       const topicNo = Number(Nabi.address().getParameter("topicNo") || '0');
       if (topicNo > 0) {
-        //BoardService.getList()
+        BoardService.getTopic(this.ticker, topicNo, view => this.view = view);
       } else {
         this.view = null;
       }
