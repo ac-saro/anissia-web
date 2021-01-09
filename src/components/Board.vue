@@ -65,7 +65,13 @@
     </div>
     -->
 
-    <div class="board-view" v-if="meta.isNewMode && isWritableTopic()">
+    <div class="board-view" v-if="view != null">
+      <div v-if="view.topicNo">
+        {{view}}
+      </div>
+      <div v-else>
+        없
+      </div>
     </div>
 
     <table class="board-list">
