@@ -30,6 +30,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import MarkdownUtil from "@/utils/MarkdownUtil";
 
 @Options({
   props: {
@@ -42,22 +43,8 @@ import { Options, Vue } from 'vue-class-component';
   },
   emits: ['update:modelValue'],
   methods: {
-    md()  {
-      let md: any = (window as any)['markdown-it-core-md'];
-      if (!md) {
-        (window as any)['markdown-it-core-md'] = md = require('markdown-it')({
-          html:         false,
-          xhtmlOut:     false,
-          breaks:       false,
-          linkify:      false,
-          typographer:  false,
-          highlight(code: string, lang: string) { return code; },
-        });
-      }
-      return md;
-    },
     render(text: string): string {
-      return (this.md().render(text) as string).split(/&lt;br[ ]?\/&gt;/g).join('<br/>');
+      return MarkdownUtil.render(text);
     },
     input(event: Event) {
       this.$emit('update:modelValue', (event.target as any).value);
@@ -228,7 +215,7 @@ import { Options, Vue } from 'vue-class-component';
     }
   }
 })
-export default class SaroMarkdown extends Vue {
+export default class MarkdownEditor extends Vue {
   data() {
     return {
       style: '',
