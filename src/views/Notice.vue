@@ -6,7 +6,7 @@
           <AnimeRank />
         </div>
       </div>
-      <div class="basic-layout-main">
+      <div id="notice" class="basic-layout-main">
         <div class="base-mat">
           <Board ticker="notice"/>
         </div>
@@ -15,11 +15,6 @@
 
   </div>
 </template>
-
-<style>
-
-
-</style>
 
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
@@ -43,3 +38,7 @@ export default class Notice extends Vue {
   }
 }
 </script>
+
+<style>
+#notice .base-mat { padding: 8px; }
+</style>

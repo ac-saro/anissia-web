@@ -6,7 +6,7 @@
           <AnimeRank />
         </div>
       </div>
-      <div class="basic-layout-main">
+      <div id="inquiry" class="basic-layout-main">
         <div class="base-mat">
           <Board ticker="inquiry"/>
         </div>
@@ -17,8 +17,7 @@
 </template>
 
 <style>
-
-
+#inquiry .base-mat { padding: 8px; }
 </style>
 
 <script lang="ts">
