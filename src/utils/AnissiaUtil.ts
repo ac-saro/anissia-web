@@ -19,7 +19,7 @@ export default class AnissiaUtil {
       if (status === 'OFF') { // is not status
         return '결방';
       } else if (today.localeCompare(startDate) <= 0) { // not yet start anime
-        return startDate;
+        return startDate.substring(5);
       } else if (AnissiaUtil.animeIsEnded(endDate)) { // anime end
         return '完';
       }

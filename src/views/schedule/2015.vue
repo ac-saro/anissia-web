@@ -44,12 +44,12 @@
           <a v-if="node.website !== ''" class="node" :href="node.website" target="_blank">
             <span>{{node.episode}}</span>
             <b>&nbsp;{{node.name}}&nbsp;</b>
-            <span class="time">[{{node.updDt.substring(5, 16).replace('-', '/')}}]</span>
+            <span class="time">{{node.updDt}}</span>
           </a>
           <div v-else class="node">
-            <span>준비중</span>
+            <span>{{node.episode}}</span>
             <b>&nbsp;{{node.name}}&nbsp;</b>
-            <span class="time">[{{node.updDt.substring(5, 16).replace('-', '/')}}]</span>
+            <span class="time">{{node.updDt}}</span>
           </div>
         </div>
         <div v-if="captionList.length === 0" class="node-empty">자막이 없습니다.</div>

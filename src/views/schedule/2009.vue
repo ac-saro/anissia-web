@@ -33,10 +33,10 @@
         </div>
         <div v-for="node in captionList" :key="`${node.an} ${node.name}`">
           <span v-if="node.website === ''">
-            <div class="caption">준비중 <span>{{node.updDt}}</span> {{node.name}}</div>
+            <div class="caption"><span>{{node.episode}}</span> {{node.name}} <span>{{node.updDt}}</span></div>
           </span>
           <a v-else :href="node.website" target="_blank">
-            <div class="caption">{{node.episode}} <span>{{node.updDt}}</span> {{node.name}}</div>
+            <div class="caption"><span>{{node.episode}}</span> {{node.name}} <span>{{node.updDt}}</span></div>
           </a>
         </div>
         <div v-if="captionList.length == 0" class="non-caption">

@@ -32,9 +32,11 @@ export default class AnimeService {
   }
 
   private static norCaption(e: any) {
-    const dt = e.updDt.split(' ');
-    e.updDt = dt[0] === new DateFormat().format("yyyy-MM-dd") ? dt[1] : dt[0];
+    e.updDt = AnissiaUtil.ymdOrDynamicAgo(e.updDt.replace(' ', 'T'));
     e.episode = e.episode === '0' ? '단편' : (e.episode + '화');
+    if (e.website === '') {
+      e.episode = '준비중';
+    }
     return e;
   }
 
