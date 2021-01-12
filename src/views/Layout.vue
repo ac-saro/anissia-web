@@ -51,7 +51,7 @@
         <div class="title">일반메뉴</div>
         <div class="menu">
           <div><router-link to="/introduce"><div class="nav-tool-item"><img src="@/assets/layout/nav/introduce.svg" alt=""/> 애니시아 소개</div></router-link></div>
-          <div><router-link to="/news"><div class="nav-tool-item"><img src="@/assets/layout/nav/notice.svg" alt=""/> 공지사항</div></router-link></div>
+          <div><router-link to="/notice"><div class="nav-tool-item"><img src="@/assets/layout/nav/notice.svg" alt=""/> 공지사항</div></router-link></div>
           <div><router-link to="/inquiry"><div class="nav-tool-item"><img src="@/assets/layout/nav/inquiry.svg" alt=""/> 문의 게시판</div></router-link></div>
         </div>
 

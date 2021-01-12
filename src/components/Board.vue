@@ -66,12 +66,29 @@
     -->
 
     <div class="board-view" v-if="view != null">
+
       <div v-if="view.topicNo">
-        {{view}}
+        <div class="title">{{ view.topic }}</div>
+
+        <div v-for="node in view.posts" :key="node.postNo">
+          <div>
+            <div class="content" v-html="render(node.content)"></div>
+          </div>
+          <div>
+            {{node}}
+          </div>
+        </div>
+
       </div>
+
       <div v-else>
-        없
+        <div class="title">{{ info.name }}</div>
+        <div class="empty-content">존재하지 않거나 삭제된 게시물 입니다.</div>
       </div>
+
+    </div>
+    <div v-else class="board-view">
+      <div class="title">{{ info.name }}</div>
     </div>
 
     <table class="board-list">
@@ -106,11 +123,12 @@
 <script lang="ts">
 import PageData from '@/models/PageData';
 import Pagination from '@/components/Pagination.vue';
-import Md from '@/components/SaroMarkdown.vue';
+import Md from '@/components/MarkdownEditor.vue';
 import {Options, Vue} from "vue-class-component";
 import BoardService from "@/service/BoardService";
 import Nabi from "@/utils/nabi";
 import AnimeService from "@/service/AnimeService";
+import MarkdownUtil from "@/utils/MarkdownUtil";
 
 @Options({
   props: {
@@ -134,6 +152,9 @@ import AnimeService from "@/service/AnimeService";
     },
     hrefPage(index: number) {
       return Nabi.address().deleteParameter(['topicNo', 'write']).setParameter('page', index + 1).href;
+    },
+    render(text: string): string {
+      return MarkdownUtil.render(text);
     },
     init() {
       console.log('1')
@@ -308,16 +329,13 @@ import AnimeService from "@/service/AnimeService";
     user(): UserSession {
       return this.$store.state.user as UserSession;
     },
-    render(text: string): string {
-      return this.md.render(text);
-    },
+
   },*/
 
 export default class Board extends Vue {
   data() {
     return {
       // basic
-      //md: new Md(),
       info: { ticker:'', name: '', writeTopic: 'ROOT', writePost: 'ROOT' },
       // param
       query: '',
@@ -341,12 +359,14 @@ export default class Board extends Vue {
 
 <style>
 .board {  }
+.board .title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
 
 
-.board .board-list { width:100%; }
-.board .board-list tr:hover td { background: #fffffa }
-.board .board-list th { line-height: 32px; color:#505050; font-size:12px; border-bottom: 1px solid #ccc; }
-.board .board-list td { padding:14px 10px; color:#5b6a7f; text-align:center; font-size:14px; border-bottom: 1px solid #eee; }
+.board .board-view .empty-content { text-align: center; padding:120px 0; }
+
+.board .board-list { width:100%; margin-top:10px; }
+.board .board-list th { line-height: 32px; color:#505050; font-size:12px; border-bottom-width: 1px; }
+.board .board-list td { padding:14px 10px; color:#5b6a7f; text-align:center; font-size:14px; border-bottom-width: 1px; }
 .board .board-list td.seq { width:60px; }
 .board .board-list td.post { width:60px; }
 .board .board-list td.subject { padding:0 0 0 8px; text-align:left; line-height: 1.5 }
