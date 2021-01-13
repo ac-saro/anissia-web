@@ -65,18 +65,27 @@
     </div>
     -->
 
-    <div class="board-view" v-if="view != null">
+    <div class="board-view" v-if="view">
 
+      <!-- topic -->
       <div v-if="view.topicNo">
         <div class="title">{{ view.topic }}</div>
 
         <div v-for="node in view.posts" :key="node.postNo">
-          <div>
-            <div class="content" v-html="render(node.content)"></div>
+
+          <div v-if="node.editMode">
+            <md v-model="node.editContent" height="600px" placeholder="내용을 입력해주세요."/>
           </div>
-          <div>
-            {{node}}
+          <div v-else>
+            <div>
+              <div class="content" v-html="render(node.content)"></div>
+            </div>
+            <div>
+              <div @click="node.editMode = true">클릭</div>
+              {{node}}
+            </div>
           </div>
+
         </div>
 
       </div>
@@ -87,6 +96,7 @@
       </div>
 
     </div>
+    <!-- topic not found -->
     <div v-else class="board-view">
       <div class="title">{{ info.name }}</div>
     </div>
