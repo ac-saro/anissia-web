@@ -9,14 +9,15 @@
     </table>
     <div class="rank-pad">
       <table class="rank-table">
-        <tr v-for="node in rank.list" :key="node.animeNo">
+        <tr v-for="node in rank.list" :key="node.animeNo" :class="({'empty-list': node.animeNo == 0})">
           <td class="rank">{{node.rank}}</td>
           <td class="subject">
-            <router-link :to="`/anime?animeNo=${node.animeNo}`">{{node.subject}}</router-link>
+            <router-link v-if="node.animeNo > 0" :to="`/anime?animeNo=${node.animeNo}`">{{node.subject}}</router-link>
+            <div v-else>-</div>
           </td>
           <td class="diff">
-            <div v-if="node.diff == null" class="diff-new" title="#100 신규진입">◆</div>
-            <div v-else-if="node.diff == 0">&nbsp;</div>
+            <div v-if="node.animeNo == 0 || node.diff == 0"> </div>
+            <div v-else-if="node.diff == null" class="diff-up diff-new" title="#100 신규진입">🡅</div>
             <div v-else-if="node.diff > 0" class="diff-up">▲ {{node.diff}}</div>
             <div v-else-if="node.diff < 0" class="diff-down">▼ {{-node.diff}}</div>
           </td>
@@ -80,6 +81,8 @@ export default class AnimeRank extends Vue {
 .anime-rank .rank-table td.rank { min-width:20px; max-width: 50px; text-align: center; padding:0 16px; font-weight: bold }
 .anime-rank .rank-table td.subject { width:90%; }
 .anime-rank .rank-table td.diff { min-width:50px; text-align: right; padding-right:16px; font-weight: bold }
+.anime-rank .rank-table td.diff .diff-new { font-size:20px; }
+.anime-rank .rank-table tr.empty-list { opacity: .3 }
 
 @media (max-width: 800px) {
   .anime-rank .rank-table tr:nth-child( n + 16 ) { display: none }
@@ -87,13 +90,13 @@ export default class AnimeRank extends Vue {
 
 html.light .anime-rank .rank-table td.diff .diff-up { color:#d45e5e }
 html.light .anime-rank .rank-table td.diff .diff-down { color:#7490c3 }
-html.light .anime-rank .rank-table td.diff .diff-new { color:#ddd }
+html.light .anime-rank .rank-table td.diff .diff-new { color:#6fc1ae }
 html.light .anime-rank .rank-tab td div.select { border-color: #276998 }
 html.light .anime-rank a { color:#333 }
 
 html.dark .anime-rank .rank-table td.diff .diff-up { color:#753333 }
 html.dark .anime-rank .rank-table td.diff .diff-down { color:#2a3f67 }
-html.dark .anime-rank .rank-table td.diff .diff-new { color:#333 }
+html.dark .anime-rank .rank-table td.diff .diff-new { color:#1d463c }
 html.dark .anime-rank .rank-tab td div.select { border-color: #276998 }
 html.dark .anime-rank a { color:#aaa }
 </style>

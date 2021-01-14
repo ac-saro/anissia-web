@@ -27,6 +27,9 @@ export default class AnimeService {
           list[i].rank = '-';
         }
       }
+      if (list.length < 30) {
+        list = list.concat([...new Array(30).keys()].map(e => ({animeNo: 0, rank: e+1})).slice(list.length));
+      }
       callback(list);
     });
   }
