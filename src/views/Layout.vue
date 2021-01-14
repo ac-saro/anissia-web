@@ -211,8 +211,10 @@ abbr:hover { font-style: oblique }
   .basic-layout .basic-layout-main { width:70%; margin: 0 30% 0 12px;}
 }
 @media (max-width: 1023px) {
+  #area-under-nav { padding:45px 0 0; }
   .basic-layout .basic-layout-right { display: none }
-  .basic-layout .basic-layout-main { margin:0 12px; }
+  .basic-layout .basic-layout-main { margin:0  }
+  .basic-layout .basic-layout-main .base-mat { border-width: 0 !important; }
 }
 
 @media (min-width: 641px) {
