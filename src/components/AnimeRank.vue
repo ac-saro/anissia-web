@@ -88,15 +88,19 @@ export default class AnimeRank extends Vue {
   .anime-rank .rank-table tr:nth-child( n + 16 ) { display: none }
 }
 
+@media (max-width: 1023px) {
+  .anime-rank .rank-table tr:nth-child( n + 6 ).empty-list { display: none }
+}
+
 html.light .anime-rank .rank-table td.diff .diff-up { color:#d45e5e }
 html.light .anime-rank .rank-table td.diff .diff-down { color:#7490c3 }
-html.light .anime-rank .rank-table td.diff .diff-new { color:#6fc1ae }
+html.light .anime-rank .rank-table td.diff .diff-new { color:#e03f3f }
 html.light .anime-rank .rank-tab td div.select { border-color: #276998 }
 html.light .anime-rank a { color:#333 }
 
 html.dark .anime-rank .rank-table td.diff .diff-up { color:#753333 }
 html.dark .anime-rank .rank-table td.diff .diff-down { color:#2a3f67 }
-html.dark .anime-rank .rank-table td.diff .diff-new { color:#1d463c }
+html.dark .anime-rank .rank-table td.diff .diff-new { color:#a72a2a }
 html.dark .anime-rank .rank-tab td div.select { border-color: #276998 }
 html.dark .anime-rank a { color:#aaa }
 </style>
