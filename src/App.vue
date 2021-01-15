@@ -1,7 +1,7 @@
 <template>
-    <router-view :key="$route.fullPath"/>
+  <!-- do not use :key in router-view / :key calls created() to create a component each time. -->
+  <router-view />
 </template>
-
 
 <style>
 img, a { border: 0; }

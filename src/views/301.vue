@@ -19,3 +19,9 @@
 
 html.dark #error-301 img { opacity: .8 }
 </style>
+
+<script lang="ts">
+import {Options, Vue} from "vue-class-component";
+
+export default class P301 extends Vue {}
+</script>

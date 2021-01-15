@@ -156,6 +156,11 @@ import MarkdownUtil from "@/utils/MarkdownUtil";
   created() {
     this.init();
   },
+  watch: {
+    $route(to, from) {
+      this.load();
+    }
+  },
   methods: {
     hrefList(node: any) {
       return Nabi.address().deleteParameter('write').setParameter('topicNo', node.topicNo).href;
@@ -167,35 +172,28 @@ import MarkdownUtil from "@/utils/MarkdownUtil";
       return MarkdownUtil.render(text);
     },
     init() {
-      console.log('1')
       if (this.info.ticker != '') {
-        this.getView();
-        this.getList();
+        this.load();
       } else {
-        BoardService.getTicker(this.ticker, (info) => {
-          console.log('2')
-          this.info = info;
-          if (this.info.ticker != '') {
-            this.init();
-          }
-        });
+        BoardService.getTicker(this.ticker, (info) => { this.info = info; this.load(); });
       }
     },
-    getList() {
-      this.page = Number(Nabi.address().getParameter("page") || '0') - 1;
-      this.page = this.page > 0 ? this.page : 0;
+    load() {
+      const topicNo = Nabi.address().getIntParameter("topicNo");
+      this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
       const pageQuery = `${this.page} ${this.query}`;
-      if (this.pageQuery != pageQuery) {
-        this.pageQuery = pageQuery;
-        BoardService.getList(this.ticker, this.query, this.page, (list) => this.list = list);
-      }
-    },
-    getView() {
-      const topicNo = Number(Nabi.address().getParameter("topicNo") || '0');
+
+      // view
       if (topicNo > 0) {
         BoardService.getTopic(this.ticker, topicNo, view => this.view = view);
       } else {
         this.view = null;
+      }
+
+      // list
+      if (this.pageQuery != pageQuery) {
+        this.pageQuery = pageQuery;
+        BoardService.getList(this.ticker, this.query, this.page, (list) => this.list = list);
       }
     },
   },

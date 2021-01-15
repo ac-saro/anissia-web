@@ -87,30 +87,30 @@ import AnimeService from "@/service/AnimeService";
     Pagination
   },
   created() {
-    console.log('created');
-    this.getView();
-    this.getList();
+    this.load();
+  },
+  watch: {
+    $route(to, from) {
+      this.load();
+    }
   },
   methods: {
-    getView() {
-      const animeNo = Number(Nabi.address().getParameter("animeNo") || '0');
+    load() {
+      const animeNo = Nabi.address().getIntParameter("animeNo");
+      this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
+      const pageQuery = `${this.page} ${this.query}`;
+
+      // view
       if (animeNo > 0) {
         AnimeService.getAnime(animeNo, anime => this.anime = anime);
       } else {
         this.anime = null;
       }
-    },
-    getList() {
-      this.page = Number(Nabi.address().getParameter("page") || '0') - 1;
-      this.page = this.page > 0 ? this.page : 0;
-      const pageQuery = `${this.page} ${this.query}`;
+
+      // list
       if (this.pageQuery != pageQuery) {
         this.pageQuery = pageQuery;
-        //AnimeService.getList(this.query, this.page, list => this.list = list);
-        AnimeService.getList(this.query, this.page, list => {
-          this.list = list;
-          console.log(list.content)
-        });
+        AnimeService.getList(this.query, this.page, list => this.list = list);
       }
     },
     hrefList(animeNo: number) {

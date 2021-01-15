@@ -15,3 +15,9 @@
 #error-404 .title-sub { font-size:32px; margin: 20px 0 }
 #error-404 .desc { margin:32px 0 }
 </style>
+
+<script lang="ts">
+import {Options, Vue} from "vue-class-component";
+
+export default class P404 extends Vue {}
+</script>

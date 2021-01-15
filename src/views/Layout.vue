@@ -1,7 +1,8 @@
 <template>
   <div>
     <div id="area-under-nav">
-      <router-view :key="this.$route.fullPath"/>
+      <!-- do not use :key in router-view / :key calls created() to create a component each time. -->
+      <router-view />
     </div>
 
     <nav id="nav">

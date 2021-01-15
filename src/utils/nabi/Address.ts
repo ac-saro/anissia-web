@@ -1,4 +1,5 @@
 import { AddressParameter } from './AddressParameter';
+import Nabi from "@/utils/nabi/index";
 
 export class Address {
   public origin = '';
@@ -29,6 +30,11 @@ export class Address {
   public getParameter(name: string): string|null {
     const vals = this.inParams.filter((e) => e.name === name).map((e) => e.value);
     return vals.length > 0 ? vals[0] : null;
+  }
+
+  public getIntParameter(name: string, defaultValue = 0): number {
+    const val = Number(this.getParameter(name));
+    return isNaN(val) ? defaultValue : val;
   }
 
   public deleteParameter(args: string|string[]): Address {
