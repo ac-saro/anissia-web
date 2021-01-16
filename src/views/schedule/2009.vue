@@ -106,8 +106,9 @@ export default class Sc2009 extends Vue {
 #sc2009 {
   position: absolute; top:0; right:0; bottom:0; left:0; background-color: #333;
   background-image: url(~@/assets/schedule/2009-bg.jpg); background-repeat: no-repeat;
-  font-family: "Malgun Gothic", "Dotum"; min-width:530px;
+  font-family: "Malgun Gothic", "Dotum"; min-width:530px; color:#000;
 }
+#sc2009 ::-webkit-scrollbar{ width:0; height:0 }
 #sc2009 a { text-decoration: none }
 #sc2009 > div { position: absolute; }
 #sc2009 .nav,

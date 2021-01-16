@@ -89,15 +89,14 @@ export default class AdminLayout extends Vue {
 </script>
 
 <style>
-#admin-layout { }
 #admin-layout .admin-menu { -webkit-tap-highlight-color: rgba(0,0,0,0); }
 #admin-layout .admin-menu table { width:100%; }
 #admin-layout .admin-menu table td { width:25%; text-align: center; border-bottom-width: 1px }
-#admin-layout .admin-menu table td img { width:20%; filter:grayscale(.9); opacity: .5; }
-#admin-layout .admin-menu table td a { display:block; padding:20px 0; text-decoration: none !important; }
+#admin-layout .admin-menu table td img { width:20%; max-width:60px; filter:grayscale(1); opacity: .5; transition: all .2s }
+#admin-layout .admin-menu table td a { display:block; padding:24px 0; text-decoration: none !important; }
 #admin-layout .admin-menu table td a span { margin-top: 8px; font-size:15px; display: inline-block }
 #admin-layout .admin-menu table td.menu-on img,
-#admin-layout .admin-menu table td:hover img { filter:grayscale(.3); opacity: .8 }
+#admin-layout .admin-menu table td:hover img { filter:grayscale(.4); opacity: .8 }
 
 
 #admin-layout .admin-menu table td:not(.menu-on) {  }
@@ -113,6 +112,8 @@ export default class AdminLayout extends Vue {
 }
 
 html.light #admin-layout .admin-menu table td a { color:#333; }
+
+html.dark #admin-layout .admin-menu table td a { color:#999; }
 
 
 

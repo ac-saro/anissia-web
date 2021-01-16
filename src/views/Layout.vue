@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ml">
     <div id="area-under-nav">
       <!-- do not use :key in router-view / :key calls created() to create a component each time. -->
       <router-view />
@@ -157,11 +157,10 @@ export default class Layout extends Vue {
 
 <style>
 @import url(~@fortawesome/fontawesome-free/css/all.min.css);
-a { text-decoration: none }
-a:hover { text-decoration: underline }
-abbr { cursor: help; text-decoration: none; }
-abbr:hover { font-style: oblique }
-
+.ml a { text-decoration: none }
+.ml a:hover { text-decoration: underline }
+.ml abbr { cursor: help; text-decoration: none; }
+.ml abbr:hover { font-style: oblique }
 
 #area-under-nav { padding:56px 0 12px; }
 #nav { height:56px; position: fixed; top:0; left:0; right:0; user-select: none; }
@@ -196,29 +195,24 @@ abbr:hover { font-style: oblique }
 #nav-tool .color-scheme .color-scheme-st.st-light { color:#bbb }
 #nav-tool .color-scheme .color-scheme-st.st-dark { color:#fff }
 
-.x-tag {
-  display: inline-block; margin:4px 4px 0 0; border:1px solid #eee; padding:3px 5px 4px; border-radius: 3px; font-size:14px
-}
+.ml .basic-layout { padding-top:12px; overflow: auto }
 
-
-.basic-layout { padding-top:12px; overflow: auto }
-
-.mono-area { margin:120px auto 0; max-width:400px; }
-.mono-area .base-mat-body { padding:20px 0; }
-.mono-area .input-unit { padding:12px 24px 10px; }
-.mono-area input { border:0; padding:8px; height:32px; width:100%; box-sizing: border-box; }
+.ml .mono-area { margin:120px auto 0; max-width:400px; }
+.ml .mono-area .base-mat-body { padding:20px 0; }
+.ml .mono-area .input-unit { padding:12px 24px 10px; }
+.ml .mono-area input { border:0; padding:8px; height:32px; width:100%; box-sizing: border-box; }
 
 @media (min-width: 1024px) {
-  .basic-layout .basic-layout-right { float:right; width:calc(30% - 36px); margin-right:12px; }
-  .basic-layout .basic-layout-main { width:70%; margin: 0 30% 0 12px;}
-  .basic-layout .basic-layout-mono { margin: 0 12px;}
+  .ml .basic-layout .basic-layout-right { float:right; width:calc(30% - 36px); margin-right:12px; }
+  .ml .basic-layout .basic-layout-main { width:70%; margin: 0 30% 0 12px;}
+  .ml .basic-layout .basic-layout-mono { margin: 0 12px;}
 }
 @media (max-width: 1023px) {
   #area-under-nav { padding:45px 0 0; }
-  .basic-layout .basic-layout-right { display: none }
-  .basic-layout .basic-layout-main,
-  .basic-layout .basic-layout-mono { margin:0  }
-  .basic-layout .base-mat { border-width: 0 !important; }
+  .ml .basic-layout .basic-layout-right { display: none }
+  .ml .basic-layout .basic-layout-main,
+  .ml .basic-layout .basic-layout-mono { margin:0  }
+  .ml .basic-layout .base-mat { border-width: 0 !important; }
 }
 
 @media (min-width: 641px) {
@@ -228,31 +222,26 @@ abbr:hover { font-style: oblique }
 @media (max-width: 640px) {
   #nav .menu { display:none }
   #nav-tool { top:68px; left:12px; right:12px; bottom:12px; }
-  .mono-area { margin:80px auto 0; }
+  .ml .mono-area { margin:80px auto 0; }
 }
 
-.popup-background { position: absolute; backdrop-filter: blur(10px); top:0; left:0; right:0; bottom:0; z-index: 1000 }
-.popup-background .popup-box {
-  position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); padding:20px 12px; min-width:240px;
-}
-.popup-background .popup-box .title { font-size:13px; margin-bottom:20px; }
-.popup-background .popup-box .center { text-align: center }
-.popup-background .popup-box input { line-height: 32px; height:32px; text-align: center }
-.popup-background .popup-box input[type=password] { width:70%; }
-.popup-background .popup-box input[type=button] { border:0; width:40%; }
-.popup-background .popup-box .button-wrap { margin-top:18px; }
-
-
-
+.ml .popup-background { position: absolute; backdrop-filter: blur(10px); top:0; left:0; right:0; bottom:0; z-index: 1000 }
+.ml .popup-background .popup-box { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); padding:20px 12px; min-width:240px; }
+.ml .popup-background .popup-box .title { font-size:13px; margin-bottom:20px; }
+.ml .popup-background .popup-box .center { text-align: center }
+.ml .popup-background .popup-box input { line-height: 32px; height:32px; text-align: center }
+.ml .popup-background .popup-box input[type=password] { width:70%; }
+.ml .popup-background .popup-box input[type=button] { border:0; width:40%; }
+.ml .popup-background .popup-box .button-wrap { margin-top:18px; }
 
 
 /* modding */
-html.modding body,
+html.modding,
 html.modding #nav,
 html.modding #nav-tool { transition: background .4s }
 
 /* light mode */
-html.light body { background: #f4f4f4; color:#333 }
+html.light { background: #f4f4f4; color:#333 }
 html.light table td,
 html.light table th,
 html.light .basic-border-color { border-color: #e8e8e8 }
@@ -275,12 +264,11 @@ html.light .mono-area input[type=password]:-webkit-autofill {
   -webkit-text-fill-color: #333 !important;
 }
 html.light .mono-area input[type=button] { background: #4f5677; color:#fff }
-html.light .x-tag { color:#333; border-color:#eee; }
 html.light .popup-background .popup-box { background: #fff; border:1px solid #276998; }
 html.light .popup-background .popup-box input[type=password] { border:1px solid #ddd }
 
 /* dark mode */
-html.dark body { background: #000; color:#999 }
+html.dark { background: #000; color:#999 }
 html.dark table td,
 html.dark table th,
 html.dark .basic-border-color { border-color: #282828 }
@@ -303,7 +291,6 @@ html.dark .mono-area input[type=password]:-webkit-autofill {
   -webkit-text-fill-color: #aaa !important;
 }
 html.dark .mono-area input[type=button] { background: #999; color:#000; }
-html.dark .x-tag { color:#999; border-color:#191919; }
 html.dark .popup-background .popup-box { background: #000; border:1px solid #276998; }
 html.dark .popup-background .popup-box input[type=password] { border:1px solid #333 }
 
