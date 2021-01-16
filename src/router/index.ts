@@ -15,6 +15,11 @@ import Home from "@/views/Home.vue";
 import Sc2009 from "@/views/schedule/2009.vue";
 import Sc2015 from "@/views/schedule/2015.vue";
 import Account from "@/views/Account.vue";
+import AdminLayout from "@/views/admin/AdminLayout.vue";
+import AdminCaption from "@/views/admin/AdminCaption.vue";
+import AdminSchdule from "@/views/admin/AdminSchdule.vue";
+import AdminAnime from "@/views/admin/AdminAnime.vue";
+import AdminPanel from "@/views/admin/AdminPanel.vue";
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -24,99 +29,37 @@ const router = createRouter({
     });
   },
   routes: [
-    {
-      path: '/schedule/2015',
-      component: Sc2015,
-      meta: { title: '애니편성표' },
-    },
-    {
-      path: '/schedule/2009',
-      component: Sc2009,
-      meta: { title: '애니편성표 2009' },
-    },
-    {
-      path: '/',
-      component: Layout,
-      children: [
-        {
-          path: '/',
-          meta: { title: '애니시아' },
-          component: Home,
-        },
-        {
-          path: '/schedule',
-          meta: { title: '애니시아' },
-          component: Schedule,
-        },
-        {
-          path: '/anime',
-          meta: { title: '애니시아' },
-          component: Anime,
-        },
-        {
-          path: '/introduce',
-          meta: { title: '애니시아' },
-          component: Introduce,
-        },
-        {
-          path: '/notice',
-          meta: { title: '애니시아' },
-          component: Notice,
-        },
-        {
-          path: '/inquiry',
-          meta: { title: '애니시아' },
-          component: Inquiry,
-        },
-        {
-          path: '/login',
-          meta: { title: '애니시아' },
-          component: Login,
-        },
-        {
-          path: '/join/:token',
-          meta: { title: '애니시아' },
-          component: Join
-        },
-        {
-          path: '/join',
-          meta: { title: '애니시아' },
-          component: Join,
-        },
-        {
-          path: '/lost',
-          meta: { title: '애니시아' },
-          component: Lost,
-        },
-        {
-          path: '/account',
-          meta: { title: '애니시아' },
-          component: Account,
-        },
-        {
-          path: '/admin',
-          component: P301,
-          meta: { title: '애니시아' },
-        },
-        {
-          path: '/anitime/:path(.*)',
-          component: P301,
-          meta: { title: '애니시아 - 주소이전' },
-        },
-      ]
-    },
-    // 404 page not found
-    {
-      path: '/:path(.*)',
-      component: Layout,
-      children: [
-        {
-          path: '/:path(.*)',
-          component: P404,
-          meta: { title: '애니시아 404' },
-        },
-      ],
-    },
+      // schedule
+      { path: '/schedule/2015', component: Sc2015, meta: { title: '애니편성표' } },
+      { path: '/schedule/2009', component: Sc2009, meta: { title: '애니편성표 2009' } },
+      // basic
+      {
+        path: '/', component: Layout,
+        children: [
+          { path: '/', component: Home },
+          { path: '/schedule', component: Schedule },
+          { path: '/anime', component: Anime },
+          { path: '/introduce', component: Introduce },
+          { path: '/notice', component: Notice },
+          { path: '/inquiry', component: Inquiry },
+          { path: '/login', component: Login },
+          { path: '/join/:token', component: Join },
+          { path: '/join', component: Join },
+          { path: '/lost', component: Lost },
+          { path: '/account', component: Account },
+          {
+            path: '/admin', component: AdminLayout,
+            children: [
+              { path: '/admin', component: AdminPanel },
+              { path: '/admin/anime', component: AdminAnime },
+              { path: '/admin/schedule', component: AdminSchdule },
+              { path: '/admin/caption', component: AdminCaption },
+            ]
+          },
+          { path: '/anitime/:path(.*)', component: P301, meta: { title: '애니시아 - 주소이전' } },
+          { path: '/:path(.*)', component: P404, meta: { title: '애니시아 404' } },
+        ]
+      },
   ],
 });
 

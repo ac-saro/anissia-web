@@ -150,7 +150,7 @@ import MarkdownUtil from "@/utils/MarkdownUtil";
   },
   computed: {
     user() {
-      return this.$store.user;
+      return this.$store.state.user;
     }
   },
   created() {

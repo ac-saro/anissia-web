@@ -13,7 +13,7 @@
       </div>
       <div class="tool">
         <div v-if="user.isAdmin">
-          <router-link to="/admin/"><img src="@/assets/layout/nav/tool-admin.svg" alt="tool"/></router-link>
+          <router-link to="/admin"><img src="@/assets/layout/nav/tool-admin.svg" alt="tool"/></router-link>
         </div>
         <div id="nav-tool-toggle" class="inline" @click="onTool = !onTool">
           <img v-if="user.isLogin" src="@/assets/layout/nav/tool-on.svg" alt="tool"/>
@@ -38,7 +38,7 @@
         <div class="title">계정</div>
         <div class="menu">
           <div v-if="!user.isLogin"><div @click="login"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-login.svg" alt=""/> 로그인</div></div></div>
-          <div v-if="user.isAdmin"><router-link to="/admin/"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-admin.svg" alt=""/> 관리자</div></router-link></div>
+          <div v-if="user.isAdmin"><router-link to="/admin"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-admin.svg" alt=""/> 관리자</div></router-link></div>
           <div v-if="user.isLogin"><router-link to="/account"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-user.svg" alt=""/> 회원정보</div></router-link></div>
           <div v-if="user.isLogin"><div @click="logout" class="nav-tool-item"><img src="@/assets/layout/nav/tool-logout.svg" alt=""/> 로그아웃</div></div>
         </div>
@@ -165,6 +165,7 @@ abbr:hover { font-style: oblique }
 
 #area-under-nav { padding:56px 0 12px; }
 #nav { height:56px; position: fixed; top:0; left:0; right:0; user-select: none; }
+#nav { -webkit-tap-highlight-color: rgba(0,0,0,0); }
 #nav div.inline { display:inline-block; }
 #nav img { vertical-align: top }
 #nav .logo { float:left; }
@@ -210,12 +211,14 @@ abbr:hover { font-style: oblique }
 @media (min-width: 1024px) {
   .basic-layout .basic-layout-right { float:right; width:calc(30% - 36px); margin-right:12px; }
   .basic-layout .basic-layout-main { width:70%; margin: 0 30% 0 12px;}
+  .basic-layout .basic-layout-mono { margin: 0 12px;}
 }
 @media (max-width: 1023px) {
   #area-under-nav { padding:45px 0 0; }
   .basic-layout .basic-layout-right { display: none }
-  .basic-layout .basic-layout-main { margin:0  }
-  .basic-layout .basic-layout-main .base-mat { border-width: 0 !important; }
+  .basic-layout .basic-layout-main,
+  .basic-layout .basic-layout-mono { margin:0  }
+  .basic-layout .base-mat { border-width: 0 !important; }
 }
 
 @media (min-width: 641px) {

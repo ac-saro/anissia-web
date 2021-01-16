@@ -1,41 +1,48 @@
 <template>
   <div>
-    <div v-if="user.isAdmin">
-      <div class="basic-layout">
-        <div class="basic-layout-right">
-          <div class="base-mat">
-            최근수정
-          </div>
-        </div>
-        <div id="home" class="basic-layout-main">
+    <div v-if="this.user.isAdmin">
+      <div id="admin-layout" class="basic-layout">
+        <div class="basic-layout-mono">
           <div class="base-mat">
 
-            <div class="home-anime-rank">
-              <AnimeRank mode="static"/>
+            <div class="admin-menu">
+              <table>
+                <tr>
+                  <td :class="({'menu-on': menu == 'panel'})">
+                    <router-link to="/admin">
+                      <div><img src="@/assets/layout/nav/admin-panel.svg"/></div>
+                      <span>관리패널</span>
+                    </router-link>
+                  </td>
+                  <td :class="({'menu-on': menu == 'anime'})">
+                    <router-link to="/admin/anime">
+                      <div><img src="@/assets/layout/nav/admin-anime.svg"/></div>
+                      <span>애니메이션</span>
+                    </router-link>
+                  </td>
+                  <td :class="({'menu-on': menu == 'schedule'})">
+                    <router-link to="/admin/schedule">
+                      <div><img src="@/assets/layout/nav/admin-schedule.svg"/></div>
+                      <span>편성표</span>
+                    </router-link>
+                  </td>
+                  <td :class="({'menu-on': menu == 'caption'})">
+                    <router-link to="/admin/caption">
+                      <div><img src="@/assets/layout/nav/admin-caption.svg"/></div>
+                      <span>자막</span>
+                    </router-link>
+                  </td>
+                </tr>
+              </table>
             </div>
 
-            <div class="doc-title">액티브 패널</div>
             <div>
-              내용
-              <br/><br/><router-link to="/notice">공지사항</router-link> / <router-link to="/inquiry">문의</router-link>
-              <br/><br/>
-            </div>
-
-            <div class="recent">
-              <div class="recent-unit">
-                <div class="doc-title">공지사항</div>
-                <BoardRecent ticker="notice" :list="noticeList"/>
-              </div>
-              <div class="recent-unit">
-                <div class="doc-title">문의 게시판</div>
-                <BoardRecent ticker="inquiry" :list="inquiryList"/>
-              </div>
+              <router-view />
             </div>
 
           </div>
         </div>
       </div>
-
     </div>
     <div v-else>
       <p404/>
@@ -51,38 +58,62 @@ import P404 from "@/views/404.vue";
 @Options({
   computed: {
     user() {
-      return this.$store.user;
+      return this.$store.state.user;
     },
+  },
+  watch: {
+    $route(to, from) {
+      this.bindMenu();
+    }
   },
   components: {
     P404
   },
   created() {
-
+    this.bindMenu();
   },
   methods: {
-
+    bindMenu() {
+      this.menu = location.pathname.replace(/\/admin\/?/, '') || 'panel';
+    }
   }
 })
 
-export default class Home extends Vue {
+export default class AdminLayout extends Vue {
   data() {
     return {
-      noticeList: [],
-      inquiryList: []
+      menu: ''
     };
   }
 }
 </script>
 
 <style>
-#home .base-mat { padding: 8px; }
-#home .doc-title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
+#admin-layout { }
+#admin-layout .admin-menu { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+#admin-layout .admin-menu table { width:100%; }
+#admin-layout .admin-menu table td { width:25%; text-align: center; border-bottom-width: 1px }
+#admin-layout .admin-menu table td img { width:20%; filter:grayscale(.9); opacity: .5; }
+#admin-layout .admin-menu table td a { display:block; padding:20px 0; text-decoration: none !important; }
+#admin-layout .admin-menu table td a span { margin-top: 8px; font-size:15px; display: inline-block }
+#admin-layout .admin-menu table td.menu-on img,
+#admin-layout .admin-menu table td:hover img { filter:grayscale(.3); opacity: .8 }
 
-@media (min-width: 1024px) {
-  #home .home-anime-rank { display: none; }
-  #home .recent { overflow:auto }
-  #home .recent .recent-unit { float:left; width:50%; box-sizing: border-box }
+
+#admin-layout .admin-menu table td:not(.menu-on) {  }
+#admin-layout .admin-menu table td:not(.menu-on) img { }
+
+
+@media (max-width: 1023px) {
+  #admin-layout .admin-menu table td a span { display: none }
 }
+
+@media (max-width: 800px) {
+  #admin-layout .admin-menu table td img { width:36%; }
+}
+
+html.light #admin-layout .admin-menu table td a { color:#333; }
+
+
 
 </style>
