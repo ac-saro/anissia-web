@@ -17,7 +17,7 @@
           </td>
           <td class="diff">
             <div v-if="node.animeNo == 0 || node.diff == 0"> </div>
-            <div v-else-if="node.diff == null" class="diff-up diff-new" title="#100 신규진입">🡅</div>
+            <div v-else-if="node.diff == null" class="diff-up diff-new fas fa-angle-double-up" title="#100 신규진입"></div>
             <div v-else-if="node.diff > 0" class="diff-up">▲ {{node.diff}}</div>
             <div v-else-if="node.diff < 0" class="diff-down">▼ {{-node.diff}}</div>
           </td>
@@ -81,7 +81,7 @@ export default class AnimeRank extends Vue {
 .anime-rank .rank-table td.rank { min-width:20px; max-width: 50px; text-align: center; padding:0 16px; font-weight: bold }
 .anime-rank .rank-table td.subject { width:90%; }
 .anime-rank .rank-table td.diff { min-width:50px; text-align: right; padding-right:16px; font-weight: bold }
-.anime-rank .rank-table td.diff .diff-new { font-size:20px; }
+.anime-rank .rank-table td.diff .diff-new { font-size:16px; }
 .anime-rank .rank-table tr.empty-list { opacity: .3 }
 
 @media (max-width: 800px) {
