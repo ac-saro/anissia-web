@@ -33,8 +33,8 @@ export class Address {
   }
 
   public getIntParameter(name: string, defaultValue = 0): number {
-    const val = Number(this.getParameter(name));
-    return isNaN(val) ? defaultValue : val;
+    const val = this.getParameter(name);
+    return val == null || isNaN(Number(val)) ? defaultValue : Number(val);
   }
 
   public deleteParameter(args: string|string[]): Address {
