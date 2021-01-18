@@ -161,6 +161,10 @@ export default class Layout extends Vue {
 .ml a:hover { text-decoration: underline }
 .ml abbr { cursor: help; text-decoration: none; }
 .ml abbr:hover { font-style: oblique }
+.ml input { box-sizing: border-box }
+.ml input::-webkit-outer-spin-button,
+.ml input::-webkit-inner-spin-button,
+.ml input::-webkit-calendar-picker-indicator { -webkit-appearance: none; display: none; margin: 0; }
 
 #area-under-nav { padding:56px 0 12px; }
 #nav { height:56px; position: fixed; top:0; left:0; right:0; user-select: none; }

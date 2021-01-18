@@ -20,7 +20,6 @@
           <div>
             <input class="date" type="datetime-local" v-model="node.updDt" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" />
             <input class="now" type="button" value="현재" @click="setNow(i)"/>
-
           </div>
           <div>
             <input class="website" type="text" v-model="node.website" placeholder="https://example.com (미 입력 시 [준비중]으로 표시)"/>
@@ -29,9 +28,12 @@
         <td class="save"><input type="button" value="저장" @click="updateCaption(i)"/></td>
       </tr>
     </table>
+    <div class="caption-empty" v-if="captions.content.length == 0">
+      해당하는 자막이 존재하지 않습니다.
+    </div>
 
     <div>
-      <pagination :total="captions.totalPages" :index="page" :unit="5" :href="hrefPage" :key="$route.fullPath"/>
+      <pagination :total="captions.totalPages" :index="page" :unit="10" :href="hrefPage" :key="$route.fullPath"/>
     </div>
 
   </div>
@@ -39,12 +41,10 @@
 
 <style>
 #admin-caption {  }
-#admin-caption input { border:0; box-sizing: border-box }
+#admin-caption input { border:0; }
 #admin-caption table { width:100%; }
 
-#admin-caption input::-webkit-outer-spin-button,
-#admin-caption input::-webkit-inner-spin-button,
-#admin-caption input::-webkit-calendar-picker-indicator { -webkit-appearance: none; display: none; margin: 0; }
+#admin-caption .caption-empty { text-align: center; padding: 200px 0; }
 
 #admin-caption table.tab td { text-align: center; width:50%; border-bottom-width: 1px; line-height: 48px; }
 
@@ -102,7 +102,6 @@ import Nabi from "@/utils/nabi";
       if (isUp) {
         this.list[index].episode = ((isNaN(episode) ? 0 : Math.floor(episode)) + 1).toString();
       } else {
-
         this.list[index].episode = Math.max(0, (isNaN(episode) ? 1 : Math.ceil(episode)) - 1).toString();
       }
     },

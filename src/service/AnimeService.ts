@@ -34,7 +34,7 @@ export default class AnimeService {
     });
   }
 
-  private static norCaption(e: any) {
+  public static norCaption(e: any) {
     e.updDt = AnissiaUtil.ymdOrDynamicAgo(e.updDt.replace(' ', 'T'));
     e.episode = e.episode === '0' ? '단편' : (e.episode + '화');
     if (e.website === '') {
@@ -43,7 +43,7 @@ export default class AnimeService {
     return e;
   }
 
-  private static norAnime(e: any, weekParam: string | null = null) {
+  public static norAnime(e: any, weekParam: string | null = null) {
     const week = weekParam || e.week;
     e.subjectPrefix = AnissiaUtil.getSubjectPrefix(week, e.status, e.startDate, e.endDate);
     e.time = e.time != '' ? e.time.replace('-99-99', '') : 'N/A';
