@@ -125,7 +125,7 @@
 <!--      <router-link :to="urlWriteTopic()" class="bt-write">글쓰기</router-link>-->
 <!--    </div>-->
 
-    <pagination :href="hrefPage" :total="list.totalPages" :index="list.number" :unit="10" />
+    <pagination :href="hrefPage" :total="list.totalPages" :index="list.number" :unit="10" :key="$route.fullPath"/>
 
   </div>
 </template>

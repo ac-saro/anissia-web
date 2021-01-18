@@ -61,7 +61,7 @@
 
           <!-- page -->
           <div>
-            <pagination :total="list.totalPages" :index="page" :unit="10" :href="hrefPage" />
+            <pagination :total="list.totalPages" :index="page" :unit="10" :href="hrefPage" :key="$route.fullPath"/>
           </div>
 
         </div>
