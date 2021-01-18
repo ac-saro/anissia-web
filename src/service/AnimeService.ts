@@ -45,6 +45,7 @@ export default class AnimeService {
 
   public static norAnime(e: any, weekParam: string | null = null) {
     const week = weekParam || e.week;
+    e.pureWeek = AnissiaUtil.isPureWeek(week);
     e.subjectPrefix = AnissiaUtil.getSubjectPrefix(week, e.status, e.startDate, e.endDate);
     e.time = e.time != '' ? e.time.replace('-99-99', '') : 'N/A';
     e.period = AnissiaUtil.animePeriod(week, e.startDate, e.endDate);
@@ -52,5 +53,17 @@ export default class AnimeService {
       e.captions = e.captions.map((caption: any) => this.norCaption(caption));
     }
     return e;
+  }
+
+  public static toInfo(anime: any): string[] {
+    const info: string[] = [];
+    anime.info = [anime.period];
+    if (!anime.pureWeek) {
+      anime.info.push(AnissiaUtil.toKoWeek(anime.week));
+    } else if (['ON', 'OFF'].indexOf(anime.status) != -1) {
+      anime.info.push("매주 (" + AnissiaUtil.toKoWeek(anime.week) + ") " + AnissiaUtil.toKo12Time(anime.time));
+      if (anime.status == 'OFF') { anime.info.push('금주결방'); }
+    }
+    return anime.info.filter((e: string) => e);
   }
 }

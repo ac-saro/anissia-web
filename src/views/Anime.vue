@@ -50,11 +50,22 @@
             <table class="list">
               <tr v-for="node in list.content" :key="node.animeNo">
                 <td class="anime-no">{{node.animeNo}}</td>
+                <td class="main">
+                  <div class="subject"><router-link :to="hrefList(node.animeNo)">{{node.subject}}</router-link></div>
+                  <div class="info">
+                    <span class="tag" v-for="tag in node.info" :key="tag">{{tag}}</span>
+                    <span class="tag" v-for="tag in node.genres.split(/,/g)" :key="tag">{{tag}}</span>
+                    <span class="tag" v-if="node.website"><a :href="node.website" target="_blank" class="fas fa-home"></a></span>
+                  </div>
+                </td>
+                <!--
+
                 <td class="subject">
                   <router-link :to="hrefList(node.animeNo)">{{node.subject}}</router-link>
                   <div>[{{node.time}}] {{node.period}}</div>
                 </td>
-                <td class="genres mob-hide">{{node.genres.replace(',', ' / ')}}</td>
+
+                -->
               </tr>
             </table>
           </div>
@@ -110,7 +121,10 @@ import AnimeService from "@/service/AnimeService";
       // list
       if (this.pageQuery != pageQuery) {
         this.pageQuery = pageQuery;
-        AnimeService.getList(this.query, this.page, list => this.list = list);
+        AnimeService.getList(this.query, this.page, list => {
+          list.content.forEach(e => e.info = AnimeService.toInfo(e));
+          this.list = list;
+        });
       }
     },
     hrefList(animeNo: number) {
@@ -144,11 +158,26 @@ export default class Anime extends Vue {
 #anime table { width:100% }
 #anime table.list { margin-top:6px }
 #anime table.list th { height:40px;  }
-#anime table.list td { font-size:15px; padding:10px 4px; border-bottom-width: 1px; }
-#anime table.list td.anime-no { text-align: center }
+#anime table.list td { font-size:13px; padding:10px 4px; border-bottom-width: 1px; line-height: 1.5 }
+
+#anime table.list td.anime-no { text-align: center; width:60px; }
+#anime table.list td div.subject { font-size:15px; padding-top:2px; }
+#anime table.list td div.info { padding:4px 0 2px; }
+#anime table.list td div.info .tag {
+  display: inline-block; padding:2px 6px; border-radius: 1px; border-width: 1px; border-style:solid; margin:4px 6px 0 0;
+  font-size:12px;
+}
+#anime table.list td div.info .tag a { text-decoration: none; filter:grayscale(1) }
+
+
+html.light #anime table.list td div.info .tag { border-color:#eee; }
+html.dark #anime table.list td div.info .tag { border-color:#222; }
+/*
+
 #anime table.list td.subject {}
 #anime table.list td.subject div { font-size:12px; margin:6px 0 0; }
-#anime table.list td.genres { text-align: right }
+
+*/
 
 @media (max-width: 800px) {
   #anime .mob-hide { display: none; }

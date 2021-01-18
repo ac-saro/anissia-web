@@ -9,8 +9,33 @@ export default class AnissiaUtil {
    * pure week: 0:sun,1:mon...6:sat
    * week extension: 7:other, 8:new
    */
-  public static isPureWeek(week: number): boolean {
-    return [7, 8].indexOf(week) === -1;
+  public static isPureWeek(week: number | string): boolean {
+    return [7, 8].indexOf(Number(week)) === -1;
+  }
+
+  public static toKoWeek(week: number | string) {
+    switch(Number(week)) {
+      case 0 : return '일';
+      case 1 : return '월';
+      case 2 : return '화';
+      case 3 : return '수';
+      case 4 : return '목';
+      case 5 : return '금';
+      case 6 : return '토';
+      case 7 : return '기타';
+      case 8 : return '신작';
+    }
+    return '';
+  }
+
+  public static toKo12Time(time: string) {
+    console.log(time);
+    if (time.localeCompare('11:59') > 0) {
+      const hour = Number(time.substring(0, 2));
+      return '오후 ' + Nabi.zerofill( hour > 12 ? hour -12 : hour, 2) + time.substring(2);
+    } else {
+      return '오전 ' + time;
+    }
   }
 
   public static getSubjectPrefix(week: string, status: string, startDate: string, endDate: string) {
@@ -50,14 +75,14 @@ export default class AnissiaUtil {
       } else { // exist only one side
         rv = sd + ed;
         if (AnissiaUtil.isPureWeek(Number(week)) && sd) { // is day and exsit only start date
-          rv += ' ~ 진행중';
+          rv += ' ~ 방영중';
         }
       }
       // change date format : yyyy-MM-dd -> yyyy년 MM월 dd일
       return (`${rv} `
-          .replace(/([\d]{4})-([\d]{2})-([\d]{2})/g, '$1년 $2월 $3일')
-          .replace(/([\d]{4})-([\d]{2})/g, '$1년 $2월')
-          .replace(/([\d]{4}) /g, '$1년'))
+          .replace(/([\d]{4})-([\d]{2})-([\d]{2})/g, '$1. $2. $3.')
+          .replace(/([\d]{4})-([\d]{2})/g, '$1. $2.')
+          .replace(/([\d]{4}) /g, '$1.'))
           .trim();
     }
     return '';
