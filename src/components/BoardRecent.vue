@@ -1,5 +1,5 @@
 <template>
-  <div class="bbs-recent doc-area">
+  <div class="bbs-recent doc-area a-text-style">
 
     <table class="topics">
       <tr v-for="node in list" :key="node.topicNo">

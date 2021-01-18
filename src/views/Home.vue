@@ -16,17 +16,17 @@
           <div class="doc-title">액티브 패널</div>
           <div>
             내용
-            <br/><br/><router-link to="/notice">공지사항</router-link> / <router-link to="/inquiry">문의</router-link>
+
             <br/><br/>
           </div>
 
           <div class="recent">
             <div class="recent-unit">
-              <div class="doc-title">공지사항</div>
+              <div class="doc-title"><router-link to="/notice">공지사항</router-link></div>
               <BoardRecent ticker="notice" :list="noticeList"/>
             </div>
             <div class="recent-unit">
-              <div class="doc-title">문의 게시판</div>
+              <div class="doc-title"><router-link to="/inquiry">문의 게시판</router-link></div>
               <BoardRecent ticker="inquiry" :list="inquiryList"/>
             </div>
           </div>
@@ -78,6 +78,7 @@ export default class Home extends Vue {
 <style>
 #home .base-mat { padding: 8px; }
 #home .doc-title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
+#home .doc-title a { text-decoration: none }
 
 @media (min-width: 1024px) {
   #home .home-anime-rank { display: none; }

@@ -158,7 +158,7 @@ export default class Layout extends Vue {
 <style>
 @import url(~@fortawesome/fontawesome-free/css/all.min.css);
 .ml a { text-decoration: none }
-.ml a:hover { text-decoration: underline }
+.ml :not(.a-text-style) a:hover { text-decoration: underline }
 .ml abbr { cursor: help; text-decoration: none; }
 .ml abbr:hover { font-style: oblique }
 .ml input { box-sizing: border-box }
@@ -245,7 +245,10 @@ html.modding #nav,
 html.modding #nav-tool { transition: background .4s }
 
 /* light mode */
-html.light { background: #f4f4f4; color:#333 }
+html.light { background: #f4f4f4; }
+html.light .ml a { color:#48659a }
+html.light,
+html.light .ml .a-text-style a { color:#333; text-decoration: none }
 html.light table td,
 html.light table th,
 html.light .basic-border-color { border-color: #e8e8e8 }
@@ -272,7 +275,10 @@ html.light .popup-background .popup-box { background: #fff; border:1px solid #27
 html.light .popup-background .popup-box input[type=password] { border:1px solid #ddd }
 
 /* dark mode */
-html.dark { background: #000; color:#999 }
+html.dark { background: #000; }
+html.dark .ml a { color:#48659a }
+html.dark,
+html.dark .ml .a-text-style a { color:#999; text-decoration: none }
 html.dark table td,
 html.dark table th,
 html.dark .basic-border-color { border-color: #282828 }

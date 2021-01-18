@@ -51,11 +51,9 @@
 }
 
 html.light #admin-schedule input { color:#333 }
-html.light #admin-schedule table.tab a { color:#333; text-decoration: none }
 html.light #admin-schedule table.tab .select div { background: #f7f7f7 }
 
 html.dark #admin-schedule input { color:#999 }
-html.dark #admin-schedule table.tab a { color:#aaa; text-decoration: none }
 html.dark #admin-schedule table.tab .select div { background: #111 }
 
 </style>

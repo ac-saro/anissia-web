@@ -52,7 +52,7 @@
                 <td class="anime-no">{{node.animeNo}}</td>
                 <td class="main">
                   <div class="subject"><router-link :to="hrefList(node.animeNo)">{{node.subject}}</router-link></div>
-                  <div class="info">
+                  <div class="info a-text-style">
                     <span class="tag" v-for="tag in node.info" :key="tag">{{tag}}</span>
                     <span class="tag" v-for="tag in node.genres.split(/,/g)" :key="tag">{{tag}}</span>
                     <span class="tag" v-if="node.website"><a :href="node.website" target="_blank" class="fas fa-home"></a></span>
@@ -167,17 +167,10 @@ export default class Anime extends Vue {
   display: inline-block; padding:2px 6px; border-radius: 1px; border-width: 1px; border-style:solid; margin:4px 6px 0 0;
   font-size:12px;
 }
-#anime table.list td div.info .tag a { text-decoration: none; filter:grayscale(1) }
-
 
 html.light #anime table.list td div.info .tag { border-color:#eee; }
 html.dark #anime table.list td div.info .tag { border-color:#222; }
-/*
 
-#anime table.list td.subject {}
-#anime table.list td.subject div { font-size:12px; margin:6px 0 0; }
-
-*/
 
 @media (max-width: 800px) {
   #anime .mob-hide { display: none; }

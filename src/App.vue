@@ -12,8 +12,6 @@ html { height: 100%; }
 body { height: 100%; margin: 0; padding: 0; }
 ::-webkit-scrollbar { width:6px; height:6px }
 
-a { color:#48659a }
-a:hover { text-decoration: underline }
 </style>
 
 <script lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <div class="anime-rank">
+  <div class="anime-rank a-text-style">
     <table class="rank-tab">
       <tr>
         <td><div class="basic-border-color" :class="{'select': rank.period === 'day'}" @click="selectRankType('day')">일간</div></td>
