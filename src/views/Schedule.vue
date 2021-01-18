@@ -1,12 +1,7 @@
 <template>
   <div class="color-picker-closer-area" @click="closerColorPicker">
     <div class="basic-layout">
-      <div class="basic-layout-right">
-        <div class="base-mat">
-          <AnimeRank />
-        </div>
-      </div>
-      <div id="schedule" class="basic-layout-main">
+      <div id="schedule" class="basic-layout-mono">
         <div class="base-mat">
 
           <!-- 애니편성표 모바일 [시작] -->
@@ -221,16 +216,14 @@
 </template>
 
 <script lang="ts">
-import AnimeRank from "@/components/AnimeRank.vue";
-import { Options, Vue } from "vue-class-component";
+import {Options, Vue} from "vue-class-component";
 import Nabi from "@/utils/nabi";
 import ColorPicker from "vanilla-picker"
-import { DateFormat } from "@/utils/nabi/DateFormat";
+import {DateFormat} from "@/utils/nabi/DateFormat";
 import AnimeService from "@/service/AnimeService";
 
 @Options({
   components: {
-    AnimeRank
     //Color
   },
   computed: {
@@ -380,11 +373,11 @@ export default class Schedule extends Vue {
 #schedule table.schedule-application th { padding:8px 12px; border-width: 1px; }
 
 #schedule .html-gen { overflow: auto; }
-#schedule .html-gen .tool-preview { float:left; padding:16px; box-sizing: border-box; text-align:center; width:calc(100% - 208px); }
+#schedule .html-gen .tool-preview { float:left; padding:16px; text-align: center; box-sizing: border-box; width:calc(100% - 228px); }
 #schedule .html-gen .tool-preview .preview-border {  border:0; max-width:100% !important; max-height:100% !important; vertical-align: middle;  }
 #schedule .html-gen .tool-preview .preview-img { display: inline-block }
-#schedule .html-gen .tool-preview .preview-error { margin:200px 0 0; font-weight: bold; font-size: 32px; line-height: 1.8 }
-#schedule .html-gen .tool { padding:16px 8px; margin-left:calc(100% - 208px); }
+#schedule .html-gen .tool-preview .preview-error { margin:220px 0 0; font-weight: bold; font-size: 32px; line-height: 1.8 }
+#schedule .html-gen .tool { padding:16px 8px; margin-left:calc(100% - 228px); }
 #schedule .html-gen .tool .tool-title { color: #276998; padding: 6px 0 8px; text-align: center; font-weight: bold; font-size:14px; }
 #schedule .html-gen .tool hr { border: 0; border-bottom: 1px solid #276998; padding:0; margin:12px 0 8px; opacity: .2 }
 #schedule .html-gen .tool .line > div { display:inline-block; vertical-align: top; margin-top:2px; }

@@ -1,12 +1,7 @@
 <template>
   <div>
     <div class="basic-layout">
-      <div class="basic-layout-right">
-        <div class="base-mat">
-          <AnimeRank />
-        </div>
-      </div>
-      <div id="introduce" class="basic-layout-main">
+      <div id="introduce" class="basic-layout-mono">
         <form class="base-mat">
           <div class="doc-title">애니시아</div>
           <div class="doc-desc">
@@ -107,14 +102,7 @@
 
 
 <script lang="ts">
-import AnimeRank from "@/components/AnimeRank.vue";
-import {Options, Vue} from "vue-class-component";
-
-@Options({
-  components: {
-    AnimeRank
-  }
-})
+import {Vue} from "vue-class-component";
 
 export default class Introduce extends Vue {
   data() {
