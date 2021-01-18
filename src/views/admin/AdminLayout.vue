@@ -102,6 +102,10 @@ export default class AdminLayout extends Vue {
 #admin-layout .admin-menu table td:not(.menu-on) {  }
 #admin-layout .admin-menu table td:not(.menu-on) img { }
 
+html.light #admin-layout a { color:#333; text-decoration: none }
+
+html.dark #admin-layout a { color:#aaa; text-decoration: none }
+
 
 @media (max-width: 1023px) {
   #admin-layout .admin-menu table td a span { display: none }
