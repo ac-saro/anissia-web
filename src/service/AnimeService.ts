@@ -60,7 +60,7 @@ export default class AnimeService {
     anime.info = [anime.period];
     if (!anime.pureWeek) {
       anime.info.push(AnissiaUtil.toKoWeek(anime.week));
-    } else if (['ON', 'OFF'].indexOf(anime.status) != -1) {
+    } else if (['ON', 'OFF'].indexOf(anime.status) != -1 && anime.week) {
       anime.info.push("매주 (" + AnissiaUtil.toKoWeek(anime.week) + ") " + AnissiaUtil.toKo12Time(anime.time));
       if (anime.status == 'OFF') { anime.info.push('금주결방'); }
     }

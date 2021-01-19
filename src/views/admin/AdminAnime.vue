@@ -9,8 +9,16 @@
     </table>
 
     <table class="anime">
-      <tr v-for="(node, i) in animeList.content" :key="node.animeNo">
-        <td>{{i}} {{node}}</td>
+      <tr v-for="node in animeList.content" :key="node.animeNo">
+        <td class="anime-no">{{node.animeNo}}</td>
+        <td class="main">
+          <div class="subject"><router-link :to="hrefList(node.animeNo)">{{node.subject}}</router-link></div>
+          <div class="info a-text-style">
+            <span class="x-tag" v-for="tag in node.info" :key="tag">{{tag}}</span>
+            <span class="x-tag" v-for="tag in node.genres.split(/,/g)" :key="tag">{{tag}}</span>
+            <span class="x-tag" v-if="node.website"><a :href="node.website" target="_blank" class="fas fa-home"></a></span>
+          </div>
+        </td>
       </tr>
     </table>
 
@@ -33,6 +41,12 @@
 #admin-anime table { width:100%; }
 #admin-anime table.tab td { text-align: center; width:50%; border-bottom-width: 1px; line-height: 48px; }
 
+#admin-anime table.anime { margin-top:6px }
+#admin-anime table.anime th { height:40px;  }
+#admin-anime table.anime td { font-size:13px; padding:10px 4px; border-bottom-width: 1px; line-height: 1.5 }
+#admin-anime table.anime td.anime-no { text-align: center; width:60px; }
+#admin-anime table.anime td div.subject { font-size:15px; padding-top:2px; }
+#admin-anime table.anime td div.info { padding:4px 0 2px; }
 
 html.light #admin-anime table.tab .select div { background: #f7f7f7 }
 
@@ -65,18 +79,21 @@ import AnimeService from "@/service/AnimeService";
     hrefPage(index: number) {
       return Nabi.address().setParameter('page', index + 1).href;
     },
+    hrefList(animeNo: number) {
+      return Nabi.address().setParameter('animeNo', animeNo).href;
+    },
     load() {
       const animeNo = Nabi.address().getIntParameter("animeNo");
       this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
       this.status = Nabi.address().getParameter("status") == 'delist' ? 'delist' : 'list';
       const pageQueryStatus = `${this.status} ${this.page} ${this.query}`;
 
-      // // view
-      // if (animeNo > 0) {
-      //   AnimeService.getAnime(animeNo, anime => this.anime = anime);
-      // } else {
-      //   this.anime = null;
-      // }
+      // view
+      if (animeNo > 0) {
+        AnimeService.getAnime(animeNo, anime => this.anime = anime);
+      } else {
+        this.anime = null;
+      }
 
       // list
       if (this.pageQueryStatus != pageQueryStatus) {

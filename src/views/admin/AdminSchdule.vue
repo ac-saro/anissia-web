@@ -15,14 +15,18 @@
           {{node.time}}
         </td>
         <td class="subject">
-          <router-link :to="`/admin/anime?animeNo=${node.animeNo}`">
-            <span class="prefix" v-if="node.subjectPrefix">[<b>{{node.subjectPrefix}}</b>] </span> {{node.subject}}
-          </router-link>
+          <div>
+            <router-link :to="`/admin/anime?animeNo=${node.animeNo}`">
+              <span class="prefix" v-if="node.subjectPrefix">[<b>{{node.subjectPrefix}}</b>] </span> {{node.subject}}
+            </router-link>
+          </div>
+          <div class="info a-text-style">
+            <span class="x-tag" v-for="tag in node.info" :key="tag">{{tag}}</span>
+            <span class="x-tag" v-for="tag in node.genres.split(/,/g)" :key="tag">{{tag}}</span>
+            <span class="x-tag" v-if="node.website"><a :href="node.website" target="_blank" class="fas fa-home"></a></span>
+          </div>
         </td>
-        <td class="genres">
-          {{node.genres.replace(',', ' / ')}}
-        </td>
-        <td class="tool">
+        <td class="tool" v-if="isPureWeek">
           <div v-if="node.status == 'ON'" class="turn-off" @click="updateStatus(i, 'OFF')">결방</div>
           <div v-else class="turn-on" @click="updateStatus(i, 'ON')">방영</div>
         </td>
@@ -51,9 +55,11 @@
 }
 
 html.light #admin-schedule input { color:#333 }
+html.light #admin-schedule .prefix b { color:#b55f5f }
 html.light #admin-schedule table.tab .select div { background: #f7f7f7 }
 
 html.dark #admin-schedule input { color:#999 }
+html.dark #admin-schedule .prefix b { color:#b55f5f }
 html.dark #admin-schedule table.tab .select div { background: #111 }
 
 </style>
@@ -67,6 +73,11 @@ import AnimeService from "@/service/AnimeService";
   mounted() {
     this.selectAnimeList(new Date().getDay());
   },
+  computed: {
+    isPureWeek() {
+      return AnissiaUtil.isPureWeek(this.weekNow);
+    }
+  },
   methods: {
     updateStatus(index: number, status: string) {
       const node = this.animeList[index];
@@ -77,8 +88,9 @@ import AnimeService from "@/service/AnimeService";
       }
     },
     selectAnimeList(week: number): void {
-      AnimeService.getSchedule(week.toString(), (e) => {
-        this.animeList = e;
+      AnimeService.getSchedule(week.toString(), (data) => {
+        data.forEach(e => e.info = AnimeService.toInfo(e));
+        this.animeList = data;
         this.weekNow = week;
       });
     },

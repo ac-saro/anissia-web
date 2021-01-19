@@ -165,6 +165,10 @@ export default class Layout extends Vue {
 .ml input::-webkit-outer-spin-button,
 .ml input::-webkit-inner-spin-button,
 .ml input::-webkit-calendar-picker-indicator { -webkit-appearance: none; display: none; margin: 0; }
+.ml .x-tag {
+  display: inline-block; padding:2px 6px; border-radius: 1px; border-width: 1px; border-style:solid; margin:4px 6px 0 0;
+  font-size:12px;
+}
 
 #area-under-nav { padding:56px 0 12px; }
 #nav { height:56px; position: fixed; top:0; left:0; right:0; user-select: none; }
@@ -249,6 +253,7 @@ html.light { background: #f4f4f4; }
 html.light .ml a { color:#48659a }
 html.light,
 html.light .ml .a-text-style a { color:#333; text-decoration: none }
+html.light .ml .x-tag { border-color:#eee; }
 html.light table td,
 html.light table th,
 html.light .basic-border-color { border-color: #e8e8e8 }
@@ -274,11 +279,13 @@ html.light .mono-area input[type=button] { background: #4f5677; color:#fff }
 html.light .popup-background .popup-box { background: #fff; border:1px solid #276998; }
 html.light .popup-background .popup-box input[type=password] { border:1px solid #ddd }
 
+
 /* dark mode */
 html.dark { background: #000; }
 html.dark .ml a { color:#48659a }
 html.dark,
 html.dark .ml .a-text-style a { color:#999; text-decoration: none }
+html.dark .ml .x-tag { border-color:#222; }
 html.dark table td,
 html.dark table th,
 html.dark .basic-border-color { border-color: #282828 }
