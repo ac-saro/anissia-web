@@ -9,7 +9,7 @@
       <div class="basic-layout-main" id="anime">
         <div class="base-mat">
 
-          <div v-if="anime == null" class="doc-title">애니메이션 정보</div>
+          <div class="doc-title">애니메이션 정보</div>
 
           <!-- view -->
           <div v-if="anime">
@@ -45,6 +45,10 @@
             </div>
           </div>
 
+          <div class="search">
+            <input type="text" v-model="query" @keyup.enter="search()"/>
+          </div>
+
           <!-- list -->
           <div>
             <table class="list">
@@ -54,7 +58,7 @@
                   <div class="subject"><router-link :to="hrefList(node.animeNo)">{{node.subject}}</router-link></div>
                   <div class="info a-text-style">
                     <span class="x-tag" v-for="tag in node.info" :key="tag">{{tag}}</span>
-                    <span class="x-tag" v-for="tag in node.genres.split(/,/g)" :key="tag">{{tag}}</span>
+                    <span class="x-tag" v-for="tag in node.genres.split(/,/g)" :key="tag"><router-link :to="`/anime?q=%23${encodeURIComponent(tag)}`">{{tag}}</router-link></span>
                     <span class="x-tag" v-if="node.website"><a :href="node.website" target="_blank" class="fas fa-home"></a></span>
                   </div>
                 </td>
@@ -100,6 +104,7 @@ import AnimeService from "@/service/AnimeService";
   methods: {
     load() {
       const animeNo = Nabi.address().getIntParameter("animeNo");
+      this.query = (Nabi.address().getParameter("q") || '').trim();
       this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
       const pageQuery = `${this.page} ${this.query}`;
 
@@ -124,6 +129,14 @@ import AnimeService from "@/service/AnimeService";
     },
     hrefPage(index: number) {
       return Nabi.address().deleteParameter('animeNo').setParameter('page', index + 1).href;
+    },
+    search() {
+      const q = this.query.trim();
+      if (q) {
+        this.$router.push(Nabi.address().deleteParameter(['page', 'animeNo']).setParameter('q', q).href);
+      } else {
+        Nabi.address().clearParameter().href;
+      }
     }
   }
 })

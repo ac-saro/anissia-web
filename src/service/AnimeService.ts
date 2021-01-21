@@ -5,7 +5,7 @@ import PageData from "@/models/PageData";
 export default class AnimeService {
 
   public static getList(query: string, page: number, callback: (data: PageData<any>) => void): void {
-    fetch(`/api/anime/list/${page}`).then(e => e.json()).then(data => callback(PageData.cast(data, (e: any) => this.norAnime(e))));
+    fetch(`/api/anime/list/${page}?q=${query}`).then(e => e.json()).then(data => callback(PageData.cast(data, (e: any) => this.norAnime(e))));
   }
 
   public static getAnime(animeNo: number, callback: (data: PageData<any>) => void): void {
