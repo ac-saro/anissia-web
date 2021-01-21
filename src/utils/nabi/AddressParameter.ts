@@ -3,8 +3,8 @@ export class AddressParameter {
   public readonly value: string;
 
   constructor(name: string, value: string) {
-    this.name = name;
-    this.value = value;
+    this.name = decodeURIComponent(name);
+    this.value = decodeURIComponent(value);
   }
 
   public get query(): string {

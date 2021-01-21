@@ -28,7 +28,7 @@ export class Address {
   }
 
   public getParameter(name: string): string|null {
-    const vals = this.inParams.filter((e) => e.name === name).map((e) => e.value);
+    const vals = this.getParameters(name);
     return vals.length > 0 ? vals[0] : null;
   }
 
