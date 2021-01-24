@@ -294,7 +294,6 @@ import AnimeService from "@/service/AnimeService";
       this.colorPickerOpen = false;
     },
     closerColorPicker(e: Event) {
-      console.log(Nabi.matchesParents(e.target, ['.color-picker', '.color-picker-closer-area']));
       if (this.colorPickerOpen && Nabi.matchesParents(e.target, ['.color-picker', '.color-picker-closer-area', '.color']) === '.color-picker-closer-area') {
         this.closeColorPicker();
       }

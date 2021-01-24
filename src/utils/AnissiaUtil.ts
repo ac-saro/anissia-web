@@ -14,7 +14,7 @@ export default class AnissiaUtil {
   }
 
   public static toKoWeek(week: number | string) {
-    return (['일', '월', '화', '수', '목', '금', '토', '기타', '신작'])[Number(week)];
+    return (['일', '월', '화', '수', '목', '금', '토', '外', '新'])[Number(week)];
   }
 
   public static toKo12Time(time: string) {

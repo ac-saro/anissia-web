@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="clickAutocorrect">
     <div class="basic-layout">
       <div class="basic-layout-right">
         <div class="base-mat">
@@ -45,13 +45,17 @@
             </div>
           </div>
 
-          <div class="search">
-            <div>
-              <input type="text" v-model="query" @keyup.enter="search()" @keyup="autocorrect"/>
+          <div class="search a-text-style">
+            <div class="search-box">
+              <input type="text" v-model="query" @keydown="keyAutocorrect" @keyup="autocorrect" placeholder="애니메이션 검색"/>
             </div>
-            <div>
-              <div v-for="node in autoList" :key="node.key">
-                {{node}}
+            <div class="autocorrect" v-if="autoOn && autoList">
+              <div class="autocorrect-box">
+                <div v-for="(node, i) in autoList" :key="node.key">
+                  <router-link :to="`/anime?animeNo=${node.key}`">
+                    <div v-html="node.hl" class="node" :class="({'sel': autoIndex == i})"></div>
+                  </router-link>
+                </div>
               </div>
             </div>
           </div>
@@ -111,6 +115,8 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
   },
   methods: {
     load() {
+      this.autoIndex = -1;
+      this.autoList = [];
       const animeNo = Nabi.address().getIntParameter("animeNo");
       this.query = (Nabi.address().getParameter("q") || '').trim();
       this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
@@ -139,6 +145,43 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
         AnimeService.getAnimeAutocorrect(word, list => this.autoList = AnissiaUtil.highlight(word, list))
       }
     },
+    keyAutocorrect(event: KeyboardEvent) {
+      const key = event.key;
+      const len = this.autoList.length;
+
+      switch (key) {
+        case 'ArrowUp':
+          if (len) {
+            event.preventDefault();
+            if (this.autoIndex == -1) {
+              this.autoIndex = len -1;
+            } else {
+              this.autoIndex--;
+            }
+          }
+          return;
+        case 'ArrowDown':
+          if (len) {
+            event.preventDefault();
+            if (this.autoIndex >= (len -1)) {
+              this.autoIndex = -1;
+            } else {
+              this.autoIndex++;
+            }
+          }
+          return;
+        case 'Enter':
+          if (!this.autoList || this.autoIndex == -1) {
+            this.search();
+          } else {
+            this.$router.push(`/anime?animeNo=${this.autoList[this.autoIndex].key}`)
+          }
+          return;
+      }
+    },
+    clickAutocorrect(event: MouseEvent) {
+      this.autoOn = Nabi.matchesParents(event.target, ['#anime .search']) != '';
+    },
     hrefList(animeNo: number) {
       return Nabi.address().setParameter('animeNo', animeNo).href;
     },
@@ -163,6 +206,7 @@ export default class Anime extends Vue {
       query: '',
       autoQuery: '',
       autoList: [],
+      autoOn: false,
       autoIndex: -1,
       page: 0,
       pageQuery: '',
@@ -186,6 +230,19 @@ export default class Anime extends Vue {
 #anime table.list td div.subject { font-size:15px; padding-top:2px; }
 #anime table.list td div.info { padding:4px 0 2px; }
 
+#anime .search { padding: 20px 40px; }
+#anime .search .search-box { }
+#anime .search .search-box input { width:100%; border:4px solid #276998; height:40px; padding:0 8px; font-size:16px; }
+#anime .search .autocorrect { height:0; font-size:15px; }
+#anime .search .autocorrect .autocorrect-box {
+  position: relative; backdrop-filter:blur(3px); background: rgba(255, 255, 255, .7)
+}
+#anime .search .autocorrect div.node {
+  padding:4px 8px; border:1px solid #eee; border-width: 0 1px 1px;
+}
+#anime .search .autocorrect div.node.sel,
+#anime .search .autocorrect div.node:hover { background: rgba(200, 230, 255, .3) }
+#anime .search .autocorrect div.node span { color:#f00 }
 
 @media (max-width: 800px) {
   #anime .mob-hide { display: none; }
