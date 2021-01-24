@@ -81,4 +81,10 @@ export default class Nabi {
   public static address(setNowAddress = true): Address {
     return new Address(setNowAddress);
   }
+
+  public static enHtml(text: string): string {
+    const div = document.createElement('div');
+    div.innerText = text;
+    return div.innerHTML;
+  }
 }

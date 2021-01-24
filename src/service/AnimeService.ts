@@ -5,11 +5,19 @@ import PageData from "@/models/PageData";
 export default class AnimeService {
 
   public static getList(query: string, page: number, callback: (data: PageData<any>) => void): void {
-    fetch(`/api/anime/list/${page}?q=${query}`).then(e => e.json()).then(data => callback(PageData.cast(data, (e: any) => this.norAnime(e))));
+    fetch(`/api/anime/list/${page}?q=${encodeURIComponent(query)}`).then(e => e.json()).then(data => callback(PageData.cast(data, (e: any) => this.norAnime(e))));
   }
 
   public static getAnime(animeNo: number, callback: (data: PageData<any>) => void): void {
     fetch(`/api/anime/animeNo/${animeNo}`).then(e => e.json()).then(anime => callback(this.norAnime(anime)));
+  }
+
+  public static getAnimeAutocorrect(query: string, callback: (list: any[]) => void): void {
+    if (query.trim() != '') {
+      fetch(`/api/anime/autocorrect?q=${encodeURIComponent(query)}`).then(e => e.json()).then(e => callback(e));
+    } else {
+      callback([]);
+    }
   }
 
   public static getCaptionByAnimeNo(animeNo: string, callback: (data: any) => void): void {

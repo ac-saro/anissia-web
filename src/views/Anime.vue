@@ -46,7 +46,14 @@
           </div>
 
           <div class="search">
-            <input type="text" v-model="query" @keyup.enter="search()"/>
+            <div>
+              <input type="text" v-model="query" @keyup.enter="search()" @keyup="autocorrect"/>
+            </div>
+            <div>
+              <div v-for="node in autoList" :key="node.key">
+                {{node}}
+              </div>
+            </div>
           </div>
 
           <!-- list -->
@@ -87,6 +94,7 @@ import Nabi from "@/utils/nabi";
 import PageData from "@/models/PageData";
 import Pagination from "@/components/Pagination.vue";
 import AnimeService from "@/service/AnimeService";
+import AnissiaUtil from "@/utils/AnissiaUtil";
 
 @Options({
   components: {
@@ -124,6 +132,13 @@ import AnimeService from "@/service/AnimeService";
         });
       }
     },
+    autocorrect(event: KeyboardEvent) {
+      const word = (event.target as any).value;
+      if (this.autoQuery != word) {
+        this.autoQuery = word;
+        AnimeService.getAnimeAutocorrect(word, list => this.autoList = AnissiaUtil.highlight(word, list))
+      }
+    },
     hrefList(animeNo: number) {
       return Nabi.address().setParameter('animeNo', animeNo).href;
     },
@@ -146,6 +161,9 @@ export default class Anime extends Vue {
     return {
       anime: null as any,
       query: '',
+      autoQuery: '',
+      autoList: [],
+      autoIndex: -1,
       page: 0,
       pageQuery: '',
       list: new PageData()

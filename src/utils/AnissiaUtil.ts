@@ -14,22 +14,10 @@ export default class AnissiaUtil {
   }
 
   public static toKoWeek(week: number | string) {
-    switch(Number(week)) {
-      case 0 : return '일';
-      case 1 : return '월';
-      case 2 : return '화';
-      case 3 : return '수';
-      case 4 : return '목';
-      case 5 : return '금';
-      case 6 : return '토';
-      case 7 : return '기타';
-      case 8 : return '신작';
-    }
-    return '';
+    return (['일', '월', '화', '수', '목', '금', '토', '기타', '신작'])[Number(week)];
   }
 
   public static toKo12Time(time: string) {
-    console.log(time);
     if (time.localeCompare('11:59') > 0) {
       const hour = Number(time.substring(0, 2));
       return '오후 ' + Nabi.zerofill( hour > 12 ? hour -12 : hour, 2) + time.substring(2);
@@ -114,5 +102,22 @@ export default class AnissiaUtil {
       return `${now - time}일 전`;
     }
     return Nabi.dateFormat(date).format(format);
+  }
+
+  public static highlight(keyword: string, list: any[]): any[] {
+    const k0 = keyword.trim().toLowerCase();
+    const k1 = Nabi.enHtml(k0);
+    const k2 = Nabi.enHtml(k0.length > 1 ? k0.substring(0, k0.length - 1) : '');
+    return list.map(node => {
+      const rv = { key : Number(node.substring(0, node.indexOf(' '))) } as any;
+      const w1 = rv["hl"] = rv["word"] = Nabi.enHtml(node.substring(node.indexOf(' ') + 1));
+      const w2 = w1.toLowerCase();
+      if (k1 && w2.indexOf(k1) == 0) {
+        rv["hl"] = `<span>${w1.substring(0, k1.length)}</span>${w1.substring(k1.length)}`
+      } else if (k2 && w2.indexOf(k2) == 0) {
+        rv["hl"] = `<span>${w1.substring(0, k2.length)}</span>${w1.substring(k2.length)}`
+      }
+      return rv;
+    });
   }
 }
