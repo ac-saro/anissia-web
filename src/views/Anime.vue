@@ -115,12 +115,15 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
   },
   methods: {
     load() {
-      this.autoIndex = -1;
-      this.autoList = [];
       const animeNo = Nabi.address().getIntParameter("animeNo");
       this.query = (Nabi.address().getParameter("q") || '').trim();
       this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
       const pageQuery = `${this.page} ${this.query}`;
+      this.autoIndex = -1;
+      this.autoOn = false;
+      if (this.query != this.autoQuery) {
+        this.autoList = [];
+      }
 
       // view
       if (animeNo > 0) {
@@ -142,6 +145,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       const word = (event.target as any).value;
       if (this.autoQuery != word) {
         this.autoQuery = word;
+        this.autoOn = true;
         AnimeService.getAnimeAutocorrect(word, list => this.autoList = AnissiaUtil.highlight(word, list))
       }
     },
@@ -193,7 +197,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       if (q) {
         this.$router.push(Nabi.address().deleteParameter(['page', 'animeNo']).setParameter('q', q).href);
       } else {
-        Nabi.address().clearParameter().href;
+        this.$router.push('/anime');
       }
     }
   }
@@ -235,17 +239,20 @@ export default class Anime extends Vue {
 #anime .search .search-box input { width:100%; border:4px solid #276998; height:40px; padding:0 8px; font-size:16px; }
 #anime .search .autocorrect { height:0; font-size:15px; }
 #anime .search .autocorrect .autocorrect-box {
-  position: relative; backdrop-filter:blur(3px); background: rgba(255, 255, 255, .7)
+  position: relative; backdrop-filter:blur(3px); background: rgba(255, 255, 255, .7);
+  border:1px solid #eee; border-width: 0 1px 1px;
 }
 #anime .search .autocorrect div.node {
-  padding:4px 8px; border:1px solid #eee; border-width: 0 1px 1px;
+  padding:8px 12px;
 }
 #anime .search .autocorrect div.node.sel,
-#anime .search .autocorrect div.node:hover { background: rgba(200, 230, 255, .3) }
+#anime .search .autocorrect div.node:hover { font-weight: bold; }
 #anime .search .autocorrect div.node span { color:#f00 }
 
 @media (max-width: 800px) {
   #anime .mob-hide { display: none; }
+  #anime .search { padding:20px 0; }
+  #anime .search .autocorrect div.node { padding:16px; }
 }
 
 </style>
