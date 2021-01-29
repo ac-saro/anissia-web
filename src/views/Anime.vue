@@ -12,7 +12,7 @@
           <div class="doc-title">애니메이션 정보</div>
 
           <!-- view -->
-          <div v-if="anime">
+          <div v-if="anime" class="view">
             <div v-if="anime.animeNo">
               <div class="doc-title">{{anime.subject}}</div>
               <div class="anime-view">
