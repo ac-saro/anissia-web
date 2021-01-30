@@ -4,6 +4,8 @@ import PageData from "@/models/PageData";
 
 export default class AnimeService {
 
+  static cacheAutocorrect: any = {}
+
   public static getList(query: string, page: number, callback: (data: PageData<any>) => void): void {
     fetch(`/api/anime/list/${page}?q=${encodeURIComponent(query)}`).then(e => e.json()).then(data => callback(PageData.cast(data, (e: any) => this.norAnime(e))));
   }
@@ -14,7 +16,12 @@ export default class AnimeService {
 
   public static getAnimeAutocorrect(query: string, callback: (list: any[]) => void): void {
     if (query.trim() != '') {
-      fetch(`/api/anime/autocorrect?q=${encodeURIComponent(query)}`).then(e => e.json()).then(e => callback(e));
+      const cache = AnimeService.cacheAutocorrect[query];
+      if (cache) {
+        callback(cache);
+      } else {
+        fetch(`/api/anime/autocorrect?q=${encodeURIComponent(query)}`).then(e => e.json()).then(e => callback((AnimeService.cacheAutocorrect[query] = e)));
+      }
     } else {
       callback([]);
     }
