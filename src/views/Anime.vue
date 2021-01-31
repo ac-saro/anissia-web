@@ -14,26 +14,49 @@
           <!-- view -->
           <div v-if="anime" class="view">
             <div v-if="anime.animeNo">
-              <div class="doc-title">{{anime.subject}}</div>
+              <div class="title">{{anime.subject}}</div>
               <div class="anime-view">
-                <table class="view">
-                  <tr><td>장르</td><td>{{anime.genres.replace(',', ', ')}}</td></tr>
-                  <tr><td>시작일</td><td>{{anime.startDate}}</td></tr>
-                  <tr><td>종료일</td><td>{{anime.endDate}}</td></tr>
-                  <tr><td>웹사이트</td><td><a :href="anime.website" target="_blank">{{anime.website}}</a></td></tr>
+                <table class="basic-info">
+                  <tr v-if="anime.period" class="basic-info-tr">
+                    <td>방영기간</td>
+                    <td>{{anime.period}}</td>
+                  </tr>
+                  <tr class="basic-info-tr">
+                    <td>방영상태</td>
+                    <td>
+                      <span v-if="anime.status == 'ON' && anime.pureWeek"> 매주 ({{anime.weekText}}) {{anime.timeText}}</span>
+                      <span v-else-if="anime.status == 'ON' && !anime.pureWeek">{{anime.statusText}} ({{anime.weekText}})</span>
+                      <span v-else>{{anime.statusText}}</span>
+                    </td>
+                  </tr>
+                  <tr class="basic-info-tr">
+                    <td>장르</td>
+                    <td>
+                      <span class="in-tag" v-for="tag in anime.genres.split(/,/g)" :key="tag">
+                        <router-link :to="`/anime?q=%23${encodeURIComponent(tag)}`">{{tag}}</router-link>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr v-if="anime.website" class="basic-info-tr">
+                    <td>웹사이트</td>
+                    <td><a :href="anime.website" target="_blank">{{anime.website}}</a></td>
+                  </tr>
+                  <tr v-if="anime.captions && anime.captions.length" class="basic-info-tr">
+                    <td>자막</td>
+                    <td class="basic-info-caption">
+                      <table class="caption">
+                        <tr v-for="caption in anime.captions" :key="caption.name">
+                          <td>{{caption.episode}}</td>
+                          <td class="caption-name">
+                            <span v-if="caption.website"><a :href="caption.website" target="_blank" >{{caption.name}}</a></span>
+                            <span v-else>{{caption.name}}</span>
+                          </td>
+                          <td>{{caption.updDt}}</td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
                 </table>
-
-                <div v-if="anime.captions && anime.captions.length" >
-                  <div class="doc-title">자막</div>
-                  <table class="caption">
-                    <tr v-for="caption in anime.captions" :key="caption.name">
-                      <td>{{caption.episode}}</td>
-                      <td>{{caption.name}}</td>
-                      <td>{{caption.updDt}}</td>
-                      <td><a :href="caption.website" target="_blank">자막</a></td>
-                    </tr>
-                  </table>
-                </div>
 
               </div>
             </div>
@@ -47,9 +70,9 @@
 
           <div class="search a-text-style">
             <div class="search-box">
-              <input type="text" v-model="query" @keydown="keyAutocorrect" @keyup="autocorrect" placeholder="애니메이션 검색"/>
+              <input type="text" class="std-inp-txt" v-model="query" @keydown="keyAutocorrect" @keyup="autocorrect" placeholder="애니메이션 검색"/>
             </div>
-            <div class="autocorrect" v-if="autoOn && autoList">
+            <div class="autocorrect" v-if="autoOn && autoList.length">
               <div class="autocorrect-box">
                 <div v-for="(node, i) in autoList" :key="node.key">
                   <router-link :to="`/anime?animeNo=${node.key}`">
@@ -127,7 +150,11 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
 
       // view
       if (animeNo > 0) {
-        AnimeService.getAnime(animeNo, anime => this.anime = anime);
+        AnimeService.getAnime(animeNo, anime => {
+          AnimeService.toInfo(anime);
+          console.log(anime);
+          this.anime = anime;
+        });
       } else {
         this.anime = null;
       }
@@ -157,21 +184,13 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
         case 'ArrowUp':
           if (len) {
             event.preventDefault();
-            if (this.autoIndex == -1) {
-              this.autoIndex = len -1;
-            } else {
-              this.autoIndex--;
-            }
+            if (this.autoIndex == -1) { this.autoIndex = len -1; } else { this.autoIndex--; }
           }
           return;
         case 'ArrowDown':
           if (len) {
             event.preventDefault();
-            if (this.autoIndex >= (len -1)) {
-              this.autoIndex = -1;
-            } else {
-              this.autoIndex++;
-            }
+            if (this.autoIndex >= (len -1)) { this.autoIndex = -1; } else { this.autoIndex++; }
           }
           return;
         case 'Enter':
@@ -226,32 +245,40 @@ export default class Anime extends Vue {
 #anime .doc-title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
 #anime .anime-view-error { font-size:24px; text-align: center; line-height: 2; margin:50px 0 70px; }
 
-#anime table { width:100% }
-#anime table.list { margin-top:6px }
+#anime table { }
+#anime table.list { margin-top:6px;  width:100% }
 #anime table.list th { height:40px;  }
-#anime table.list td { font-size:13px; padding:10px 4px; border-bottom-width: 1px; line-height: 1.5 }
+#anime table.list td { font-size:13px; padding:10px 4px; border-top-width: 1px; line-height: 1.5 }
 #anime table.list td.anime-no { text-align: center; width:60px; }
 #anime table.list td div.subject { font-size:15px; padding-top:2px; }
 #anime table.list td div.info { padding:4px 0 2px; }
 
-#anime .search { padding: 20px 40px; }
+#anime .view { padding: 8px 8px 40px; }
+#anime .view .title { line-height: 2; font-size:20px; font-weight: bold; padding:8px 2px 12px; }
+#anime .view .in-tag:not(:first-child):before { content: ', ' }
+#anime .view table.basic-info tr.basic-info-tr > td { border-width: 1px; line-height: 32px; padding:8px 16px }
+#anime .view table.caption td { padding:4px 0; }
+#anime .view table.caption td.caption-name { padding:4px 32px; }
+
+#anime .search { padding: 40px 40px; }
 #anime .search .search-box { }
 #anime .search .search-box input { width:100%; border:4px solid #276998; height:40px; padding:0 8px; font-size:16px; }
 #anime .search .autocorrect { height:0; font-size:15px; }
-#anime .search .autocorrect .autocorrect-box {
-  position: relative; backdrop-filter:blur(3px); background: rgba(255, 255, 255, .7);
-  border:1px solid #eee; border-width: 0 1px 1px;
-}
+#anime .search .autocorrect .autocorrect-box { position: relative; backdrop-filter:blur(3px);border-width: 0 1px 1px;}
 #anime .search .autocorrect div.node {
   padding:8px 12px;
 }
 #anime .search .autocorrect div.node.sel,
 #anime .search .autocorrect div.node:hover { font-weight: bold; }
-#anime .search .autocorrect div.node span { color:#f00 }
+
+html.light #anime .search .autocorrect .autocorrect-box { background: rgba(255, 255, 255, .7); border:1px solid #eee; }
+html.light #anime .search .autocorrect div.node span { color:#2f7cbd }
+html.dark #anime .search .autocorrect .autocorrect-box { background: rgba(0, 0, 0, .7); border:1px solid #222; }
+html.dark #anime .search .autocorrect div.node span { color:#2e7bb5 }
 
 @media (max-width: 800px) {
   #anime .mob-hide { display: none; }
-  #anime .search { padding:20px 0; }
+  #anime .search { padding:10px 0 6px; }
   #anime .search .autocorrect div.node { padding:16px; }
 }
 

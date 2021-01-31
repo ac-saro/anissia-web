@@ -270,12 +270,14 @@ html.light .base-mat { background: #fff }
 html.light .mono-area input[type=text],
 html.light .mono-area input[type=password],
 html.light .mono-area input[type=text]:-webkit-autofill,
-html.light .mono-area input[type=password]:-webkit-autofill {
-  background: #f5f5f5; color:#333;
-  box-shadow: 0 0 0 30px #f5f5f5 inset !important;
+html.light .mono-area input[type=password]:-webkit-autofill,
+html.light input.std-inp-txt {
+  background: #fff; color:#333;
+  box-shadow: 0 0 0 30px #fff inset !important;
   -webkit-text-fill-color: #333 !important;
 }
-html.light .mono-area input[type=button] { background: #4f5677; color:#fff }
+html.light .mono-area input[type=button],
+html.light input.std-inp-btn { background: #4f5677; color:#fff }
 html.light .popup-background .popup-box { background: #fff; border:1px solid #276998; }
 html.light .popup-background .popup-box input[type=password] { border:1px solid #ddd }
 
@@ -302,12 +304,14 @@ html.dark .base-mat { border:1px solid #222 }
 html.dark .mono-area input[type=text],
 html.dark .mono-area input[type=password],
 html.dark .mono-area input[type=text]:-webkit-autofill,
-html.dark .mono-area input[type=password]:-webkit-autofill {
-  background: #151515; color:#aaa;
-  box-shadow: 0 0 0 30px #151515 inset !important;
+html.dark .mono-area input[type=password]:-webkit-autofill,
+html.dark input.std-inp-txt {
+  background: #000; color:#aaa;
+  box-shadow: 0 0 0 30px #000 inset !important;
   -webkit-text-fill-color: #aaa !important;
 }
-html.dark .mono-area input[type=button] { background: #999; color:#000; }
+html.dark .mono-area input[type=button],
+html.dark input.std-inp-btn { background: #999; color:#000; }
 html.dark .popup-background .popup-box { background: #000; border:1px solid #276998; }
 html.dark .popup-background .popup-box input[type=password] { border:1px solid #333 }
 
