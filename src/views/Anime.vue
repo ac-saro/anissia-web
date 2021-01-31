@@ -100,6 +100,10 @@
             </table>
           </div>
 
+          <div class="anime-empty" v-if="list.content.length == 0">
+            해당하는 애니메이션이 존재하지 않습니다.
+          </div>
+
           <!-- page -->
           <div>
             <pagination :total="list.totalPages" :index="page" :unit="10" :href="hrefPage" :key="$route.fullPath"/>
@@ -152,7 +156,6 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       if (animeNo > 0) {
         AnimeService.getAnime(animeNo, anime => {
           AnimeService.toInfo(anime);
-          console.log(anime);
           this.anime = anime;
         });
       } else {
@@ -244,6 +247,7 @@ export default class Anime extends Vue {
 #anime .base-mat { padding: 8px; }
 #anime .doc-title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
 #anime .anime-view-error { font-size:24px; text-align: center; line-height: 2; margin:50px 0 70px; }
+#anime .anime-empty { text-align: center; padding: 200px 0; }
 
 #anime table { }
 #anime table.list { margin-top:6px;  width:100% }
@@ -265,9 +269,7 @@ export default class Anime extends Vue {
 #anime .search .search-box input { width:100%; border:4px solid #276998; height:40px; padding:0 8px; font-size:16px; }
 #anime .search .autocorrect { height:0; font-size:15px; }
 #anime .search .autocorrect .autocorrect-box { position: relative; backdrop-filter:blur(3px);border-width: 0 1px 1px;}
-#anime .search .autocorrect div.node {
-  padding:8px 12px;
-}
+#anime .search .autocorrect div.node { padding:8px 12px; }
 #anime .search .autocorrect div.node.sel,
 #anime .search .autocorrect div.node:hover { font-weight: bold; }
 
