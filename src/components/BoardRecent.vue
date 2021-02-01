@@ -39,7 +39,7 @@ export default class BoardRecent extends Vue {}
 <style>
 .bbs-recent { padding-top:4px; }
 .bbs-recent .topics { width:100%; }
-.bbs-recent .topics td { padding:12px 10px; font-size:14px; height:40px; line-height: 1.5; }
+.bbs-recent .topics td { padding:12px 10px; font-size:14px; height:40px; line-height: 1.5; border-bottom-width: 1px }
 .bbs-recent .topics td.title { padding:0 0 0 8px; }
 .bbs-recent .topics td.date { padding:0 8px 0 0; text-align:right; }
 .bbs-recent .topics .empty { text-align: center; padding:90px 0; }

@@ -13,11 +13,9 @@
             <AnimeRank mode="static"/>
           </div>
 
-          <div class="doc-title">액티브 패널</div>
+          <div class="doc-title">운영기록</div>
           <div>
-            내용
-
-            <br/><br/>
+            <active-panel :admin="false"/>
           </div>
 
           <div class="recent">
@@ -44,13 +42,15 @@ import AnimeRank from "@/components/AnimeRank.vue";
 import {Options, Vue} from "vue-class-component";
 import BoardRecent from "@/components/BoardRecent.vue";
 import BoardService from "@/service/BoardService";
+import ActivePanel from "@/components/ActivePanel.vue";
 
 @Options({
   computed: {
   },
   components: {
     AnimeRank,
-    BoardRecent
+    BoardRecent,
+    ActivePanel
   },
   created() {
     this.recent();
