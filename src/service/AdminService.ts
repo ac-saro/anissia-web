@@ -14,17 +14,17 @@ export default class AdminService {
   }
 
   public static addCaption(animeNo: number, callback: (result: Result<any>) => void): void {
-    fetch(`/api/admin/caption/${animeNo}`, { ...Ajax.post, ...Ajax.session, ...Ajax.json })
+    fetch(`/api/admin/caption/${animeNo}`, { ...Ajax.post, ...Ajax.json })
         .then(e => e.json()).then(data => callback(Result.assign(data)));
   }
 
   public static delCaption(animeNo: number, callback: (result: Result<any>) => void): void {
-    fetch(`/api/admin/caption/${animeNo}`, { ...Ajax.delete, ...Ajax.session, ...Ajax.json })
+    fetch(`/api/admin/caption/${animeNo}`, { ...Ajax.delete, ...Ajax.json })
         .then(e => e.json()).then(data => callback(Result.assign(data)));
   }
 
   public static editCaption(anime: any, callback: (result: Result<any>) => void): void {
-    fetch(`/api/admin/caption/${anime.animeNo}`, { ...Ajax.post, ...Ajax.session, ...Ajax.json, body: JSON.stringify(anime) })
+    fetch(`/api/admin/caption/${anime.animeNo}`, { ...Ajax.post, ...Ajax.json, body: JSON.stringify(anime) })
         .then(e => e.json()).then(data => callback(Result.assign(data)));
   }
 

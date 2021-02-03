@@ -1,3 +1,5 @@
+import Ajax from "@/utils/Ajax";
+
 export default class AccountService {
 
   public static joinApply(email: string, password: string, passwordConfirm: string, name: string, callback: (success: boolean, message: string) => void): void {
@@ -16,8 +18,7 @@ export default class AccountService {
     }
 
     fetch('/api/account/join/apply', {
-      method: 'POST', credentials: 'same-origin', headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({email, password, name}),
+      ...Ajax.post, ...Ajax.json, body: JSON.stringify({email, password, name}),
     }).then((e) => e.json()).then((res) => callback(res.st === 'OK', res.msg));
   }
 

@@ -1,6 +1,7 @@
 import PageData from "@/models/PageData";
 import Result from "@/models/Result";
 import AnissiaUtil from "@/utils/AnissiaUtil";
+import Ajax from "@/utils/Ajax";
 
 export default class ActivePanelService {
 
@@ -22,11 +23,7 @@ export default class ActivePanelService {
       published = true;
       text = text.substring(1).trim();
     }
-    fetch(`/api/active-panel/notice`, {
-      headers: [['Content-Type', 'application/json']],
-      method: 'POST',
-      body: JSON.stringify({text, published})
-    })
+    fetch(`/api/active-panel/notice`, {...Ajax.json, ...Ajax.post, body: JSON.stringify({text, published})})
         .then(e => e.json()).then(data => callback(Result.assign(data)));
   }
 

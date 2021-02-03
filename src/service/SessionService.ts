@@ -2,6 +2,7 @@ import store from '@/store';
 import router from '@/router';
 
 import UserSession from '@/models/UserSession';
+import Ajax from "@/utils/Ajax";
 
 export default class SessionService {
 
@@ -12,10 +13,8 @@ export default class SessionService {
       return;
     }
 
-    fetch('/api/session', {
-      method: 'POST', credentials: 'same-origin', headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({email, password, tokenLogin}),
-    }).then((e) => e.json()).then((res) => {
+    fetch('/api/session', {...Ajax.post, ...Ajax.json, body: JSON.stringify({email, password, tokenLogin})})
+        .then((e) => e.json()).then((res) => {
       if (res.st === 'OK') {
         store.state.user = UserSession.cast(res.data);
         res.msg !== '' && localStorage.setItem('login-token', res.msg);
@@ -29,10 +28,8 @@ export default class SessionService {
   public static tokenLogin() {
     const absoluteToken = localStorage.getItem('login-token');
     if (absoluteToken) {
-      fetch('/api/session/token', {
-        method: 'POST', credentials: 'same-origin', headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({absoluteToken}),
-      }).then((e) => e.json()).then((res) => {
+      fetch('/api/session/token', {...Ajax.post, ...Ajax.json, body: JSON.stringify({absoluteToken})})
+          .then((e) => e.json()).then((res) => {
         if (res.st === 'OK') {
           store.state.user = UserSession.cast(res.data);
           res.msg !== '' && localStorage.setItem('login-token', res.msg);
@@ -49,9 +46,8 @@ export default class SessionService {
    * @param success
    */
   public static logout(success?: () => void) {
-    fetch(`/api/session`, {
-      method: 'DELETE', credentials: 'same-origin', headers: {'Content-Type': 'application/json'}
-    }).then((e) => e.json()).then((data) => {
+    fetch(`/api/session`, {...Ajax.delete, ...Ajax.json})
+        .then((e) => e.json()).then((data) => {
       if (data.st === 'OK') {
         store.state.user = UserSession.cast(null);
         localStorage.removeItem('login-token');
@@ -67,9 +63,8 @@ export default class SessionService {
    * @param result
    */
   public static sync(result?: (isLogin: boolean) => void) {
-    fetch(`/api/session`, {
-      method: 'GET', credentials: 'same-origin', headers: {'Content-Type': 'application/json'}
-    }).then((e) => e.json()).then((data) => {
+    fetch(`/api/session`, {...Ajax.get, ...Ajax.json})
+        .then((e) => e.json()).then((data) => {
       data = (store.state.user = UserSession.cast(data));
       result && result(data.isLogin);
       this.amendPathInSession();
