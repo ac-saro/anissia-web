@@ -8,7 +8,8 @@
         <tr v-for="node in list.content" :key="node.apNo" :class="({'closed': !node.published})">
           <td class="node-text">
             <span v-if="node.code == 'TEXT'" v-html="node.html"></span>
-            <span v-else>{{code}}는 지원하지 않는 활동 패널 코드입니다.</span>
+            <span v-if="node.code == 'ANIME'" v-html="node.html"></span>
+            <span v-else>{{node.code}}는 지원하지 않는 활동 패널 코드입니다.</span>
           </td>
           <td class="node-date">{{node.regDtText}}</td>
         </tr>
@@ -41,6 +42,7 @@ import Nabi from "@/utils/nabi";
   },
   methods: {
     load() {
+      this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
       ActivePanelService.getList(this.page, list => this.list = list);
     },
     hrefPage(index: number) {
@@ -74,7 +76,7 @@ export default class ActivePanel extends Vue {
 
 <style>
 .active-panel {}
-.active-panel table.active-panel-table { width:100%; font-size:15px; }
+.active-panel table.active-panel-table { width:100%; font-size:14px; }
 .active-panel td { height:40px; padding:0 6px; border-bottom-width: 1px }
 .active-panel td.node-date { width:120px; text-align: right }
 .active-panel tr.closed td { opacity: .6 }

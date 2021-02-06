@@ -10,11 +10,22 @@
         <table>
           <tr>
             <th>제목</th>
-            <td><input type="text" class="std-inp-txt" v-model="anime.subject" /></td>
+            <td><input type="text" class="std-inp-txt" v-model="anime.subject" placeholder="애니메이션 제목" /></td>
           </tr>
           <tr>
             <th>장르</th>
-            <td><input type="text" class="std-inp-txt" v-model="anime.genres" /></td>
+            <td>
+              <div @click="genresOn = !genresOn" class="x-tag-box">
+                <span class="x-tag" v-for="tag in anime.genreList" :key="tag">{{tag}}</span>
+                <span class="x-tag" v-if="!anime.genreList.length">장르선택</span>
+              </div>
+              <div v-if="genresOn" class="input-label genre-box">
+                  <span v-for="(g, i) in genres" :key="g">
+                    <input name="anime-genre" :id="`anime-genre-${i}`" type="checkbox" @change="changeGenres()" :value="g" v-model="anime.genreList"/>
+                    <label :for="`anime-genre-${i}`">{{g}}</label>
+                  </span>
+              </div>
+            </td>
           </tr>
           <tr>
             <th>상태</th>
@@ -58,31 +69,33 @@
           </tr>
           <tr>
             <th>웹사이트</th>
-            <td><input type="text" class="std-inp-txt" v-model="anime.website" /></td>
+            <td><input type="text" class="std-inp-txt" v-model="anime.website" placeholder="웹사이트" /></td>
           </tr>
-          <tr>
+          <tr v-if="!anime.isNew">
             <th>자막참여자</th>
             <td class="captions">
               <span v-for="cp in anime.captions" :key="cp.name">{{cp.name}}</span>
-              <input type="button" value="자막참여"/>
+              <input type="button" value="자막참여" @click="addCaption()" />
             </td>
           </tr>
         </table>
-        <div>
-          <div><input type="button" value="삭제"/></div>
-          <div><input type="button" value="저장"/></div>
+        <div class="edit-btn">
+          <div v-if="!anime.isNew" class="edit-btn-delete"><input type="button" value="삭제" @click="deleteAnime()"/></div>
+          <div class="edit-btn-save"><input type="button" :value="anime.isNew ? '추가' : '수정'" @click="saveAnime()"/></div>
         </div>
 
       </div>
       <div v-else>
         <div class="anime-view-error">존재하지 않거나<br/>삭제된 애니메이션 입니다.</div>
       </div>
+
     </form>
 
     <table class="tab">
       <tr>
         <td><router-link to="/admin/anime" :class="({'select': status == 'list'})"><div>전체</div></router-link></td>
         <td><router-link to="/admin/anime?status=delist" :class="({'select': status == 'delist'})"><div>삭제대기</div></router-link></td>
+        <td><div @click="createAnimeView()">신규작성</div></td>
       </tr>
     </table>
 
@@ -112,6 +125,7 @@
               <span class="x-tag" v-for="tag in node.info" :key="tag">{{tag}}</span>
               <span class="x-tag" v-for="tag in node.genres.split(/,/g)" :key="tag"><router-link :to="`/admin/anime?q=%23${encodeURIComponent(tag)}`">{{tag}}</router-link></span>
               <span class="x-tag" v-if="node.website"><a :href="node.website" target="_blank" class="fas fa-home"></a></span>
+              <span class="x-tag" v-if="node.captionCount"><span class="fas fa-closed-captioning">&nbsp;{{node.captionCount}}</span></span>
             </div>
           </td>
         </tr>
@@ -134,7 +148,8 @@
 #admin-anime .anime-empty { text-align: center; padding: 200px 0; }
 #admin-anime .anime-view-error { font-size:24px; text-align: center; line-height: 2; margin:50px 0 70px; }
 #admin-anime table.tab { width:100%; }
-#admin-anime table.tab td { text-align: center; width:50%; border-bottom-width: 1px; line-height: 48px; }
+#admin-anime table.tab td { text-align: center; width:33.3%; border-bottom-width: 1px; line-height: 48px; }
+#admin-anime table.tab td div { cursor: pointer }
 
 #admin-anime table { }
 #admin-anime table.list { margin-top:6px;  width:100% }
@@ -147,17 +162,27 @@
 #admin-anime .view { padding:8px; border-bottom-width: 1px }
 #admin-anime .view .title { line-height: 2; font-size:20px; font-weight: bold; padding:8px; }
 #admin-anime .view input { border:0; height:40px; }
+#admin-anime .view input[type=button] { height: 28px; }
 #admin-anime .view input[type=text] { width:100% }
 #admin-anime .view .input-label {}
-#admin-anime .view .input-label label { padding:8px; margin:0 8px 0 0; display: inline-block }
+#admin-anime .view .input-label label {
+  padding:8px; margin:4px 8px 4px 0; display: inline-block; opacity: .6;
+  font-size:14px; border: 1px solid transparent;
+}
 #admin-anime .view .input-label input { position: absolute; visibility: hidden; width:0 !important; height: 0 !important; }
-#admin-anime .view .input-label input:checked + label { font-weight: bold; background: #ddd }
+#admin-anime .view .input-label input:checked + label { font-weight: bold; opacity:1 }
 #admin-anime .view table { width:100%; }
 #admin-anime .view table td,
 #admin-anime .view table th { border-width: 1px; padding:4px 8px; }
 #admin-anime .view table th { line-height: 1.5; padding:10px 8px; }
+#admin-anime .view table td .genre-box { max-width:480px; }
+#admin-anime .view table td .x-tag-box { padding:4px 0; display: inline-block; cursor: pointer }
+#admin-anime .view table td .x-tag { font-size:14px !important; padding: 6px 8px; margin: 0 8px 0 0; }
 #admin-anime .view td.captions span { line-height: 40px; margin-right: 20px; }
-
+#admin-anime .view .edit-btn { overflow: auto; padding:8px 0; }
+#admin-anime .view .edit-btn input { padding: 0px 12px; }
+#admin-anime .view .edit-btn .edit-btn-delete { float:left; }
+#admin-anime .view .edit-btn .edit-btn-save { text-align: right }
 
 #admin-anime .search { padding: 40px 40px; }
 #admin-anime .search .search-box { }
@@ -181,8 +206,12 @@ html.dark #admin-anime .search .autocorrect div.node span { color:#2e7bb5 }
 
 
 html.light #admin-anime table.tab .select div { background: #f7f7f7 }
+html.light #admin-anime .view .input-label input:checked + label { border-color: #eee }
+html.light #admin-anime .view input { background: #eee; color:#333 }
 
 html.dark #admin-anime table.tab .select div { background: #111 }
+html.dark #admin-anime .view .input-label input:checked + label { border-color: #222 }
+html.dark #admin-anime .view input { background: #222; color:#aaa }
 
 </style>
 
@@ -200,6 +229,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
     Pagination
   },
   created() {
+    this.init();
     this.load();
   },
   watch: {
@@ -209,10 +239,13 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
   },
   methods: {
     hrefPage(index: number) {
-      return Nabi.address().setParameter('page', index + 1).href;
+      return Nabi.address().deleteParameter(['animeNo']).setParameter('page', index + 1).href;
     },
     hrefList(animeNo: number) {
       return Nabi.address().setParameter('animeNo', animeNo).href;
+    },
+    init() {
+      AnimeService.getGenres(genres => this.genres = genres)
     },
     load() {
       const animeNo = Nabi.address().getIntParameter("animeNo");
@@ -222,6 +255,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       const pageQueryStatus = `${this.status} ${this.page} ${this.query}`;
       this.autoIndex = -1;
       this.autoOn = false;
+      this.genresOn = false;
       if (this.query != this.autoQuery) {
         this.autoList = [];
       }
@@ -247,6 +281,50 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
         } else if (this.status == 'delist') {
           this.list = new PageData();
         }
+      }
+    },
+    addCaption() {
+      AdminService.addCaption(this.anime.animeNo, result => {
+        if (result.st == 'OK') {
+          this.load();
+          alert("자막제작자로 참여하셨습니다.");
+        } else if (result.msg) {
+          alert(result.msg);
+        }
+      });
+    },
+    saveAnime() {
+      const anime = this.anime;
+      if (confirm(`${anime.subject} 을(를) ${anime.animeNo != 0 ? '수정' : '추가'} 하시겠습니까?\n임의조작시 권한박탈의 사유가됩니다.`)) {
+        if (!anime.isPureWeek) {
+          anime.time = '00:00';
+        }
+        anime.subject = anime.subject.trim();
+        anime.genres = anime.genreList.join(',')
+        if (anime.animeNo != 0) {
+          AdminService.updateAnime(anime, result => {
+            if (result.st == 'OK') {
+              this.load();
+              alert("애니메이션이 수정되었습니다.");
+            } else if (result.msg) {
+              alert(result.msg);
+            }
+          });
+        } else {
+          AdminService.addAnime(anime, result => {
+            if (result.st == 'OK') {
+              this.load();
+              alert("애니메이션이 추가되었습니다.");
+            } else if (result.msg) {
+              alert(result.msg);
+            }
+          });
+        }
+      }
+    },
+    deleteAnime() {
+      if (confirm(`${this.anime.subject} 을(를) 삭제하시겠습니까?\n임의삭제시 권한박탈의 사유가됩니다.`)) {
+        alert('제작중');
       }
     },
     autocorrect(event: KeyboardEvent) {
@@ -286,6 +364,14 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
     clickAutocorrect(event: MouseEvent) {
       this.autoOn = Nabi.matchesParents(event.target, ['#admin-anime .search']) != '';
     },
+    changeGenres() {
+      this.$nextTick(() => {
+        console.log(this.anime.genreList.length);
+        if (this.anime.genreList.length > 3) {
+          this.anime.genreList = this.anime.genreList.slice(this.anime.genreList.length - 3);
+        }
+      });
+    },
     search() {
       const q = this.query.trim();
       if (q) {
@@ -297,13 +383,22 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
     isPureWeek(week: string) {
       return AnissiaUtil.isPureWeek(week);
     },
-    createAnime() {
-      this.anime = {
-        "animeNo":-1,"isNew":true,
-        "status":"","week":"","time":"",
-        "subject":"","genres":"",
-        "startDate":"","endDate":"",
-        "website":"","captions":[]};
+    createAnimeView() {
+      var anime = {
+        animeNo:0,
+        isNew:true,
+        status:"ON",
+        week:"0",
+        time:"00:00",
+        subject:"",
+        genres:"",
+        startDate:"",
+        endDate:"",
+        website:"",
+        captions:[]
+      };
+      AnimeService.toInfo(anime);
+      this.anime = anime;
     }
   },
 })
@@ -313,6 +408,8 @@ export default class AdminAnime extends Vue {
     return {
       week: ['日', '月', '火', '水', '木', '金', '土', '外', '新'],
       status: 'list',
+      genres: [],
+      genresOn: false,
       anime: null as any,
       query: '',
       autoQuery: '',

@@ -28,4 +28,19 @@ export default class AdminService {
         .then(e => e.json()).then(data => callback(Result.assign(data)));
   }
 
+  public static addAnime(anime: any, callback: (result: Result<any>) => void): void {
+    fetch(`/api/admin/anime`, { ...Ajax.post, ...Ajax.json, body: JSON.stringify(anime) })
+        .then(e => e.json()).then(data => callback(Result.assign(data)));
+  }
+
+  public static deleteAnime(animeNo: number, callback: (result: Result<any>) => void): void {
+    fetch(`/api/admin/anime/${animeNo}`, { ...Ajax.delete, ...Ajax.json })
+        .then(e => e.json()).then(data => callback(Result.assign(data)));
+  }
+
+  public static updateAnime(anime: any, callback: (result: Result<any>) => void): void {
+    fetch(`/api/admin/anime/${anime.animeNo}`, { ...Ajax.put, ...Ajax.json, body: JSON.stringify(anime) })
+        .then(e => e.json()).then(data => callback(Result.assign(data)));
+  }
+
 }

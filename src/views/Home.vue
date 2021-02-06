@@ -14,7 +14,7 @@
           </div>
 
           <div class="doc-title">운영기록</div>
-          <div>
+          <div class="active-panel-wrap">
             <active-panel :admin="false"/>
           </div>
 
@@ -79,6 +79,7 @@ export default class Home extends Vue {
 #home .base-mat { padding: 8px; }
 #home .doc-title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
 #home .doc-title a { text-decoration: none }
+#home .active-panel-wrap { padding-bottom: 16px; }
 
 @media (min-width: 1024px) {
   #home .home-anime-rank { display: none; }

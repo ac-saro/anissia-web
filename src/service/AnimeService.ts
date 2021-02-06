@@ -4,7 +4,8 @@ import PageData from "@/models/PageData";
 
 export default class AnimeService {
 
-  static cacheAutocorrect: any = {}
+  static cacheAutocorrect: any = {};
+  static genres: string[] = [];
 
   public static getList(query: string, page: number, callback: (data: PageData<any>) => void): void {
     fetch(`/api/anime/list/${page}?q=${encodeURIComponent(query)}`).then(e => e.json()).then(data => callback(PageData.cast(data, (e: any) => this.norAnime(e))));
@@ -12,6 +13,14 @@ export default class AnimeService {
 
   public static getAnime(animeNo: number, callback: (data: PageData<any>) => void): void {
     fetch(`/api/anime/animeNo/${animeNo}`).then(e => e.json()).then(anime => callback(this.norAnime(anime)));
+  }
+
+  public static getGenres(callback: (genres: string[]) => void): void {
+    if (AnimeService.genres.length) {
+      callback(AnimeService.genres);
+    } else {
+      fetch(`/api/anime/genres`).then(e => e.json()).then(genres => callback((AnimeService.genres = genres)));
+    }
   }
 
   public static getAnimeAutocorrect(query: string, callback: (list: any[]) => void): void {
@@ -50,7 +59,7 @@ export default class AnimeService {
   }
 
   public static norCaption(e: any) {
-    e.updDt = AnissiaUtil.ymdOrDynamicAgo(e.updDt.replace(' ', 'T'));
+    e.updDt = AnissiaUtil.ymdOrDynamicAgo(e.updDt);
     e.episode = e.episode === '0' ? '단편' : (e.episode + '화');
     if (e.website === '') {
       e.episode = '준비중';
@@ -75,6 +84,7 @@ export default class AnimeService {
     anime.info = [anime.period];
     anime.weekText = AnissiaUtil.toKoWeek(anime.week);
     anime.timeText = anime.pureWeek ? AnissiaUtil.toKo12Time(anime.time) : '';
+    anime.genreList = anime.genres.split(/,/g).filter((e: string) => e != '');
     if (!anime.pureWeek) {
       anime.info.push(AnissiaUtil.toKoWeek(anime.week));
     } else if (['ON', 'OFF'].indexOf(anime.status) != -1 && anime.week) {

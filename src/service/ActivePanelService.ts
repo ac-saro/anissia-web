@@ -11,9 +11,12 @@ export default class ActivePanelService {
       data.content.forEach((e: any) => {
         e.regDtText = AnissiaUtil.ymdOrDynamicAgo(e.regDt);
         if (e.code == 'TEXT') {
-          const t = e.html = Nabi.enHtml(e.data1);
-          if (t.split('[').length == t.split(']').length) {
-            e.html = t.replace(/\[/g, '<b>').replace(/\]/g, '</b>');
+          e.html = ActivePanelService.toHtml(e.data1)
+        } else if (e.code == 'ANIME') {
+          e.html = ActivePanelService.toHtml(e.data1)
+          if (e.status == 'U') {
+            e.data2 = eval(`(${e.data2})`);
+            e.data3 = eval(`(${e.data3})`);
           }
         }
       });
@@ -34,6 +37,16 @@ export default class ActivePanelService {
     }
     fetch(`/api/active-panel/notice`, {...Ajax.json, ...Ajax.post, body: JSON.stringify({text, published})})
         .then(e => e.json()).then(data => callback(Result.assign(data)));
+  }
+
+
+  private static toHtml(text: string) {
+    const t = Nabi.enHtml(text);
+    if (t.split('[').length == t.split(']').length) {
+      return t.replace(/\[/g, '<b>').replace(/\]/g, '</b>');
+    } else {
+      return t;
+    }
   }
 
 }
