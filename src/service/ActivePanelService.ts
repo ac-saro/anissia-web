@@ -2,12 +2,21 @@ import PageData from "@/models/PageData";
 import Result from "@/models/Result";
 import AnissiaUtil from "@/utils/AnissiaUtil";
 import Ajax from "@/utils/Ajax";
+import Nabi from "@/utils/nabi";
 
 export default class ActivePanelService {
 
   public static getList(page: number, callback: (data: PageData<any>) => void): void {
     fetch(`/api/active-panel/list/${page}`).then(e => e.json()).then(data => {
-      data.content.forEach((e: any) => { e.regDtText = AnissiaUtil.ymdOrDynamicAgo(e.regDt) });
+      data.content.forEach((e: any) => {
+        e.regDtText = AnissiaUtil.ymdOrDynamicAgo(e.regDt);
+        if (e.code == 'TEXT') {
+          const t = e.html = Nabi.enHtml(e.data1);
+          if (t.split('[').length == t.split(']').length) {
+            e.html = t.replace(/\[/g, '<b>').replace(/\]/g, '</b>');
+          }
+        }
+      });
       callback(PageData.cast(data))
     });
   }

@@ -1,13 +1,13 @@
 <template>
   <div class="active-panel">
-    <div v-if="admin">
-      <input placeholder="공지사항 !시작하면 전회원 공개 - 사적인대화는 삼가해주세요." v-model="noticeText" @keyup.enter="saveNotice"/>
+    <div v-if="admin" class="active-panel-write">
+      <input class="std-inp-txt basic-border-color" placeholder="공지 (!로 시작시 사이트 전체공개) - 개발 피드백을 위해 임시오픈하였습니다." v-model="noticeText" @keyup.enter="saveNotice"/>
     </div>
     <div>
       <table class="active-panel-table">
-        <tr v-for="node in list.content" :key="node.apNo">
+        <tr v-for="node in list.content" :key="node.apNo" :class="({'closed': !node.published})">
           <td class="node-text">
-            <span v-if="node.code == 'TEXT'">{{node.data1}}</span>
+            <span v-if="node.code == 'TEXT'" v-html="node.html"></span>
             <span v-else>{{code}}는 지원하지 않는 활동 패널 코드입니다.</span>
           </td>
           <td class="node-date">{{node.regDtText}}</td>
@@ -77,6 +77,8 @@ export default class ActivePanel extends Vue {
 .active-panel table.active-panel-table { width:100%; font-size:15px; }
 .active-panel td { height:40px; padding:0 6px; border-bottom-width: 1px }
 .active-panel td.node-date { width:120px; text-align: right }
+.active-panel tr.closed td { opacity: .6 }
+.active-panel .active-panel-write input { width:100%; line-height: 40px; border-bottom-width: 1px; padding:0 8px }
 
 @media (max-width: 500px) {
   .active-panel table.active-panel-table td.node-date { display: none }

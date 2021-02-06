@@ -2,63 +2,82 @@
   <div id="admin-anime" @click="clickAutocorrect">
 
     <!-- view -->
-    <div v-if="anime" class="view basic-border-color">
-      <div v-if="anime.animeNo">
-        <div class="title">{{anime.subject}}</div>
-        <div class="anime-view">
-          <table class="basic-info">
-            <tr v-if="anime.period" class="basic-info-tr">
-              <td>방영기간</td>
-              <td>{{anime.period}}</td>
-            </tr>
-            <tr class="basic-info-tr">
-              <td>방영상태</td>
-              <td>
-                <span v-if="anime.status == 'ON' && anime.pureWeek"> 매주 ({{anime.weekText}}) {{anime.timeText}}</span>
-                <span v-else-if="anime.status == 'ON' && !anime.pureWeek">{{anime.statusText}} ({{anime.weekText}})</span>
-                <span v-else>{{anime.statusText}}</span>
-              </td>
-            </tr>
-            <tr class="basic-info-tr">
-              <td>장르</td>
-              <td>
-                      <span class="in-tag" v-for="tag in anime.genres.split(/,/g)" :key="tag">
-                        <router-link :to="`/anime?q=%23${encodeURIComponent(tag)}`">{{tag}}</router-link>
-                      </span>
-              </td>
-            </tr>
-            <tr v-if="anime.website" class="basic-info-tr">
-              <td>웹사이트</td>
-              <td><a :href="anime.website" target="_blank">{{anime.website}}</a></td>
-            </tr>
-            <tr v-if="anime.captions && anime.captions.length" class="basic-info-tr">
-              <td>자막</td>
-              <td class="basic-info-caption">
-                <table class="caption">
-                  <tr v-for="caption in anime.captions" :key="caption.name">
-                    <td>{{caption.episode}}</td>
-                    <td class="caption-name">
-                      <span v-if="caption.website"><a :href="caption.website" target="_blank" >{{caption.name}}</a></span>
-                      <span v-else>{{caption.name}}</span>
-                    </td>
-                    <td>{{caption.updDt}}</td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
+    <form v-if="anime" class="view basic-border-color">
+      <div v-if="anime.animeNo || anime.isNew">
 
+        <div class="title">{{anime.isNew ? '애니메이션 신규등록' : '애니메이션 수정'}}</div>
+
+        <table>
+          <tr>
+            <th>제목</th>
+            <td><input type="text" class="std-inp-txt" v-model="anime.subject" /></td>
+          </tr>
+          <tr>
+            <th>장르</th>
+            <td><input type="text" class="std-inp-txt" v-model="anime.genres" /></td>
+          </tr>
+          <tr>
+            <th>상태</th>
+            <td class="input-label">
+              <input name="anime-status" id="anime-status-on" type="radio" value="ON" v-model="anime.status"/>
+              <label for="anime-status-on">편성표</label>
+              <input name="anime-status" id="anime-status-off" type="radio" value="OFF" v-model="anime.status"/>
+              <label for="anime-status-off">편성표-결방</label>
+              <input name="anime-status" id="anime-status-end" type="radio" value="END" v-model="anime.status"/>
+              <label for="anime-status-end">완결</label>
+            </td>
+          </tr>
+          <tr>
+            <th>요일</th>
+            <td>
+              <div class="input-label">
+                <span v-for="(w, i) in week" :key="w">
+                  <input name="anime-week" :id="`anime-week-${i}`" type="radio" :value="(i+'')" v-model="anime.week"/>
+                  <label :for="`anime-week-${i}`">{{w}}</label>
+                </span>
+              </div>
+            </td>
+          </tr>
+          <tr v-if="isPureWeek(anime.week)">
+            <th>시간</th>
+            <td>
+              <input class="std-inp-txt" type="time" v-model="anime.time"/>
+            </td>
+          </tr>
+          <tr>
+            <th>시작일</th>
+            <td>
+              <input class="std-inp-txt" type="date" v-model="anime.startDate"/> <input type="button"  @click="anime.startDate = ''" value="지우기"/>
+            </td>
+          </tr>
+          <tr>
+            <th>종료일</th>
+            <td>
+              <input class="std-inp-txt" type="date" v-model="anime.endDate"/> <input type="button" @click="anime.endDate = ''" value="지우기"/>
+            </td>
+          </tr>
+          <tr>
+            <th>웹사이트</th>
+            <td><input type="text" class="std-inp-txt" v-model="anime.website" /></td>
+          </tr>
+          <tr>
+            <th>자막참여자</th>
+            <td class="captions">
+              <span v-for="cp in anime.captions" :key="cp.name">{{cp.name}}</span>
+              <input type="button" value="자막참여"/>
+            </td>
+          </tr>
+        </table>
+        <div>
+          <div><input type="button" value="삭제"/></div>
+          <div><input type="button" value="저장"/></div>
         </div>
+
       </div>
       <div v-else>
-        <div class="doc-title">애니메이션 정보 (존재하지 않는 번호)</div>
-        <div class="anime-view-error">
-          존재하지 않거나<br/>삭제된 애니메이션 입니다.
-        </div>
+        <div class="anime-view-error">존재하지 않거나<br/>삭제된 애니메이션 입니다.</div>
       </div>
-    </div>
-
-
+    </form>
 
     <table class="tab">
       <tr>
@@ -125,12 +144,20 @@
 #admin-anime table.list td div.subject { font-size:15px; padding-top:2px; }
 #admin-anime table.list td div.info { padding:4px 0 2px; }
 
-#admin-anime .view { padding: 8px 8px 40px; border-bottom-width: 1px }
-#admin-anime .view .title { line-height: 2; font-size:20px; font-weight: bold; padding:8px 2px 12px; }
-#admin-anime .view .in-tag:not(:first-child):before { content: ', ' }
-#admin-anime .view table.basic-info tr.basic-info-tr > td { border-width: 1px; line-height: 32px; padding:8px 16px }
-#admin-anime .view table.caption td { padding:4px 0; }
-#admin-anime .view table.caption td.caption-name { padding:4px 32px; }
+#admin-anime .view { padding:8px; border-bottom-width: 1px }
+#admin-anime .view .title { line-height: 2; font-size:20px; font-weight: bold; padding:8px; }
+#admin-anime .view input { border:0; height:40px; }
+#admin-anime .view input[type=text] { width:100% }
+#admin-anime .view .input-label {}
+#admin-anime .view .input-label label { padding:8px; margin:0 8px 0 0; display: inline-block }
+#admin-anime .view .input-label input { position: absolute; visibility: hidden; width:0 !important; height: 0 !important; }
+#admin-anime .view .input-label input:checked + label { font-weight: bold; background: #ddd }
+#admin-anime .view table { width:100%; }
+#admin-anime .view table td,
+#admin-anime .view table th { border-width: 1px; padding:4px 8px; }
+#admin-anime .view table th { line-height: 1.5; padding:10px 8px; }
+#admin-anime .view td.captions span { line-height: 40px; margin-right: 20px; }
+
 
 #admin-anime .search { padding: 40px 40px; }
 #admin-anime .search .search-box { }
@@ -266,6 +293,17 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       } else {
         this.$router.push('/admin/anime');
       }
+    },
+    isPureWeek(week: string) {
+      return AnissiaUtil.isPureWeek(week);
+    },
+    createAnime() {
+      this.anime = {
+        "animeNo":-1,"isNew":true,
+        "status":"","week":"","time":"",
+        "subject":"","genres":"",
+        "startDate":"","endDate":"",
+        "website":"","captions":[]};
     }
   },
 })
@@ -273,6 +311,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
 export default class AdminAnime extends Vue {
   data() {
     return {
+      week: ['日', '月', '火', '水', '木', '金', '土', '外', '新'],
       status: 'list',
       anime: null as any,
       query: '',

@@ -110,13 +110,13 @@ import Nabi from "@/utils/nabi";
     },
     deleteCaption(index: number) {
       if (confirm("정말로 삭제하시겠습니까?")) {
-        const node = this.list[index];
-        alert(node);
+        AdminService.deleteCaption(this.list[index].animeNo, result => {
+          result.st == "OK" ? this.load() : alert(result.msg);
+        });
       }
     },
     updateCaption(index: number) {
-      const node = this.list[index];
-      alert(node);
+      AdminService.updateCaption(this.list[index], result => alert(result.msg));
     },
     hrefPage(index: number) {
       return Nabi.address().setParameter('page', index + 1).href;
