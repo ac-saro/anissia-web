@@ -210,7 +210,7 @@ html.dark #admin-anime .search .autocorrect div.node span { color:#2e7bb5 }
 
 @media (max-width: 800px) {
   #admin-anime .mob-hide { display: none; }
-  #admin-anime .search { padding:10px 0 6px; }
+  #admin-anime .search { padding:6px 0 0; }
   #admin-anime .search .autocorrect div.node { padding:16px; }
 }
 

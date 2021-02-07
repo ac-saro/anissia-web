@@ -13,6 +13,10 @@ export default class AdminService {
     fetch(`/api/admin/anime/delist`).then(e => e.json()).then(data => callback(PageData.cast(data, (e: any) => AnimeService.norAnime(e))));
   }
 
+  public static getSchedule(week: string, callback: (list: any[]) => void): void {
+    fetch(`/api/admin/schedule/${week}`).then(e => e.json()).then(list => callback(list.map((e: any) => AnimeService.norAnime(e, week))));
+  }
+
   public static getCaptionList(state: number, page: number, callback: (data: PageData<any>) => void): void {
     fetch(`/api/admin/caption/list/${state}/${page}`).then(e => e.json()).then(data => callback(PageData.cast(data)));
   }

@@ -1,6 +1,10 @@
 <template>
   <div id="admin-schedule">
 
+    <div class="tip-box basic-border-color">
+      애니편성표 (캐싱) ≠ 관리자 (실시간)
+    </div>
+
     <table class="tab">
       <tr>
         <td v-for="(node, i) in weekList" :key="node" :class="({'select': i == weekNow})">
@@ -39,6 +43,7 @@
 
 <style>
 #admin-schedule {  }
+#admin-schedule .tip-box { padding:12px 0; border-bottom-width: 1px; font-size:12px; line-height: 1.5; text-align: center }
 #admin-schedule table { width:100%; }
 
 #admin-schedule table.tab td { line-height: 48px; text-align: center; border-bottom-width: 1px; cursor: pointer }
@@ -69,6 +74,7 @@ html.dark #admin-schedule table.tab .select div { background: #111 }
 import {Options, Vue} from "vue-class-component";
 import AnissiaUtil from "@/utils/AnissiaUtil";
 import AnimeService from "@/service/AnimeService";
+import AdminService from "@/service/AdminService";
 
 @Options({
   mounted() {
@@ -89,7 +95,7 @@ import AnimeService from "@/service/AnimeService";
       }
     },
     selectAnimeList(week: number): void {
-      AnimeService.getSchedule(week.toString(), (data) => {
+      AdminService.getSchedule(week.toString(), (data) => {
         data.forEach(e => e.info = AnimeService.toInfo(e));
         this.animeList = data;
         this.weekNow = week;
