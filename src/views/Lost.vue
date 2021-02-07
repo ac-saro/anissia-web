@@ -3,7 +3,7 @@
     <div>
 
       <div class="lost-title">
-        암호찾기
+        암호찾기 (개발중)
       </div>
 
       <div class="base-mat" v-if="mode == 'none'">
@@ -48,6 +48,7 @@
 </template>
 
 <style>
+#lost .base-mat { padding: 8px 0 10px; }
 #lost .lost-title { text-align: center; font-size: 30px; color:#777; padding: 24px 0 48px; font-weight: bold }
 #lost .lost-result .icon { padding:24px 0; text-align:center }
 #lost .lost-result .icon img { max-width:32%; }
