@@ -8,14 +8,14 @@
         <tr v-for="node in list.content" :key="node.apNo" :class="({'closed': !node.published})">
           <td class="node-text">
             <span v-if="node.code == 'TEXT'" v-html="node.html"></span>
-            <span v-if="node.code == 'ANIME'" v-html="node.html"></span>
+            <span v-else-if="node.code == 'ANIME'" v-html="node.html"></span>
             <span v-else>{{node.code}}는 지원하지 않는 활동 패널 코드입니다.</span>
           </td>
           <td class="node-date">{{node.regDtText}}</td>
         </tr>
       </table>
     </div>
-    <div v-if="admin">
+    <div>
       <pagination :total="list.totalPages" :index="page" :unit="10" :href="hrefPage" :key="$route.fullPath"/>
     </div>
   </div>

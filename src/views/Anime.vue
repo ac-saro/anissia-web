@@ -267,7 +267,7 @@ export default class Anime extends Vue {
 
 #anime .search { padding: 40px 40px; }
 #anime .search .search-box { }
-#anime .search .search-box input { width:100%; border:4px solid #276998; height:40px; padding:0 8px; font-size:16px; }
+#anime .search .search-box input { width:100%; height:40px; padding:0 8px; font-size:16px; }
 #anime .search .autocorrect { height:0; font-size:15px; }
 #anime .search .autocorrect .autocorrect-box { position: relative; backdrop-filter:blur(3px);border-width: 0 1px 1px;}
 #anime .search .autocorrect div.node { padding:8px 12px; }
@@ -276,8 +276,11 @@ export default class Anime extends Vue {
 
 html.light #anime .search .autocorrect .autocorrect-box { background: rgba(255, 255, 255, .7); border:1px solid #eee; }
 html.light #anime .search .autocorrect div.node span { color:#2f7cbd }
+html.light #anime table.list a { color:#333; text-decoration: none }
+
 html.dark #anime .search .autocorrect .autocorrect-box { background: rgba(0, 0, 0, .7); border:1px solid #222; }
 html.dark #anime .search .autocorrect div.node span { color:#2e7bb5 }
+html.dark #anime table.list a { color:#aaa; text-decoration: none }
 
 @media (max-width: 800px) {
   #anime .mob-hide { display: none; }

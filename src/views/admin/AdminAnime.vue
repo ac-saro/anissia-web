@@ -1,8 +1,16 @@
 <template>
   <div id="admin-anime" @click="clickAutocorrect">
 
+    <table class="tab">
+      <tr>
+        <td><router-link to="/admin/anime" :class="({'select': status == 'list'})"><div>전체</div></router-link></td>
+        <td><router-link to="/admin/anime?status=delist" :class="({'select': status == 'delist'})"><div>삭제대기</div></router-link></td>
+      </tr>
+    </table>
+
     <!-- view -->
     <form v-if="anime" class="view basic-border-color">
+
       <div v-if="anime.animeNo || anime.isNew">
 
         <div class="title">{{anime.isNew ? '애니메이션 신규등록' : '애니메이션 수정'}}</div>
@@ -58,13 +66,13 @@
           <tr>
             <th>시작일</th>
             <td>
-              <input class="std-inp-txt" type="date" v-model="anime.startDate"/> <input type="button"  @click="anime.startDate = ''" value="지우기"/>
+              <input class="std-inp-txt" type="date" v-model="anime.startDate" /> <input type="button"  @click="anime.startDate = ''" value="지우기"/>
             </td>
           </tr>
           <tr>
             <th>종료일</th>
             <td>
-              <input class="std-inp-txt" type="date" v-model="anime.endDate"/> <input type="button" @click="anime.endDate = ''" value="지우기"/>
+              <input class="std-inp-txt" type="date" v-model="anime.endDate" /> <input type="button" @click="anime.endDate = ''" value="지우기"/>
             </td>
           </tr>
           <tr>
@@ -91,16 +99,9 @@
 
     </form>
 
-    <table class="tab">
-      <tr>
-        <td><router-link to="/admin/anime" :class="({'select': status == 'list'})"><div>전체</div></router-link></td>
-        <td><router-link to="/admin/anime?status=delist" :class="({'select': status == 'delist'})"><div>삭제대기</div></router-link></td>
-        <td><div @click="createAnimeView()">신규작성</div></td>
-      </tr>
-    </table>
-
     <div v-if="status == 'list'" class="search a-text-style">
       <div class="search-box">
+        <input type="button" @click="createAnimeView()" value="신규작성">
         <input type="text" class="std-inp-txt" v-model="query" @keydown="keyAutocorrect" @keyup="autocorrect" placeholder="애니메이션 검색"/>
       </div>
       <div class="autocorrect" v-if="autoOn && autoList.length">
@@ -148,7 +149,7 @@
 #admin-anime .anime-empty { text-align: center; padding: 200px 0; }
 #admin-anime .anime-view-error { font-size:24px; text-align: center; line-height: 2; margin:50px 0 70px; }
 #admin-anime table.tab { width:100%; }
-#admin-anime table.tab td { text-align: center; width:33.3%; border-bottom-width: 1px; line-height: 48px; }
+#admin-anime table.tab td { text-align: center; width:50%; border-bottom-width: 1px; line-height: 48px; }
 #admin-anime table.tab td div { cursor: pointer }
 
 #admin-anime table { }
@@ -186,12 +187,15 @@
 
 #admin-anime .search { padding: 40px 40px; }
 #admin-anime .search .search-box { }
-#admin-anime .search .search-box input { width:100%; border:4px solid #276998; height:40px; padding:0 8px; font-size:16px; }
-#admin-anime .search .autocorrect { height:0; font-size:15px; }
+#admin-anime .search .search-box input { height:40px; vertical-align: top; }
+#admin-anime .search .search-box input[type=button] { width:80px; cursor:pointer; }
+#admin-anime .search .search-box input[type=text] { width:calc(100% - 80px); height:40px; padding:0 8px; font-size:16px; }
+#admin-anime .search .autocorrect { height:0; font-size:15px; margin-left:81px; }
 #admin-anime .search .autocorrect .autocorrect-box { position: relative; backdrop-filter:blur(3px);border-width: 0 1px 1px;}
 #admin-anime .search .autocorrect div.node { padding:8px 12px; }
 #admin-anime .search .autocorrect div.node.sel,
 #admin-anime .search .autocorrect div.node:hover { font-weight: bold; }
+
 
 html.light #admin-anime .search .autocorrect .autocorrect-box { background: rgba(255, 255, 255, .7); border:1px solid #eee; }
 html.light #admin-anime .search .autocorrect div.node span { color:#2f7cbd }
@@ -247,6 +251,10 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
     init() {
       AnimeService.getGenres(genres => this.genres = genres)
     },
+    loadForce() {
+      this.pageQueryStatus = '';
+      this.load();
+    },
     load() {
       const animeNo = Nabi.address().getIntParameter("animeNo");
       this.query = (Nabi.address().getParameter("q") || '').trim();
@@ -286,7 +294,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
     addCaption() {
       AdminService.addCaption(this.anime.animeNo, result => {
         if (result.st == 'OK') {
-          this.load();
+          this.loadForce();
           alert("자막제작자로 참여하셨습니다.");
         } else if (result.msg) {
           alert(result.msg);
@@ -300,11 +308,11 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
           anime.time = '00:00';
         }
         anime.subject = anime.subject.trim();
-        anime.genres = anime.genreList.join(',')
+        anime.genres = anime.genreList.join(',');
         if (anime.animeNo != 0) {
           AdminService.updateAnime(anime, result => {
             if (result.st == 'OK') {
-              this.load();
+              this.loadForce();
               alert("애니메이션이 수정되었습니다.");
             } else if (result.msg) {
               alert(result.msg);
@@ -313,7 +321,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
         } else {
           AdminService.addAnime(anime, result => {
             if (result.st == 'OK') {
-              this.load();
+              this.loadForce();
               alert("애니메이션이 추가되었습니다.");
             } else if (result.msg) {
               alert(result.msg);
@@ -399,6 +407,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       };
       AnimeService.toInfo(anime);
       this.anime = anime;
+      window.scrollTo(0, 0);
     }
   },
 })

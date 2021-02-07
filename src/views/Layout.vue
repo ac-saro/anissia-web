@@ -280,9 +280,11 @@ html.light .mono-area input[type=button],
 html.light input.std-inp-btn { background: #4f5677; color:#fff }
 html.light .popup-background .popup-box { background: #fff; border:1px solid #276998; }
 html.light .popup-background .popup-box input[type=password] { border:1px solid #ddd }
+html.light .search-box input[type=text] { border:4px solid #5c8dbf; }
+html.light .search-box input[type=button] { border:0; color:#fff; background: #5c8dbf }
 
 
-/* dark mode */
+  /* dark mode */
 html.dark { background: #000; }
 html.dark .ml a { color:#48659a }
 html.dark,
@@ -314,5 +316,8 @@ html.dark .mono-area input[type=button],
 html.dark input.std-inp-btn { background: #999; color:#000; }
 html.dark .popup-background .popup-box { background: #000; border:1px solid #276998; }
 html.dark .popup-background .popup-box input[type=password] { border:1px solid #333 }
+html.dark .search-box input[type=text] { border:4px solid #333; }
+html.dark .search-box input[type=button] { border:0; color:#aaa; background: #333 }
+
 
 </style>
