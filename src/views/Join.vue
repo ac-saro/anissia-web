@@ -11,7 +11,7 @@
         <div class="input-unit"><input type="password" v-model="password" placeholder="암호" autocomplete="new-password" /></div>
         <div class="input-unit"><input type="password" v-model="passwordConfirm" placeholder="암호확인" autocomplete="new-password" /></div>
         <div class="input-unit"><input type="text" v-model="this.name" placeholder="닉네임" autocomplete="new-password" /></div>
-        <div class="input-unit"><input type="button" @click="joinApply()" value="회원가입 인증문자 발송" /></div>
+        <div class="input-unit"><input type="button" @click="register()" value="회원가입 인증문자 발송" /></div>
       </div>
 
       <div class="base-mat join-result" v-if="mode == 'needMailAuth'">
@@ -74,21 +74,34 @@ import AccountService from "@/service/AccountService";
 import {Options, Vue} from "vue-class-component";
 
 @Options({
-  methods: {
-    joinApply() {
-      AccountService.joinApply(this.email, this.password, this.passwordConfirm, this.name, (success, msg) => {
-        if (success) {
-          this.mode = 'needMailAuth';
-        } else if (msg) {
-          alert(msg);
-        }
-      });
-    }
-  },
   created() {
     const token: string = this.$route.params.token || '';
     if (token !== '') {
       this.mode = 'wait';
+      this.registerValidation(token);
+    }
+  },
+  methods: {
+    register() {
+      AccountService.register(this.email, this.password, this.passwordConfirm, this.name, res => {
+        if (res.st == 'OK') {
+          this.mode = 'needMailAuth';
+        } else if (res.msg) {
+          alert(res.msg);
+        }
+      });
+    },
+    registerValidation(token: string) {
+      AccountService.registerValidation(token, res => {
+        if (res.st == 'OK') {
+          this.mode = 'pass';
+        } else {
+          this.mode = 'fail';
+          if (res.msg) {
+            this.message = res.msg;
+          }
+        }
+      });
     }
   }
 })
