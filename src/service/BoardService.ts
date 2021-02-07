@@ -9,12 +9,12 @@ export default class BoardService {
 
   public static getTopic(ticker: string, topicNo: number, callback: (topic: any) => void): void {
     fetch(`/api/board/topic/${ticker}/${topicNo}`).then(e => e.json()).then(topic => {
+      if (!topic.posts) { topic.posts = []; }
       topic.posts.forEach((e: any) => {
         e.editContent = e.content;
         e.editMode = false;
       });
-      console.log(topic)
-          callback(topic);
+      callback(topic);
     });
   }
 

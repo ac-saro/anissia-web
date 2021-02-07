@@ -1,6 +1,8 @@
 <template>
   <div class="board">
 
+    <h1>게시판은 현재 개발중입니다.</h1>
+
     <!--
     <div class="board-view" v-if="meta.isNewMode && isWritableTopic()">
       <div class="write-info">
@@ -65,13 +67,23 @@
     </div>
     -->
 
+    <div class="doc-title fo">
+      <div class="fl">{{ info.name }}</div>
+      <div class="fr"><input type="button" class="std-inp-btn" value="글쓰기"/></div>
+    </div>
+
     <div class="board-view" v-if="view">
 
       <!-- topic -->
-      <div v-if="view.topicNo">
-        <div class="title">{{ view.topic }}</div>
-
-        <div v-for="node in view.posts" :key="node.postNo">
+      <div v-if="view.topicNo != 0">
+        <div class="topic fo">
+          <div class="fl">{{ view.topic }}</div>
+          <div class="fr">
+            <input type="button" class="std-inp-btn" value="수정"/>
+            <input type="button" class="std-inp-btn" value="삭제"/>
+          </div>
+        </div>
+        <div v-for="node in view.posts" :key="node.postNo" class="basic-border-color post">
 
           <div v-if="node.editMode">
             <md v-model="node.editContent" height="600px" placeholder="내용을 입력해주세요."/>
@@ -87,18 +99,11 @@
           </div>
 
         </div>
-
       </div>
-
       <div v-else>
-        <div class="title">{{ info.name }}</div>
         <div class="empty-content">존재하지 않거나 삭제된 게시물 입니다.</div>
       </div>
 
-    </div>
-    <!-- topic not found -->
-    <div v-else class="board-view">
-      <div class="title">{{ info.name }}</div>
     </div>
 
     <table class="board-list">
@@ -367,10 +372,22 @@ export default class Board extends Vue {
 
 <style>
 .board {  }
-.board .title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
-
+.board input { border:0; }
+.board input[type=button] { height:32px; }
+.board .fo { overflow: auto; }
+.board .fl { float:left; }
+.board .fr { float:right; text-align: right }
+.board .doc-title { border-bottom: 1px solid #276998; }
+.board .doc-title .fl { color: #276998; font-size: 20px; padding: 6px 8px 8px; }
+.board .doc-title .fr { padding:5px 0 0; }
 
 .board .board-view .empty-content { text-align: center; padding:120px 0; }
+
+.board .board-view .topic { font-weight: bold; font-size:16px;  }
+.board .board-view .topic .fl { padding:12px 6px; }
+.board .board-view .topic .fr { padding:6px 0; }
+.board .board-view .topic input { margin-right: 6px }
+.board .board-view .post { font-size:12px; border-top-width: 1px; }
 
 .board .board-list { width:100%; margin-top:10px; }
 .board .board-list th { line-height: 32px; color:#505050; font-size:12px; border-bottom-width: 1px; }
