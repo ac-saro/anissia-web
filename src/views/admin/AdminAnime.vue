@@ -114,6 +114,9 @@
         </div>
       </div>
     </div>
+    <div v-else class="anime-del-wait">
+      삭제 대기 애니메이션은 90일 후 완전 삭제됩니다. (현재 구현되지않음)
+    </div>
 
     <!-- list -->
     <div>
@@ -121,7 +124,8 @@
         <tr v-for="node in list.content" :key="node.animeNo">
           <td class="anime-no">{{node.animeNo}}</td>
           <td class="main">
-            <div class="subject"><router-link :to="hrefList(node.animeNo)">{{node.subject}}</router-link></div>
+            <div v-if="status == 'list'" class="subject"><router-link :to="hrefList(node.animeNo)">{{node.subject}}</router-link></div>
+            <div v-if="status == 'delist'" class="subject">{{node.subject}} (<span @click="recoverAnime(node)">복원하기</span>)</div>
             <div class="info a-text-style">
               <span class="x-tag" v-for="tag in node.info" :key="tag">{{tag}}</span>
               <span class="x-tag" v-for="tag in node.genres.split(/,/g)" :key="tag"><router-link :to="`/admin/anime?q=%23${encodeURIComponent(tag)}`">{{tag}}</router-link></span>
@@ -158,6 +162,7 @@
 #admin-anime table.list td { font-size:13px; padding:10px 4px; border-top-width: 1px; line-height: 1.5 }
 #admin-anime table.list td.anime-no { text-align: center; width:60px; }
 #admin-anime table.list td div.subject { font-size:15px; padding-top:2px; }
+#admin-anime table.list td div.subject span { color:#7d2424; font-weight: bold; cursor: pointer }
 #admin-anime table.list td div.info { padding:4px 0 2px; }
 
 #admin-anime .view { padding:8px; border-bottom-width: 1px }
@@ -196,6 +201,7 @@
 #admin-anime .search .autocorrect div.node.sel,
 #admin-anime .search .autocorrect div.node:hover { font-weight: bold; }
 
+#admin-anime .anime-del-wait { text-align: center; padding: 32px 0 28px; font-size: 14px; }
 
 html.light #admin-anime .search .autocorrect .autocorrect-box { background: rgba(255, 255, 255, .7); border:1px solid #eee; }
 html.light #admin-anime .search .autocorrect div.node span { color:#2f7cbd }
@@ -282,12 +288,15 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       if (this.pageQueryStatus != pageQueryStatus) {
         this.pageQueryStatus = pageQueryStatus;
         if (this.status == 'list') {
-          AnimeService.getList(this.query, this.page, list => {
+          AdminService.getAnimeList(this.query, this.page, list => {
             list.content.forEach(e => e.info = AnimeService.toInfo(e));
             this.list = list;
           });
         } else if (this.status == 'delist') {
-          this.list = new PageData();
+          AdminService.getAnimeDelist(list => {
+            list.content.forEach(e => e.info = AnimeService.toInfo(e));
+            this.list = list;
+          });
         }
       }
     },
@@ -303,7 +312,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
     },
     saveAnime() {
       const anime = this.anime;
-      if (confirm(`${anime.subject} 을(를) ${anime.animeNo != 0 ? '수정' : '추가'} 하시겠습니까?\n임의조작시 권한박탈의 사유가됩니다.`)) {
+      if (confirm(`${anime.subject}을(를) ${anime.animeNo != 0 ? '수정' : '추가'} 하시겠습니까?\n임의조작시 권한박탈의 사유가됩니다.`)) {
         if (!anime.isPureWeek) {
           anime.time = '00:00';
         }
@@ -331,10 +340,21 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       }
     },
     deleteAnime() {
-      if (confirm(`${this.anime.subject} 을(를) 삭제하시겠습니까?\n임의삭제시 권한박탈의 사유가됩니다.`)) {
+      if (confirm(`${this.anime.subject}을(를) 삭제하시겠습니까?\n임의삭제시 권한박탈의 사유가됩니다.`)) {
         AdminService.deleteAnime(this.anime.animeNo, result => {
           if (result.st == 'OK') {
             this.$router.push('/admin/anime');
+          } else if (result.msg) {
+            alert(result.msg);
+          }
+        });
+      }
+    },
+    recoverAnime(anime: any) {
+      if (confirm(`${anime.subject}을(를) 복원하시겠습니까?\n임의조작시 권한박탈의 사유가됩니다.`)) {
+        AdminService.recoverAnime(anime.agendaNo, result => {
+          if (result.st == 'OK') {
+            this.$router.push(`/admin/anime?animeNo=${result.data}`);
           } else if (result.msg) {
             alert(result.msg);
           }

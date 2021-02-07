@@ -5,8 +5,12 @@ import Ajax from "@/utils/Ajax";
 
 export default class AdminService {
 
-  public static getAnimeList(status: string, query: string, page: number, callback: (data: PageData<any>) => void): void {
-    fetch(`/api/admin/anime/${status}/${page}`).then(e => e.json()).then(data => callback(PageData.cast(data, (e: any) => AnimeService.norAnime(e))));
+  public static getAnimeList(query: string, page: number, callback: (data: PageData<any>) => void): void {
+    fetch(`/api/admin/anime/list/${page}?q=${encodeURIComponent(query)}`).then(e => e.json()).then(data => callback(PageData.cast(data, (e: any) => AnimeService.norAnime(e))));
+  }
+
+  public static getAnimeDelist(callback: (data: PageData<any>) => void): void {
+    fetch(`/api/admin/anime/delist`).then(e => e.json()).then(data => callback(PageData.cast(data, (e: any) => AnimeService.norAnime(e))));
   }
 
   public static getCaptionList(state: number, page: number, callback: (data: PageData<any>) => void): void {
@@ -40,6 +44,11 @@ export default class AdminService {
 
   public static updateAnime(anime: any, callback: (result: Result<any>) => void): void {
     fetch(`/api/admin/anime/${anime.animeNo}`, { ...Ajax.put, ...Ajax.json, body: JSON.stringify(anime) })
+        .then(e => e.json()).then(data => callback(Result.assign(data)));
+  }
+
+  public static recoverAnime(agendaNo: number, callback: (result: Result<any>) => void): void {
+    fetch(`/api/admin/anime/recover/${agendaNo}`, { ...Ajax.post, ...Ajax.json })
         .then(e => e.json()).then(data => callback(Result.assign(data)));
   }
 
