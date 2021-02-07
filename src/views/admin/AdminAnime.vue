@@ -332,7 +332,13 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
     },
     deleteAnime() {
       if (confirm(`${this.anime.subject} 을(를) 삭제하시겠습니까?\n임의삭제시 권한박탈의 사유가됩니다.`)) {
-        alert('제작중');
+        AdminService.deleteAnime(this.anime.animeNo, result => {
+          if (result.st == 'OK') {
+            this.$router.push('/admin/anime');
+          } else if (result.msg) {
+            alert(result.msg);
+          }
+        });
       }
     },
     autocorrect(event: KeyboardEvent) {
