@@ -4,7 +4,7 @@ import Layout from "@/views/Layout.vue";
 import P404 from "@/views/404.vue";
 import P301 from "@/views/301.vue";
 import Lost from "@/views/Lost.vue";
-import Join from "@/views/Join.vue";
+import Register from "@/views/Register.vue";
 import Login from "@/views/Login.vue";
 import Inquiry from "@/views/Inquiry.vue";
 import Notice from "@/views/Notice.vue";
@@ -43,8 +43,8 @@ const router = createRouter({
           { path: '/notice', component: Notice },
           { path: '/inquiry', component: Inquiry },
           { path: '/login', component: Login },
-          { path: '/join/:token', component: Join },
-          { path: '/join', component: Join },
+          { path: '/register/:token', component: Register },
+          { path: '/register', component: Register },
           { path: '/lost', component: Lost },
           { path: '/account', component: Account },
           {

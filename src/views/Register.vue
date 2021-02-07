@@ -1,5 +1,5 @@
 <template>
-  <div id="join" class="mono-area">
+  <div id="register" class="mono-area">
     <div>
 
       <div class="join-title">
@@ -53,19 +53,19 @@
 </template>
 
 <style>
-#join .base-mat { padding:8px 0 10px }
-#join .join-title { text-align: center; font-size: 30px; color:#777; padding: 24px 0 48px; font-weight: bold }
-#join .join-result .icon { padding:24px 0; text-align:center }
-#join .join-result .icon img { max-width:32%; }
-#join .join-result .title { text-align: center; font-size:22px; font-weight: bold; padding-bottom: 18px; }
-#join .join-result .desc-title { text-align: center; padding-bottom: 12px; }
-#join .join-result .desc { line-height: 1.6; font-size:14px; text-align: center; padding-bottom: 32px }
+#register .base-mat { padding:8px 0 10px }
+#register .join-title { text-align: center; font-size: 30px; color:#777; padding: 24px 0 48px; font-weight: bold }
+#register .join-result .icon { padding:24px 0; text-align:center }
+#register .join-result .icon img { max-width:32%; }
+#register .join-result .title { text-align: center; font-size:22px; font-weight: bold; padding-bottom: 18px; }
+#register .join-result .desc-title { text-align: center; padding-bottom: 12px; }
+#register .join-result .desc { line-height: 1.6; font-size:14px; text-align: center; padding-bottom: 32px }
 
-html.light #join a { color:#3f52ad; }
-html.dark #join a { color:#a0a0a0; }
+html.light #register a { color:#3f52ad; }
+html.dark #register a { color:#a0a0a0; }
 
 @media (max-width: 640px) {
-  #join .join-title { padding:12px 0 40px }
+  #register .join-title { padding:12px 0 40px }
 }
 </style>
 
@@ -106,7 +106,7 @@ import {Options, Vue} from "vue-class-component";
   }
 })
 
-export default class Join extends Vue {
+export default class Register extends Vue {
   data() {
     return {
       mode: 'none', // none wait fail pass

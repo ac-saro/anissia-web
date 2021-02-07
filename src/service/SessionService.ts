@@ -90,7 +90,7 @@ export default class SessionService {
             .map((e) => decodeURIComponent(e))
             .filter((e) => (/^rp=\/[a-z]+/).test(e))
             .map((e) => e.substring(3))
-            .filter((e) => !e.startsWith('/join') && !e.startsWith('/lost'));
+            .filter((e) => !e.startsWith('/register') && !e.startsWith('/lost'));
         router.push(rp.length === 0 ? '/' : rp[0]);
         return false;
       }
