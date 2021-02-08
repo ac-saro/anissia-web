@@ -77,7 +77,8 @@ export default class ActivePanel extends Vue {
 <style>
 .active-panel {}
 .active-panel table.active-panel-table { width:100%; font-size:14px; }
-.active-panel td { height:40px; padding:0 6px; border-bottom-width: 1px }
+.active-panel td { padding:6px; border-bottom-width: 1px }
+.active-panel td.node-text { line-height: 2 }
 .active-panel td.node-date { width:120px; text-align: right }
 .active-panel tr.closed td { opacity: .6 }
 .active-panel .active-panel-write input { width:100%; line-height: 40px; border-bottom-width: 1px; padding:0 8px }
