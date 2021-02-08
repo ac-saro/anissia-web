@@ -400,7 +400,6 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
     },
     changeGenres() {
       this.$nextTick(() => {
-        console.log(this.anime.genreList.length);
         if (this.anime.genreList.length > 3) {
           this.anime.genreList = this.anime.genreList.slice(this.anime.genreList.length - 3);
         }

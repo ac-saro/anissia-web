@@ -193,15 +193,15 @@
             <table class="schedule-table schedule-application">
               <tr>
                 <th rowspan="3"><img src="@/assets/page/schedule-th-api.svg" title="API" class="pmark" /></th>
-                <td><a href="https://github.com/anissia-net/anissia-web/blob/master/README-API.md" target="_blank">API</a></td>
+                <td><a href="https://github.com/anissia-net/document/blob/main/api_anime_schdule.md" target="_blank">API</a></td>
                 <th>3rd party 애니편성표 앱 제작을 위한 API 가이드</th>
               </tr>
               <tr>
-                <td><a href="https://github.com/anissia-net/anissia-web" target="_blank">WEB</a></td>
+                <td><a href="https://github.com/anissia-net/document" target="_blank">WEB</a></td>
                 <th>FE - Vue.js, Typescript</th>
               </tr>
               <tr>
-                <td><a href="https://github.com/anissia-net/anissia-core" target="_blank">CORE</a></td>
+                <td><a href="https://github.com/anissia-net/document" target="_blank">CORE</a></td>
                 <th>BE - Kotlin, Spring, JPA, QueryDSL, Elasticsearch</th>
               </tr>
             </table>
@@ -241,14 +241,13 @@ import AnimeService from "@/service/AnimeService";
     },
     imgCode() {
       const theme = this.imgTitleBg + this.imgTitle + this.imgYmdBg + this.imgYmd + this.imgListBg + this.imgList;
-      return `<a href="${location.origin + '/schedule/2015'}" target="_blank"><img src="http://localhost:8081/api/anime/schedule/svg/${this.imgWidth}/${theme}"/></a>`;
+      return `<a href="${location.origin + '/schedule/2015'}" target="_blank"><img src="${location.origin}/api/anime/schedule/svg/${this.imgWidth}/${theme}"/></a>`;
     },
     colorScheme() {
       return this.$store.state.colorScheme;
     },
     previewError() {
       if (this.mode === 'html') {
-        console.log(`${this.htmlWidth}${this.htmlHeight}`)
         if (!(/^[\d]{6}$/).test(`${this.htmlWidth}${this.htmlHeight}`)) {
           return '지원하지 않는 크기 입니다.<br/>크기를 조정해주세요.';
         }

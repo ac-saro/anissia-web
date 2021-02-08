@@ -14,7 +14,7 @@
     </table>
 
     <table class="list">
-      <tr v-for="(node, i) in animeList" :key="node">
+      <tr v-for="node in animeList" :key="node">
         <td class="time">
           {{node.time}}
         </td>
@@ -30,10 +30,6 @@
             <span class="x-tag" v-if="node.website"><a :href="node.website" target="_blank" class="fas fa-home"></a></span>
             <span class="x-tag" v-if="node.captionCount"><span class="fas fa-closed-captioning">&nbsp;{{node.captionCount}}</span></span>
           </div>
-        </td>
-        <td class="tool" v-if="isPureWeek">
-          <div v-if="node.status == 'ON'" class="turn-off" @click="updateStatus(i, 'OFF')">결방</div>
-          <div v-else class="turn-on" @click="updateStatus(i, 'ON')">방영</div>
         </td>
       </tr>
     </table>
@@ -51,10 +47,6 @@
 #admin-schedule table.list td { line-height: 1.8; border-bottom-width: 1px; font-size:15px; padding:8px; }
 #admin-schedule table.list td.time {  width: 100px; text-align: center }
 #admin-schedule table.list td.genres { width: 150px; }
-#admin-schedule table.list td.tool { width: 50px; text-align: center }
-#admin-schedule table.list td.tool > div { cursor:pointer }
-#admin-schedule table.list td.tool > div.turn-on { color:#7589c1 }
-#admin-schedule table.list td.tool > div.turn-off { color:#b55f5f }
 
 @media (max-width: 800px) {
   #admin-schedule table.list td.genres { display: none }
@@ -86,14 +78,6 @@ import AdminService from "@/service/AdminService";
     }
   },
   methods: {
-    updateStatus(index: number, status: string) {
-      const node = this.animeList[index];
-      switch(status) {
-        case 'ON' : if (confirm(`${node.subject} 를\n[방영]으로 변경하시겠습니까?`)) { break; } else { return; }
-        case 'OFF' : if (confirm(`${node.subject} 를\n[결방]으로 변경하시겠습니까?`)) { break; } else { return; }
-        default : return;
-      }
-    },
     selectAnimeList(week: number): void {
       AdminService.getSchedule(week.toString(), (data) => {
         data.forEach(e => e.info = AnimeService.toInfo(e));
