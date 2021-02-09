@@ -1,7 +1,12 @@
 <template>
   <div class="color-picker-closer-area" @click="closerColorPicker">
     <div class="basic-layout">
-      <div id="schedule" class="basic-layout-mono">
+      <div class="basic-layout-right">
+        <div class="base-mat">
+          <AnimeRank />
+        </div>
+      </div>
+      <div id="schedule" class="basic-layout-main">
         <div class="base-mat">
 
           <!-- 애니편성표 모바일 [시작] -->
@@ -221,10 +226,12 @@ import Nabi from "@/utils/nabi";
 import ColorPicker from "vanilla-picker"
 import {DateFormat} from "@/utils/nabi/DateFormat";
 import AnimeService from "@/service/AnimeService";
+import AnimeRank from "@/components/AnimeRank.vue";
 
 @Options({
   components: {
-    //Color
+    //Color,
+    AnimeRank
   },
   computed: {
     // -- HTML -----------------------------------------------------------------------------------------

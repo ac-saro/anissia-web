@@ -84,12 +84,8 @@ export default class AnimeRank extends Vue {
 .anime-rank .rank-table td.diff .diff-new { font-size:16px; }
 .anime-rank .rank-table tr.empty-list { opacity: .3 }
 
-@media (max-width: 800px) {
-  .anime-rank .rank-table tr:nth-child( n + 16 ) { display: none }
-}
-
 @media (max-width: 1023px) {
-  .anime-rank .rank-table tr:nth-child( n + 6 ).empty-list { display: none }
+  .anime-rank .rank-table tr:nth-child( n + 11 ) { display: none }
 }
 
 html.light .anime-rank .rank-table td.diff .diff-up { color:#d45e5e }

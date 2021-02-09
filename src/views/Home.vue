@@ -10,20 +10,14 @@
         <div class="base-mat">
 
           <div class="doc-title">임시알림</div>
-          <div style="font-size:14px; padding:8px 12px 30px; line-height: 1.8">
+          <div style="font-size:14px; padding:8px 12px 12px; line-height: 1.8;">
             리뉴얼 이후, 계정을 분실하신 회원분들이 많아
             <router-link to="/recover/email">아이디찾기 (임시)</router-link>,
             <router-link to="/recover">암호분실</router-link>
             메뉴를 오픈하였습니다.<br/>
-            <b>제작중 (우선순위순)</b><br/>
-            - 게시판 : 열람, 수정, 삭제<br/>
-            - 게시판-댓글 : 열람, 수정, 삭제<br/>
-            -------- 여기까지 완성후 임시 알림 삭제 --------<br/>
-            - 권한신청: 사용자, 어드민<br/>
-            - 회원정보: 열람, 수정
           </div>
 
-          <div class="home-anime-rank">
+          <div class="home-anime-rank active-panel-wrap">
             <AnimeRank mode="static"/>
           </div>
 
@@ -33,11 +27,11 @@
           </div>
 
           <div class="recent">
-            <div class="recent-unit">
+            <div class="recent-unit active-panel-wrap">
               <div class="doc-title"><router-link to="/notice">공지사항</router-link></div>
               <BoardRecent ticker="notice" :list="noticeList"/>
             </div>
-            <div class="recent-unit">
+            <div class="recent-unit active-panel-wrap">
               <div class="doc-title"><router-link to="/inquiry">문의 게시판</router-link></div>
               <BoardRecent ticker="inquiry" :list="inquiryList"/>
             </div>
@@ -90,10 +84,18 @@ export default class Home extends Vue {
 </script>
 
 <style>
-#home .base-mat { padding: 8px; }
+#home .base-mat { padding: 8px 8px 0; }
 #home .doc-title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
 #home .doc-title a { text-decoration: none }
 #home .active-panel-wrap { padding-bottom: 16px; }
+
+@media (max-width:800px) {
+  #home .active-panel tr:nth-child( n + 6 ) { display: none }
+}
+
+@media (max-width: 1023px) {
+  #home .active-panel tr:nth-child( n + 11 ) { display: none }
+}
 
 @media (min-width: 1024px) {
   #home .home-anime-rank { display: none; }

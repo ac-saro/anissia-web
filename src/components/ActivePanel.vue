@@ -15,7 +15,7 @@
         </tr>
       </table>
     </div>
-    <div>
+    <div v-if="admin">
       <pagination :total="list.totalPages" :index="page" :unit="10" :href="hrefPage" :key="$route.fullPath"/>
     </div>
   </div>

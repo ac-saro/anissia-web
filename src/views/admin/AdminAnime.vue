@@ -114,7 +114,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="anime-del-wait">
+    <div v-else-if="list.content.length > 0" class="anime-del-wait">
       삭제 대기 애니메이션은 90일 후 완전 삭제됩니다. (현재 구현되지않음)
     </div>
 
