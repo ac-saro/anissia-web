@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Layout from "@/views/Layout.vue";
 import P404 from "@/views/404.vue";
 import P301 from "@/views/301.vue";
-import Lost from "@/views/Lost.vue";
+import Recover from "@/views/Recover.vue";
 import Register from "@/views/Register.vue";
 import Login from "@/views/Login.vue";
 import Inquiry from "@/views/Inquiry.vue";
@@ -45,7 +45,8 @@ const router = createRouter({
           { path: '/login', component: Login },
           { path: '/register/:token', component: Register },
           { path: '/register', component: Register },
-          { path: '/lost', component: Lost },
+          { path: '/recover', component: Recover },
+          { path: '/recover/:token', component: Recover },
           { path: '/account', component: Account },
           {
             path: '/admin', component: AdminLayout,

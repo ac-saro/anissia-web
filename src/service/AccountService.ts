@@ -8,7 +8,6 @@ export default class AccountService {
       callback(new Result('FAIL', '암호가 서로 일치하지 않습니다.'));
       return;
     }
-
     fetch('/api/account/register', {
       ...Ajax.post, ...Ajax.json, body: JSON.stringify({email, password, name}),
     }).then((e) => e.json()).then((data) => callback(Result.assign(data)));
@@ -18,6 +17,37 @@ export default class AccountService {
     fetch('/api/account/register', {
       ...Ajax.put, ...Ajax.json, body: JSON.stringify({absoluteToken}),
     }).then((e) => e.json()).then((data) => callback(Result.assign(data)));
+  }
+
+  public static recover(email: string, name: string, callback: (result: Result<any>) => void): void {
+    fetch('/api/account/recover', {
+      ...Ajax.post, ...Ajax.json, body: JSON.stringify({email, name}),
+    }).then((e) => e.json()).then((data) => callback(Result.assign(data)));
+  }
+
+  public static recoverValidation(absoluteToken: string, callback: (result: Result<any>) => void): void {
+    fetch('/api/account/recover', {
+      ...Ajax.put, ...Ajax.json, body: JSON.stringify({absoluteToken}),
+    }).then((e) => e.json()).then((data) => callback(Result.assign(data)));
+  }
+
+  public static recoverPassword(absoluteToken: string, password: string, passwordConfirm: string, callback: (result: Result<any>) => void): void {
+    if (password !== passwordConfirm) {
+      callback(new Result('FAIL', '암호가 서로 일치하지 않습니다.'));
+      return;
+    }
+    fetch('/api/account/recover/password', {
+      ...Ajax.put, ...Ajax.json, body: JSON.stringify({absoluteToken, password}),
+    }).then((e) => e.json()).then((data) => callback(Result.assign(data)));
+  }
+
+  public static recoverEmail(name: string, callback: (result: Result<any>) => void): void {
+    if (name == '') {
+      callback(new Result('FAIL', '닉네임을 입력해주세요.'));
+      return;
+    }
+    fetch(`/api/account/recover/email/${name}`)
+        .then((e) => e.json()).then((data) => callback(Result.assign(data)));
   }
 
 }

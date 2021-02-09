@@ -15,7 +15,8 @@
           </div>
           <div class="input-unit"><input type="button" value="로그인" @click="login()" /></div>
           <div class="account">
-            <div><router-link to="/lost">&gt; 암호를 분실하였습니다.</router-link></div>
+            <div><router-link to="/recover">&gt; 암호를 분실하였습니다.</router-link></div>
+            <div><router-link to="/recover/email">&gt; 아이디를 분실하였습니다.</router-link></div>
             <div><router-link to="/register">&gt; 계정을 생성합니다.</router-link></div>
           </div>
         </div>
