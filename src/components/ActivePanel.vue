@@ -43,7 +43,7 @@ import Nabi from "@/utils/nabi";
   methods: {
     load() {
       this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
-      ActivePanelService.getList(this.page, list => this.list = list);
+      ActivePanelService.getList(this.page, this.admin ? 'admin' : 'public', list => this.list = list);
     },
     hrefPage(index: number) {
       return Nabi.address().deleteParameter('animeNo').setParameter('page', index + 1).href;
@@ -80,7 +80,7 @@ export default class ActivePanel extends Vue {
 .active-panel td { padding:6px; border-bottom-width: 1px }
 .active-panel td.node-text { line-height: 2 }
 .active-panel td.node-date { width:120px; text-align: right }
-.active-panel tr.closed td { opacity: .6 }
+.active-panel tr.closed td { opacity: .7 }
 .active-panel .active-panel-write input { width:100%; line-height: 40px; border-bottom-width: 1px; padding:0 8px }
 
 @media (max-width: 500px) {

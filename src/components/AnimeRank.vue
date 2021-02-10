@@ -94,9 +94,9 @@ html.light .anime-rank .rank-table td.diff .diff-new { color:#e03f3f }
 html.light .anime-rank .rank-tab td div.select { border-color: #276998 }
 html.light .anime-rank a { color:#333 }
 
-html.dark .anime-rank .rank-table td.diff .diff-up { color:#753333 }
-html.dark .anime-rank .rank-table td.diff .diff-down { color:#2a3f67 }
-html.dark .anime-rank .rank-table td.diff .diff-new { color:#a72a2a }
+html.dark .anime-rank .rank-table td.diff .diff-up { color:#651f1f }
+html.dark .anime-rank .rank-table td.diff .diff-down { color:#2a3c6f }
+html.dark .anime-rank .rank-table td.diff .diff-new { color:#ca3838 }
 html.dark .anime-rank .rank-tab td div.select { border-color: #276998 }
 html.dark .anime-rank a { color:#aaa }
 </style>

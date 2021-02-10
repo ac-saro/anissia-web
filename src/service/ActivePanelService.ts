@@ -6,8 +6,8 @@ import Nabi from "@/utils/nabi";
 
 export default class ActivePanelService {
 
-  public static getList(page: number, callback: (data: PageData<any>) => void): void {
-    fetch(`/api/active-panel/list/${page}`).then(e => e.json()).then(data => {
+  public static getList(page: number, mode: string, callback: (data: PageData<any>) => void): void {
+    fetch(`/api/active-panel/list/${page}?mode=${mode}`).then(e => e.json()).then(data => {
       data.content.forEach((e: any) => {
         e.regDtText = AnissiaUtil.ymdOrDynamicAgo(e.regDt);
         if (e.code == 'TEXT') {

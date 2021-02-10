@@ -286,7 +286,7 @@ html.light .search-box input[type=button] { border:0; color:#fff; background: #5
 
   /* dark mode */
 html.dark { background: #000; }
-html.dark .ml a { color:#48659a }
+html.dark .ml a { color:#9aacc7 }
 html.dark,
 html.dark .ml .a-text-style a { color:#999; text-decoration: none }
 html.dark .ml .x-tag { border-color:#222; }

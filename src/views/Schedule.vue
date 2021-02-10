@@ -33,19 +33,23 @@
               <div class="info">제작 : <a href="https://gs.saro.me" target="_blank">가리사니</a></div>
             </div>
             <div class="html-gen">
-              <div class="tool-preview">
-                <div class="preview-error" v-if="previewError != ''" v-html="previewError"></div>
-                <div v-else>
-                  <iframe v-if="mode === 'html'" class="preview-border" src="/schedule/2015" ref="html" :width="htmlWidth" :height="htmlHeight" @load="this.colorModeHtml(this.colorScheme)"></iframe>
-                  <div v-else-if="mode === 'img'" class="preview-img preview-border" :style="{width: `${imgWidth}px`}">
-                    <div class="img-preview" ondragstart="return false" onselectstart="return false">
-                      <div class="img-title" :style="{background: `#${imgTitleBg}`, color: `#${imgTitle}`}">애니편성표</div>
-                      <div class="img-ymd" :style="{background: `#${imgYmdBg}`, color: `#${imgYmd}`}">{{imgDataYmd}}</div>
-                      <div class="img-node" :style="{background: `#${imgListBg}`, color: `#${imgList}`}" v-for="node in imgDataList" :key="node">{{node}}</div>
+              <table class="tool-preview">
+                <tr>
+                  <td class="tool-main">
+                    <div class="preview-error" v-if="previewError != ''" v-html="previewError"></div>
+                    <div v-else>
+                      <iframe v-if="mode === 'html'" class="preview-border" src="/schedule/2015" ref="html" :width="htmlWidth" :height="htmlHeight" @load="this.colorModeHtml(this.colorScheme)"></iframe>
+                      <div v-else-if="mode === 'img'" class="preview-img preview-border" :style="{width: `${imgWidth}px`}">
+                        <div class="img-preview" ondragstart="return false" onselectstart="return false">
+                          <div class="img-title" :style="{background: `#${imgTitleBg}`, color: `#${imgTitle}`}">애니편성표</div>
+                          <div class="img-ymd" :style="{background: `#${imgYmdBg}`, color: `#${imgYmd}`}">{{imgDataYmd}}</div>
+                          <div class="img-node" :style="{background: `#${imgListBg}`, color: `#${imgList}`}" v-for="node in imgDataList" :key="node">{{node}}</div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
+                  </td>
+                </tr>
+              </table>
               <div class="tool">
                 <div class="tool-title">소스타입</div>
                 <div><label title="일반적으로 html 이 가능한 모든 사이트에 삽입 가능"> <input type="radio" name="schedule-mode" v-model="mode" value="html" /> HTML</label></div>
@@ -158,10 +162,10 @@
             <table class="schedule-table schedule-application">
               <!-- ios -->
               <tr>
-                <th><img src="@/assets/page/schedule-th-ios.svg" title="ios" class="pmark" /></th>
+                <th class="td-icon"><img src="@/assets/page/schedule-th-ios.svg" title="ios" class="pmark" /></th>
                 <td><a href="https://apps.apple.com/kr/app/aeni-pyeonseongpyo/id917536862" target="_blank">애니 편성표</a></td>
-                <th>Young Ho Kim</th>
-                <td>2014년</td>
+                <th class="td-author">Young Ho Kim</th>
+                <td class="td-date">2014년</td>
               </tr>
               <!-- android -->
               <tr>
@@ -197,8 +201,8 @@
           <div class="doc-desc">
             <table class="schedule-table schedule-application">
               <tr>
-                <th rowspan="3"><img src="@/assets/page/schedule-th-api.svg" title="API" class="pmark" /></th>
-                <td><a href="https://github.com/anissia-net/document/blob/main/api_anime_schdule.md" target="_blank">API</a></td>
+                <th rowspan="3" class="td-icon"><img src="@/assets/page/schedule-th-api.svg" title="API" class="pmark" /></th>
+                <td class="td-type"><a href="https://github.com/anissia-net/document/blob/main/api_anime_schdule.md" target="_blank">API</a></td>
                 <th>3rd party 애니편성표 앱 제작을 위한 API 가이드</th>
               </tr>
               <tr>
@@ -371,17 +375,23 @@ export default class Schedule extends Vue {
 #schedule .schedule-docs-header .info { text-align: right }
 
 #schedule .icon i { margin-right:4px; }
-#schedule table.schedule-table { margin:4px 0 0; }
+#schedule table.schedule-table { margin:4px 0 0; width:100%; font-size:14px; }
+#schedule table.schedule-table .td-icon { width:60px; }
+#schedule table.schedule-table .td-author { width:110px; }
+#schedule table.schedule-table .td-date { width:64px; }
+#schedule table.schedule-table .td-type { width:64px; }
+
 #schedule table.schedule-table th, #schedule table.schedule-table td { padding:4px 12px; font-weight: normal }
-#schedule table.schedule-application .pmark { width:80px; height: 80px; vertical-align: middle; margin:20px; }
+#schedule table.schedule-application .pmark { width:32px; height: 32px; vertical-align: middle; margin:10px; }
 #schedule table.schedule-application td,
 #schedule table.schedule-application th { padding:8px 12px; border-width: 1px; }
 
 #schedule .html-gen { overflow: auto; }
-#schedule .html-gen .tool-preview { float:left; padding:16px; text-align: center; box-sizing: border-box; width:calc(100% - 228px); }
+#schedule .html-gen .tool-preview { float:left;  margin-top:12px; min-height: 693px; width:calc(100% - 228px); }
+#schedule .html-gen .tool-preview td.tool-main { padding:16px; text-align: center; }
 #schedule .html-gen .tool-preview .preview-border {  border:0; max-width:100% !important; max-height:100% !important; vertical-align: middle;  }
 #schedule .html-gen .tool-preview .preview-img { display: inline-block }
-#schedule .html-gen .tool-preview .preview-error { margin:220px 0 0; font-weight: bold; font-size: 32px; line-height: 1.8 }
+#schedule .html-gen .tool-preview .preview-error { font-weight: bold; font-size: 32px; line-height: 1.8 }
 #schedule .html-gen .tool { padding:16px 8px; margin-left:calc(100% - 228px); }
 #schedule .html-gen .tool .tool-title { color: #276998; padding: 6px 0 8px; text-align: center; font-weight: bold; font-size:14px; }
 #schedule .html-gen .tool hr { border: 0; border-bottom: 1px solid #276998; padding:0; margin:12px 0 8px; opacity: .2 }
@@ -411,13 +421,15 @@ export default class Schedule extends Vue {
   #schedule .pc-hide { display: none; }
 }
 
-/*html.light #schedule .html-gen .tool-preview .preview-border { border: 1px dashed #ddd; }*/
+
 html.light #schedule .html-gen input, html.light #schedule .html-gen textarea { border:1px solid #ddd; background: #fff; color:#333 }
 html.light #schedule .html-gen .tool .line .color:not(.blank) { border:1px solid #ddd }
+html.light #schedule .html-gen .tool-preview { background: #eee }
 
-/*html.dark #schedule .html-gen .tool-preview .preview-border { border: 1px dashed #333; }*/
+
 html.dark #schedule .html-gen input, html.dark #schedule .html-gen textarea { border:1px solid #333; background: #000; color:#aaa }
 html.dark #schedule .html-gen .tool .line .color:not(.blank) { border:1px solid #222 }
+html.dark #schedule .html-gen .tool-preview { background: #12151b }
 
 html.dark #schedule table.schedule-application .pmark { opacity: .8 }
 
