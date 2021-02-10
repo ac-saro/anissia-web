@@ -79,8 +79,7 @@ export default class AnimeService {
     return e;
   }
 
-  public static toInfo(anime: any): string[] {
-    const info: string[] = [];
+  public static bindInfo(anime: any): any {
     anime.info = [anime.period];
     anime.weekText = AnissiaUtil.toKoWeek(anime.week);
     anime.timeText = anime.pureWeek ? AnissiaUtil.toKo12Time(anime.time) : '';
@@ -93,11 +92,15 @@ export default class AnimeService {
     }
     switch (anime.status) {
       case 'ON': anime.statusText = anime.pureWeek ? '방영중' : `신작/기타`; break;
-      case 'OFF': anime.statusText = '결방/휴방'; break;
+      case 'OFF': anime.statusText = '결방'; break;
       case 'END': anime.statusText = '완결'; break;
       case 'DEL': anime.statusText = '삭제대기'; break;
       case 'REQ': anime.statusText = '등록요청'; break;
     }
-    return anime.info.filter((e: string) => e);
+    return anime;
+  }
+
+  public static toInfo(anime: any): string[] {
+    return AnimeService.bindInfo(anime).info.filter((e: string) => e);
   }
 }

@@ -8,7 +8,17 @@
         <tr v-for="node in list.content" :key="node.apNo" :class="({'closed': !node.published})">
           <td class="node-text">
             <span v-if="node.code == 'TEXT'" v-html="node.html"></span>
-            <span v-else-if="node.code == 'ANIME'" v-html="node.html"></span>
+            <span v-else-if="node.code == 'ANIME'">
+              <div>
+                <span v-html="node.html"></span>
+                <span v-if="node.more == 0" @click="node.more = 1">&nbsp;-&nbsp;<span class="node-more-btn">변경점</span></span>
+              </div>
+              <div v-if="node.more == 1" class="node-more-info">
+                <table>
+                  <tr v-for="info in node.moreInfo" :key="info.o"><td>{{info.t}}</td><td>{{info.o}}</td><td>{{info.n}}</td></tr>
+                </table>
+              </div>
+            </span>
             <span v-else>{{node.code}}는 지원하지 않는 활동 패널 코드입니다.</span>
           </td>
           <td class="node-date">{{node.regDtText}}</td>
@@ -82,6 +92,12 @@ export default class ActivePanel extends Vue {
 .active-panel td.node-date { width:120px; text-align: right }
 .active-panel tr.closed td { opacity: .7 }
 .active-panel .active-panel-write input { width:100%; line-height: 40px; border-bottom-width: 1px; padding:0 8px }
+.active-panel .node-more-btn { font-weight: bold; cursor: pointer }
+.active-panel .node-more-info table { margin-top:4px; }
+.active-panel .node-more-info td { border-width: 1px; text-align: center; padding:6px 8px; }
+.active-panel .node-more-info td:first-child,
+.active-panel .node-more-info td:last-child { font-weight: bold }
+
 
 @media (max-width: 500px) {
   .active-panel table.active-panel-table td.node-date { display: none }

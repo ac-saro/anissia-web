@@ -3,6 +3,7 @@ import Result from "@/models/Result";
 import AnissiaUtil from "@/utils/AnissiaUtil";
 import Ajax from "@/utils/Ajax";
 import Nabi from "@/utils/nabi";
+import AnimeService from "@/service/AnimeService";
 
 export default class ActivePanelService {
 
@@ -15,8 +16,17 @@ export default class ActivePanelService {
         } else if (e.code == 'ANIME') {
           e.html = ActivePanelService.toHtml(e.data1)
           if (e.status == 'U') {
-            e.data2 = eval(`(${e.data2})`);
-            e.data3 = eval(`(${e.data3})`);
+            const d2 = AnimeService.bindInfo(eval(`(${e.data2})`));
+            const d3 = AnimeService.bindInfo(eval(`(${e.data3})`));
+            e.moreInfo = [];
+            const ids = [['subject', '제목'], ['statusText', '상태'], ['weekText', '요일'], ['time', '시간'], ['genres', '장르'], ['startDate', '시작일'], ['endDate', '종료일'], ['website', '웹사이트']]
+            for (const id of ids) {
+              const name = id[0];
+              if (d2[name] != d3[name]) {
+                e.moreInfo.push({t: id[1], o: d2[name] || '-', n: d3[name] || '-'});
+              }
+            }
+            if (e.moreInfo.length > 0) { e.more = 0; }
           }
         }
       });
