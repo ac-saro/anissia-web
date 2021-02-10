@@ -9,14 +9,6 @@
       <div id="home" class="basic-layout-main">
         <div class="base-mat">
 
-          <div class="doc-title">임시알림</div>
-          <div style="font-size:14px; padding:8px 12px 12px; line-height: 1.8;">
-            리뉴얼 이후, 계정을 분실하신 회원분들이 많아
-            <router-link to="/recover/email">아이디찾기 (임시)</router-link>,
-            <router-link to="/recover">암호분실</router-link>
-            메뉴를 오픈하였습니다.<br/>
-          </div>
-
           <div class="home-anime-rank active-panel-wrap">
             <AnimeRank mode="static"/>
           </div>
