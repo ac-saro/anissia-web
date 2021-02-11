@@ -18,7 +18,7 @@
         <table>
           <tr>
             <th>제목</th>
-            <td><input type="text" class="std-inp-txt" v-model="anime.subject" placeholder="애니메이션 제목" /></td>
+            <td><input type="text" v-model="anime.subject" placeholder="애니메이션 제목" /></td>
           </tr>
           <tr>
             <th>장르</th>
@@ -60,7 +60,7 @@
           <tr v-if="isPureWeek(anime.week)">
             <th>시간</th>
             <td>
-              <input class="std-inp-txt" type="time" v-model="anime.time"/>
+              <input type="time" v-model="anime.time"/>
             </td>
           </tr>
           <tr>
@@ -77,9 +77,9 @@
                 <label for="anime-sds-na">N/A</label>
               </div>
               <div v-if="anime.sds != 'N'" class="anime-date">
-                <span><input type="text" v-model="anime.sd1" maxlength="4"/> 년 </span>
-                <span v-if="anime.sds.startsWith('YM')"><input type="text" v-model="anime.sd2" maxlength="2"/> 월 </span>
-                <span v-if="anime.sds == 'YMD'"><input type="text" v-model="anime.sd3" maxlength="2"/> 일</span>
+                <span><input type="text" inputmode="numeric" v-model="anime.sd1" maxlength="4"/> 년 </span>
+                <span v-if="anime.sds.startsWith('YM')"><input type="text" inputmode="numeric" v-model="anime.sd2" maxlength="2"/> 월 </span>
+                <span v-if="anime.sds == 'YMD'"><input type="text" inputmode="numeric" v-model="anime.sd3" maxlength="2"/> 일</span>
               </div>
             </td>
           </tr>
@@ -97,15 +97,15 @@
                 <label for="anime-eds-na">N/A</label>
               </div>
               <div v-if="anime.eds != 'N'" class="anime-date">
-                <span><input type="text" v-model="anime.ed1" maxlength="4"/> 년 </span>
-                <span v-if="anime.eds.startsWith('YM')"><input type="text" v-model="anime.ed2" maxlength="2"/> 월 </span>
-                <span v-if="anime.eds == 'YMD'"><input type="text" v-model="anime.ed3" maxlength="2"/> 일</span>
+                <span><input type="text" inputmode="numeric" v-model="anime.ed1" maxlength="4"/> 년 </span>
+                <span v-if="anime.eds.startsWith('YM')"><input type="text" inputmode="numeric" v-model="anime.ed2" maxlength="2"/> 월 </span>
+                <span v-if="anime.eds == 'YMD'"><input type="text" inputmode="numeric" v-model="anime.ed3" maxlength="2"/> 일</span>
               </div>
             </td>
           </tr>
           <tr>
             <th>웹사이트</th>
-            <td><input type="text" class="std-inp-txt" v-model="anime.website" placeholder="웹사이트" /></td>
+            <td><input type="text" v-model="anime.website" placeholder="웹사이트" /></td>
           </tr>
           <tr v-if="!anime.isNew">
             <th>자막참여자</th>
@@ -197,7 +197,9 @@
 #admin-anime .view .title { line-height: 2; font-size:20px; font-weight: bold; padding:8px; }
 #admin-anime .view input { border:0; height:40px; }
 #admin-anime .view input[type=button] { height: 28px; }
-#admin-anime .view input[type=text] { width:100% }
+#admin-anime .view input[type=text] { width:100%; }
+#admin-anime .view input[type=text],
+#admin-anime .view input[type=time] { padding:0 8px; }
 #admin-anime .view .input-label {}
 #admin-anime .view .input-label label {
   padding:8px; margin:4px 8px 4px 0; display: inline-block; opacity: .6;
@@ -212,15 +214,15 @@
 #admin-anime .view table td .genre-box { max-width:480px; }
 #admin-anime .view table td .x-tag-box { padding:4px 0; display: inline-block; cursor: pointer }
 #admin-anime .view table td .x-tag { font-size:14px !important; padding: 6px 8px; margin: 0 8px 0 0; }
-#admin-anime .view td.captions span { line-height: 40px; margin-right: 20px; }
+#admin-anime .view td.captions span { font-size:15px; line-height: 40px; margin-right: 20px; }
 #admin-anime .view .edit-btn { overflow: auto; padding:8px 0; }
 #admin-anime .view .edit-btn input { padding: 0px 12px; }
 #admin-anime .view .edit-btn .edit-btn-delete { float:left; }
 #admin-anime .view .edit-btn .edit-btn-save { text-align: right }
 #admin-anime .view .anime-date { padding:4px 0 }
 #admin-anime .view .anime-date input { height: 28px; text-align: center }
-#admin-anime .view .anime-date > span:first-child input { width:50px; }
-#admin-anime .view .anime-date > span:not(:first-child) input { width:30px; }
+#admin-anime .view .anime-date > span:first-child input { width:56px; }
+#admin-anime .view .anime-date > span:not(:first-child) input { width:34px; }
 
 #admin-anime .search { padding: 40px 40px; }
 #admin-anime .search .search-box { }
