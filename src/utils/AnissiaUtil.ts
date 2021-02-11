@@ -59,11 +59,11 @@ export default class AnissiaUtil {
       const ed = endDate.replace(/-99/g, '');
       let rv = '';
       if (sd && ed) { // exist both
-        rv = sd === ed ? sd : `${sd} ~ ${ed}`;
+        rv = sd === ed ? sd : `${sd}  ~  ${ed}`;
       } else { // exist only one side
         rv = sd + ed;
         if (AnissiaUtil.isPureWeek(Number(week)) && sd) { // is day and exsit only start date
-          rv += ' ~ 방영중';
+          rv += '  ~  방영중';
         }
       }
       // change date format : yyyy-MM-dd -> yyyy년 MM월 dd일
@@ -83,6 +83,9 @@ export default class AnissiaUtil {
     const date = Nabi.dateFormat().parseIsoDate(isoDate).toDate();
     let time = Math.floor(date.getTime() / 1000);
     let now = Math.floor(new Date().getTime() / 1000);
+    if (time > now) {
+      return '방금전';
+    }
     if ((time + 60) > now) { // in 60 seconds
       return `${now - time}초 전`;
     }

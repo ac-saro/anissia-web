@@ -66,13 +66,41 @@
           <tr>
             <th>시작일</th>
             <td>
-              <input class="std-inp-txt" type="date" v-model="anime.startDate" /> <input type="button"  @click="anime.startDate = ''" value="지우기"/>
+              <div class="input-label">
+                <input name="anime-sds" id="anime-sds-ymd" type="radio" value="YMD" v-model="anime.sds"/>
+                <label for="anime-sds-ymd">YMD</label>
+                <input name="anime-sds" id="anime-sds-ym" type="radio" value="YM" v-model="anime.sds"/>
+                <label for="anime-sds-ym">YM</label>
+                <input name="anime-sds" id="anime-sds-y" type="radio" value="Y" v-model="anime.sds"/>
+                <label for="anime-sds-y">Y</label>
+                <input name="anime-sds" id="anime-sds-na" type="radio" value="N" v-model="anime.sds"/>
+                <label for="anime-sds-na">N/A</label>
+              </div>
+              <div v-if="anime.sds != 'N'" class="anime-date">
+                <span><input type="text" v-model="anime.sd1" maxlength="4"/> 년 </span>
+                <span v-if="anime.sds.startsWith('YM')"><input type="text" v-model="anime.sd2" maxlength="2"/> 월 </span>
+                <span v-if="anime.sds == 'YMD'"><input type="text" v-model="anime.sd3" maxlength="2"/> 일</span>
+              </div>
             </td>
           </tr>
           <tr>
             <th>종료일</th>
             <td>
-              <input class="std-inp-txt" type="date" v-model="anime.endDate" /> <input type="button" @click="anime.endDate = ''" value="지우기"/>
+              <div class="input-label">
+                <input name="anime-eds" id="anime-eds-ymd" type="radio" value="YMD" v-model="anime.eds"/>
+                <label for="anime-eds-ymd">YMD</label>
+                <input name="anime-eds" id="anime-eds-ym" type="radio" value="YM" v-model="anime.eds"/>
+                <label for="anime-eds-ym">YM</label>
+                <input name="anime-eds" id="anime-eds-y" type="radio" value="Y" v-model="anime.eds"/>
+                <label for="anime-eds-y">Y</label>
+                <input name="anime-eds" id="anime-eds-na" type="radio" value="N" v-model="anime.eds"/>
+                <label for="anime-eds-na">N/A</label>
+              </div>
+              <div v-if="anime.eds != 'N'" class="anime-date">
+                <span><input type="text" v-model="anime.ed1" maxlength="4"/> 년 </span>
+                <span v-if="anime.eds.startsWith('YM')"><input type="text" v-model="anime.ed2" maxlength="2"/> 월 </span>
+                <span v-if="anime.eds == 'YMD'"><input type="text" v-model="anime.ed3" maxlength="2"/> 일</span>
+              </div>
             </td>
           </tr>
           <tr>
@@ -189,6 +217,9 @@
 #admin-anime .view .edit-btn input { padding: 0px 12px; }
 #admin-anime .view .edit-btn .edit-btn-delete { float:left; }
 #admin-anime .view .edit-btn .edit-btn-save { text-align: right }
+#admin-anime .view .anime-date input { height: 28px; text-align: center }
+#admin-anime .view .anime-date > span:first-child input { width:50px; }
+#admin-anime .view .anime-date > span:not(:first-child) input { width:30px; }
 
 #admin-anime .search { padding: 40px 40px; }
 #admin-anime .search .search-box { }
@@ -258,7 +289,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       AnimeService.getGenres(genres => this.genres = genres)
     },
     loadForce() {
-      this.pageQueryStatus = '';
+      this.pageQueryStatus = 'reload';
       this.load();
     },
     load() {
@@ -278,6 +309,8 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       if (animeNo > 0) {
         AnimeService.getAnime(animeNo, anime => {
           AnimeService.toInfo(anime);
+          this.bindAnimeEditDate(anime, 'sd', 'startDate');
+          this.bindAnimeEditDate(anime, 'ed', 'endDate');
           this.anime = anime;
         });
       } else {
@@ -300,6 +333,49 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
         }
       }
     },
+    // before edit
+    bindAnimeEditDate(anime: any, cd: string, name: string) {
+      const dt = anime[name];
+      const dateType = `${cd}s`;
+      const date1 = `${cd}1`;
+      const date2 = `${cd}2`;
+      const date3 = `${cd}3`;
+      if ((/[\d]{4}-[\d]{2}-[\d]{2}/).test(dt)) {
+        if (dt.endsWith('-99-99')) {
+          anime[dateType] = 'Y';
+        } else if (dt.endsWith('-99')) {
+          anime[dateType] = 'YM';
+        } else {
+          anime[dateType] = 'YMD';
+        }
+        switch (anime[dateType]) {
+          case 'YMD' : anime[date3] = dt.substring(8, 10); /* falls through */
+          case 'YM' : anime[date2] = dt.substring(5, 7); /* falls through */
+          case 'Y' : anime[date1] = dt.substring(0, 4);
+        }
+      } else {
+        anime[dateType] = 'N';
+        anime[date1] = anime[date2] = anime[date3] = '';
+      }
+      return anime;
+    },
+    // before submit
+    bindAnimeSubmitDate(anime: any, cd: string, name: string) {
+      let date = '';
+      const dateType = anime[`${cd}s`];
+      const y = anime[`${cd}1`];
+      let m = anime[`${cd}2`];
+      let d = anime[`${cd}3`];
+      if ((/^[1-9]$/).test(m)) { m = '0' + m; }
+      if ((/^[1-9]$/).test(d)) { d = '0' + d; }
+      switch (dateType) {
+        case 'YMD': anime[name] = `${y}-${m}-${d}`; break;
+        case 'YM': anime[name] = `${y}-${m}-99`; break;
+        case 'Y': anime[name] = `${y}-99-99`; break;
+        default: anime[name] = '';
+      }
+      return anime;
+    },
     addCaption() {
       AdminService.addCaption(this.anime.animeNo, result => {
         if (result.st == 'OK') {
@@ -312,6 +388,8 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
     },
     saveAnime() {
       const anime = this.anime;
+      this.bindAnimeSubmitDate(anime, 'sd', 'startDate');
+      this.bindAnimeSubmitDate(anime, 'ed', 'endDate');
       if (confirm(`${anime.subject}을(를) ${anime.animeNo != 0 ? '수정' : '추가'} 하시겠습니까?\n임의조작시 권한박탈의 사유가됩니다.`)) {
         if (!anime.isPureWeek) {
           anime.time = '00:00';
@@ -420,14 +498,16 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       var anime = {
         animeNo:0,
         isNew:true,
-        status:"ON",
-        week:"0",
-        time:"00:00",
-        subject:"",
-        genres:"",
-        startDate:"",
-        endDate:"",
-        website:"",
+        status:'ON',
+        week:'0',
+        time:'00:00',
+        subject:'',
+        genres:'',
+        startDate:'',
+        endDate:'',
+        website:'',
+        sds:'N',
+        eds:'N',
         captions:[]
       };
       AnimeService.toInfo(anime);

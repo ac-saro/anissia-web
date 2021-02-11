@@ -11,7 +11,7 @@ export default class AnimeService {
     fetch(`/api/anime/list/${page}?q=${encodeURIComponent(query)}`).then(e => e.json()).then(data => callback(PageData.cast(data, (e: any) => this.norAnime(e))));
   }
 
-  public static getAnime(animeNo: number, callback: (data: PageData<any>) => void): void {
+  public static getAnime(animeNo: number, callback: (data: any) => void): void {
     fetch(`/api/anime/animeNo/${animeNo}`).then(e => e.json()).then(anime => callback(this.norAnime(anime)));
   }
 
@@ -71,7 +71,7 @@ export default class AnimeService {
     const week = weekParam || e.week;
     e.pureWeek = AnissiaUtil.isPureWeek(week);
     e.subjectPrefix = AnissiaUtil.getSubjectPrefix(week, e.status, e.startDate, e.endDate);
-    e.time = e.time != '' ? e.time.replace('-99-99', '') : 'N/A';
+    e.time = e.time != '' ? e.time.replace(/-99/g, '') : 'N/A';
     e.period = AnissiaUtil.animePeriod(week, e.startDate, e.endDate);
     if (e.captions && e.captions.length) {
       e.captions = e.captions.map((caption: any) => this.norCaption(caption));
