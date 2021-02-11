@@ -13,12 +13,13 @@ export default class RouterConfiguration {
     router.afterEach((to, from) => {
       // set title
       document.title = to.meta.title || RouterConfiguration.DEFAULT_TITLE;
+      const path = to.fullPath.indexOf('#') == -1 ? to.fullPath : to.fullPath.substring(0, to.fullPath.indexOf('#'));
       
       // sned google analytics
       const gtag = (window as any).gtag;
       gtag('set', 'title', document.title);
       gtag('js', new Date());
-      gtag('config', RouterConfiguration.TRACKING_ID, {'page_path': to.fullPath});
+      gtag('config', RouterConfiguration.TRACKING_ID, {'page_path': path});
     });
   }
 }

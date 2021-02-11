@@ -156,8 +156,8 @@
           <div class="doc-desc">
             <div class="desc-comment">
               서드파티 프로그램은 "애니시아 API" 를 통해 만들어진 프로그램으로<br/>
-              애니시아에서 공식 지원 및 보증을 하지않습니다.<br/>
-              때문에 프로그램에 대한 문제는 해당 개발자에게 문의하셔야 합니다.
+              애니시아에서 제작하지 않은 편성표는 공식 지원 및 보증을 하지않습니다.<br/>
+              때문에 프로그램에 대한 문제는 해당 개발자/단체에 문의하셔야 합니다.
             </div>
             <table class="schedule-table schedule-application">
               <!-- ios -->
@@ -170,9 +170,9 @@
               <!-- android -->
               <tr>
                 <th><img src="@/assets/page/schedule-th-android.svg" title="android" class="pmark" /></th>
-                <td style="color:#aaa">개발자를 찾습니다.</td>
-                <th>-</th>
-                <td>-</td>
+                <td><a href="https://play.google.com/store/apps/details?id=anissia.android.schedule" target="_blank">애니 편성표</a> (심사중)</td>
+                <th class="td-author">애니시아 (공식)</th>
+                <td class="td-date">2021년</td>
               </tr>
               <!-- windows -->
               <tr>
@@ -183,12 +183,7 @@
               </tr>
               <!-- chrome -->
               <tr>
-                <th rowspan="2"><img src="@/assets/page/schedule-th-chrome.svg" title="chrome" class="pmark" /></th>
-                <td><a href="https://chrome.google.com/webstore/detail/%EC%95%A0%EB%8B%88%ED%8E%B8%EC%84%B1%ED%91%9C/alpjhdpeaicbnhdjbgfiidbckephhlda" target="_blank">애니편성표</a></td>
-                <th>눅세</th>
-                <td><span>2014년</span></td>
-              </tr>
-              <tr>
+                <th><img src="@/assets/page/schedule-th-chrome.svg" title="chrome" class="pmark" /></th>
                 <td><a href="https://chrome.google.com/webstore/detail/anisched/lkpfenhnbjcjekjihacpcoekgdclobdn" target="_blank">AniSched</a></td>
                 <th>Novang</th>
                 <td><span>2015년</span></td>
