@@ -129,7 +129,7 @@
 
     <div v-if="status == 'list'" class="search a-text-style">
       <div class="search-box">
-        <input type="button" @click="createAnimeView()" value="신규작성">
+        <input type="button" @click="createAnime()" value="신규작성">
         <input type="text" class="std-inp-txt" v-model="query" @keydown="keyAutocorrect" @keyup="autocorrect" placeholder="애니메이션 검색"/>
       </div>
       <div class="autocorrect" v-if="autoOn && autoList.length">
@@ -217,6 +217,7 @@
 #admin-anime .view .edit-btn input { padding: 0px 12px; }
 #admin-anime .view .edit-btn .edit-btn-delete { float:left; }
 #admin-anime .view .edit-btn .edit-btn-save { text-align: right }
+#admin-anime .view .anime-date { padding:4px 0 }
 #admin-anime .view .anime-date input { height: 28px; text-align: center }
 #admin-anime .view .anime-date > span:first-child input { width:50px; }
 #admin-anime .view .anime-date > span:not(:first-child) input { width:30px; }
@@ -293,7 +294,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       this.load();
     },
     load() {
-      const animeNo = Nabi.address().getIntParameter("animeNo");
+      const animeNo = Nabi.address().getIntParameter("animeNo", -1);
       this.query = (Nabi.address().getParameter("q") || '').trim();
       this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
       this.status = Nabi.address().getParameter("status") == 'delist' ? 'delist' : 'list';
@@ -313,6 +314,24 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
           this.bindAnimeEditDate(anime, 'ed', 'endDate');
           this.anime = anime;
         });
+      } else if (animeNo == 0) {
+        const anime = {
+          animeNo:0,
+          isNew:true,
+          status:'ON',
+          week:'0',
+          time:'00:00',
+          subject:'',
+          genres:'',
+          startDate:'',
+          endDate:'',
+          website:'',
+          sds:'N',
+          eds:'N',
+          captions:[]
+        };
+        AnimeService.toInfo(anime);
+        this.anime = anime;
       } else {
         this.anime = null;
       }
@@ -494,26 +513,9 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
     isPureWeek(week: string) {
       return AnissiaUtil.isPureWeek(week);
     },
-    createAnimeView() {
-      var anime = {
-        animeNo:0,
-        isNew:true,
-        status:'ON',
-        week:'0',
-        time:'00:00',
-        subject:'',
-        genres:'',
-        startDate:'',
-        endDate:'',
-        website:'',
-        sds:'N',
-        eds:'N',
-        captions:[]
-      };
-      AnimeService.toInfo(anime);
-      this.anime = anime;
-      window.scrollTo(0, 0);
-    }
+    createAnime() {
+      this.$router.push('/admin/anime?animeNo=0');
+    },
   },
 })
 
