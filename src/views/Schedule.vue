@@ -156,37 +156,37 @@
           <div class="doc-desc">
             <div class="desc-comment">
               서드파티 프로그램은 "애니시아 API" 를 통해 만들어진 프로그램으로<br/>
-              애니시아에서 제작하지 않은 편성표는 공식 지원 및 보증을 하지않습니다.<br/>
-              때문에 프로그램에 대한 문제는 해당 개발자/단체에 문의하셔야 합니다.
+              애니시아에서 제작하지 않은 프로그램에 대한 지원을 받고있지않습니다.<br/>
+              각 프로그램에 대한 문의는 해당 개발자/단체에 하셔야 합니다.
             </div>
             <table class="schedule-table schedule-application">
               <!-- ios -->
               <tr>
                 <th class="td-icon"><img src="@/assets/page/schedule-th-ios.svg" title="ios" class="pmark" /></th>
-                <td><a href="https://apps.apple.com/kr/app/aeni-pyeonseongpyo/id917536862" target="_blank">애니 편성표</a></td>
+                <td class="td-title"><a href="https://apps.apple.com/kr/app/aeni-pyeonseongpyo/id917536862" target="_blank">애니 편성표</a></td>
                 <th class="td-author">Young Ho Kim</th>
                 <td class="td-date">2014년</td>
               </tr>
               <!-- android -->
               <tr>
-                <th><img src="@/assets/page/schedule-th-android.svg" title="android" class="pmark" /></th>
-                <td><a href="https://play.google.com/store/apps/details?id=anissia.android.schedule" target="_blank">애니 편성표</a> (심사중)</td>
-                <th class="td-author">애니시아 (공식)</th>
+                <th class="td-icon"><img src="@/assets/page/schedule-th-android.svg" title="android" class="pmark" /></th>
+                <td class="td-title"><a href="https://play.google.com/store/apps/details?id=anissia.android.schedule" target="_blank">애니 편성표</a> (심사중)</td>
+                <th class="td-author" title="공식">애니시아</th>
                 <td class="td-date">2021년</td>
               </tr>
               <!-- windows -->
               <tr>
-                <th><img src="@/assets/page/schedule-th-windows.svg" title="windows" class="pmark" /></th>
-                <td><a href="https://www.microsoft.com/p/anisched/9wzdncrd8kxg" target="_blank">AniSched</a></td>
-                <th>Novang</th>
-                <td>2015년</td>
+                <th class="td-icon"><img src="@/assets/page/schedule-th-windows.svg" title="windows" class="pmark" /></th>
+                <td class="td-title"><a href="https://www.microsoft.com/p/anisched/9wzdncrd8kxg" target="_blank">AniSched</a></td>
+                <th class="td-author">Novang</th>
+                <td class="td-date">2015년</td>
               </tr>
               <!-- chrome -->
               <tr>
-                <th><img src="@/assets/page/schedule-th-chrome.svg" title="chrome" class="pmark" /></th>
-                <td><a href="https://chrome.google.com/webstore/detail/anisched/lkpfenhnbjcjekjihacpcoekgdclobdn" target="_blank">AniSched</a></td>
-                <th>Novang</th>
-                <td><span>2015년</span></td>
+                <th class="td-icon"><img src="@/assets/page/schedule-th-chrome.svg" title="chrome" class="pmark" /></th>
+                <td class="td-title"><a href="https://chrome.google.com/webstore/detail/anisched/lkpfenhnbjcjekjihacpcoekgdclobdn" target="_blank">AniSched</a></td>
+                <th class="td-author">Novang</th>
+                <td class="td-date">2015년</td>
               </tr>
             </table>
           </div>
@@ -372,8 +372,9 @@ export default class Schedule extends Vue {
 #schedule .icon i { margin-right:4px; }
 #schedule table.schedule-table { margin:4px 0 0; width:100%; font-size:14px; }
 #schedule table.schedule-table .td-icon { width:60px; }
-#schedule table.schedule-table .td-author { width:110px; }
-#schedule table.schedule-table .td-date { width:64px; }
+#schedule table.schedule-table .td-title { }
+#schedule table.schedule-table .td-author { width:25%; }
+#schedule table.schedule-table .td-date { width:60px; text-align: center }
 #schedule table.schedule-table .td-type { width:64px; }
 
 #schedule table.schedule-table th, #schedule table.schedule-table td { padding:4px 12px; font-weight: normal }
