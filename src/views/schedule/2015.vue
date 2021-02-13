@@ -157,19 +157,20 @@ import AnimeService from "@/service/AnimeService";
     },
     applyColorMode(mode: string|null) {
       if (mode == null) {
-        mode = this.getMode();
-        this.colorMode = mode != null ? mode : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      } else {
-        localStorage.setItem('schedule2015ColorMode', (this.colorMode = mode));
+        if (this.isWeb) {
+          try {
+            mode = (localStorage.getItem('schedule2015ColorMode') as string | null);
+            this.colorMode = mode != null ? mode : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          } catch (e) {this.colorMode = 'light'; }
+        } else {
+          this.colorMode = 'light';
+        }
+      } else if (this.isWeb) {
+        try {
+          localStorage.setItem('schedule2015ColorMode', (this.colorMode = mode));
+        } catch (e) { this.colorMode = 'light'; }
       }
     },
-    getMode() {
-      if (this.isWeb) {
-        return (localStorage.getItem('schedule2015ColorMode') as string|null);
-      } else {
-        return 'light';
-      }
-    }
   }
 })
 
@@ -182,7 +183,7 @@ export default class Sc2015 extends Vue {
       animeList: [] as any[],
       animeNow: null as any|null,
       captionList: [] as any[],
-      colorMode: '' as string
+      colorMode: 'light' as string
     };
   }
 }
