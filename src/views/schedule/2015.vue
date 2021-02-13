@@ -7,7 +7,7 @@
   <div id="sc2015" @click="e => closePopup(e)" :class="colorMode">
     <div class="title" ondragstart="return false" onselectstart="return false">
       <div class="color-mode" v-if="isWeb">
-        <svg id="dark-mode" @click="applyColorMode('dark')" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="moon" class="svg-inline--fa fa-moon fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></svg>
+        <svg id="dark-mode" @click="applyColorMode('dark')" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="moon" class="svg-inline--fa fa-moon fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 258.885 258.885"><path d="M205.635,252.709c-0.973,0-1.958-0.233-2.864-0.708l-73.334-38.557l-73.33,38.557c-2.072,1.086-4.582,0.906-6.482-0.469,c-1.892-1.375-2.84-3.705-2.441-6.011l14.003-81.659L1.859,106.031c-1.678-1.637-2.279-4.077-1.561-6.305,c0.727-2.225,2.657-3.849,4.975-4.185l81.99-11.917l36.666-74.297c2.065-4.201,8.959-4.201,11.024,0l36.671,74.297l81.99,11.917,c2.317,0.336,4.239,1.96,4.972,4.185c0.721,2.228,0.12,4.668-1.562,6.305l-59.327,57.832l14.003,81.659,c0.396,2.306-0.552,4.636-2.443,6.011C208.175,252.307,206.909,252.709,205.635,252.709z"/></svg>
         <svg id="light-mode" @click="applyColorMode('light')" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sun" class="svg-inline--fa fa-sun fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"></path></svg>
       </div>
       <a href="/" target="_blank">애니<span class="mob-hide">메이션</span> 편성표</a>
@@ -160,24 +160,15 @@ import AnimeService from "@/service/AnimeService";
         mode = this.getMode();
         this.colorMode = mode != null ? mode : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       } else {
-        this.setMode(mode);
+        localStorage.setItem('schedule2015ColorMode', (this.colorMode = mode));
       }
     },
     getMode() {
-      try {
-        if (this.isWeb) {
-          return (localStorage.getItem('schedule2015ColorMode') as string|null);
-        } else {
-          return 'light';
-        }
-      } catch (e) {
-        return null;
+      if (this.isWeb) {
+        return (localStorage.getItem('schedule2015ColorMode') as string|null);
+      } else {
+        return 'light';
       }
-    },
-    setMode(mode: string) {
-      try {
-        localStorage.setItem('schedule2015ColorMode', (this.colorMode = mode));
-      } catch (e) { console.log('this browser is not support local-storage') }
     }
   }
 })
@@ -210,7 +201,7 @@ export default class Sc2015 extends Vue {
 #sc2015 .title { font-size:32px; font-weight: 200; line-height: 64px; text-align: center }
 #sc2015 .title .color-mode { position: absolute; top:0; right:0; height:64px; }
 #sc2015 .title svg { width:28px; height:28px; margin:18px; opacity: .4; transition: all .2s; }
-#sc2015 .title svg:hover { opacity: 1; transform: rotate(-22deg); }
+#sc2015 .title svg:hover { opacity: 1; transform: rotate(22deg); }
 #sc2015 .nav th { line-height: 40px; cursor: pointer; transition: background-color 0.2s, color 0.2s; }
 #sc2015 .main { position: absolute; right:0; bottom:0; left:0; overflow-y:auto }
 #sc2015 .list { font-size:16px; font-family: "Noto Sans KR", "Malgun Gothic", "Dotum"; }

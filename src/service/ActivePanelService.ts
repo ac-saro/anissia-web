@@ -23,6 +23,10 @@ export default class ActivePanelService {
             for (const id of ids) {
               const name = id[0];
               if (d2[name] != d3[name]) {
+                if (['startDate', 'endDate'].indexOf(name) != -1) {
+                  d2[name] = d2[name].replace(/-99/g, '');
+                  d3[name] = d3[name].replace(/-99/g, '');
+                }
                 e.moreInfo.push({t: id[1], o: d2[name] || '-', n: d3[name] || '-'});
               }
             }
