@@ -71,7 +71,7 @@ export default class AnimeService {
     const week = weekParam || e.week;
     e.pureWeek = AnissiaUtil.isPureWeek(week);
     e.subjectPrefix = AnissiaUtil.getSubjectPrefix(week, e.status, e.startDate, e.endDate);
-    e.time = e.time != '' ? e.time.replace(/-99/g, '') : 'N/A';
+    e.time = e.time != '' ? e.time.replace(/-99/g, '') : '-';
     e.period = AnissiaUtil.animePeriod(week, e.startDate, e.endDate);
     if (e.captions && e.captions.length) {
       e.captions = e.captions.map((caption: any) => this.norCaption(caption));
