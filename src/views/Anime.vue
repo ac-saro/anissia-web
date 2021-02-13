@@ -16,7 +16,7 @@
             <div v-if="anime.animeNo">
               <div class="title">{{anime.subject}}</div>
               <div class="anime-view">
-                <table class="basic-info">
+                <table class="basic-info view-info">
                   <tr v-if="anime.period" class="basic-info-tr">
                     <td>방영기간</td>
                     <td>{{anime.period}}</td>
@@ -41,22 +41,26 @@
                     <td>웹사이트</td>
                     <td><a :href="anime.website" target="_blank">{{anime.website}}</a></td>
                   </tr>
-                  <tr v-if="anime.captions && anime.captions.length" class="basic-info-tr">
-                    <td>자막</td>
-                    <td class="basic-info-caption">
-                      <table class="caption">
-                        <tr v-for="caption in anime.captions" :key="caption.name">
-                          <td>{{caption.episode}}</td>
-                          <td class="caption-name">
-                            <span v-if="caption.website"><a :href="caption.website" target="_blank" >{{caption.name}}</a></span>
-                            <span v-else>{{caption.name}}</span>
-                          </td>
-                          <td>{{caption.updDt}}</td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
                 </table>
+
+                <div v-if="anime.captions && anime.captions.length" class="caption">
+                  <div class="caption-title">자막정보</div>
+                  <table class="view-info">
+                    <tr>
+                      <th>자막</th><th>제작자</th><th>날짜</th>
+                    </tr>
+                    <tr v-for="caption in anime.captions" :key="caption.name">
+                      <td>
+                        <span v-if="caption.website"><a :href="caption.website" target="_blank" >{{caption.episode}}</a></span>
+                        <span v-else>준비중</span>
+                      </td>
+                      <td>
+                        <router-link :to="`/anime?q=%40${encodeURIComponent(caption.name)}`">{{caption.name}}</router-link>
+                      </td>
+                      <td>{{caption.updDt}}</td>
+                    </tr>
+                  </table>
+                </div>
 
               </div>
             </div>
@@ -259,11 +263,13 @@ export default class Anime extends Vue {
 #anime table.list td div.info { padding:4px 0 2px; }
 
 #anime .view { padding: 8px 8px 40px; }
+#anime .view table.view-info { min-width:400px }
 #anime .view .title { line-height: 2; font-size:20px; font-weight: bold; padding:8px 2px 12px; }
 #anime .view .in-tag:not(:first-child):before { content: ', ' }
 #anime .view table.basic-info tr.basic-info-tr > td { border-width: 1px; line-height: 32px; padding:8px 16px }
-#anime .view table.caption td { padding:4px 0; }
-#anime .view table.caption td.caption-name { padding:4px 32px; }
+#anime .view .caption-title { line-height: 2; font-size:18px; font-weight: bold; padding:14px 2px 12px; }
+#anime .view .caption table th,
+#anime .view .caption table td { border-width: 1px; padding:8px 16px; text-align: center }
 
 #anime .search { padding: 40px 40px; }
 #anime .search .search-box { }
@@ -286,6 +292,7 @@ html.dark #anime table.list a { color:#aaa; text-decoration: none }
   #anime .mob-hide { display: none; }
   #anime .search { padding:10px 0 6px; }
   #anime .search .autocorrect div.node { padding:16px; }
+  #anime .view table.view-info { width:100% }
 }
 
 </style>
