@@ -39,7 +39,7 @@
                     <div class="preview-error" v-if="previewError != ''" v-html="previewError"></div>
                     <div v-else>
                       <iframe v-if="mode === 'html'" class="preview-border" src="/schedule/2015" ref="html" :width="htmlWidth" :height="htmlHeight" @load="this.colorModeHtml(this.colorScheme)"></iframe>
-                      <div v-else-if="mode === 'img'" class="preview-img preview-border" :style="{width: `${imgWidth}px`}">
+                      <div v-else-if="mode === 'img'" class="preview-img preview-border" :style="({width: `${imgWidth}px`,height: `${imgHeight}px`, background: `#${imgListBg}`, 'overflow-y': imgScroll})">
                         <div class="img-preview" ondragstart="return false" onselectstart="return false">
                           <div class="img-title" :style="{background: `#${imgTitleBg}`, color: `#${imgTitle}`}">애니편성표</div>
                           <div class="img-ymd" :style="{background: `#${imgYmdBg}`, color: `#${imgYmd}`}">{{imgDataYmd}}</div>
@@ -137,11 +137,20 @@
                     <div v="imgList" :style="`background:#${imgList}`" @click="openColorPicker" class="color"></div>
                   </div>
                   <hr/>
-                  <div class="tool-title">크기</div>
+                  <div class="tool-title">너비</div>
                   <div class="line">
                     <input type="number" min="150" max="900" v-model="imgWidth"/>
                     <input type="range" min="150" max="900" step="10" v-model="imgWidth">
                   </div>
+                  <div class="tool-title">높이(단)</div>
+                  <div class="line">
+                    <input type="number" min="150" max="900" v-model="imgSize"/>
+                    <input type="range" min="5" max="20" step="1" v-model="imgSize">
+                  </div>
+                  <hr/>
+                  <div class="tool-title">스크롤</div>
+                  <div><label> <input type="radio" name="schedule-img-scroll" v-model="imgScroll" value="auto" /> 활성</label></div>
+                  <div><label> <input type="radio" name="schedule-img-scroll" v-model="imgScroll" value="hidden" /> 비활성</label></div>
                   <hr/>
                   <div class="tool-title">소스코드</div>
                   <textarea readonly="readonly" v-model="imgCode" style="height:90px;"></textarea>
@@ -245,9 +254,12 @@ import AnimeRank from "@/components/AnimeRank.vue";
           this.htmlNavActDark + this.htmlListBgDark + this.htmlListDark + this.htmlListActBgDark + this.htmlListActDark + this.htmlPrefixDark
       );
     },
+    imgHeight() {
+      return 50 + (this.imgSize * 20);
+    },
     imgCode() {
       const theme = this.imgTitleBg + this.imgTitle + this.imgYmdBg + this.imgYmd + this.imgListBg + this.imgList;
-      return `<a href="${location.origin + '/schedule/2015'}" target="_blank"><img src="${location.origin}/api/anime/schedule/svg/${this.imgWidth}/${theme}"/></a>`;
+      return `<div style="width:${this.imgWidth}px;height:${this.imgHeight}px;background:#${this.imgListBg};overflow-y:${this.imgScroll}"><a href="${location.origin + '/schedule/2015'}" target="_blank"><img src="${location.origin}/api/anime/schedule/svg/${this.imgWidth}/${theme}"/></a></div>`;
     },
     colorScheme() {
       return this.$store.state.colorScheme;
@@ -344,8 +356,10 @@ export default class Schedule extends Vue {
       imgYmd: '000000',
       imgListBg: 'ffffff',
       imgList: '000000',
+      imgScroll: 'auto',
       // IMG - size
       imgWidth: 180,
+      imgSize: 10,
       // IMG - data
       imgDataList: [] as string[],
       imgDataYmd: '',
@@ -386,7 +400,7 @@ export default class Schedule extends Vue {
 #schedule .html-gen .tool-preview { float:left;  margin-top:12px; min-height: 693px; width:calc(100% - 228px); }
 #schedule .html-gen .tool-preview td.tool-main { padding:16px; text-align: center; }
 #schedule .html-gen .tool-preview .preview-border {  border:0; max-width:100% !important; max-height:100% !important; vertical-align: middle;  }
-#schedule .html-gen .tool-preview .preview-img { display: inline-block }
+#schedule .html-gen .tool-preview .preview-img { display: inline-block; }
 #schedule .html-gen .tool-preview .preview-error { font-weight: bold; font-size: 32px; line-height: 1.8 }
 #schedule .html-gen .tool { padding:16px 8px; margin-left:calc(100% - 228px); }
 #schedule .html-gen .tool .tool-title { color: #276998; padding: 6px 0 8px; text-align: center; font-weight: bold; font-size:14px; }
