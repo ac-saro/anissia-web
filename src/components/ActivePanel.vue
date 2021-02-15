@@ -1,7 +1,7 @@
 <template>
   <div class="active-panel">
     <div v-if="admin" class="active-panel-write">
-      <input class="std-inp-txt basic-border-color" placeholder="공지 (!로 시작시 사이트 전체공개) - 개발 피드백을 위해 임시오픈하였습니다." v-model="noticeText" @keyup.enter="saveNotice"/>
+      <input class="std-inp-txt basic-border-color" placeholder="운영기록작성 ##여기를 클릭하여 글작성가능##" v-model="noticeText" @keyup.enter="saveNotice"/>
     </div>
     <div>
       <table class="active-panel-table">

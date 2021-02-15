@@ -57,7 +57,7 @@
               </div>
             </td>
           </tr>
-          <tr v-if="isPureWeek(anime.week)">
+          <tr v-if="anime.week != '7'">
             <th>시간</th>
             <td>
               <input type="time" v-model="anime.time"/>
@@ -412,7 +412,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       this.bindAnimeSubmitDate(anime, 'sd', 'startDate');
       this.bindAnimeSubmitDate(anime, 'ed', 'endDate');
       if (confirm(`${anime.subject}을(를) ${anime.animeNo != 0 ? '수정' : '추가'} 하시겠습니까?\n임의조작시 권한박탈의 사유가됩니다.`)) {
-        if (!anime.isPureWeek) {
+        if (anime.week == '7') {
           anime.time = '00:00';
         }
         anime.subject = anime.subject.trim();
@@ -511,9 +511,6 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       } else {
         this.$router.push('/admin/anime');
       }
-    },
-    isPureWeek(week: string) {
-      return AnissiaUtil.isPureWeek(week);
     },
     createAnime() {
       this.$router.push('/admin/anime?animeNo=0');
