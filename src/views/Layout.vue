@@ -271,7 +271,7 @@ html.light .mono-area input[type=text],
 html.light .mono-area input[type=password],
 html.light .mono-area input[type=text]:-webkit-autofill,
 html.light .mono-area input[type=password]:-webkit-autofill,
-html.light input.std-inp-txt {
+html.light .std-inp-txt {
   background: #fff; color:#333;
   box-shadow: 0 0 0 30px #fff inset !important;
   -webkit-text-fill-color: #333 !important;
@@ -307,7 +307,7 @@ html.dark .mono-area input[type=text],
 html.dark .mono-area input[type=password],
 html.dark .mono-area input[type=text]:-webkit-autofill,
 html.dark .mono-area input[type=password]:-webkit-autofill,
-html.dark input.std-inp-txt {
+html.dark .std-inp-txt {
   background: #000; color:#aaa;
   box-shadow: 0 0 0 30px #000 inset !important;
   -webkit-text-fill-color: #aaa !important;

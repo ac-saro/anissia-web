@@ -19,7 +19,7 @@
       </div>
     </div>
     <div :class="`saro-md saro-md-body ${editMode}-view`" :style="style">
-      <textarea ref="textarea" class="md-edit" :value="modelValue" :placeholder="placeholder"
+      <textarea ref="textarea" class="md-edit std-inp-txt" :value="modelValue" :placeholder="placeholder"
         @input="input($event)"
         @keydown.tab="onTab"
         @keydown.enter="onEnter"></textarea><div
@@ -39,7 +39,7 @@ import MarkdownUtil from "@/utils/MarkdownUtil";
     placeholder: String
   },
   created() {
-    this.style = `height:${this.height || '320px'}`;
+    this.style = `height:${this.height || '480px'}`;
   },
   emits: ['update:modelValue'],
   methods: {
@@ -118,6 +118,7 @@ import MarkdownUtil from "@/utils/MarkdownUtil";
       }
       this.setSelect(ta, sel);
       this.$emit('input', ta.value);
+      this.$emit('update:modelValue', ta.value);
     },
     onTab(event: KeyboardEvent) {
       event.preventDefault();

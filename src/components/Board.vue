@@ -1,117 +1,55 @@
 <template>
   <div class="board">
 
-    <h1>게시판은 현재 개발중입니다.</h1>
-
-    <!--
-    <div class="board-view" v-if="meta.isNewMode && isWritableTopic()">
-      <div class="write-info">
-        <div class="write-name">{{user().name}}</div>
-        <div class="write-tool">
-          <span class="bt" @click="writeTopic()">글쓰기</span>
-        </div>
-      </div>
-      <div class="edit-subject">
-        <input type="text" v-model="meta.newSubject" placeholder="제목을 입력해주세요." />
-      </div>
-      <div class="edit-centent">
-        <md v-model="meta.newContent" height="600px" placeholder="내용을 입력해주세요."/>
-      </div>
-    </div>
-    <div class="board-view" v-else-if="view != null">
-      <div v-if="view.exist">
-        <div class="board-title" v-if="view.isView">
-          <div class="board-title-tool" v-if="isEditableTopic() || isDeletableTopic()">
-            <span class="bt" v-if="isEditableTopic()" @click="view.isView = false">수정</span>
-            <span class="bt" v-if="isDeletableTopic()" @click="deleteTopic()">삭제</span>
-          </div>
-          <div class="board-title-text">{{view.subject}}</div>
-        </div>
-
-        <div v-if="!view.isView" class="board-title-edit">
-          <input type="text" v-model="view.subject" @keydown.enter="editTopic(view)" placeholder="제목을 입력해주세요." />
-        </div>
-
-        <div v-for="node in view.posts" :key="node.brn">
-          <div class="write-info post">
-            <div class="write-name">{{node.name}}</div>
-            <div class="write-tool">
-              <span class="bt" v-if="isEditablePost(node) && node.isView" @click="node.isView = false">수정</span>
-              <span class="bt" v-if="isEditablePost(node) && !node.isView" @click="editPost(node)">수정완료</span>
-              <span class="bt" v-if="isDeletablePost(node)" @click="deletePost(node)">삭제</span>
-              <span>{{node.regDt}}</span>
-            </div>
-          </div>
-          <div v-if="node.isView" class="content" v-html="render(node.content)"></div>
-          <div v-else>
-            <md v-model="node.content" placeholder="내용을 입력해주세요." />
-          </div>
-        </div>
-
-        <div class="new-post" v-if="isWritablePost()">
-          <div class="write-info post">
-            <div class="write-name">{{user().name}}</div>
-            <div class="write-tool">
-              <span class="bt" @click="writePost(view.bn)">댓글쓰기</span>
-            </div>
-          </div>
-          <div class="new-post-md">
-            <md v-model="meta.newPostContent" placeholder="내용을 입력해주세요." />
-          </div>
-        </div>
-
-      </div>
-      <div class="not-exist-content" v-else>
-        존재하지 않거나 삭제된 게시물 입니다.
-      </div>
-    </div>
-    -->
-
     <div class="doc-title fo">
       <div class="fl">{{ info.name }}</div>
-      <div class="fr"><input type="button" class="std-inp-btn" value="글쓰기"/></div>
+      <div v-if="hasPer('wt')" class="fr"><input type="button" class="std-inp-btn" value="글쓰기" @click="$router.push('?topicNo=0')"/></div>
     </div>
 
-    <div class="board-view" v-if="view">
+    <div class="board-view" v-if="view != null">
 
-      <!-- topic -->
-      <div v-if="view.topicNo != 0">
-        <div class="topic fo">
-          <div class="fl">{{ view.topic }}</div>
-          <div class="fr">
-            <input type="button" class="std-inp-btn" value="수정"/>
-            <input type="button" class="std-inp-btn" value="삭제"/>
+      <div v-for="node in view.posts" :key="node.postNo" class="node basic-border-color">
+
+        <!-- view -->
+        <div v-if="node.isViewMode && node.root" class="topic basic-border-color">
+          <div>{{node.topic}}</div>
+        </div>
+        <!-- common -->
+        <div class="post-info basic-border-color">
+          <div class="post-info-left">{{node.name}}</div>
+          <div class="post-info-right">
+            <span v-if="node.regDtText">{{node.regDtText}}</span>
+            <input v-if="node.isViewMode && node.perEdit" type="button" class="std-inp-btn" value="수정" @click="node.isViewMode = false"/>
+            <input v-if="node.isViewMode && node.perDelete" type="button" class="std-inp-btn" value="삭제" @click="deletePost(node)"/>
+
+            <input v-if="!node.isViewMode && node.postNo != 0" type="button" class="std-inp-btn" value="수정완료" @click="updatePost(node)"/>
+            <input v-if="!node.isViewMode && node.postNo == 0" type="button" class="std-inp-btn" value="신규작성" @click="createPost(node)"/>
           </div>
         </div>
-        <div v-for="node in view.posts" :key="node.postNo" class="basic-border-color post">
-
-          <div v-if="node.editMode">
-            <md v-model="node.editContent" height="600px" placeholder="내용을 입력해주세요."/>
+        <!-- view -->
+        <div v-if="node.isViewMode" v-html="render(node.content)" class="node-content"></div>
+        <!-- edit -->
+        <div v-else>
+          <div v-if="node.root" class="topic basic-border-color">
+            <input type="text" v-model="node.editTopic" class="std-inp-txt" placeholder="제목을 입력해주세요." />
           </div>
-          <div v-else>
-            <div>
-              <div class="content" v-html="render(node.content)"></div>
-            </div>
-            <div>
-              <div @click="node.editMode = true">클릭</div>
-              {{node}}
-            </div>
-          </div>
-
+          <md v-model="node.editContent" :height="node.editHeight" placeholder="내용을 입력해주세요." />
         </div>
+
       </div>
-      <div v-else>
+
+      <div v-if="view.posts.length == 0">
         <div class="empty-content">존재하지 않거나 삭제된 게시물 입니다.</div>
       </div>
-
     </div>
 
-    <table class="board-list">
+
+    <table class="list a-text-style">
       <tr class="mob-hide">
         <th class="seq">번호</th>
         <th class="post">댓글</th>
         <th class="subject">제목</th>
-        <th class="name">이름</th>
+        <th class="name">작성자</th>
         <th class="date">날짜</th>
       </tr>
       <tr v-for="node in list.content" :key="node.topicNo">
@@ -125,10 +63,6 @@
         <td class="date mob-hide">{{node.regDt}}</td>
       </tr>
     </table>
-
-<!--    <div v-if="isWritableTopic()" class="bt-write-wrapper">-->
-<!--      <router-link :to="urlWriteTopic()" class="bt-write">글쓰기</router-link>-->
-<!--    </div>-->
 
     <pagination :href="hrefPage" :total="list.totalPages" :index="list.number" :unit="10" :key="$route.fullPath"/>
 
@@ -144,6 +78,7 @@ import BoardService from "@/service/BoardService";
 import Nabi from "@/utils/nabi";
 import AnimeService from "@/service/AnimeService";
 import MarkdownUtil from "@/utils/MarkdownUtil";
+import AnissiaUtil from "@/utils/AnissiaUtil";
 
 @Options({
   props: {
@@ -183,14 +118,79 @@ import MarkdownUtil from "@/utils/MarkdownUtil";
         BoardService.getTicker(this.ticker, (info) => { this.info = info; this.load(); });
       }
     },
+    hasPer(action: string, node: (any | null) = null) {
+      const user = this.user;
+      if (!user.isLogin) { return false; }
+      switch (action) {
+        case 'wt': return user.hasRole(...this.info.writeTopicRoles);
+        case 'wp': return user.hasRole(...this.info.writePostRoles);
+      }
+    },
+    createPost(node: any) {
+      alert('준비중' + node.topicNo + '/' + node.postNo);
+    },
+    updatePost(node: any) {
+      alert('준비중' + node.topicNo + '/' + node.postNo);
+    },
+    deletePost(node: any) {
+      alert('준비중' + node.topicNo + '/' + node.postNo);
+    },
     load() {
-      const topicNo = Nabi.address().getIntParameter("topicNo");
+      const topicNo = Nabi.address().getIntParameter("topicNo", -1);
       this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
       const pageQuery = `${this.page} ${this.query}`;
 
       // view
       if (topicNo > 0) {
-        BoardService.getTopic(this.ticker, topicNo, view => this.view = view);
+        BoardService.getTopic(this.ticker, topicNo, view => {
+          const user = this.user;
+          view.posts.forEach((node: any) => {
+
+            node.isViewMode = true;
+            node.perEdit = node.name == user.name || user.isAdmin; // will delete user.isAdmin
+            node.perDelete = node.name == user.name || user.isAdmin;
+            node.editContent = node.content;
+            node.regDtText = AnissiaUtil.ymdOrDynamicAgo(node.regDt);
+            node.topicNo = view.topicNo;
+            node.editHeight = '480px';
+
+            if (node.root) {
+              node.topic = node.editTopic = view.topic;
+            }
+          });
+
+          if (view.posts.length > 0 && user.isLogin) {
+            view.posts.push({
+              isViewMode: false,
+              name: user.name,
+              root: false,
+              topicNo: view.topicNo,
+              postNo: 0,
+              editTopic: '',
+              editContent: '',
+              editHeight: '240px'
+            });
+          }
+
+          this.view = view;
+        });
+      } else if (topicNo == 0) {
+        const user = this.user;
+        this.view = ({
+          posts: [{
+            isViewMode: false,
+            name: user ? (user.name || '') : '',
+            root: true,
+            topicNo: 0,
+            postNo: 0,
+            topic: '',
+            content: '',
+            regDtText: '',
+            editTopic: '',
+            editContent: '',
+            editHeight: '240px'
+          }]
+        });
       } else {
         this.view = null;
       }
@@ -204,152 +204,11 @@ import MarkdownUtil from "@/utils/MarkdownUtil";
   },
 })
 
-/*
-  watch: {
-    $route(to, from) {
-      this.load();
-    },
-  },
-  methods: {
-    topicViewHref(node: BoardTopic) {
-      return Nabi.address().deleteParameter('write').setParameter('view', node.bn).href;
-    },
-    load() {
-      const page: number = Number(Nabi.address().getParameter('page') || '1') - 1;
-      const view: number = Number(Nabi.address().getParameter('view'));
-      this.meta.isNewMode = Nabi.address().getParameter('write') != null;
-      this.loadList(this.code, isNaN(page) ? 0 : page);
-      this.loadView(this.code, view);
-      this.loadInfo(this.code);
-    },
-    hrefPage(index: number): string {
-      if (index === 0) {
-        return Nabi.address().deleteParameter(['view', 'page', 'write']).href;
-      } else {
-        return Nabi.address().deleteParameter(['view', 'write']).setParameter('page', index + 1).href;
-      }
-    },
-    isWritableTopic(): boolean {
-      return this.info.isWritable(this.user());
-    },
-    isEditableTopic(): boolean {
-      const user = this.user();
-      return this.view != null && (this.view.name === user.name || user.admin);
-    },
-    isDeletableTopic(): boolean {
-      const user = this.user();
-      return this.view != null && (this.view.name === user.name || user.admin);
-    },
-    isWritablePost(): boolean {
-      return this.info.isWritablePost(this.user());
-    },
-    isEditablePost(post: BoardPost): boolean {
-      const user = this.user();
-      return post.name === user.name || user.admin;
-    },
-    isDeletablePost(post: BoardPost): boolean {
-      const user = this.user();
-      return !post.topic && (post.name === user.name || user.admin);
-    },
-    urlWriteTopic() {
-      return Nabi.address().deleteParameter('view').setParameter('write', 'new').href;
-    },
-    writeTopic() {
-      BoardService.topicWrite(this.code, this.meta.newSubject, this.meta.newContent, (p, m, bn) => {
-        if (p) {
-          this.param = '';
-          this.$router.push(Nabi.address().clearParameter().addParameter('view', bn).href);
-        } else {
-          alert(m || '일시적인 오류입니다.');
-        }
-      });
-    },
-    editTopic(view: BoardContent) {
-      BoardService.topicEdit(view.bn, view.subject, '-', (p, m) => {
-        if (p) {
-          this.loadView(this.code, (this.view as any).bn);
-        } else {
-          alert(m || '일시적인 오류입니다.');
-        }
-      });
-    },
-    deleteTopic() {
-      if (!confirm('정말로 삭제하시겠습니까?')) {
-        return;
-      }
-      BoardService.topicDelete((this.view as any).bn, (p, m) => {
-        if (p) {
-          this.param = '';
-          this.$router.push(Nabi.address().clearParameter().href);
-        } else {
-          alert(m || '일시적인 오류입니다.');
-        }
-      });
-    },
-    writePost(bn: number) {
-      BoardService.postWrite(bn, this.meta.newPostContent, (p, m) => {
-        if (p) {
-          this.meta.newPostContent = '';
-          this.param = '';
-          this.load();
-        } else {
-          alert(m || '일시적인 오류입니다.');
-        }
-      });
-    },
-    editPost(post: BoardPost) {
-      BoardService.postEdit(post.brn, post.content, (p, m) => {
-        if (p) {
-          this.loadView(this.code, (this.view as any).bn);
-        } else {
-          alert(m || '일시적인 오류입니다.');
-        }
-      });
-    },
-    deletePost(post: BoardPost) {
-      if (!confirm('정말로 삭제하시겠습니까?')) {
-        return;
-      }
-      BoardService.postDelete(post.bn, post.brn, (p, m) => {
-        if (p) {
-          this.param = '';
-          this.load();
-        } else {
-          alert(m || '일시적인 오류입니다.');
-        }
-      });
-    },
-    loadInfo(code: string) {
-      if (!this.info.exist) {
-        BoardService.info(code, (data) => this.info = data);
-      }
-    },
-    loadList(code: string, page: number) {
-      const h = JSON.stringify({code, page});
-      if (h === this.param) {
-        return;
-      }
-      this.param = h;
-      BoardService.topic(code, page, (topics) => this.topics = topics);
-    },
-    loadView(code: string, an: number) {
-      if (isNaN(an) || an <= 0) {
-        this.view = null;
-        return;
-      }
-      BoardService.view(code, an, (view) => this.view = view);
-    },
-    user(): UserSession {
-      return this.$store.state.user as UserSession;
-    },
-
-  },*/
-
 export default class Board extends Vue {
   data() {
     return {
       // basic
-      info: { ticker:'', name: '', writeTopic: 'ROOT', writePost: 'ROOT' },
+      info: {'ticker':'', 'name':'', 'writeTopicRoles':[], 'writePostRoles':[]},
       // param
       query: '',
       page: 0,
@@ -377,30 +236,35 @@ export default class Board extends Vue {
 .board .fo { overflow: auto; }
 .board .fl { float:left; }
 .board .fr { float:right; text-align: right }
-.board .doc-title { border-bottom: 1px solid #276998; }
-.board .doc-title .fl { color: #276998; font-size: 20px; padding: 6px 8px 8px; }
-.board .doc-title .fr { padding:5px 0 0; }
+.board .doc-title {color: #276998; font-size: 20px; border-bottom: 1px solid #276998; }
+.board .doc-title .fl { padding: 6px 8px 8px; }
+.board .doc-title .fr { padding:5px 4px 0 0; }
+.board table.list { width:100%; margin:16px 0 20px; }
+.board table.list th { border-bottom-width: 1px; padding: 8px 0; font-size: 12px; }
+.board table.list td { border-bottom-width: 1px; line-height: 2; padding:12px 0; font-size:13px; }
+.board table.list td:not(.subject) { text-align: center }
+.board table.list td.subject {  }
+.board table.list td.seq { width:60px; }
+.board table.list td.post { width:60px; }
+.board table.list td.subject { padding-left:8px; }
+.board table.list td.name { width:130px; }
+.board table.list td.date { width:130px }
 
-.board .board-view .empty-content { text-align: center; padding:120px 0; }
-
-.board .board-view .topic { font-weight: bold; font-size:16px;  }
-.board .board-view .topic .fl { padding:12px 6px; }
-.board .board-view .topic .fr { padding:6px 0; }
-.board .board-view .topic input { margin-right: 6px }
-.board .board-view .post { font-size:12px; border-top-width: 1px; }
-
-.board .board-list { width:100%; margin-top:10px; }
-.board .board-list th { line-height: 32px; color:#505050; font-size:12px; border-bottom-width: 1px; }
-.board .board-list td { padding:14px 10px; color:#5b6a7f; text-align:center; font-size:14px; border-bottom-width: 1px; }
-.board .board-list td.seq { width:60px; }
-.board .board-list td.post { width:60px; }
-.board .board-list td.subject { padding:0 0 0 8px; text-align:left; line-height: 1.5 }
-.board .board-list td.subject a { text-decoration: none; color:#4b5771 }
-.board .board-list tr:hover td.subject a { color:#376298 }
-.board .board-list td.subject a:hover { color:#2c5cc3 !important }
-.board .board-list td.subject .mob-show { margin-top:2px; }
-.board .board-list td.name { width:130px; color:#224f8e; }
-.board .board-list td.date { width:130px }
+.board .board-view { margin-bottom: 120px; }
+.board .board-view .empty-content { text-align: center; padding:140px 0 80px; }
+.board .board-view .node { border-bottom-width: 1px }
+.board .board-view .topic { border-bottom-width: 1px }
+.board .board-view .topic div { font-size:18px; font-weight: bold; line-height: 2; padding: 4px 8px; }
+.board .board-view .topic input { height: 40px; width:100%; padding:0 8px; }
+.board .board-view .post-info { overflow: auto; border-bottom-width: 1px; font-size:15px; line-height: 40px; }
+.board .board-view .post-info .post-info-left { float:left; height:40px; padding: 0 8px; }
+.board .board-view .post-info .post-info-right { float:right; text-align: right }
+.board .board-view .post-info .post-info-right > span { margin-right: 8px; }
+.board .board-view .post-info .post-info-right > input { margin:0 4px; }
+.board .board-view .node-content { font-size:14px; line-height: 1.8; padding:8px; }
+.board .board-view .node-content hr { border: 1px dashed #777; border-width: 1px 0 0 0; }
+.board .board-view table th,
+.board .board-view table td { border: 1px solid #aaa; padding:8px; }
 
 
 @media (min-width: 701px) {
@@ -409,75 +273,8 @@ export default class Board extends Vue {
 
 @media (max-width: 700px) {
   .board .mob-hide { display: none }
-  .board .board-list td.subject { padding:8px 12px; }
-  .board .board-list td.subject a { font-size:14px; }
+  .board table.list td.subject { padding:8px 12px; }
+  .board table.list td.subject a { font-size:14px; }
 }
 
-/*
-.board .board-view { padding-bottom: 50px; }
-.board .board-view input,
-.board .board-view textarea,
-.board .board-view .content,
-.saro-md .content { font-size:14px; }
-.board .board-view .not-exist-content { padding:160px 0 100px; text-align: center; line-height: 2; font-size: 20px; color:#555 }
-.board .board-view .board-title { line-height: 32px; margin:12px 6px 16px; }
-.board .board-view .board-title-edit { margin:12px 0; }
-.board .board-view .board-title-edit input { border:1px solid #eee; width:100%; box-sizing: border-box; height:40px; line-height: 40px; padding: 0 8px; }
-.board .board-view .board-title-text { font-size:18px; color:#52667b }
-.board .board-view .board-title-tool { float: right; text-align: right; color:#555; font-size:14px;  }
-.board .board-view .board-title-tool span.bt { cursor: pointer; }
-.board .board-view .board-title-tool span.bt:hover { color:#2c5cc3 }
-.board .board-view .board-title-tool span:not(:first-child):before { content: ' | '; color:#ccc }
-
-.board .board-view .write-info { overflow: auto; border: 1px solid #eee; border-radius: 4px 4px 0 0; }
-.board .board-view .write-info > div { line-height: 34px; padding: 0 8px; font-size:14px; }
-.board .board-view .write-info .write-name { float:left; color:#3758a0; }
-.board .board-view .write-info .write-tool { text-align: right; color:#555 }
-.board .board-view .write-info .write-tool span.bt { cursor: pointer; }
-.board .board-view .write-info .write-tool span.bt:hover { color:#2c5cc3 }
-.board .board-view .write-info .write-tool span:not(:first-child):before { content: ' | '; color:#ccc }
-
-.board .edit-subject { border-bottom:1px solid #ddd; }
-.board .edit-subject input { line-height: 40px; height:40px; padding: 0 8px; border:0; width:100%; box-sizing: border-box }
-.board .board-view .content { padding-bottom: 80px; }
-.board .board-view .content table,
-.board .board-view .content table td,
-.board .board-view .content table th,
-.saro-md .content table,
-.saro-md .content table td,
-.saro-md .content table th { border:1px solid #ddd }
-
-.board .board-topics-table { width:100%; }
-.board .board-topics-table tr:hover td { background: #fffffa }
-.board .board-topics-table th { line-height: 32px; color:#505050; font-size:12px; border-bottom: 1px solid #ccc; }
-.board .board-topics-table td { padding:12px 10px; color:#5b6a7f; text-align:center; font-size:14px; border-bottom: 1px solid #eee; }
-.board .board-topics-table td.seq { width:60px; }
-.board .board-topics-table td.post { width:60px; }
-.board .board-topics-table td.subject { padding:0 0 0 8px; text-align:left;  }
-.board .board-topics-table td.subject a { text-decoration: none; color:#4b5771 }
-.board .board-topics-table tr:hover td.subject a { color:#376298 }
-.board .board-topics-table td.subject a:hover { color:#2c5cc3 !important }
-.board .board-topics-table td.subject .mob-show { margin-top:2px; }
-.board .board-topics-table td.name { width:130px; color:#224f8e; }
-.board .board-topics-table td.date { width:130px }
-
-.board .bt-write,
-.board .bt-write-post { text-decoration: none; color:#333;  border:1px solid #ddd; font-size:14px; }
-.board .bt-write { margin:32px 4px 10px; padding:8px; display: inline-block; }
-.board .bt-write-post { margin:48px 0 32px; padding:8px; display:block; text-align: center }
-.board .bt-write-wrapper { text-align: right }
-
-.board .new-post { border-bottom: 1px solid #ddd }
-.board .new-post .new-post-md { border: 1px solid #eee; border-width: 0 1px; }
-
-@media (min-width: 701px) {
-  .mob-show { display: none }
-}
-
-@media (max-width: 700px) {
-  .mob-hide { display: none }
-  .board .board-topics-table td.subject { padding:8px 12px; line-height: 1.5 }
-  .board .board-topics-table td.subject a { font-size:18px; }
-}
- */
 </style>

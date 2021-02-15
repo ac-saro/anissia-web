@@ -7,7 +7,7 @@ export default class UserSession {
   public roles = [] as string[];
 
   public get isLogin() {
-    return this.name != '' ? true : false;
+    return this.name != '';
   }
 
   public get isRoot() {
@@ -19,6 +19,9 @@ export default class UserSession {
   }
 
   public hasRole(...roles: string[]) {
+    if (roles.length == 0) {
+      return true;
+    }
     for (let i = 0 ; i < roles.length ; i++) {
       if (this.roles.indexOf(roles[i]) != -1) {
         return true;
