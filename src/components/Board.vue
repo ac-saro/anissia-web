@@ -8,7 +8,7 @@
 
     <div class="board-view" v-if="view != null">
 
-      <div v-for="node in view.posts" :key="node.postNo" class="node basic-border-color">
+      <div v-for="node in view.posts" :key="`${node.topicNo}/${node.postNo}`" class="node basic-border-color">
 
         <!-- view -->
         <div v-if="node.isViewMode && node.root" class="topic basic-border-color">
@@ -20,10 +20,10 @@
           <div class="post-info-right">
             <span v-if="node.regDtText">{{node.regDtText}}</span>
             <input v-if="node.isViewMode && node.perEdit" type="button" class="std-inp-btn" value="수정" @click="node.isViewMode = false"/>
-            <input v-if="node.isViewMode && node.perDelete" type="button" class="std-inp-btn" value="삭제" @click="deletePost(node)"/>
+            <input v-if="node.isViewMode && node.perDelete" type="button" class="std-inp-btn" value="삭제" @click="node.root ? deleteTopic(node) : deletePost(node)"/>
 
-            <input v-if="!node.isViewMode && node.postNo != 0" type="button" class="std-inp-btn" value="수정완료" @click="updatePost(node)"/>
-            <input v-if="!node.isViewMode && node.postNo == 0" type="button" class="std-inp-btn" value="신규작성" @click="createPost(node)"/>
+            <input v-if="!node.isViewMode && node.postNo != 0" type="button" class="std-inp-btn" value="수정완료" @click="node.root ? updateTopic(node) : updatePost(node)"/>
+            <input v-if="!node.isViewMode && node.postNo == 0" type="button" class="std-inp-btn" value="신규작성" @click="node.root ? createTopic(node) : createPost(node)"/>
           </div>
         </div>
         <!-- view -->
@@ -126,14 +126,32 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
         case 'wp': return user.hasRole(...this.info.writePostRoles);
       }
     },
+    createTopic(node: any) {
+      BoardService.createTopic(this.ticker, node, res => { if (res.st == 'OK') { this.pageQuery = 'N/A'; this.$router.push(`?topicNo=${res.data}`); } else { alert(res.msg || '일시적인 오류입니다.'); } });
+    },
+    updateTopic(node: any) {
+      BoardService.updateTopic(node.topicNo, node, res => { if (res.st == 'OK') { this.loadForce(); } else { alert(res.msg || '일시적인 오류입니다.'); } });
+    },
+    deleteTopic(node: any) {
+      BoardService.deleteTopic(node.topicNo, res => { if (res.st == 'OK') { this.loadForce(true); } else { alert(res.msg || '일시적인 오류입니다.'); } });
+    },
     createPost(node: any) {
-      alert('준비중' + node.topicNo + '/' + node.postNo);
+      BoardService.createPost(node.topicNo, node, res => { if (res.st == 'OK') { this.loadForce(); } else { alert(res.msg || '일시적인 오류입니다.'); } });
     },
     updatePost(node: any) {
-      alert('준비중' + node.topicNo + '/' + node.postNo);
+      BoardService.updatePost(node.postNo, node, res => { if (res.st == 'OK') { this.loadForce(); } else { alert(res.msg || '일시적인 오류입니다.'); } });
     },
     deletePost(node: any) {
-      alert('준비중' + node.topicNo + '/' + node.postNo);
+      BoardService.deletePost(node.postNo, res => { if (res.st == 'OK') { this.loadForce(); } else { alert(res.msg || '일시적인 오류입니다.'); } });
+
+    },
+    loadForce(clearPath = false) {
+      this.pageQuery = 'N/A';
+      if (clearPath) {
+        this.$router.push(this.$route.path);
+      } else {
+        this.load();
+      }
     },
     load() {
       const topicNo = Nabi.address().getIntParameter("topicNo", -1);
@@ -188,7 +206,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
             regDtText: '',
             editTopic: '',
             editContent: '',
-            editHeight: '240px'
+            editHeight: '480px'
           }]
         });
       } else {
