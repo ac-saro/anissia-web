@@ -14,8 +14,7 @@
     </div>
     <table class="nav" ondragstart="return false" onselectstart="return false">
       <tr>
-        <th v-for="(name, idx) in weekList" :key="name"
-          @click="selectAnimeList(idx)" :class="{'sel': (weekNow == idx)}">{{name}}</th>
+        <th v-for="(name, idx) in weekList" :key="name" @click="selectAnimeList(idx)" :class="{'sel': (weekNow == idx)}">{{name}}</th>
       </tr>
     </table>
     <div class="main" ondragstart="return false" onselectstart="return false">
@@ -199,7 +198,10 @@ export default class Sc2015 extends Vue {
 #sc2015 ::-webkit-scrollbar { display: none; }
 #sc2015 a { text-decoration: none; }
 #sc2015 table { width:100%; }
-#sc2015 .title { font-size:32px; font-weight: 200; line-height: 64px; height: 64px; text-align: center }
+#sc2015 .title {
+  font-size:32px; font-weight: 200; padding-top:8px; height: 64px; text-align: center;
+  font-family: "Noto Sans KR", "Malgun Gothic", "Dotum"; box-sizing: border-box;
+}
 #sc2015 .title .color-mode { position: absolute; top:0; right:0; height:64px; }
 #sc2015 .title svg { width:28px; height:28px; margin:18px; opacity: .4; transition: all .2s; }
 #sc2015 .title svg:hover { opacity: 1; transform: rotate(22deg); }
@@ -238,7 +240,7 @@ export default class Sc2015 extends Vue {
 
 @media (max-width: 600px) {
   #sc2015 .main { top:92px; }
-  #sc2015 .title { font-size:24px; line-height: 52px; height: 52px }
+  #sc2015 .title { font-size:24px; padding-top:7px; height: 52px }
   #sc2015 .title .color-mode { height:52px; }
   #sc2015 .title .color-mode svg { width:28px; height:28px; margin:12px; }
   #sc2015 .mob-hide { display: none; }
@@ -248,7 +250,6 @@ export default class Sc2015 extends Vue {
 
 @media (max-width: 300px) {
   #sc2015 .main { top:92px; }
-  #sc2015 .title { font-size:24px; line-height: 52px; height: 52px }
   #sc2015 .title .color-mode { height:52px; }
   #sc2015 .title .color-mode svg { width:28px; height:24px; margin:14px 4px 14px 4px; }
   #sc2015 .mob-hide { display: none; }

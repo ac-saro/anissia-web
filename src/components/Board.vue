@@ -135,6 +135,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       BoardService.updateTopic(node.topicNo, node, res => { if (res.st == 'OK') { this.loadForce(); } else { alert(res.msg || '일시적인 오류입니다.'); } });
     },
     deleteTopic(node: any) {
+      if (!confirm('정말로 삭제하시겠습니까?')) { return; }
       BoardService.deleteTopic(node.topicNo, res => { if (res.st == 'OK') { this.loadForce(true); } else { alert(res.msg || '일시적인 오류입니다.'); } });
     },
     createPost(node: any) {
@@ -144,8 +145,8 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       BoardService.updatePost(node.postNo, node, res => { if (res.st == 'OK') { this.loadForce(); } else { alert(res.msg || '일시적인 오류입니다.'); } });
     },
     deletePost(node: any) {
+      if (!confirm('정말로 삭제하시겠습니까?')) { return; }
       BoardService.deletePost(node.postNo, res => { if (res.st == 'OK') { this.loadForce(); } else { alert(res.msg || '일시적인 오류입니다.'); } });
-
     },
     loadForce(clearPath = false) {
       this.pageQuery = 'N/A';
