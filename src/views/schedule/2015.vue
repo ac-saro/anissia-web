@@ -199,12 +199,12 @@ export default class Sc2015 extends Vue {
 #sc2015 ::-webkit-scrollbar { display: none; }
 #sc2015 a { text-decoration: none; }
 #sc2015 table { width:100%; }
-#sc2015 .title { font-size:32px; font-weight: 200; line-height: 64px; text-align: center }
+#sc2015 .title { font-size:32px; font-weight: 200; line-height: 64px; height: 64px; text-align: center }
 #sc2015 .title .color-mode { position: absolute; top:0; right:0; height:64px; }
 #sc2015 .title svg { width:28px; height:28px; margin:18px; opacity: .4; transition: all .2s; }
 #sc2015 .title svg:hover { opacity: 1; transform: rotate(22deg); }
-#sc2015 .nav th { line-height: 40px; cursor: pointer; transition: background-color 0.2s, color 0.2s; }
-#sc2015 .main { position: absolute; right:0; bottom:0; left:0; overflow-y:auto }
+#sc2015 .nav th { height: 40px; cursor: pointer; transition: background-color 0.2s, color 0.2s; }
+#sc2015 .main { position: fixed; right:0; bottom:0; left:0; overflow-y:auto }
 #sc2015 .list { font-size:16px; font-family: "Noto Sans KR", "Malgun Gothic", "Dotum"; }
 #sc2015 .list td { height: 48px; line-height: 1.8; padding:0; transition: background-color 0.2s, color 0.2s; }
 #sc2015 .list td.tod { width:64px; text-align: center; }
@@ -238,7 +238,7 @@ export default class Sc2015 extends Vue {
 
 @media (max-width: 600px) {
   #sc2015 .main { top:92px; }
-  #sc2015 .title { font-size:24px; line-height: 52px; }
+  #sc2015 .title { font-size:24px; line-height: 52px; height: 52px }
   #sc2015 .title .color-mode { height:52px; }
   #sc2015 .title .color-mode svg { width:28px; height:28px; margin:12px; }
   #sc2015 .mob-hide { display: none; }
@@ -248,7 +248,7 @@ export default class Sc2015 extends Vue {
 
 @media (max-width: 300px) {
   #sc2015 .main { top:92px; }
-  #sc2015 .title { font-size:24px; line-height: 52px; }
+  #sc2015 .title { font-size:24px; line-height: 52px; height: 52px }
   #sc2015 .title .color-mode { height:52px; }
   #sc2015 .title .color-mode svg { width:28px; height:24px; margin:14px 4px 14px 4px; }
   #sc2015 .mob-hide { display: none; }

@@ -3,39 +3,41 @@
 
     <div class="doc-title fo">
       <div class="fl">{{ info.name }}</div>
-      <div v-if="hasPer('wt')" class="fr"><input type="button" class="std-inp-btn" value="글쓰기" @click="$router.push('?topicNo=0')"/></div>
+      <div v-if="topicNo == -1 && hasPer('wt')" class="fr"><input type="button" class="std-inp-btn" value="글쓰기" @click="$router.push('?topicNo=0')"/></div>
+      <div v-if="topicNo > 0" class="fr"><input type="button" class="std-inp-btn" value="목록" @click="$router.push($route.path)"/></div>
     </div>
 
     <div class="board-view" v-if="view != null">
 
       <div v-for="node in view.posts" :key="`${node.topicNo}/${node.postNo}`" class="node basic-border-color">
+        <div v-if="!node.isNew || user.isLogin">
 
-        <!-- view -->
-        <div v-if="node.isViewMode && node.root" class="topic basic-border-color">
-          <div>{{node.topic}}</div>
-        </div>
-        <!-- common -->
-        <div class="post-info basic-border-color">
-          <div class="post-info-left">{{node.name}}</div>
-          <div class="post-info-right">
-            <span v-if="node.regDtText">{{node.regDtText}}</span>
-            <input v-if="node.isViewMode && node.perEdit" type="button" class="std-inp-btn" value="수정" @click="node.isViewMode = false"/>
-            <input v-if="node.isViewMode && node.perDelete" type="button" class="std-inp-btn" value="삭제" @click="node.root ? deleteTopic(node) : deletePost(node)"/>
-
-            <input v-if="!node.isViewMode && node.postNo != 0" type="button" class="std-inp-btn" value="수정완료" @click="node.root ? updateTopic(node) : updatePost(node)"/>
-            <input v-if="!node.isViewMode && node.postNo == 0" type="button" class="std-inp-btn" value="신규작성" @click="node.root ? createTopic(node) : createPost(node)"/>
+          <!-- view -->
+          <div v-if="node.isViewMode && node.root" class="topic basic-border-color">
+            <div>{{node.topic}}</div>
           </div>
-        </div>
-        <!-- view -->
-        <div v-if="node.isViewMode" v-html="render(node.content)" class="node-content"></div>
-        <!-- edit -->
-        <div v-else>
-          <div v-if="node.root" class="topic basic-border-color">
-            <input type="text" v-model="node.editTopic" class="std-inp-txt" placeholder="제목을 입력해주세요." />
+          <!-- common -->
+          <div class="post-info basic-border-color">
+            <div class="post-info-left">{{node.isNew ? user.name : node.name}}</div>
+            <div class="post-info-right">
+              <span v-if="node.regDtText">{{node.regDtText}}</span>
+              <span v-if="node.isViewMode && (node.name == user.name || user.isAdmin)" class="info-btn" @click="node.isViewMode = false">수정</span>
+              <span v-if="node.isViewMode && (node.name == user.name || user.isAdmin)" class="info-btn" @click="node.root ? deleteTopic(node) : deletePost(node)">삭제</span>
+              <span v-if="!node.isViewMode && node.postNo != 0" class="info-btn" @click="node.root ? updateTopic(node) : updatePost(node)">수정완료</span>
+              <span v-if="!node.isViewMode && node.postNo == 0" class="info-btn" @click="node.root ? createTopic(node) : createPost(node)">작성완료</span>
+            </div>
           </div>
-          <md v-model="node.editContent" :height="node.editHeight" placeholder="내용을 입력해주세요." />
-        </div>
+          <!-- view -->
+          <div v-if="node.isViewMode" v-html="render(node.content)" class="node-content"></div>
+          <!-- edit -->
+          <div v-else>
+            <div v-if="node.root" class="topic basic-border-color">
+              <input type="text" v-model="node.editTopic" class="std-inp-txt" placeholder="제목을 입력해주세요." />
+            </div>
+            <md v-model="node.editContent" :height="node.editHeight" placeholder="내용을 입력해주세요." />
+          </div>
 
+        </div>
       </div>
 
       <div v-if="view.posts.length == 0">
@@ -154,7 +156,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       }
     },
     load() {
-      const topicNo = Nabi.address().getIntParameter("topicNo", -1);
+      const topicNo = this.topicNo = Nabi.address().getIntParameter("topicNo", -1);
       this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
       const pageQuery = `${this.page} ${this.query}`;
 
@@ -164,9 +166,8 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
           const user = this.user;
           view.posts.forEach((node: any) => {
 
+            node.isNew = false;
             node.isViewMode = true;
-            node.perEdit = node.name == user.name || user.isAdmin; // will delete user.isAdmin
-            node.perDelete = node.name == user.name || user.isAdmin;
             node.editContent = node.content;
             node.regDtText = AnissiaUtil.ymdOrDynamicAgo(node.regDt);
             node.topicNo = view.topicNo;
@@ -177,10 +178,11 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
             }
           });
 
-          if (view.posts.length > 0 && user.isLogin) {
+          if (view.posts.length > 0) {
             view.posts.push({
+              isNew: true,
               isViewMode: false,
-              name: user.name,
+              name: '',
               root: false,
               topicNo: view.topicNo,
               postNo: 0,
@@ -196,9 +198,10 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
         const user = this.user;
         this.view = ({
           posts: [{
+            isNew: true,
             isViewMode: false,
-            name: user ? (user.name || '') : '',
             root: true,
+            name: '',
             topicNo: 0,
             postNo: 0,
             topic: '',
@@ -231,6 +234,7 @@ export default class Board extends Vue {
       query: '',
       page: 0,
       pageQuery: '',
+      topicNo: -1,
       // data
       list: new PageData(),
       view: null as any|null,
@@ -277,8 +281,9 @@ export default class Board extends Vue {
 .board .board-view .post-info { overflow: auto; border-bottom-width: 1px; font-size:15px; line-height: 40px; }
 .board .board-view .post-info .post-info-left { float:left; height:40px; padding: 0 8px; }
 .board .board-view .post-info .post-info-right { float:right; text-align: right }
-.board .board-view .post-info .post-info-right > span { margin-right: 8px; }
-.board .board-view .post-info .post-info-right > input { margin:0 4px; }
+.board .board-view .post-info .post-info-right > span { margin-right: 8px; vertical-align: top; font-size:14px; }
+.board .board-view .post-info .info-btn { cursor: pointer }
+.board .board-view .post-info .info-btn:hover { text-decoration: underline }
 .board .board-view .node-content { font-size:14px; line-height: 1.8; padding:8px; }
 .board .board-view .node-content hr { border: 1px dashed #777; border-width: 1px 0 0 0; }
 .board .board-view table th,

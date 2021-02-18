@@ -179,7 +179,7 @@
               <!-- android -->
               <tr>
                 <th class="td-icon"><img src="@/assets/page/schedule-th-android.svg" title="android" class="pmark" /></th>
-                <td class="td-title"><a href="https://play.google.com/store/apps/details?id=anissia.android.schedule" target="_blank">애니 편성표</a> (심사중)</td>
+                <td class="td-title"><a href="https://play.google.com/store/apps/details?id=anissia.android.schedule" target="_blank">애니 편성표</a></td>
                 <th class="td-author" title="공식">애니시아</th>
                 <td class="td-date">2021년</td>
               </tr>
@@ -196,6 +196,18 @@
                 <td class="td-title"><a href="https://chrome.google.com/webstore/detail/anisched/lkpfenhnbjcjekjihacpcoekgdclobdn" target="_blank">AniSched</a></td>
                 <th class="td-author">Novang</th>
                 <td class="td-date">2015년</td>
+              </tr>
+            </table>
+            <div class="desc-comment" style="margin-top:16px;">
+              개발중
+            </div>
+            <table class="schedule-table schedule-application">
+              <!-- android -->
+              <tr>
+                <th class="td-icon"><img src="@/assets/page/schedule-th-android.svg" title="android" class="pmark" /></th>
+                <td class="td-title"><a href="https://github.com/qkdxorjs1002/AniSched-Android" target="_blank">AniSched</a> (개발중)</td>
+                <th class="td-author">Novang</th>
+                <td class="td-date">2021년</td>
               </tr>
             </table>
           </div>
