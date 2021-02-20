@@ -6,11 +6,11 @@ export default createStore({
       colorScheme: 'light',
       user: new UserSession(),
       rank: {
-          period: 'day',
+          period: 'week',
           list: [],
-          day: [],
           week: [],
-          month: []
+          month: [],
+          quarter: []
       }
   },
   mutations: {

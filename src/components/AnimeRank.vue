@@ -2,9 +2,9 @@
   <div class="anime-rank a-text-style">
     <table class="rank-tab">
       <tr>
-        <td><div class="basic-border-color" :class="{'select': rank.period === 'day'}" @click="selectRankType('day')">일간</div></td>
         <td><div class="basic-border-color" :class="{'select': rank.period === 'week'}" @click="selectRankType('week')">주간</div></td>
         <td><div class="basic-border-color" :class="{'select': rank.period === 'month'}" @click="selectRankType('month')">월간</div></td>
+        <td><div class="basic-border-color" :class="{'select': rank.period === 'quarter'}" @click="selectRankType('quarter')">분기</div></td>
       </tr>
     </table>
     <div class="rank-pad">
@@ -43,7 +43,7 @@ import AnimeService from "@/service/AnimeService";
   },
   created() {
     if (this.mode != 'static' && this.rank.list.length == 0) {
-      this.selectRankType('day');
+      this.selectRankType('week');
     }
   },
   computed: {
