@@ -1,29 +1,29 @@
 <template>
   <div :class="'saro-md-wrap' + (fullScreen ? ' md-screen-full' : '')">
     <div class="saro-md">
-      <div class="saro-md-tool">
-        <i @click="onTool('screen')" title="화면모드" :class="`fas ${fullScreen ? 'fa-compress-arrows-alt' : 'fa-expand-arrows-alt'} i-right`"></i>
-        <i @click="onTool('mode')" title="편집모드" class="fas fa-columns i-right"></i>
-        <i @click="onTool('b')" title="강조" class="fas fa-bold"></i>
-        <i @click="onTool('i')" title="기울임" class="fas fa-italic"></i>
-        <i @click="onTool('s')" title="취소선" class="fas fa-strikethrough"></i>
-        <i @click="onTool('a')" title="링크" class="fas fa-link"></i>
-        <i @click="onTool('ul')" title="목록" class="fas fa-list-ul"></i>
-        <i @click="onTool('ol')" title="순차목록" class="fas fa-list-ol"></i>
-        <i @click="onTool('bq')" title="틀" class="fas fa-quote-left"></i>
-        <i @click="onTool('hr')" title="경계선" class="fas fa-minus"></i>
-        <i @click="onTool('table')" title="표" class="fas fa-table"></i>
-        <i @click="onTool('h1')" title="헤드라인1" class="i-text">H1</i>
-        <i @click="onTool('h2')" title="헤드라인2" class="i-text">H2</i>
-        <i @click="onTool('h3')" title="헤드라인3" class="i-text">H3</i>
+      <div class="saro-md-tool basic-border-color">
+        <i @click="onTool('screen')" title="화면모드" :class="`fas ${fullScreen ? 'fa-compress-arrows-alt' : 'fa-expand-arrows-alt'} i-right`" class="basic-border-color"></i>
+        <i @click="onTool('mode')" title="편집모드" class="fas fa-columns i-right basic-border-color"></i>
+        <i @click="onTool('b')" title="강조" class="fas fa-bold basic-border-color"></i>
+        <i @click="onTool('i')" title="기울임" class="fas fa-italic basic-border-color"></i>
+        <i @click="onTool('s')" title="취소선" class="fas fa-strikethrough basic-border-color"></i>
+        <i @click="onTool('a')" title="링크" class="fas fa-link basic-border-color"></i>
+        <i @click="onTool('ul')" title="목록" class="fas fa-list-ul basic-border-color"></i>
+        <i @click="onTool('ol')" title="순차목록" class="fas fa-list-ol basic-border-color"></i>
+        <i @click="onTool('bq')" title="틀" class="fas fa-quote-left basic-border-color"></i>
+        <i @click="onTool('hr')" title="경계선" class="fas fa-minus basic-border-color"></i>
+        <i @click="onTool('table')" title="표" class="fas fa-table basic-border-color"></i>
+        <i @click="onTool('h1')" title="헤드라인1" class="i-text basic-border-color">H1</i>
+        <i @click="onTool('h2')" title="헤드라인2" class="i-text basic-border-color">H2</i>
+        <i @click="onTool('h3')" title="헤드라인3" class="i-text basic-border-color">H3</i>
       </div>
     </div>
-    <div :class="`saro-md saro-md-body ${editMode}-view`" :style="style">
+    <div :class="`saro-md saro-md-body ${editMode}-view basic-border-color`" :style="style">
       <textarea ref="textarea" class="md-edit std-inp-txt" :value="modelValue" :placeholder="placeholder"
         @input="input($event)"
         @keydown.tab="onTab"
         @keydown.enter="onEnter"></textarea><div
-      class="md-edit md-view content" v-html="render(modelValue)"></div>
+      class="md-edit md-view content basic-border-color" v-html="render(modelValue)"></div>
     </div>
   </div>
 </template>
@@ -229,25 +229,27 @@ export default class MarkdownEditor extends Vue {
 
 <style>
 .saro-md > .md-edit {
-  box-sizing: border-box; border:0; margin: 0; vertical-align: top;
+  box-sizing: border-box; border-width:0; margin: 0; vertical-align: top;
   height:100%; padding:8px; font-size:15px; line-height: 1.8; resize: none
 }
 .saro-md.both-view > .md-edit { width:50%; display: inline-block; }
-.saro-md.both-view > div { border-left:1px solid #ddd; }
+.saro-md.both-view > div { border-left-width:1px; }
 .saro-md.edit-view > textarea { width:100%; }
 .saro-md.edit-view > div,
 .saro-md.view-view > textarea { display: none; }
 
 .saro-md > .md-view { overflow-y:auto }
-.saro-md .saro-md-tool { overflow:auto; border-bottom: 1px solid #eee }
+.saro-md .saro-md-tool { overflow:auto; border-bottom-width: 1px }
 .saro-md .saro-md-tool i {
   width: 38px; height: 38px; line-height: 38px; box-sizing: border-box; display: inline-block; text-align: center;
-    color: #566c88; transition: color .3s; cursor: pointer; border-right: 1px solid #eee; font-size: 20px; vertical-align: top;
+    color: #566c88; transition: color .3s; cursor: pointer; border-right-width: 1px; font-size: 20px; vertical-align: top;
 }
-.saro-md .saro-md-tool i.i-right { float: right; border: 0; border-left: 1px solid #eee; }
+.saro-md .saro-md-tool i.i-right { float: right; border-width: 0; border-left-width: 1px; }
 .saro-md .saro-md-tool i.i-text { font-style: normal }
 .saro-md .saro-md-tool i:hover { color: #c00 }
 
 .saro-md-wrap.md-screen-full { z-index: 1000; position: fixed; top:0; left:0; right:0; bottom:0; background: #fff; }
 .saro-md-wrap.md-screen-full .saro-md-body { height: calc(100% - 40px) !important; }
+
+html.dark .saro-md .saro-md-tool i { filter:grayscale(1) }
 </style>

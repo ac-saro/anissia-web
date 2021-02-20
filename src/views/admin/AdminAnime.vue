@@ -239,7 +239,7 @@
 
 html.light #admin-anime .search .autocorrect .autocorrect-box { background: rgba(255, 255, 255, .7); border:1px solid #eee; }
 html.light #admin-anime .search .autocorrect div.node span { color:#2f7cbd }
-html.dark #admin-anime .search .autocorrect .autocorrect-box { background: rgba(0, 0, 0, .7); border:1px solid #222; }
+html.dark #admin-anime .search .autocorrect .autocorrect-box { background: rgba(0, 0, 0, .7); border:1px solid #333; }
 html.dark #admin-anime .search .autocorrect div.node span { color:#2e7bb5 }
 
 @media (max-width: 800px) {
@@ -251,10 +251,10 @@ html.dark #admin-anime .search .autocorrect div.node span { color:#2e7bb5 }
 
 html.light #admin-anime table.tab .select div { background: #f7f7f7 }
 html.light #admin-anime .view .input-label input:checked + label { border-color: #eee }
-html.light #admin-anime .view input { background: #eee; color:#333 }
+html.light #admin-anime .view input { background: #eee; color:#444 }
 
-html.dark #admin-anime table.tab .select div { background: #111 }
-html.dark #admin-anime .view .input-label input:checked + label { border-color: #222 }
+html.dark #admin-anime table.tab .select div { background: #222 }
+html.dark #admin-anime .view .input-label input:checked + label { border-color: #333 }
 html.dark #admin-anime .view input { background: #222; color:#aaa }
 
 </style>

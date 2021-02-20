@@ -77,8 +77,6 @@ export default class Home extends Vue {
 
 <style>
 #home .base-mat { padding: 8px 8px 0; }
-#home .doc-title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
-#home .doc-title a { text-decoration: none }
 #home .active-panel-wrap { padding-bottom: 16px; }
 
 @media (max-width:800px) {

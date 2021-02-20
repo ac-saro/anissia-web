@@ -35,7 +35,7 @@
     <nav id="nav-tool" v-if="onTool">
       <div>
 
-        <div class="title">계정</div>
+        <div class="doc-title">계정</div>
         <div class="menu">
           <div v-if="!user.isLogin"><div @click="login"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-login.svg" alt=""/> 로그인</div></div></div>
           <div v-if="user.isAdmin"><router-link to="/admin"><div class="nav-tool-item"><img src="@/assets/layout/nav/tool-admin.svg" alt=""/> 관리자</div></router-link></div>
@@ -43,20 +43,20 @@
           <div v-if="user.isLogin"><div @click="logout" class="nav-tool-item"><img src="@/assets/layout/nav/tool-logout.svg" alt=""/> 로그아웃</div></div>
         </div>
 
-        <div class="title">애니메이션</div>
+        <div class="doc-title">애니메이션</div>
         <div class="menu">
           <div><router-link to="/schedule"><div class="nav-tool-item"><img src="@/assets/layout/nav/schedule.svg" alt=""/> 애니 편성표</div></router-link></div>
           <div><router-link to="/anime"><div class="nav-tool-item"><img src="@/assets/layout/nav/anime.svg" alt=""/> 애니 정보</div></router-link></div>
         </div>
 
-        <div class="title">일반메뉴</div>
+        <div class="doc-title">일반메뉴</div>
         <div class="menu">
           <div><router-link to="/introduce"><div class="nav-tool-item"><img src="@/assets/layout/nav/introduce.svg" alt=""/> 애니시아 소개</div></router-link></div>
           <div><router-link to="/notice"><div class="nav-tool-item"><img src="@/assets/layout/nav/notice.svg" alt=""/> 공지사항</div></router-link></div>
           <div><router-link to="/inquiry"><div class="nav-tool-item"><img src="@/assets/layout/nav/inquiry.svg" alt=""/> 문의 게시판</div></router-link></div>
         </div>
 
-        <div class="title">화면</div>
+        <div class="doc-title">화면</div>
         <div class="color-scheme" @click="toggleColorScheme()">
           <div class="color-scheme-st" :class="`st-${cs}`">{{cs == 'dark' ? 'ON' : 'OFF'}}</div>
           <div class="nav-tool-item">
@@ -159,8 +159,8 @@ export default class Layout extends Vue {
 @import url(~@fortawesome/fontawesome-free/css/all.min.css);
 .ml a { text-decoration: none }
 .ml :not(.a-text-style) a:hover { text-decoration: underline }
-.ml abbr { cursor: help; text-decoration: none; }
-.ml abbr:hover { font-style: oblique }
+.ml abbr { cursor: help; text-decoration: none;  }
+.ml abbr:hover { font-style: oblique;  }
 .ml input { box-sizing: border-box }
 .ml input::-webkit-outer-spin-button,
 .ml input::-webkit-inner-spin-button,
@@ -169,6 +169,7 @@ export default class Layout extends Vue {
   display: inline-block; padding:2px 6px; border-radius: 1px; border-width: 1px; border-style:solid; margin:4px 6px 0 0;
   font-size:12px;
 }
+.ml .doc-title { font-size: 20px; padding: 6px 8px 8px; }
 
 #area-under-nav { padding:56px 0 12px; }
 #nav { height:56px; position: fixed; top:0; left:0; right:0; user-select: none; }
@@ -191,7 +192,6 @@ export default class Layout extends Vue {
 
 #nav-tool { position: fixed; overflow-y: auto; user-select: none; backdrop-filter: blur(10px); }
 #nav-tool a { text-decoration: none; }
-#nav-tool .title { font-size:20px; border-bottom:1px solid #276998; color:#276998; padding:8px; margin:8px 8px 8px; }
 #nav-tool .sign { font-weight: bold; padding:48px 0; text-align:center; font-size:14px; cursor: default; }
 #nav-tool ruby { transition:all .5s }
 #nav-tool rt { transition:all 1s }
@@ -202,6 +202,7 @@ export default class Layout extends Vue {
 #nav-tool .color-scheme .color-scheme-st { font-weight: bold; float: right; text-align: right; padding:16px; }
 #nav-tool .color-scheme .color-scheme-st.st-light { color:#bbb }
 #nav-tool .color-scheme .color-scheme-st.st-dark { color:#fff }
+#nav-tool .doc-title { padding: 8px !important; margin: 8px 8px 8px !important; }
 
 .ml .basic-layout { padding-top:12px; overflow: auto }
 
@@ -235,7 +236,6 @@ export default class Layout extends Vue {
 
 .ml .popup-background { position: absolute; backdrop-filter: blur(10px); top:0; left:0; right:0; bottom:0; z-index: 1000 }
 .ml .popup-background .popup-box { position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); padding:20px 12px; min-width:240px; }
-.ml .popup-background .popup-box .title { font-size:13px; margin-bottom:20px; }
 .ml .popup-background .popup-box .center { text-align: center }
 .ml .popup-background .popup-box input { line-height: 32px; height:32px; text-align: center }
 .ml .popup-background .popup-box input[type=password] { width:70%; }
@@ -252,7 +252,7 @@ html.modding #nav-tool { transition: background .4s }
 html.light { background: #f4f4f4; }
 html.light .ml a { color:#48659a }
 html.light,
-html.light .ml .a-text-style a { color:#333; text-decoration: none }
+html.light .ml .a-text-style a { color:#444; text-decoration: none }
 html.light .ml .x-tag { border-color:#eee; }
 html.light table td,
 html.light table th,
@@ -260,64 +260,67 @@ html.light .basic-border-color { border-color: #e8e8e8 }
 html.light ::-webkit-scrollbar-track{ background-color:#fafafa }
 html.light ::-webkit-scrollbar-thumb{ background-color:rgba(197, 197, 197, 0.3) }
 html.light ::-webkit-scrollbar-thumb:hover{ background-color:rgba(80, 80, 80, 0.3); }
-html.light abbr { color:#ab1d1d }
 html.light #nav { background: #fff }
 html.light #nav-tool { background: rgba(255, 255, 255, 0.4); }
 html.light #nav-tool .sign { color:#ccc; }
 html.light #nav-tool,
-html.light #nav-tool a { color:#444 }
+html.light #nav-tool a { color:#555 }
 html.light .base-mat { background: #fff }
 html.light .mono-area input[type=text],
 html.light .mono-area input[type=password],
 html.light .mono-area input[type=text]:-webkit-autofill,
 html.light .mono-area input[type=password]:-webkit-autofill,
 html.light .std-inp-txt {
-  background: #fff; color:#333;
+  background: #fff; color:#444;
   box-shadow: 0 0 0 30px #fff inset !important;
-  -webkit-text-fill-color: #333 !important;
+  -webkit-text-fill-color: #444 !important;
 }
 html.light .mono-area input[type=button],
-html.light input.std-inp-btn { background: #4f5677; color:#fff }
+html.light input.std-inp-btn { background: #7994b5; color:#fff }
 html.light .popup-background .popup-box { background: #fff; border:1px solid #276998; }
 html.light .popup-background .popup-box input[type=password] { border:1px solid #ddd }
 html.light .search-box input[type=text] { border:4px solid #5c8dbf; }
 html.light .search-box input[type=button] { border:0; color:#fff; background: #5c8dbf }
+html.light .ml .doc-title { border-bottom: 1px solid #276998; }
+html.light .ml .doc-title,
+html.light .ml .doc-title a { color: #276998;  }
 
 
   /* dark mode */
-html.dark { background: #000; }
+html.dark { background: #151515; }
 html.dark .ml a { color:#9aacc7 }
 html.dark,
 html.dark .ml .a-text-style a { color:#999; text-decoration: none }
-html.dark .ml .x-tag { border-color:#222; }
+html.dark .ml .x-tag { border-color:#333; }
 html.dark table td,
 html.dark table th,
 html.dark .basic-border-color { border-color: #282828 }
-html.dark ::-webkit-scrollbar-track{ background-color:#111 }
+html.dark ::-webkit-scrollbar-track{ background-color:#222 }
 html.dark ::-webkit-scrollbar-thumb{ background-color:rgba(120, 120, 120, 0.3) }
 html.dark ::-webkit-scrollbar-thumb:hover{ background-color:rgba(180, 180, 180, 0.3) }
-html.dark abbr { color:#e46c6c }
 html.dark #nav-tool { background: rgba(0, 0, 0, 0.45); }
-html.dark #nav { background: #151515 }
+html.dark #nav { background: #222 }
 html.dark #nav-tool .sign { color:#555; }
 html.dark #nav-tool,
 html.dark #nav-tool a { color:#999 }
-html.dark .base-mat { border:1px solid #222 }
+html.dark .base-mat { border:1px solid #333 }
 html.dark .mono-area input[type=text],
 html.dark .mono-area input[type=password],
 html.dark .mono-area input[type=text]:-webkit-autofill,
 html.dark .mono-area input[type=password]:-webkit-autofill,
 html.dark .std-inp-txt {
-  background: #000; color:#aaa;
-  box-shadow: 0 0 0 30px #000 inset !important;
+  background: #111; color:#aaa;
+  box-shadow: 0 0 0 30px #111 inset !important;
   -webkit-text-fill-color: #aaa !important;
 }
 html.dark .mono-area input[type=button],
-html.dark input.std-inp-btn { background: #999; color:#000; }
+html.dark input.std-inp-btn { background: #333; color:#aaa; }
 html.dark .popup-background .popup-box { background: #000; border:1px solid #276998; }
-html.dark .popup-background .popup-box input[type=password] { border:1px solid #333 }
-html.dark .search-box input[type=text] { border:4px solid #333; }
-html.dark .search-box input[type=button] { border:0; color:#aaa; background: #333 }
-
+html.dark .popup-background .popup-box input[type=password] { border:1px solid #444 }
+html.dark .search-box input[type=text] { border:4px solid #444; }
+html.dark .search-box input[type=button] { border:0; color:#aaa; background: #444 }
+html.dark .ml .doc-title { border-bottom: 1px solid #aaa; }
+html.dark .ml .doc-title,
+html.dark .ml .doc-title a { color: #999;  }
 
 </style>

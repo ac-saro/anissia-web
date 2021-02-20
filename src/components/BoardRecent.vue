@@ -48,7 +48,7 @@ export default class BoardRecent extends Vue {}
   .bbs-recent .mob-hide { display: none }
 }
 
-html.light .bbs-recent .topics td a { color:#333 }
+html.light .bbs-recent .topics td a { color:#444 }
 
-html.dark .bbs-recent .topics td a { color:#aaa }
+html.dark .bbs-recent .topics td a { color:#999 }
 </style>

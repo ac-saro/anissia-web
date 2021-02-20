@@ -64,11 +64,11 @@
 #admin-caption table.caption .now { width:40px; }
 #admin-caption table.caption .website { width:100%; }
 
-html.light #admin-caption input { color:#333 }
+html.light #admin-caption input { color:#444 }
 html.light #admin-caption table.tab .select div { background: #f7f7f7 }
 
 html.dark #admin-caption input { color:#999 }
-html.dark #admin-caption table.tab .select div { background: #111 }
+html.dark #admin-caption table.tab .select div { background: #222 }
 
 </style>
 

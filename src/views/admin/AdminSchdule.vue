@@ -52,13 +52,13 @@
   #admin-schedule table.list td.genres { display: none }
 }
 
-html.light #admin-schedule input { color:#333 }
+html.light #admin-schedule input { color:#444 }
 html.light #admin-schedule .prefix b { color:#b55f5f }
 html.light #admin-schedule table.tab .select div { background: #f7f7f7 }
 
 html.dark #admin-schedule input { color:#999 }
 html.dark #admin-schedule .prefix b { color:#b55f5f }
-html.dark #admin-schedule table.tab .select div { background: #111 }
+html.dark #admin-schedule table.tab .select div { background: #222 }
 
 </style>
 

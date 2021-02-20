@@ -75,11 +75,11 @@ export default class Pagination extends Vue {
 html.light .pagination .page-area { border:1px solid #eee; }
 html.light .pagination .page-area.page-disabled { color:#999 }
 html.light .pagination .page-area.page-now { color: #227fc1; font-weight: bold; }
-html.light .pagination a.page-area { color:#333 }
+html.light .pagination a.page-area { color:#444 }
 html.light .pagination a.page-area:hover { color:#227fc1 }
 
-html.dark .pagination .page-area { border:1px solid #111; }
-html.dark .pagination .page-area.page-disabled { color:#444 }
+html.dark .pagination .page-area { border:1px solid #222; }
+html.dark .pagination .page-area.page-disabled { color:#555 }
 html.dark .pagination .page-area.page-now { color: #227fc1; font-weight: bold; }
 html.dark .pagination a.page-area { color:#aaa }
 html.dark .pagination a.page-area:hover { color:#227fc1 }

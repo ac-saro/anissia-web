@@ -21,8 +21,8 @@
             <div class="post-info-left">{{node.isNew ? user.name : node.name}}</div>
             <div class="post-info-right">
               <span v-if="node.regDtText">{{node.regDtText}}</span>
-              <span v-if="node.isViewMode && (node.name == user.name || user.isAdmin)" class="info-btn" @click="node.isViewMode = false">수정</span>
-              <span v-if="node.isViewMode && (node.name == user.name || user.isAdmin)" class="info-btn" @click="node.root ? deleteTopic(node) : deletePost(node)">삭제</span>
+              <span v-if="node.isViewMode && node.name == user.name" class="info-btn" @click="node.isViewMode = false">수정</span>
+              <span v-if="node.isViewMode && (node.name == user.name || user.isRoot)" class="info-btn" @click="node.root ? deleteTopic(node) : deletePost(node)">삭제</span>
               <span v-if="!node.isViewMode && node.postNo != 0" class="info-btn" @click="node.root ? updateTopic(node) : updatePost(node)">수정완료</span>
               <span v-if="!node.isViewMode && node.postNo == 0" class="info-btn" @click="node.root ? createTopic(node) : createPost(node)">작성완료</span>
             </div>
@@ -54,7 +54,7 @@
         <th class="name">작성자</th>
         <th class="date">날짜</th>
       </tr>
-      <tr v-for="node in list.content" :key="node.topicNo">
+      <tr v-for="node in list.content" :key="node.topicNo" :class="({sel: node.topicNo == topicNo})">
         <td class="seq mob-hide">{{node.topicNo}}</td>
         <td class="post mob-hide">{{node.postCount}}</td>
         <td class="subject">
@@ -259,8 +259,8 @@ export default class Board extends Vue {
 .board .fo { overflow: auto; }
 .board .fl { float:left; }
 .board .fr { float:right; text-align: right }
-.board .doc-title {color: #276998; font-size: 20px; border-bottom: 1px solid #276998; }
-.board .doc-title .fl { padding: 6px 8px 8px; }
+.board .doc-title { padding:0 !important; overflow: auto }
+.board .doc-title .fl { padding: 6px 8px 10px; }
 .board .doc-title .fr { padding:5px 4px 0 0; }
 .board table.list { width:100%; margin:16px 0 20px; }
 .board table.list th { border-bottom-width: 1px; padding: 8px 0; font-size: 12px; }
@@ -272,6 +272,7 @@ export default class Board extends Vue {
 .board table.list td.subject { padding-left:8px; }
 .board table.list td.name { width:130px; }
 .board table.list td.date { width:130px }
+.board table.list tr.sel td { font-weight: bold }
 
 .board .board-view { margin-bottom: 120px; }
 .board .board-view .empty-content { text-align: center; padding:140px 0 80px; }
@@ -286,9 +287,9 @@ export default class Board extends Vue {
 .board .board-view .post-info .info-btn { cursor: pointer }
 .board .board-view .post-info .info-btn:hover { text-decoration: underline }
 .board .board-view .node-content { font-size:14px; line-height: 1.8; padding:8px; }
-.board .board-view .node-content hr { border: 1px dashed #777; border-width: 1px 0 0 0; }
+.board .board-view .node-content hr { border-width: 1px 0 0 0; }
 .board .board-view table th,
-.board .board-view table td { border: 1px solid #aaa; padding:8px; }
+.board .board-view table td { border-width: 1px; padding:8px; }
 
 
 @media (min-width: 701px) {

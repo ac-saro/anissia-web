@@ -104,7 +104,7 @@ export default class Sc2009 extends Vue {
 
 <style>
 #sc2009 {
-  position: absolute; top:0; right:0; bottom:0; left:0; background-color: #333;
+  position: absolute; top:0; right:0; bottom:0; left:0; background-color: #444;
   background-image: url(~@/assets/schedule/2009-bg.jpg); background-repeat: no-repeat;
   font-family: "Malgun Gothic", "Dotum"; min-width:530px; color:#000;
 }
@@ -133,10 +133,10 @@ export default class Sc2009 extends Vue {
   background-color: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center;
 }
 #sc2009 .popup .box { background-color:rgba(255, 255, 255, 0.85); line-height: 1.5; padding: 18px 18px 18px; }
-#sc2009 .popup .box a { color: #333; }
+#sc2009 .popup .box a { color: #444; }
 #sc2009 .popup .box a.official { color: #d43676; font-size:14px; }
 #sc2009 .popup .box div.caption { padding: 4px 8px 3px; font-size: 12px; margin-top: 3px; color: #4354ab; }
 #sc2009 .popup .box div.caption > span { margin:0 4px; font-weight: normal; color: #000; }
 #sc2009 .popup .box div.caption:hover { background: #fff; }
-#sc2009 .popup .box div.non-caption { color:#333; padding: 14px 24px; font-weight: normal; font-size:12px; }
+#sc2009 .popup .box div.non-caption { color:#444; padding: 14px 24px; font-weight: normal; font-size:12px; }
 </style>

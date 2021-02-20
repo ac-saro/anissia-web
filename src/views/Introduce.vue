@@ -132,10 +132,8 @@ export default class Introduce extends Vue {
 <style>
 #introduce { font-family: "Malgun Gothic", "Dotum"; }
 #introduce .base-mat { padding: 12px; }
-#introduce .doc-title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
 #introduce .doc-desc { margin: 12px 8px; font-size:14px; line-height: 1.8; }
 #introduce table.intro-table { margin:16px 4px; }
-#introduce table.intro-table th { color:#2a4c8c }
 #introduce table.intro-table th, #introduce table.intro-table td { padding:6px 12px; font-weight: normal; line-height: 1.8; font-size:15px; border-width:1px; }
 
 #introduce .gallery { padding-top:12px; display: flex; justify-content: flex-start; flex-flow: row wrap; }

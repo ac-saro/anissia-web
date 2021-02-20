@@ -250,7 +250,6 @@ export default class Anime extends Vue {
 <style>
 
 #anime .base-mat { padding: 8px; }
-#anime .doc-title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
 #anime .anime-view-error { font-size:24px; text-align: center; line-height: 2; margin:50px 0 70px; }
 #anime .anime-empty { text-align: center; padding: 200px 0; }
 
@@ -282,9 +281,9 @@ export default class Anime extends Vue {
 
 html.light #anime .search .autocorrect .autocorrect-box { background: rgba(255, 255, 255, .7); border:1px solid #eee; }
 html.light #anime .search .autocorrect div.node span { color:#2f7cbd }
-html.light #anime table.list a { color:#333; text-decoration: none }
+html.light #anime table.list a { color:#444; text-decoration: none }
 
-html.dark #anime .search .autocorrect .autocorrect-box { background: rgba(0, 0, 0, .7); border:1px solid #222; }
+html.dark #anime .search .autocorrect .autocorrect-box { background: rgba(0, 0, 0, .7); border:1px solid #333; }
 html.dark #anime .search .autocorrect div.node span { color:#2e7bb5 }
 html.dark #anime table.list a { color:#aaa; text-decoration: none }
 

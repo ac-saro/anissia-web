@@ -388,7 +388,6 @@ export default class Schedule extends Vue {
 <style>
 #schedule { font-family: "Malgun Gothic", "Dotum"; }
 #schedule .base-mat { padding:8px; }
-#schedule .doc-title { font-size: 20px; border-bottom: 1px solid #276998; color: #276998; padding: 6px 8px 8px; }
 #schedule .doc-desc { padding: 12px 8px; line-height: 1.8; margin-bottom: 8px }
 #schedule .doc-desc .desc-comment { font-size:13px; opacity: .8; padding: 2px 0 10px; }
 #schedule .schedule-docs-header { padding:2px 0 0; overflow: auto }
@@ -444,14 +443,14 @@ export default class Schedule extends Vue {
 }
 
 
-html.light #schedule .html-gen input, html.light #schedule .html-gen textarea { border:1px solid #ddd; background: #fff; color:#333 }
+html.light #schedule .html-gen input, html.light #schedule .html-gen textarea { border:1px solid #ddd; background: #fff; color:#444 }
 html.light #schedule .html-gen .tool .line .color:not(.blank) { border:1px solid #ddd }
 html.light #schedule .html-gen .tool-preview { background: #eee }
 
 
-html.dark #schedule .html-gen input, html.dark #schedule .html-gen textarea { border:1px solid #333; background: #000; color:#aaa }
-html.dark #schedule .html-gen .tool .line .color:not(.blank) { border:1px solid #222 }
-html.dark #schedule .html-gen .tool-preview { background: #12151b }
+html.dark #schedule .html-gen input, html.dark #schedule .html-gen textarea { border:1px solid #444; background: #000; color:#aaa }
+html.dark #schedule .html-gen .tool .line .color:not(.blank) { border:1px solid #333 }
+html.dark #schedule .html-gen .tool-preview { background: #222 }
 
 html.dark #schedule table.schedule-application .pmark { opacity: .8 }
 
