@@ -90,7 +90,7 @@
           <!-- list -->
           <div>
             <table class="list">
-              <tr v-for="node in list.content" :key="node.animeNo">
+              <tr v-for="node in list.content" :key="node.animeNo" :class="({sel: node.animeNo == animeNo})">
                 <td class="anime-no">{{node.animeNo}}</td>
                 <td class="main">
                   <div class="subject"><router-link :to="hrefList(node.animeNo)">{{node.subject}}</router-link></div>
@@ -147,7 +147,7 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
   },
   methods: {
     load() {
-      const animeNo = Nabi.address().getIntParameter("animeNo");
+      const animeNo = this.animeNo = Nabi.address().getIntParameter("animeNo");
       this.query = (Nabi.address().getParameter("q") || '').trim();
       this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
       const pageQuery = `${this.page} ${this.query}`;
@@ -234,6 +234,7 @@ export default class Anime extends Vue {
   data() {
     return {
       anime: null as any,
+      animeNo: -1,
       query: '',
       autoQuery: '',
       autoList: [],
@@ -260,6 +261,7 @@ export default class Anime extends Vue {
 #anime table.list td.anime-no { text-align: center; width:60px; }
 #anime table.list td div.subject { font-size:15px; padding-top:2px; }
 #anime table.list td div.info { padding:4px 0 2px; }
+#anime table.list tr.sel td { font-weight: bold }
 
 #anime .view { padding: 8px 8px 40px; }
 #anime .view table.view-info { min-width:400px }
