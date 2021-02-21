@@ -20,6 +20,7 @@ import AdminCaption from "@/views/admin/AdminCaption.vue";
 import AdminSchdule from "@/views/admin/AdminSchdule.vue";
 import AdminAnime from "@/views/admin/AdminAnime.vue";
 import AdminPanel from "@/views/admin/AdminPanel.vue";
+import TranslatorApply from "@/views/TranslatorApply.vue";
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -39,6 +40,7 @@ const router = createRouter({
           { path: '/', component: Home },
           { path: '/schedule', component: Schedule },
           { path: '/anime', component: Anime },
+          { path: '/translator/apply', component: TranslatorApply },
           { path: '/introduce', component: Introduce },
           { path: '/notice', component: Notice },
           { path: '/inquiry', component: Inquiry },

@@ -47,6 +47,7 @@
         <div class="menu">
           <div><router-link to="/schedule"><div class="nav-tool-item"><img src="@/assets/layout/nav/schedule.svg" alt=""/> 애니 편성표</div></router-link></div>
           <div><router-link to="/anime"><div class="nav-tool-item"><img src="@/assets/layout/nav/anime.svg" alt=""/> 애니 정보</div></router-link></div>
+          <div><router-link to="/translator/apply"><div class="nav-tool-item"><img src="@/assets/layout/nav/anime.svg" alt=""/> 자막제작자 신청</div></router-link></div>
         </div>
 
         <div class="doc-title">일반메뉴</div>
