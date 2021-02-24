@@ -286,7 +286,7 @@ export default class Board extends Vue {
 .board .board-view .post-info .post-info-right > span { margin-right: 8px; vertical-align: top; font-size:14px; }
 .board .board-view .post-info .info-btn { cursor: pointer }
 .board .board-view .post-info .info-btn:hover { text-decoration: underline }
-.board .board-view .node-content { font-size:14px; line-height: 1.8; padding:8px; }
+.board .board-view .node-content { font-size:14px; line-height: 1.8; padding: 0px 6px 20px; }
 .board .board-view .node-content hr { border-width: 1px 0 0 0; }
 .board .board-view table th,
 .board .board-view table td { border-width: 1px; padding:8px; }
