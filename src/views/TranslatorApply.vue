@@ -21,59 +21,66 @@
                 <li>자막 도용시 추후에 적발되더라도 권한이 회수될 수 있습니다.</li>
               </ul>
               <div class="sign">
-                <label><input type="checkbox" /> 위 사항을 읽고 확인하였습니다.</label>
+                <label><input type="checkbox" v-model="neo.agree" /> 위 사항을 읽고 확인하였습니다.</label>
               </div>
             </div>
 
             <div class="report">
               <div class="subject">블로그주소</div>
               <div class="pad">
-                <input type="text" class="std-inp-txt basic-border-color" placeholder="http://example-blog.com - 동일작 기준 4편이상 자막 확인을 위한 블로그 주소 입력" />
+                <input type="text" v-model="neo.website" class="std-inp-txt basic-border-color" placeholder="http://example-blog.com - 동일작 기준 4편이상 자막 확인을 위한 블로그 주소 입력" />
               </div>
 
             </div>
 
             <div class="submit">
-              <input class="std-inp-btn" type="button" value="신청하기"/>
+              <input class="std-inp-btn" type="button" @click="createApply()" value="신청하기"/>
             </div>
           </div>
           <!-- view -->
-          <div v-if="applyNo != 0" class="view">
-            <div class="subject">자막제작자 신청 진행사항</div>
-            <div>
-              <table class="report">
-                <tr><th>심사번호</th><td>11</td></tr>
-                <tr><th>상태</th><td>11</td></tr>
-                <tr><th>신청자</th><td>11</td></tr>
-                <tr><th>블로그주소</th><td>11</td></tr>
-              </table>
+          <div v-if="view != null">
+            <div v-if="view.applyNo > 0" class="view">
+              <div class="subject">자막제작자 신청 진행사항</div>
+              <div>
+                <table class="report">
+                  <tr><th>신청일자</th><td>{{ view.regDtText }}</td></tr>
+                  <tr><th>심사번호</th><td>{{ view.applyNo }}</td></tr>
+                  <tr><th>상태</th><td>{{ view.resultText }}</td></tr>
+                  <tr><th>신청자</th><td>{{ view.name }}</td></tr>
+                  <tr><th>블로그주소</th><td><a :href="view.website" target="_blank">{{ view.website }}</a></td></tr>
+                </table>
 
+              </div>
+
+              <div>
+                <table>
+                  <tr>
+                    <td>의견</td>
+                    <td>박용서: 가나다라마바바사</td>
+                  </tr>
+                </table>
+              </div>
             </div>
-
-            <div>
-              <table>
-                <tr>
-                  <td>의견</td>
-                  <td>박용서: 가나다라마바바사</td>
-                </tr>
-              </table>
+            <div v-else>
+              <div class="empty-content">존재하지 않거나 삭제된 신청내역입니다.</div>
             </div>
           </div>
+
 
           <!-- list -->
           <div>
             <table class="list">
-              <tr v-for="node in list.content" :key="node.animeNo" :class="({sel: node.animeNo == animeNo})">
-                <td class="anime-no">{{node.animeNo}}</td>
-                <td class="main">
-                  <div class="subject"><router-link :to="hrefList(node.animeNo)">{{node.subject}}</router-link></div>
-                  <div class="info a-text-style">
-                    <span class="x-tag" v-for="tag in node.info" :key="tag">{{tag}}</span>
-                    <span class="x-tag" v-for="tag in node.genres.split(/,/g)" :key="tag"><router-link :to="`/anime?q=%23${encodeURIComponent(tag)}`">{{tag}}</router-link></span>
-                    <span class="x-tag" v-if="node.website"><a :href="node.website" target="_blank" class="fas fa-home"></a></span>
-                    <span class="x-tag" v-if="node.captionCount"><span class="fas fa-closed-captioning">&nbsp;{{node.captionCount}}</span></span>
-                  </div>
-                </td>
+              <tr>
+                <th>번호</th>
+                <th>상태</th>
+                <th>제목</th>
+                <th>등록일</th>
+              </tr>
+              <tr v-for="node in list.content" :key="node.applyNo" :class="({sel: node.applyNo == applyNo})">
+                <td class="no">{{node.applyNo}}</td>
+                <td class="st">{{node.resultText}}</td>
+                <td class="app"><router-link :to="hrefList(node.applyNo)"><b>{{node.name}}</b>님의 자막제작자 권한 신청서</router-link></td>
+                <td class="date">{{node.regDyText}}</td>
               </tr>
             </table>
           </div>
@@ -104,6 +111,7 @@ import PageData from "@/models/PageData";
 import Pagination from "@/components/Pagination.vue";
 import AnimeService from "@/service/AnimeService";
 import AnissiaUtil from "@/utils/AnissiaUtil";
+import TranslatorService from "@/service/TranslatorService";
 
 @Options({
   components: {
@@ -124,34 +132,26 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
     }
   },
   methods: {
+    loadClear() {
+      this.page = -1;
+    },
     load() {
-      const applyNo = this.applyNo = Nabi.address().getIntParameter("applyNo");
-      this.query = (Nabi.address().getParameter("q") || '').trim();
-      this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
-      const pageQuery = `${this.page} ${this.query}`;
-      this.autoIndex = -1;
-      this.autoOn = false;
-      if (this.query != this.autoQuery) {
-        this.autoList = [];
-      }
+      const applyNo = this.applyNo = Nabi.address().getIntParameter("applyNo", -1);
+      const page = Nabi.address().getIntParameter("page", 1) - 1;
 
       // view
       if (applyNo > 0) {
-        AnimeService.getAnime(applyNo, anime => {
-          AnimeService.toInfo(anime);
-          this.anime = anime;
+        TranslatorService.getApply(applyNo, view => {
+          this.view = view;
         });
       } else {
-        this.anime = null;
+        this.view = null;
       }
 
       // list
-      if (this.pageQuery != pageQuery) {
-        this.pageQuery = pageQuery;
-        AnimeService.getList(this.query, this.page, list => {
-          list.content.forEach(e => e.info = AnimeService.toInfo(e));
-          this.list = list;
-        });
+      if (this.page != page) {
+        this.page = page;
+        TranslatorService.getApplyList(page, list => this.list = list);
       }
     },
     hasPer(action: string, node: (any | null) = null) {
@@ -163,73 +163,40 @@ import AnissiaUtil from "@/utils/AnissiaUtil";
       //
       // }
     },
-    autocorrect(event: KeyboardEvent) {
-      const word = (event.target as any).value;
-      if (this.autoQuery != word) {
-        this.autoQuery = word;
-        this.autoOn = true;
-        AnimeService.getAnimeAutocorrect(word, list => this.autoList = AnissiaUtil.highlight(word, list))
+    createApply() {
+      if (!this.neo.agree) {
+        alert('자막제작자 신청 동의사항을 읽고 동의해주세요.');
+        return;
       }
+      TranslatorService.createApply(this.neo.website, res => {
+        if (res.st == 'OK') {
+          this.loadClear();
+          this.$router.push(`?applyNo=${res.data}`)
+        } else {
+          alert(res.msg);
+        }
+      });
     },
-    keyAutocorrect(event: KeyboardEvent) {
-      const key = event.key;
-      const len = this.autoList.length;
-
-      switch (key) {
-        case 'ArrowUp':
-          if (len) {
-            event.preventDefault();
-            if (this.autoIndex == -1) { this.autoIndex = len -1; } else { this.autoIndex--; }
-          }
-          return;
-        case 'ArrowDown':
-          if (len) {
-            event.preventDefault();
-            if (this.autoIndex >= (len -1)) { this.autoIndex = -1; } else { this.autoIndex++; }
-          }
-          return;
-        case 'Enter':
-          if (!this.autoList || this.autoIndex == -1) {
-            this.search();
-          } else {
-            this.$router.push(`/anime?animeNo=${this.autoList[this.autoIndex].key}`)
-          }
-          return;
-      }
-    },
-    clickAutocorrect(event: MouseEvent) {
-      this.autoOn = Nabi.matchesParents(event.target, ['#tr-apply .search']) != '';
-    },
-    hrefList(animeNo: number) {
-      return Nabi.address().setParameter('animeNo', animeNo).href;
+    hrefList(applyNo: number) {
+      return Nabi.address().setParameter('applyNo', applyNo).href;
     },
     hrefPage(index: number) {
-      return Nabi.address().deleteParameter('animeNo').setParameter('page', index + 1).href;
+      return Nabi.address().deleteParameter('applyNo').setParameter('page', index + 1).href;
     },
-    search() {
-      const q = this.query.trim();
-      if (q) {
-        this.$router.push(Nabi.address().deleteParameter(['page', 'animeNo']).setParameter('q', q).href);
-      } else {
-        this.$router.push('/anime');
-      }
-    }
   }
 })
 
 export default class TranslatorApply extends Vue {
   data() {
     return {
-      view: null as any,
+      neo: {
+        agree: false,
+        website: '',
+      },
       applyNo: -1,
-      query: '',
-      autoQuery: '',
-      autoList: [],
-      autoOn: false,
-      autoIndex: -1,
-      page: 0,
-      pageQuery: '',
-      list: new PageData()
+      view: null as any,
+      page: -1,
+      list: new PageData(),
     };
   }
 }
@@ -256,55 +223,30 @@ export default class TranslatorApply extends Vue {
 #tr-apply .app .report .info { font-size:14px; opacity: .8 }
 #tr-apply .app .submit { padding:36px 4px 48px; }
 #tr-apply .app .submit input { padding:0 24px; border:0; }
+#tr-apply .empty-content { text-align: center; padding:140px 0; }
 
+#tr-apply .view { padding:0 0 80px; }
 #tr-apply .view .subject { font-size:18px; font-weight: bold; padding:18px 4px 10px; }
+#tr-apply .view table { font-size:15px; }
 #tr-apply .view table.report { min-width:40%; margin: 12px 0 20px; }
 #tr-apply .view table.report th { width:100px; text-align: left }
 #tr-apply .view table.report th,
 #tr-apply .view table.report td{ border-width: 1px; padding: 8px 12px }
 
-
-
 #tr-apply table { }
-#tr-apply table.list { margin-top:6px;  width:100% }
-#tr-apply table.list th { height:40px;  }
-#tr-apply table.list td { font-size:13px; padding:10px 4px; border-top-width: 1px; line-height: 1.5 }
-#tr-apply table.list td.anime-no { text-align: center; width:60px; }
-#tr-apply table.list td div.subject { font-size:15px; padding-top:2px; }
-#tr-apply table.list td div.info { padding:4px 0 2px; }
+#tr-apply table.list { margin:16px 0 20px;  width:100% }
+#tr-apply table.list th { border-bottom-width: 1px; padding: 8px 0; font-size: 12px; }
+#tr-apply table.list td { font-size:13px; padding:12px 0; border-top-width: 1px; line-height: 2 }
+#tr-apply table.list td { text-align: center;  }
+#tr-apply table.list td.no { width:60px; }
+#tr-apply table.list td.st { width:60px; }
+#tr-apply table.list td.app { padding:0 20px; }
+#tr-apply table.list td.date { width:130px  }
 #tr-apply table.list tr.sel td { font-weight: bold }
 
-#tr-apply .view { padding: 8px 8px 40px; }
-#tr-apply .view table.view-info { min-width:400px }
-#tr-apply .view .title { line-height: 2; font-size:20px; font-weight: bold; padding:8px 2px 12px; }
-#tr-apply .view .in-tag:not(:first-child):before { content: ', ' }
-#tr-apply .view table.basic-info tr.basic-info-tr > td { border-width: 1px; line-height: 32px; padding:8px 16px }
-#tr-apply .view .caption-title { line-height: 2; font-size:18px; font-weight: bold; padding:14px 2px 12px; }
-#tr-apply .view .caption table th,
-#tr-apply .view .caption table td { border-width: 1px; padding:8px 16px; text-align: center }
-
-#tr-apply .search { padding: 40px 40px; }
-#tr-apply .search .search-box { }
-#tr-apply .search .search-box input { width:100%; height:40px; padding:0 8px; font-size:16px; }
-#tr-apply .search .autocorrect { height:0; font-size:15px; }
-#tr-apply .search .autocorrect .autocorrect-box { position: relative; backdrop-filter:blur(3px);border-width: 0 1px 1px;}
-#tr-apply .search .autocorrect div.node { padding:8px 12px; }
-#tr-apply .search .autocorrect div.node.sel,
-#tr-apply .search .autocorrect div.node:hover { font-weight: bold; }
-
-html.light #tr-apply .search .autocorrect .autocorrect-box { background: rgba(255, 255, 255, .7); border:1px solid #eee; }
-html.light #tr-apply .search .autocorrect div.node span { color:#2f7cbd }
 html.light #tr-apply table.list a { color:#444; text-decoration: none }
 
-html.dark #tr-apply .search .autocorrect .autocorrect-box { background: rgba(0, 0, 0, .7); border:1px solid #333; }
-html.dark #tr-apply .search .autocorrect div.node span { color:#2e7bb5 }
 html.dark #tr-apply table.list a { color:#aaa; text-decoration: none }
 
-@media (max-width: 800px) {
-  #tr-apply .mob-hide { display: none; }
-  #tr-apply .search { padding:10px 0 6px; }
-  #tr-apply .search .autocorrect div.node { padding:16px; }
-  #tr-apply .view table.view-info { width:100% }
-}
 
 </style>
