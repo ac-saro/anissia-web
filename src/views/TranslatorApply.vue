@@ -6,7 +6,7 @@
 
           <div class="doc-title fo">
             <div class="fl">자막제작자 신청</div>
-            <div v-if="applyNo == -1 && hasPer('apply')" class="fr"><input type="button" class="std-inp-btn" value="글쓰기" @click="$router.push('?applyNo=0')"/></div>
+            <div v-if="applyNo == -1 && hasPer('apply')" class="fr"><input type="button" class="std-inp-btn" value="신청하기" @click="$router.push('?applyNo=0')"/></div>
             <div v-if="applyNo > 0" class="fr"><input type="button" class="std-inp-btn" value="목록" @click="$router.push($route.path)"/></div>
           </div>
 
