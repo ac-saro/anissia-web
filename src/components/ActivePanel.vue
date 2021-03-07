@@ -62,7 +62,6 @@ import AdminService from "@/service/AdminService";
       this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
       ActivePanelService.getList(this.page, this.admin ? 'admin' : 'public', list => this.list = list);
       if (this.$route.path.startsWith("/admin")) {
-        console.log(11)
         AdminService.getTranslatorApplyCount(count => this.translatorApplyCount = count);
       }
     },
