@@ -60,6 +60,23 @@
                   </tr>
                 </table>
               </div>
+              <div>
+                asdf
+              </div>
+              <div v-if="view.name == user.name">
+                <div>
+                  <input type="radio" name="poll" /><label id="aa">ㅇ1ㄹ</label>
+                  <input type="radio" name="poll" /><label id="aa">ㅇ2ㄹ</label>
+                  <input type="radio" name="poll" /><label id="aa">ㅇ3ㄹ</label>
+                </div>
+                <div>
+                  <input type="text" />
+                </div>
+              </div>
+              <div v-if="view.name == user.name">
+                <input type="text" />
+              </div>
+
             </div>
             <div v-else>
               <div class="empty-content">존재하지 않거나 삭제된 신청내역입니다.</div>
