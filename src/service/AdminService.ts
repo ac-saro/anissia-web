@@ -13,6 +13,10 @@ export default class AdminService {
     fetch(`/api/admin/anime/delist`).then(e => e.json()).then(data => callback(PageData.cast(data, (e: any) => AnimeService.norAnime(e))));
   }
 
+  public static getTranslatorApplyCount(callback: (count: number) => void): void {
+    fetch(`/api/admin/translator/apply/count`).then(e => e.json()).then(data => callback(data.count));
+  }
+
   public static getSchedule(week: string, callback: (list: any[]) => void): void {
     fetch(`/api/admin/schedule/${week}`).then(e => e.json()).then(list => callback(list.map((e: any) => AnimeService.norAnime(e, week))));
   }

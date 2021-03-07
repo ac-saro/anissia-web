@@ -49,32 +49,31 @@
                   <tr><th>신청자</th><td>{{ view.name }}</td></tr>
                   <tr><th>블로그주소</th><td><a :href="view.website" target="_blank">{{ view.website }}</a></td></tr>
                 </table>
-
               </div>
 
               <div>
-                <table>
-                  <tr>
-                    <td>의견</td>
-                    <td>박용서: 가나다라마바바사</td>
+                <table class="poll-table">
+                  <tr v-for="node in view.polls" :key="node.no">
+                    <td class="main"><b>{{node.name}}</b> <b v-if="node.voteText">[{{node.voteText}}]</b> : {{node.comment}}</td>
+                    <td class="date">{{node.regDyText}}</td>
                   </tr>
                 </table>
               </div>
-              <div>
-                asdf
-              </div>
-              <div v-if="view.name == user.name">
-                <div>
-                  <input type="radio" name="poll" /><label id="aa">ㅇ1ㄹ</label>
-                  <input type="radio" name="poll" /><label id="aa">ㅇ2ㄹ</label>
-                  <input type="radio" name="poll" /><label id="aa">ㅇ3ㄹ</label>
+
+              <div v-if="view.status == 'ACT'">
+                <div v-if="user.isAdmin" class="poll basic-border-color">
+                  <div class="poll-point">
+                    <input type="radio" name="poll" id="pool-p" v-model="poll.point" value="1" /><label for="pool-p" class="fas fa-thumbs-up" title="찬성"></label>
+                    <input type="radio" name="poll" id="pool-m" v-model="poll.point" value="-1" /><label for="pool-m" class="fas fa-thumbs-down" title="반대"></label>
+                    <input type="radio" name="poll" id="pool-o" v-model="poll.point" value="0" /><label for="pool-o" class="fas fa-comment-dots" title="의견"></label>
+                  </div>
+                  <div class="poll-comment">
+                    <input type="text" class="std-inp-txt" @keyup.enter="createPoll(poll.point)" v-model="poll.comment" placeholder="찬성/반대/의견 아이콘 선택 후 글을 쓴 후 엔터" maxlength="64"/>
+                  </div>
                 </div>
-                <div>
-                  <input type="text" />
+                <div v-else-if="view.name == user.name" class="poll basic-border-color">
+                  <div><input type="text" class="std-inp-txt" @keyup.enter="createPoll('0')" v-model="poll.comment" placeholder="의견 작성 후 엔터 (의견제출)" maxlength="64"/></div>
                 </div>
-              </div>
-              <div v-if="view.name == user.name">
-                <input type="text" />
               </div>
 
             </div>
@@ -100,10 +99,6 @@
                 <td class="date">{{node.regDyText}}</td>
               </tr>
             </table>
-          </div>
-
-          <div class="anime-empty" v-if="list.content.length == 0">
-            해당하는 애니메이션이 존재하지 않습니다.
           </div>
 
           <!-- page -->
@@ -194,6 +189,18 @@ import TranslatorService from "@/service/TranslatorService";
         }
       });
     },
+    createPoll(point: string) {
+      const comment = this.poll.comment;
+      this.poll.comment = '';
+      TranslatorService.createApplyPoll(this.applyNo, { point, comment }, res => {
+        if (res.st == 'OK') {
+          this.loadClear();
+          this.load();
+        } else {
+          alert(res.msg);
+        }
+      });
+    },
     hrefList(applyNo: number) {
       return Nabi.address().setParameter('applyNo', applyNo).href;
     },
@@ -209,6 +216,10 @@ export default class TranslatorApply extends Vue {
       neo: {
         agree: false,
         website: '',
+      },
+      poll: {
+        point: '0',
+        comment: ''
       },
       applyNo: -1,
       view: null as any,
@@ -249,6 +260,18 @@ export default class TranslatorApply extends Vue {
 #tr-apply .view table.report th { width:100px; text-align: left }
 #tr-apply .view table.report th,
 #tr-apply .view table.report td{ border-width: 1px; padding: 8px 12px }
+#tr-apply .view .poll { border-width: 1px }
+#tr-apply .view .poll input[type=text] { width:100%; height:32px; padding:0 4px; border-width: 0 }
+#tr-apply .view .poll .poll-point input { position: absolute; visibility: hidden; width:0 !important; height: 0 !important; }
+#tr-apply .view .poll .poll-point label {
+  opacity: .3; display: inline-block; width:32px; height:32px; line-height: 32px; text-align:center; cursor: pointer;
+}
+#tr-apply .view .poll .poll-point { float:left; width:96px; }
+#tr-apply .view .poll .poll-comment { margin-left:96px; }
+#tr-apply .view .poll .poll-point input:checked + label { opacity:1; }
+#tr-apply .view table.poll-table { width:100%; margin:20px 0; }
+#tr-apply .view table.poll-table td { line-height: 40px; border-width:0 0 1px; padding:0 8px; }
+#tr-apply .view table.poll-table td.date { text-align: right }
 
 #tr-apply table { }
 #tr-apply table.list { margin:16px 0 20px;  width:100% }

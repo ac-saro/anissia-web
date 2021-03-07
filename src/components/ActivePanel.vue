@@ -5,6 +5,12 @@
     </div>
     <div>
       <table class="active-panel-table">
+        <tr v-if="translatorApplyCount > 0">
+          <td class="node-text">
+            현재 <b>{{translatorApplyCount}}</b> 건의 자막제작자 권한요청이 있습니다.
+            - <router-link to="/translator/apply"><b>바로가기</b></router-link>
+          </td>
+        </tr>
         <tr v-for="node in list.content" :key="node.apNo" :class="({'closed': !node.published})">
           <td class="node-text">
             <span v-if="node.code == 'TEXT'" v-html="node.html"></span>
@@ -37,6 +43,7 @@ import PageData from "@/models/PageData";
 import ActivePanelService from "@/service/ActivePanelService";
 import Pagination from "@/components/Pagination.vue";
 import Nabi from "@/utils/nabi";
+import AdminService from "@/service/AdminService";
 
 @Options({
   props: {
@@ -54,6 +61,10 @@ import Nabi from "@/utils/nabi";
     load() {
       this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
       ActivePanelService.getList(this.page, this.admin ? 'admin' : 'public', list => this.list = list);
+      if (this.$route.path.startsWith("/admin")) {
+        console.log(11)
+        AdminService.getTranslatorApplyCount(count => this.translatorApplyCount = count);
+      }
     },
     hrefPage(index: number) {
       return Nabi.address().deleteParameter('animeNo').setParameter('page', index + 1).href;
@@ -79,6 +90,7 @@ export default class ActivePanel extends Vue {
       noticeText: '',
       list: new PageData(),
       page: 0,
+      translatorApplyCount: 0
     };
   }
 }
