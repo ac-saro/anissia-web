@@ -6,7 +6,7 @@
     <div>
       <table class="active-panel-table">
         <tr v-if="translatorApplyCount > 0">
-          <td class="node-text">
+          <td class="node-text" colspan="2">
             현재 <b>{{translatorApplyCount}}</b> 건의 자막제작자 권한요청이 있습니다.
             - <router-link to="/translator/apply"><b>바로가기</b></router-link>
           </td>

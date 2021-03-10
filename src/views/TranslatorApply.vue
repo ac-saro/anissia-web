@@ -270,7 +270,7 @@ export default class TranslatorApply extends Vue {
 #tr-apply .view .poll .poll-comment { margin-left:96px; }
 #tr-apply .view .poll .poll-point input:checked + label { opacity:1; }
 #tr-apply .view table.poll-table { width:100%; margin:20px 0; }
-#tr-apply .view table.poll-table td { line-height: 40px; border-width:0 0 1px; padding:0 8px; }
+#tr-apply .view table.poll-table td { line-height: 40px; border-width:0 0 1px; padding:0 8px; font-size:14px; }
 #tr-apply .view table.poll-table td.date { text-align: right }
 
 #tr-apply table { }
