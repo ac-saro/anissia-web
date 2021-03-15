@@ -4,7 +4,7 @@
       <div id="account" class="basic-layout-mono">
         <div class="base-mat">
 
-          계정
+          <div class="doc-title">계정</div>
 
 <pre style="font-size:16px; line-height: 2">
 제작중 (아래 기능 추가예정)
