@@ -54,7 +54,10 @@
               <div>
                 <table class="poll-table">
                   <tr v-for="node in view.polls" :key="node.no">
-                    <td class="main"><b>{{node.name}}</b> <b v-if="node.voteText">[{{node.voteText}}]</b> : {{node.comment}}</td>
+                    <td class="main">
+                      <div v-if="node.name != ''"><b>{{node.name}}</b> <b v-if="node.voteText">[{{node.voteText}}]</b> : {{node.comment}}</div>
+                      <div v-else>{{node.comment}}</div>
+                    </td>
                     <td class="date">{{node.regDyText}}</td>
                   </tr>
                 </table>
@@ -63,12 +66,12 @@
               <div v-if="view.status == 'ACT'">
                 <div v-if="user.isAdmin" class="poll basic-border-color">
                   <div class="poll-point">
-                    <input type="radio" name="poll" id="pool-p" v-model="poll.point" value="1" /><label for="pool-p" class="fas fa-thumbs-up" title="찬성"></label>
-                    <input type="radio" name="poll" id="pool-m" v-model="poll.point" value="-1" /><label for="pool-m" class="fas fa-thumbs-down" title="반대"></label>
+                    <input type="radio" name="poll" id="pool-p" v-model="poll.point" value="1" /><label for="pool-p" class="fas fa-thumbs-up" title="수리"></label>
+                    <input type="radio" name="poll" id="pool-m" v-model="poll.point" value="-1" /><label for="pool-m" class="fas fa-thumbs-down" title="반려"></label>
                     <input type="radio" name="poll" id="pool-o" v-model="poll.point" value="0" /><label for="pool-o" class="fas fa-comment-dots" title="의견"></label>
                   </div>
                   <div class="poll-comment">
-                    <input type="text" class="std-inp-txt" @keyup.enter="createPoll(poll.point)" v-model="poll.comment" placeholder="찬성/반대/의견 아이콘 선택 후 글을 쓴 후 엔터" maxlength="64"/>
+                    <input type="text" class="std-inp-txt" @keyup.enter="createPoll(poll.point)" v-model="poll.comment" placeholder="수리/반려/의견 아이콘 선택 후 글을 쓴 후 엔터" maxlength="64"/>
                   </div>
                 </div>
                 <div v-else-if="view.name == user.name" class="poll basic-border-color">

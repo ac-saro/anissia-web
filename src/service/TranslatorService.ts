@@ -34,7 +34,7 @@ export default class TranslatorService {
     }
     if (e.polls) {
       e.polls.forEach((f: any) => {
-        f.voteText = f.vote > 0 ? '찬성' : (f.vote < 0 ? '반대' : '');
+        f.voteText = f.vote > 0 ? '수리' : (f.vote < 0 ? '반려' : '');
         f.regDyText = AnissiaUtil.ymdOrDynamicAgo(f.regDt);
       });
     }
