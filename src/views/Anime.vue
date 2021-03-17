@@ -74,7 +74,7 @@
 
           <div class="search a-text-style">
             <div class="search-box">
-              <input type="text" class="std-inp-txt" v-model="query" @keydown="keyAutocorrect" @keyup="autocorrect" placeholder="애니메이션 검색"/>
+              <input type="text" class="std-inp-txt" v-model="query" @keydown="keyAutocorrect" @keyup="autocorrect" placeholder="애니메이션 검색 : 검색어 #장르 @제작자 /완결"/>
             </div>
             <div class="autocorrect" v-if="autoOn && autoList.length">
               <div class="autocorrect-box">
