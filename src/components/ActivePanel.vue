@@ -1,10 +1,16 @@
 <template>
   <div class="active-panel">
     <div v-if="admin" class="active-panel-write">
-      <input class="std-inp-txt basic-border-color" placeholder="운영기록작성 ##여기를 클릭하여 글작성가능##" v-model="noticeText" @keyup.enter="saveNotice"/>
+      <input class="std-inp-txt basic-border-color" :placeholder="`운영기록작성 ${user.isRoot ? '/도움말' : ''}`" v-model="noticeText" @keyup.enter="saveNotice"/>
     </div>
     <div>
       <table class="active-panel-table">
+        <tr v-if="help">
+          <td class="node-text" colspan="2">
+            명령어 도움말<br/>
+            <b>/권한박탈 닉네임</b> - 자막제작자 권한을 박탈합니다.
+          </td>
+        </tr>
         <tr v-if="translatorApplyCount > 0">
           <td class="node-text" colspan="2">
             현재 <b>{{translatorApplyCount}}</b> 건의 자막제작자 권한요청이 있습니다.
@@ -57,6 +63,11 @@ import AdminService from "@/service/AdminService";
       this.load();
     }
   },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    }
+  },
   methods: {
     load() {
       this.page = Math.max(Nabi.address().getIntParameter("page"), 1) - 1;
@@ -69,7 +80,14 @@ import AdminService from "@/service/AdminService";
       return Nabi.address().deleteParameter('animeNo').setParameter('page', index + 1).href;
     },
     saveNotice() {
-      ActivePanelService.addNotice(this.noticeText, result => {
+      const text = this.noticeText.trim();
+
+      if (text == '/도움말') {
+        this.help = true;
+        return;
+      }
+
+      ActivePanelService.addNotice(text, result => {
         if (result.st == 'OK') {
           this.load();
         } else {
@@ -89,7 +107,8 @@ export default class ActivePanel extends Vue {
       noticeText: '',
       list: new PageData(),
       page: 0,
-      translatorApplyCount: 0
+      translatorApplyCount: 0,
+      help: false,
     };
   }
 }
