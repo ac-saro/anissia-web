@@ -61,4 +61,7 @@ yarn run build
 ```
 
 ## 참고
-* [애니편성표 API](https://github.com/anissia-net/anissia-web/blob/master/README-API.md)
+* [애니시아 문서](https://github.com/anissia-net/document)
+* [애니편성표 API](https://github.com/anissia-net/document/blob/main/api_anime_schdule.md)
+* [애니시아 CORE](https://github.com/anissia-net/anissia-core)
+* [애니시아 WEB](https://github.com/anissia-net/anissia-web)
