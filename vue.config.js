@@ -20,6 +20,12 @@ module.exports = {
                 ws: true,
                 changeOrigin: true
             },
+            // this path will not work on production server
+            '^/data': {
+                target: process.env.VUE_APP_API_HOST,
+                ws: true,
+                changeOrigin: true
+            },
         }
     },
     pwa: {
