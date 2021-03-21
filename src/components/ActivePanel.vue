@@ -8,7 +8,7 @@
         <tr v-if="help">
           <td class="node-text" colspan="2">
             명령어 도움말<br/>
-            <b>/권한박탈 닉네임</b> - 자막제작자 권한을 박탈합니다.
+            <b>/권한반납 닉네임</b> - 자막제작자 권한을 반납합니다.
           </td>
         </tr>
         <tr v-if="translatorApplyCount > 0">
@@ -83,6 +83,7 @@ import AdminService from "@/service/AdminService";
       const text = this.noticeText.trim();
 
       if (text == '/도움말') {
+        this.noticeText = '';
         this.help = true;
         return;
       }

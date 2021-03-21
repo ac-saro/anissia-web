@@ -38,18 +38,8 @@ export default class ActivePanelService {
     });
   }
 
-  public static addNotice(text: string, callback: (result: Result<void>) => void): void {
-    text = text.trim();
-    let published = false;
-    if (text.length < 10) {
-      callback(new Result("FAIL", "글자는 10글자 이상 입력해주세요."))
-      return;
-    }
-    if (text.startsWith('!')) {
-      published = true;
-      text = text.substring(1).trim();
-    }
-    fetch(`/api/active-panel/notice`, {...Ajax.json, ...Ajax.post, body: JSON.stringify({text, published})})
+  public static addNotice(query: string, callback: (result: Result<void>) => void): void {
+    fetch(`/api/active-panel/notice`, {...Ajax.json, ...Ajax.post, body: JSON.stringify({query: query.trim()})})
         .then(e => e.json()).then(data => callback(Result.assign(data)));
   }
 
