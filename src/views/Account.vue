@@ -6,6 +6,10 @@
 
           <div class="doc-title">계정</div>
 
+          <div class="doc-title">닉네임</div>
+
+          <div class="doc-title">암호교체</div>
+
 <pre style="font-size:16px; line-height: 2">
 제작중 (아래 기능 추가예정)
 ------
