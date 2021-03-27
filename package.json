@@ -3,15 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --mode production",
-    "lint": "vue-cli-service lint"
+    "dev": "./node_modules/.bin/vite",
+    "build": "./node_modules/.bin/vue-tsc --noEmit && ../node_modules/.bin/vite build",
+    "serve": "./node_modules/.bin/vite preview"
   },
   "dependencies": {
-    "build": "latest",
-    "core-js": "latest",
-    "vue-property-decorator": "latest",
-
     "vue": "^3.0.5",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.3",
@@ -23,19 +19,15 @@
     "@fortawesome/fontawesome-free": "latest"
   },
   "devDependencies": {
-    "eslint-plugin-vue": "latest",
-
-    "@typescript-eslint/eslint-plugin": "latest",
-    "@typescript-eslint/parser": "latest",
-    "@vue/cli-plugin-babel": "latest",
-    "@vue/cli-plugin-eslint": "latest",
-    "@vue/cli-plugin-router": "latest",
-    "@vue/cli-plugin-typescript": "latest",
-    "@vue/cli-plugin-vuex": "latest",
-    "@vue/cli-service": "latest",
-    "@vue/compiler-sfc": "latest",
-    "@vue/eslint-config-typescript": "latest",
+    "@vitejs/plugin-vue": "^1.1.5",
+    "@vue/compiler-sfc": "^3.0.5",
+    "typescript": "^4.1.3",
+    "vite": "^2.1.3",
+    "vue-tsc": "^0.0.8",
     "eslint": "latest",
-    "typescript": "latest"
+    "eslint-plugin-vue": "latest",
+    "dotenv": "8.2.0",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest"
   }
 }
