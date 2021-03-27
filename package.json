@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "./node_modules/.bin/vite",
+    "dev": "./node_modules/.bin/vite --mode dev",
     "build": "./node_modules/.bin/vue-tsc --noEmit && ../node_modules/.bin/vite build",
     "serve": "./node_modules/.bin/vite preview"
   },
   "dependencies": {
     "vue": "^3.0.5",
     "vue-class-component": "^8.0.0-0",
-    "vue-router": "^4.0.3",
+    "vue-router": "^4.0.5",
     "vuex": "^4.0.0-0",
+
+    "@types/node": "^14.14.36",
 
     "markdown-it": "latest",
     "vue-color": "latest",

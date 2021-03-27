@@ -1,8 +1,10 @@
 /**
  * markdown Util
  */
+import mdi from 'markdown-it/dist/markdown-it.js'
+
 export default class MarkdownUtil {
-  public static md = require('markdown-it')({
+  public static md = mdi({
     html:         false,
     xhtmlOut:     false,
     breaks:       false,

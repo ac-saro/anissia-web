@@ -4,12 +4,14 @@
  */
 import { Router } from 'vue-router';
 
+
 export default class RouterConfiguration {
 
-  private static readonly DEFAULT_TITLE = process.env["VUE_APP_TITLE"];
-  private static readonly TRACKING_ID = process.env["VUE_APP_GA_TRACKING_ID"];
+  private static readonly DEFAULT_TITLE = import.meta.env["VUE_APP_TITLE"];
+  private static readonly TRACKING_ID = import.meta.env["VUE_APP_GA_TRACKING_ID"];
 
   public static bind(router: Router) {
+
     router.afterEach((to, from) => {
       // set title
       document.title = to.meta.title || RouterConfiguration.DEFAULT_TITLE;
