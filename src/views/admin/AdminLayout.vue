@@ -52,8 +52,8 @@
 
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import P404 from "@/views/404.vue";
+import {Options, Vue} from "vue-class-component"
+import P404 from "@/views/404.vue"
 
 @Options({
   computed: {

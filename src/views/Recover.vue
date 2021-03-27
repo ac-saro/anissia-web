@@ -86,9 +86,9 @@ html.dark #recover a { color:#a0a0a0; }
 </style>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import AccountService from "@/service/AccountService";
-import Result from "@/models/Result";
+import {Options, Vue} from "vue-class-component"
+import AccountService from "@/service/AccountService"
+import Result from "@/models/Result"
 
 @Options({
   created() {

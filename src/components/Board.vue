@@ -72,15 +72,15 @@
 </template>
 
 <script lang="ts">
-import PageData from '@/models/PageData';
-import Pagination from '@/components/Pagination.vue';
-import Md from '@/components/MarkdownEditor.vue';
-import {Options, Vue} from "vue-class-component";
-import BoardService from "@/service/BoardService";
-import Nabi from "@/utils/nabi";
-import AnimeService from "@/service/AnimeService";
-import MarkdownUtil from "@/utils/MarkdownUtil";
-import AnissiaUtil from "@/utils/AnissiaUtil";
+import PageData from '@/models/PageData'
+import Pagination from '@/components/Pagination.vue'
+import Md from '@/components/MarkdownEditor.vue'
+import {Options, Vue} from "vue-class-component"
+import BoardService from "@/service/BoardService"
+import Nabi from "@/utils/nabi"
+import AnimeService from "@/service/AnimeService"
+import MarkdownUtil from "@/utils/MarkdownUtil"
+import AnissiaUtil from "@/utils/AnissiaUtil"
 
 @Options({
   props: {

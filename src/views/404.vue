@@ -17,7 +17,7 @@
 </style>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
+import {Options, Vue} from "vue-class-component"
 
 export default class P404 extends Vue {}
 </script>

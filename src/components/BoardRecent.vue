@@ -17,8 +17,8 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import AnissiaUtil from "@/utils/AnissiaUtil";
+import {Options, Vue} from "vue-class-component"
+import AnissiaUtil from "@/utils/AnissiaUtil"
 
 @Options({
   props: {

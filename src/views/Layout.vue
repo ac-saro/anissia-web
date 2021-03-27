@@ -72,10 +72,10 @@
 </template>
 
 <script lang="ts">
-import ColorScheme from "@/utils/ColorScheme";
-import SessionService from "@/service/SessionService";
-import UserSession from "@/models/UserSession";
-import { Options, Vue } from 'vue-class-component';
+import ColorScheme from "@/utils/ColorScheme"
+import SessionService from "@/service/SessionService"
+import UserSession from "@/models/UserSession"
+import { Options, Vue } from 'vue-class-component'
 
 @Options({
   created() {
@@ -157,7 +157,7 @@ export default class Layout extends Vue {
 </script>
 
 <style>
-@import url(~@fortawesome/fontawesome-free/css/all.min.css);
+@import url(@fortawesome/fontawesome-free/css/all.min.css);
 .ml a { text-decoration: none }
 .ml :not(.a-text-style) a:hover { text-decoration: underline }
 .ml abbr { cursor: help; text-decoration: none;  }

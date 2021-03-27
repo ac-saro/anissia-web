@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import Board from "@/components/Board.vue";
+import {Options, Vue} from "vue-class-component"
+import Board from "@/components/Board.vue"
 
 @Options({
   components: {

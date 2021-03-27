@@ -73,11 +73,11 @@ html.dark #admin-caption table.tab .select div { background: #222 }
 </style>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import Pagination from "@/components/Pagination.vue";
-import PageData from "@/models/PageData";
-import AdminService from "@/service/AdminService";
-import Nabi from "@/utils/nabi";
+import {Options, Vue} from "vue-class-component"
+import Pagination from "@/components/Pagination.vue"
+import PageData from "@/models/PageData"
+import AdminService from "@/service/AdminService"
+import Nabi from "@/utils/nabi"
 
 @Options({
   components: {

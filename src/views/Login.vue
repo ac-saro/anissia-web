@@ -51,8 +51,8 @@ html.dark #login .account a { color:#a0a0a0; }
 </style>
 
 <script lang="ts">
-import SessionService from "@/service/SessionService";
-import {Options, Vue} from "vue-class-component";
+import SessionService from "@/service/SessionService"
+import {Options, Vue} from "vue-class-component"
 
 @Options({
   methods: {

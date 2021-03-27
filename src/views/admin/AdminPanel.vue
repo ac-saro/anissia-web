@@ -9,8 +9,8 @@
 </style>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import ActivePanel from "@/components/ActivePanel.vue";
+import {Options, Vue} from "vue-class-component"
+import ActivePanel from "@/components/ActivePanel.vue"
 
 @Options({
   components: {

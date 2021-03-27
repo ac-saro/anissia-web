@@ -63,10 +63,10 @@ html.dark #admin-schedule table.tab .select div { background: #222 }
 </style>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import AnissiaUtil from "@/utils/AnissiaUtil";
-import AnimeService from "@/service/AnimeService";
-import AdminService from "@/service/AdminService";
+import {Options, Vue} from "vue-class-component"
+import AnissiaUtil from "@/utils/AnissiaUtil"
+import AnimeService from "@/service/AnimeService"
+import AdminService from "@/service/AdminService"
 
 @Options({
   mounted() {

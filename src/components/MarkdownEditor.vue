@@ -29,8 +29,8 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import MarkdownUtil from "@/utils/MarkdownUtil";
+import { Options, Vue } from 'vue-class-component'
+import MarkdownUtil from "@/utils/MarkdownUtil"
 
 @Options({
   props: {

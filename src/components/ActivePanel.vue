@@ -44,12 +44,12 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import PageData from "@/models/PageData";
-import ActivePanelService from "@/service/ActivePanelService";
-import Pagination from "@/components/Pagination.vue";
-import Nabi from "@/utils/nabi";
-import AdminService from "@/service/AdminService";
+import { Options, Vue } from 'vue-class-component'
+import PageData from "@/models/PageData"
+import ActivePanelService from "@/service/ActivePanelService"
+import Pagination from "@/components/Pagination.vue"
+import Nabi from "@/utils/nabi"
+import AdminService from "@/service/AdminService"
 
 @Options({
   props: {

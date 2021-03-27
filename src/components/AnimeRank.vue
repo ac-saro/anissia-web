@@ -28,8 +28,8 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-class-component';
-import AnimeService from "@/service/AnimeService";
+import {Options, Vue} from 'vue-class-component'
+import AnimeService from "@/service/AnimeService"
 
 @Options({
   props: {

@@ -16,8 +16,8 @@
 </style>
 
 <script lang="ts">
-import Board from "@/components/Board.vue";
-import {Options, Vue} from "vue-class-component";
+import Board from "@/components/Board.vue"
+import {Options, Vue} from "vue-class-component"
 
 @Options({
   components: {

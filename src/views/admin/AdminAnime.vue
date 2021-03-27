@@ -260,13 +260,13 @@ html.dark #admin-anime .view input { background: #222; color:#aaa }
 </style>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import Nabi from "@/utils/nabi";
-import AdminService from "@/service/AdminService";
-import PageData from "@/models/PageData";
-import Pagination from "@/components/Pagination.vue";
-import AnimeService from "@/service/AnimeService";
-import AnissiaUtil from "@/utils/AnissiaUtil";
+import {Options, Vue} from "vue-class-component"
+import Nabi from "@/utils/nabi"
+import AdminService from "@/service/AdminService"
+import PageData from "@/models/PageData"
+import Pagination from "@/components/Pagination.vue"
+import AnimeService from "@/service/AnimeService"
+import AnissiaUtil from "@/utils/AnissiaUtil"
 
 @Options({
   components: {

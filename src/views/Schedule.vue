@@ -236,12 +236,12 @@
 </template>
 
 <script lang="ts">
-import {Options, Vue} from "vue-class-component";
-import Nabi from "@/utils/nabi";
+import {Options, Vue} from "vue-class-component"
+import Nabi from "@/utils/nabi"
 import ColorPicker from "vanilla-picker"
-import {DateFormat} from "@/utils/nabi/DateFormat";
-import AnimeService from "@/service/AnimeService";
-import AnimeRank from "@/components/AnimeRank.vue";
+import {DateFormat} from "@/utils/nabi/DateFormat"
+import AnimeService from "@/service/AnimeService"
+import AnimeRank from "@/components/AnimeRank.vue"
 
 @Options({
   components: {

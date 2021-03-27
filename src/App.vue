@@ -15,8 +15,8 @@ body { height: 100%; margin: 0; padding: 0; }
 </style>
 
 <script lang="ts">
-import ColorScheme from "@/utils/ColorScheme";
-import {Options, Vue} from "vue-class-component";
+import ColorScheme from "@/utils/ColorScheme"
+import {Options, Vue} from "vue-class-component"
 
 @Options({
   created() {

@@ -70,8 +70,8 @@ html.dark #register a { color:#a0a0a0; }
 </style>
 
 <script lang="ts">
-import AccountService from "@/service/AccountService";
-import {Options, Vue} from "vue-class-component";
+import AccountService from "@/service/AccountService"
+import {Options, Vue} from "vue-class-component"
 
 @Options({
   created() {

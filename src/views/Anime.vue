@@ -124,13 +124,13 @@
 
 
 <script lang="ts">
-import AnimeRank from "@/components/AnimeRank.vue";
-import {Options, Vue} from "vue-class-component";
-import Nabi from "@/utils/nabi";
-import PageData from "@/models/PageData";
-import Pagination from "@/components/Pagination.vue";
-import AnimeService from "@/service/AnimeService";
-import AnissiaUtil from "@/utils/AnissiaUtil";
+import AnimeRank from "@/components/AnimeRank.vue"
+import {Options, Vue} from "vue-class-component"
+import Nabi from "@/utils/nabi"
+import PageData from "@/models/PageData"
+import Pagination from "@/components/Pagination.vue"
+import AnimeService from "@/service/AnimeService"
+import AnissiaUtil from "@/utils/AnissiaUtil"
 
 @Options({
   components: {

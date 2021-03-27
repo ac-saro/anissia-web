@@ -38,11 +38,11 @@
 
 
 <script lang="ts">
-import AnimeRank from "@/components/AnimeRank.vue";
-import {Options, Vue} from "vue-class-component";
-import BoardRecent from "@/components/BoardRecent.vue";
-import BoardService from "@/service/BoardService";
-import ActivePanel from "@/components/ActivePanel.vue";
+import AnimeRank from "@/components/AnimeRank.vue"
+import {Options, Vue} from "vue-class-component"
+import BoardRecent from "@/components/BoardRecent.vue"
+import BoardService from "@/service/BoardService"
+import ActivePanel from "@/components/ActivePanel.vue"
 
 @Options({
   computed: {

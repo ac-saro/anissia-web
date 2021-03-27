@@ -62,10 +62,10 @@
 </template>
 
 <script lang="ts">
-import Nabi from '@/utils/nabi';
-import AnissiaUtil from '@/utils/AnissiaUtil';
-import {Options, Vue} from "vue-class-component";
-import AnimeService from "@/service/AnimeService";
+import Nabi from '@/utils/nabi'
+import AnissiaUtil from '@/utils/AnissiaUtil'
+import {Options, Vue} from "vue-class-component"
+import AnimeService from "@/service/AnimeService"
 
 @Options({
   mounted() {
