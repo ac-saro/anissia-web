@@ -212,16 +212,20 @@
           <div class="doc-desc">
             <table class="schedule-table schedule-application">
               <tr>
-                <th rowspan="3" class="td-icon"><img src="@/assets/page/schedule-th-api.svg" title="API" class="pmark" /></th>
+                <th rowspan="4" class="td-icon"><img src="@/assets/page/schedule-th-api.svg" title="API" class="pmark" /></th>
                 <td class="td-type"><a href="https://github.com/anissia-net/document/blob/main/api_anime_schdule.md" target="_blank">API</a></td>
                 <th>3rd party 애니편성표 앱 제작을 위한 API 가이드</th>
               </tr>
               <tr>
-                <td><a href="https://github.com/anissia-net/document" target="_blank">WEB</a></td>
+                <td class="td-type"><a href="https://github.com/anissia-net/document/blob/main/doc_anime_rank.md" target="_blank">RANK</a></td>
+                <th>애니메이션 랭킹 집계기준 문서</th>
+              </tr>
+              <tr>
+                <td><a href="https://github.com/anissia-net/anissia-web" target="_blank">WEB</a></td>
                 <th>FE - Vue.js, Typescript</th>
               </tr>
               <tr>
-                <td><a href="https://github.com/anissia-net/document" target="_blank">CORE</a></td>
+                <td><a href="https://github.com/anissia-net/anissia-core" target="_blank">CORE</a></td>
                 <th>BE - Kotlin, Spring, JPA, QueryDSL, Elasticsearch</th>
               </tr>
             </table>
