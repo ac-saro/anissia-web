@@ -19,7 +19,7 @@
           <table>
             <tr><th>이름</th><td><input type="text" v-model="nickname" class="std-inp-txt" placeholder="닉네임" /></td></tr>
             <tr><th>암호</th><td><input type="password" class="std-inp-txt" v-model="password" maxlength="64" autocomplete="new-password" placeholder="암호"/></td></tr>
-            <tr><td colspan="2"><input type="button" value="이름변경" class="std-inp-btn" @click="updateName()" /></td></tr>
+            <tr><td colspan="2"><input type="button" value="이름 변경" class="std-inp-btn" @click="updateName()" /></td></tr>
           </table>
 
           <div class="doc-title">암호</div>
@@ -27,7 +27,7 @@
             <tr><th>기존 암호</th><td><input type="password" class="std-inp-txt" v-model="oldPassword" maxlength="64" autocomplete="new-password" placeholder="기존 암호"/></td></tr>
             <tr><th>새 암호</th><td><input type="password" class="std-inp-txt" v-model="newPassword" maxlength="64" autocomplete="new-password"  placeholder="새 암호"/></td></tr>
             <tr><th>새 암호 확인</th><td><input type="password" class="std-inp-txt" v-model="newPasswordConfirm" maxlength="64" autocomplete="new-password"  placeholder="새 암호 확인"/></td></tr>
-            <tr><td colspan="2"><input type="button" value="암호교체" class="std-inp-btn" @click="updatePassword()" /></td></tr>
+            <tr><td colspan="2"><input type="button" value="암호 변경" class="std-inp-btn" @click="updatePassword()" /></td></tr>
           </table>
 
 
