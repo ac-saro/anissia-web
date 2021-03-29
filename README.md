@@ -10,12 +10,6 @@
    ```
    npm install -g yarn
    ```
-1. vue 설치
-   ```
-   yarn global add @vue/cli
-   ```
-1. git 설치
-    * https://git-scm.com/
 1. IDE 설치
    * IDE는 상관없으나 **WebStorm** 혹은 **Visual Studio Code (무료)** 추천
    * **Visual Studio Code (무료)**
@@ -36,15 +30,16 @@
 ## 실행
 1. 실행
    * IDE 에서 다음 명령어 실행
-    
-     * [로컬서버](https://github.com/anissia-net/anissia-core) 사용시
-       ```
-       yarn serve
-       ```
-     * 개발서버 api 로 FE를 개발할 경우 (개발존 VPN 필요)
-       ```
-       yarn serve --mode dev-server-api
-       ```
+        * **운영서버** API 사용 - https://anissia.net
+            ```
+            yarn serve --mode prod-server-api
+            ```
+        * **로컬서버** API 사용 - http://localhost:8001
+            - 우선 코어서버(백엔드)를 가동해야 합니다.
+            - 참고 : [anissia-core](https://github.com/anissia-net/anissia-core)
+            ```
+            yarn serve
+            ```
 2. 접속
    * 메인 : http://localhost:8080/
    * 어드민 : http://localhost:8080/admin/
