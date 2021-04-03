@@ -23,6 +23,7 @@
      * https://www.jetbrains.com/webstorm/
 1. 모듈설치
    * IDE 에서 다음 명령어 실행
+   * Visual Studio Code 사용시 콘솔 기본값은 PowerShell 이 아닌 cmd 추천 
    ```
    yarn install
    ```
