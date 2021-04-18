@@ -13,11 +13,6 @@
             <AnimeRank mode="static"/>
           </div>
 
-          <div class="doc-title">운영기록</div>
-          <div class="active-panel-wrap">
-            <active-panel :admin="false"/>
-          </div>
-
           <div class="recent">
             <div class="recent-unit active-panel-wrap">
               <div class="doc-title"><router-link to="/notice">공지사항</router-link></div>
@@ -27,6 +22,11 @@
               <div class="doc-title"><router-link to="/inquiry">문의 게시판</router-link></div>
               <BoardRecent ticker="inquiry" :list="inquiryList"/>
             </div>
+          </div>
+
+          <div class="doc-title">운영기록</div>
+          <div class="active-panel-wrap">
+            <active-panel :admin="false"/>
           </div>
 
         </div>
