@@ -14,6 +14,7 @@
           </div>
 
           <div class="home-anime-rank active-panel-wrap">
+            <div class="doc-title">애니메이션 순위</div>
             <AnimeRank mode="static"/>
           </div>
 
