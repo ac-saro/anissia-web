@@ -9,6 +9,10 @@
       <div id="home" class="basic-layout-main">
         <div class="base-mat">
 
+          <div class="recent-caption-mob">
+            <AnimeCaptionRecent mode="static"/>
+          </div>
+
           <div class="home-anime-rank active-panel-wrap">
             <AnimeRank mode="static"/>
           </div>
@@ -22,6 +26,10 @@
               <div class="doc-title"><router-link to="/inquiry">문의 게시판</router-link></div>
               <BoardRecent ticker="inquiry" :list="inquiryList"/>
             </div>
+          </div>
+
+          <div class="recent-caption-full">
+            <AnimeCaptionRecent />
           </div>
 
           <div class="doc-title">운영기록</div>
@@ -43,12 +51,16 @@ import {Options, Vue} from "vue-class-component";
 import BoardRecent from "@/components/BoardRecent.vue";
 import BoardService from "@/service/BoardService";
 import ActivePanel from "@/components/ActivePanel.vue";
+import AnimeCaptionRecent from "@/components/AnimeCaptionRecent.vue";
+import Anime from "@/views/Anime.vue";
 
 @Options({
   computed: {
   },
   components: {
+    Anime,
     AnimeRank,
+    AnimeCaptionRecent,
     BoardRecent,
     ActivePanel
   },
@@ -85,10 +97,12 @@ export default class Home extends Vue {
 
 @media (max-width: 1023px) {
   #home .active-panel tr:nth-child( n + 11 ) { display: none }
+  #home .recent-caption-full { display: none }
 }
 
 @media (min-width: 1024px) {
   #home .home-anime-rank { display: none; }
+  #home .recent-caption-mob { display: none }
   #home .recent { overflow:auto }
   #home .recent .recent-unit { float:left; width:50%; box-sizing: border-box }
 }

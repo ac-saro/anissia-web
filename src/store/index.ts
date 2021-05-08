@@ -11,6 +11,9 @@ export default createStore({
           week: [],
           month: [],
           quarter: []
+      },
+      recent: {
+          captions: []
       }
   },
   mutations: {

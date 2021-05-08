@@ -1,29 +1,19 @@
 <template>
   <div class="anime-caption-recent a-text-style">
-    <table class="rank-tab">
-      <tr>
-        <td><div class="basic-border-color" :class="{'select': rank.period === 'week'}" @click="selectRankType('week')">주간</div></td>
-        <td><div class="basic-border-color" :class="{'select': rank.period === 'month'}" @click="selectRankType('month')">월간</div></td>
-        <td><div class="basic-border-color" :class="{'select': rank.period === 'quarter'}" @click="selectRankType('quarter')">분기</div></td>
+    <div class="doc-title">최근 자막</div>
+    <table class="basic-border-color">
+      <tr v-for="node in recent.captions" :key="node.animeNo">
+        <td class="main-td">
+          <router-link :to="`http://localhost:8080/anime?animeNo=${node.animeNo}`">{{node.subject}}</router-link>
+          <div class="mode-mob sub-info"><a :href="node.website" target="_blank"><span class="fas fa-closed-captioning"></span>&nbsp; {{node.episode}}&nbsp; <b>{{node.name}}</b>&nbsp; {{node.updDt}}</a></div>
+        </td>
+        <td class="name mode-full">
+          <a :href="node.website" target="_blank">
+            <span class="fas fa-closed-captioning"></span>&nbsp; {{node.episode}}&nbsp; <b>{{node.name}}</b>&nbsp; {{node.updDt}}
+          </a>
+        </td>
       </tr>
     </table>
-    <div class="rank-pad">
-      <table class="rank-table">
-        <tr v-for="node in rank.list" :key="node.animeNo" :class="({'empty-list': node.animeNo == 0})">
-          <td class="rank">{{node.rank}}</td>
-          <td class="subject">
-            <router-link v-if="node.animeNo > 0" :to="`/anime?animeNo=${node.animeNo}`">{{node.subject}}</router-link>
-            <div v-else>-</div>
-          </td>
-          <td class="diff">
-            <div v-if="node.animeNo == 0 || node.diff == 0"> </div>
-            <div v-else-if="node.diff == null" class="diff-up diff-new fas fa-angle-double-up" title="#100 신규진입"></div>
-            <div v-else-if="node.diff > 0" class="diff-up">▲ {{node.diff}}</div>
-            <div v-else-if="node.diff < 0" class="diff-down">▼ {{-node.diff}}</div>
-          </td>
-        </tr>
-      </table>
-    </div>
   </div>
 </template>
 
@@ -42,25 +32,22 @@ import AnimeService from "@/service/AnimeService";
     mode: String
   },
   created() {
-    if (this.mode != 'static' && this.rank.list.length == 0) {
-      this.selectRankType('week');
+    if (this.mode != 'static') {
+      this.getCaptionRecent();
     }
   },
   computed: {
-    rank() {
-      return this.$store.state.rank;
+    recent() {
+      return this.$store.state.recent;
     }
   },
   methods: {
-    selectRankType(type: string) {
-      this.rank.period = type;
-      if (!this.rank[type].length) {
-        AnimeService.getRank(type, (list) => this.rank.list = this.rank[type] = list);
-      } else {
-        this.rank.list = this.rank[type];
+    getCaptionRecent() {
+      if (!this.recent.captions.length) {
+        AnimeService.getCaptionRecent((list) => this.recent.captions = list);
       }
     }
-  },
+  }
 })
 export default class AnimeCaptionRecent extends Vue {
   data() {
@@ -70,33 +57,24 @@ export default class AnimeCaptionRecent extends Vue {
 </script>
 
 <style>
-.anime-caption-recent {  }
+.anime-caption-recent { padding:0 0 16px; }
 .anime-caption-recent table { width:100%; }
-.anime-caption-recent .rank-tab td { width:33.33%; }
-.anime-caption-recent .rank-tab td div { text-align: center; line-height: 48px; cursor: pointer; font-size:15px; }
-.anime-caption-recent .rank-table td,
-.anime-caption-recent .rank-tab td div { border-bottom-width: 1px; }
-.anime-caption-recent .rank-pad { padding:4px 0 0; }
-.anime-caption-recent .rank-table td { height: 36px; padding: 6px 0; line-height: 1.6; font-size:14px }
-.anime-caption-recent .rank-table td.rank { min-width:20px; max-width: 50px; text-align: center; padding:0 16px; font-weight: bold }
-.anime-caption-recent .rank-table td.subject { width:90%; }
-.anime-caption-recent .rank-table td.diff { min-width:50px; text-align: right; padding-right:16px; font-weight: bold }
-.anime-caption-recent .rank-table td.diff .diff-new { font-size:16px; }
-.anime-caption-recent .rank-table tr.empty-list { opacity: .3 }
+.anime-caption-recent table td { height:28px; padding:10px 8px; font-size:14px; border-width:0 0 1px; line-height: 1.8 }
+.anime-caption-recent table td.name { text-align: right }
+.anime-caption-recent table td.main-td .sub-info { margin:8px 0 0 1px; }
 
-@media (max-width: 1023px) {
-  .anime-caption-recent .rank-table tr:nth-child( n + 11 ) { display: none }
+@media (max-width: 600px) {
+  .anime-caption-recent .mode-full { display: none }
+}
+@media (min-width: 601px) {
+  .anime-caption-recent .mode-mob { display: none }
 }
 
-html.light .anime-caption-recent .rank-table td.diff .diff-up { color:#d45e5e }
-html.light .anime-caption-recent .rank-table td.diff .diff-down { color:#7490c3 }
-html.light .anime-caption-recent .rank-table td.diff .diff-new { color:#e03f3f }
-html.light .anime-caption-recent .rank-tab td div.select { border-color: #276998 }
-html.light .anime-caption-recent a { color:#444 }
+@media (max-width: 1023px) {
+  .anime-caption-recent table tr:nth-child( n + 6 ) { display: none }
+}
+@media (min-width: 1024px) {
+  .anime-caption-recent table tr:nth-child( n + 13 ) { display: none }
+}
 
-html.dark .anime-caption-recent .rank-table td.diff .diff-up { color:#4c2626 }
-html.dark .anime-caption-recent .rank-table td.diff .diff-down { color:#132046 }
-html.dark .anime-caption-recent .rank-table td.diff .diff-new { color:#ca3838 }
-html.dark .anime-caption-recent .rank-tab td div.select { border-color: #aaa }
-html.dark .anime-caption-recent a { color:#aaa }
 </style>

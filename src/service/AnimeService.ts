@@ -40,6 +40,10 @@ export default class AnimeService {
     fetch(`/api/anime/caption/animeNo/${animeNo}`).then(e => e.json()).then(list => callback(list.map((e: any) => this.norCaption(e))));
   }
 
+  public static getCaptionRecent(callback: (data: any[]) => void): void {
+    fetch(`/api/anime/caption/recent`).then(e => e.json()).then(list => callback(list.map((node: any) => this.norCaption(node))));
+  }
+
   public static getSchedule(week: string, callback: (list: any[]) => void): void {
     fetch(`/api/anime/schedule/${week}`).then(e => e.json()).then(list => callback(list.map((e: any) => this.norAnime(e, week))));
   }
