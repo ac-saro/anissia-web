@@ -35,7 +35,7 @@
 
           <div class="doc-title">히스토리</div>
           <div class="doc-desc">
-            과거 애니시아 운영진 혹은 운영/개발을 지원해주셨던 히스토리입니다.
+            과거 애니시아의 운영진이었거나 개발을 지원해 주셨던 명단입니다.
           </div>
           <table class="intro-table">
             <tr><th>UTPasiirs</th><td>관리 지원</td><td>2015 ~ 2018</td></tr>
