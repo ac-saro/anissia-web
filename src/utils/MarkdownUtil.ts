@@ -12,6 +12,9 @@ export default class MarkdownUtil {
   });
 
   public static render(text: string): string {
-    return (MarkdownUtil.md.render(text) as string).split(/&lt;br[ ]?\/&gt;/g).join('<br/>');
+    const rv = (MarkdownUtil.md.render(text) as string)
+      .split(/&lt;br[ ]?\/&gt;/g).join('<br/>')
+      .split(/\n/g).join('<br/>');
+    return rv;
   }
 }
