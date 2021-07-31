@@ -300,7 +300,7 @@ html.dark ::-webkit-scrollbar-track{ background-color:#222 }
 html.dark ::-webkit-scrollbar-thumb{ background-color:rgba(120, 120, 120, 0.3) }
 html.dark ::-webkit-scrollbar-thumb:hover{ background-color:rgba(180, 180, 180, 0.3) }
 html.dark #nav-tool { background: rgba(0, 0, 0, 0.45); }
-html.dark #nav { background: #222 }
+html.dark #nav { background: #1d1d1d }
 html.dark #nav-tool .sign { color:#555; }
 html.dark #nav-tool,
 html.dark #nav-tool a { color:#999 }
