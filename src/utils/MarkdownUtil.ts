@@ -8,7 +8,7 @@ export default class MarkdownUtil {
     breaks:       false,
     linkify:      false,
     typographer:  false,
-    highlight(code: string, lang: string) { return code; },
+    highlight(code: string, lang: string) { return "코드를 지원하지 않습니다."; },
   });
 
   public static render(text: string): string {
