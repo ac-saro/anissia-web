@@ -14,7 +14,8 @@ export default class MarkdownUtil {
   public static render(text: string): string {
     const rv = (MarkdownUtil.md.render(text) as string)
       .split(/&lt;br[ ]?\/&gt;/g).join('<br/>')
-      .split(/\n/g).join('<br/>');
+      .replace(/[\r]+/g, "")
+      .split(/[\n]{1,2}/g).join('<br/>');
     return rv;
   }
 }
