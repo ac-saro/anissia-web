@@ -6,7 +6,7 @@ export default class MarkdownUtil {
     html:         false,
     xhtmlOut:     false,
     breaks:       true,
-    linkify:      false,
+    linkify:      true,
     typographer:  false,
     highlight(code: string, lang: string) { return "코드를 지원하지 않습니다."; },
   });
