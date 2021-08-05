@@ -169,12 +169,19 @@
               각 프로그램에 대한 문의는 해당 개발자/단체에 하셔야 합니다.
             </div>
             <table class="schedule-table schedule-application">
-              <!-- ios -->
+              <!-- iOS -->
               <tr>
                 <th class="td-icon"><img src="@/assets/page/schedule-th-ios.svg" title="ios" class="pmark" /></th>
-                <td class="td-title"><a href="https://apps.apple.com/kr/app/aeni-pyeonseongpyo/id917536862" target="_blank">애니 편성표</a></td>
+                <td class="td-title"><a href="https://apps.apple.com/kr/app/aeni-pyeonseongpyo/id917536862" target="_blank">애니 편성표</a> - iOS</td>
                 <th class="td-author">Young Ho Kim</th>
                 <td class="td-date">2014년</td>
+              </tr>
+              <!-- macOS -->
+              <tr>
+                <th class="td-icon"><img src="@/assets/page/schedule-th-ios.svg" title="macOs" class="pmark" /></th>
+                <td class="td-title"><a href="https://github.com/qkdxorjs1002/AniSched-Desktop#homebrew-macos-1011-%EC%9D%B4%EC%83%81" target="_blank">AniSched-Desktop</a> - macOS</td>
+                <th class="td-author">Novang</th>
+                <td class="td-date">2021년</td>
               </tr>
               <!-- android -->
               <tr>
@@ -193,7 +200,7 @@
               <!-- windows -->
               <tr>
                 <th class="td-icon"><img src="@/assets/page/schedule-th-windows.svg" title="windows" class="pmark" /></th>
-                <td class="td-title"><a href="https://www.microsoft.com/p/anisched/9wzdncrd8kxg" target="_blank">AniSched</a></td>
+                <td class="td-title"><a href="https://www.microsoft.com/store/apps/9PB5WSXN3TMN" target="_blank">AniSched</a></td>
                 <th class="td-author">Novang</th>
                 <td class="td-date">2015년</td>
               </tr>
