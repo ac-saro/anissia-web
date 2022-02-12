@@ -75,7 +75,7 @@ export default class AnimeRank extends Vue {
 .anime-rank .rank-tab td { width:33.33%; }
 .anime-rank .rank-tab td div { text-align: center; line-height: 48px; cursor: pointer; font-size:15px; }
 .anime-rank .rank-table td,
-.anime-rank .rank-tab td div { border-bottom-width: 1px; }
+.anime-rank .rank-tab td div { border-bottom-width: 3px; border-color: transparent }
 .anime-rank .rank-pad { padding:4px 0 0; }
 .anime-rank .rank-table td { height: 36px; padding: 6px 0; line-height: 1.6; font-size:14px }
 .anime-rank .rank-table td.rank { min-width:20px; max-width: 50px; text-align: center; padding:0 16px; font-weight: bold }
@@ -91,12 +91,12 @@ export default class AnimeRank extends Vue {
 html.light .anime-rank .rank-table td.diff .diff-up { color:#d45e5e }
 html.light .anime-rank .rank-table td.diff .diff-down { color:#7490c3 }
 html.light .anime-rank .rank-table td.diff .diff-new { color:#e03f3f }
-html.light .anime-rank .rank-tab td div.select { border-color: #276998 }
+html.light .anime-rank .rank-tab td div.select { border-color: #869dbb }
 html.light .anime-rank a { color:#444 }
 
 html.dark .anime-rank .rank-table td.diff .diff-up { color:#863838 }
-html.dark .anime-rank .rank-table td.diff .diff-down { color:#404c8a }
+html.dark .anime-rank .rank-table td.diff .diff-down { color:#2b4d8b }
 html.dark .anime-rank .rank-table td.diff .diff-new { color:#fff }
-html.dark .anime-rank .rank-tab td div.select { border-color: #aaa }
+html.dark .anime-rank .rank-tab td div.select { border-color: #555 }
 html.dark .anime-rank a { color:#aaa }
 </style>

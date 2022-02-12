@@ -12,7 +12,7 @@
 </template>
 
 <style>
-#inquiry .base-mat { padding: 8px; }
+#inquiry .base-mat { padding: 8px 0; }
 </style>
 
 <script lang="ts">

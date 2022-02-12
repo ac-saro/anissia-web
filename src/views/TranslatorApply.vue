@@ -89,12 +89,6 @@
           <!-- list -->
           <div>
             <table class="list">
-              <tr>
-                <th>번호</th>
-                <th>상태</th>
-                <th>제목</th>
-                <th>등록일</th>
-              </tr>
               <tr v-for="node in list.content" :key="node.applyNo" :class="({sel: node.applyNo == applyNo})">
                 <td class="no">{{node.applyNo}}</td>
                 <td class="st">{{node.resultText}}</td>
@@ -235,12 +229,12 @@ export default class TranslatorApply extends Vue {
 
 <style>
 
-#tr-apply .base-mat { padding: 8px; }
+#tr-apply .base-mat { }
 #tr-apply .fo { overflow: auto; }
 #tr-apply .fl { float:left; }
 #tr-apply .fr { float:right; text-align: right }
-#tr-apply .doc-title { padding:0 !important; overflow: auto }
-#tr-apply .doc-title .fl { padding: 6px 8px 10px; }
+#tr-apply .doc-title { verflow: auto }
+#tr-apply .doc-title .fl { padding: 10px 8px 0; }
 #tr-apply .doc-title .fr { padding:5px 4px 0 0; }
 #tr-apply .doc-title input { border-width:0; height:32px; }
 #tr-apply .app .subject { font-size:18px; font-weight: bold; padding:18px 4px 10px; }
@@ -277,9 +271,9 @@ export default class TranslatorApply extends Vue {
 #tr-apply .view table.poll-table td.date { text-align: right }
 
 #tr-apply table { }
-#tr-apply table.list { margin:16px 0 20px;  width:100% }
+#tr-apply table.list { margin:6px 0 8px;  width:100% }
 #tr-apply table.list th { border-bottom-width: 1px; padding: 8px 0; font-size: 12px; }
-#tr-apply table.list td { font-size:13px; padding:12px 0; border-top-width: 1px; line-height: 2 }
+#tr-apply table.list td { font-size:13px; padding:12px 0; border-width: 1px 0; line-height: 2 }
 #tr-apply table.list td { text-align: center;  }
 #tr-apply table.list td.no { width:60px; }
 #tr-apply table.list td.st { width:60px; }
