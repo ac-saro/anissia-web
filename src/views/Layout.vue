@@ -5,7 +5,7 @@
       <router-view />
     </div>
 
-    <nav id="nav">
+    <nav id="nav" class="basic-border-color">
       <div class="logo">
         <router-link to="/">
           <div class="inline"><img :src="require(`@/assets/layout/nav/logo-${cs}.svg`)" alt=""/></div>
@@ -170,10 +170,10 @@ export default class Layout extends Vue {
   display: inline-block; padding:2px 6px; border-radius: 1px; border-width: 1px; border-style:solid; margin:4px 6px 0 0;
   font-size:12px;
 }
-.ml .doc-title { font-size: 20px; padding: 6px 8px 8px; }
+.ml .doc-title { font-size: 16px; font-weight: bold; padding: 8px 10px 8px; }
 
 #area-under-nav { padding:56px 0 12px; }
-#nav { height:56px; position: fixed; top:0; left:0; right:0; user-select: none; }
+#nav { height:56px; position: fixed; top:0; left:0; right:0; user-select: none; border-bottom-width: 1px }
 #nav { -webkit-tap-highlight-color: rgba(0,0,0,0); }
 #nav div.inline { display:inline-block; }
 #nav img { vertical-align: top }
@@ -257,7 +257,7 @@ html.light .ml .a-text-style a { color:#444; text-decoration: none }
 html.light .ml .x-tag { border-color:#eee; }
 html.light table td,
 html.light table th,
-html.light .basic-border-color { border-color: #e8e8e8 }
+html.light .basic-border-color { border-color: #f4f4f4 }
 html.light ::-webkit-scrollbar-track{ background-color:#fafafa }
 html.light ::-webkit-scrollbar-thumb{ background-color:rgba(197, 197, 197, 0.3) }
 html.light ::-webkit-scrollbar-thumb:hover{ background-color:rgba(80, 80, 80, 0.3); }
@@ -282,20 +282,19 @@ html.light .popup-background .popup-box { background: #fff; border:1px solid #27
 html.light .popup-background .popup-box input[type=password] { border:1px solid #ddd }
 html.light .search-box input[type=text] { border:4px solid #5c8dbf; }
 html.light .search-box input[type=button] { border:0; color:#fff; background: #5c8dbf }
-html.light .ml .doc-title { border-bottom: 1px solid #276998; }
 html.light .ml .doc-title,
-html.light .ml .doc-title a { color: #276998;  }
+html.light .ml .doc-title a { color: #555;  }
 
 
   /* dark mode */
 html.dark { background: #151515; }
-html.dark .ml a { color:#9aacc7 }
+html.dark .ml a { color:#ad955f }
 html.dark,
 html.dark .ml .a-text-style a { color:#999; text-decoration: none }
 html.dark .ml .x-tag { border-color:#333; }
 html.dark table td,
 html.dark table th,
-html.dark .basic-border-color { border-color: #282828 }
+html.dark .basic-border-color { border-color: #151515 }
 html.dark ::-webkit-scrollbar-track{ background-color:#222 }
 html.dark ::-webkit-scrollbar-thumb{ background-color:rgba(120, 120, 120, 0.3) }
 html.dark ::-webkit-scrollbar-thumb:hover{ background-color:rgba(180, 180, 180, 0.3) }
@@ -304,7 +303,7 @@ html.dark #nav { background: #1d1d1d }
 html.dark #nav-tool .sign { color:#555; }
 html.dark #nav-tool,
 html.dark #nav-tool a { color:#999 }
-html.dark .base-mat { border:1px solid #333 }
+html.dark .base-mat {  }
 html.dark .mono-area input[type=text],
 html.dark .mono-area input[type=password],
 html.dark .mono-area input[type=text]:-webkit-autofill,
@@ -320,7 +319,6 @@ html.dark .popup-background .popup-box { background: #000; border:1px solid #276
 html.dark .popup-background .popup-box input[type=password] { border:1px solid #444 }
 html.dark .search-box input[type=text] { border:4px solid #444; }
 html.dark .search-box input[type=button] { border:0; color:#aaa; background: #444 }
-html.dark .ml .doc-title { border-bottom: 1px solid #aaa; }
 html.dark .ml .doc-title,
 html.dark .ml .doc-title a { color: #999;  }
 

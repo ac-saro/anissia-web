@@ -4,7 +4,9 @@
     <table class="topics">
       <tr v-for="node in list" :key="node.topicNo">
         <td class="title">
-          <router-link :to="`/${ticker}?topicNo=${node.topicNo}`">{{node.title}} {{node.postCount ? '('+node.postCount+')' : ''}}</router-link>
+          <div>
+            <router-link :to="`/${ticker}?topicNo=${node.topicNo}`">{{node.title}} {{node.postCount ? '('+node.postCount+')' : ''}}</router-link>
+          </div>
         </td>
         <td class="date mob-hide">{{norDate(node)}}</td>
       </tr>
@@ -39,9 +41,10 @@ export default class BoardRecent extends Vue {}
 <style>
 .bbs-recent { padding-top:4px; }
 .bbs-recent .topics { width:100%; }
-.bbs-recent .topics td { padding:12px 10px; font-size:14px; height:40px; line-height: 1.5; border-bottom-width: 1px }
-.bbs-recent .topics td.title { padding:0 0 0 8px; }
-.bbs-recent .topics td.date { padding:0 8px 0 0; text-align:right; }
+.bbs-recent .topics td { padding:12px 10px; font-size:14px; height:40px; line-height: 1.5; border-width: 1px 0 0;  }
+.bbs-recent .topics td.title { padding:4px 0 4px 8px; width:calc(100% - 96px); max-width: 0; }
+.bbs-recent .topics td.title > div { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bbs-recent .topics td.date { padding:0 8px 0 0; text-align:right; width:80px; }
 .bbs-recent .topics .empty { text-align: center; padding:90px 0; }
 
 @media (max-width: 500px) {
@@ -49,6 +52,5 @@ export default class BoardRecent extends Vue {}
 }
 
 html.light .bbs-recent .topics td a { color:#444 }
-
 html.dark .bbs-recent .topics td a { color:#999 }
 </style>

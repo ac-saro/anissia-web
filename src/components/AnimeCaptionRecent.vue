@@ -59,7 +59,7 @@ export default class AnimeCaptionRecent extends Vue {
 <style>
 .anime-caption-recent { padding:0 0 16px; }
 .anime-caption-recent table { width:100%; }
-.anime-caption-recent table td { height:28px; padding:10px 8px; font-size:14px; border-width:0 0 1px; line-height: 1.8 }
+.anime-caption-recent table td { height:28px; padding:10px 8px; font-size:14px; border-width:1px 0 0; line-height: 1.8 }
 .anime-caption-recent table td.name { text-align: right }
 .anime-caption-recent table td.main-td .sub-info { margin:8px 0 0 1px; }
 

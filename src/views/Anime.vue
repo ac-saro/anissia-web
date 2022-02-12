@@ -8,11 +8,8 @@
       </div>
       <div class="basic-layout-main" id="anime">
         <div class="base-mat">
-
-          <div class="doc-title">애니메이션 정보</div>
-
           <!-- view -->
-          <div v-if="anime" class="view">
+          <div v-if="anime" class="view basic-border-color">
             <div v-if="anime.animeNo">
               <div class="title">{{anime.subject}}</div>
               <div class="anime-view">
@@ -250,20 +247,20 @@ export default class Anime extends Vue {
 
 <style>
 
-#anime .base-mat { padding: 8px; }
+#anime .base-mat { }
 #anime .anime-view-error { font-size:24px; text-align: center; line-height: 2; margin:50px 0 70px; }
 #anime .anime-empty { text-align: center; padding: 200px 0; }
 
 #anime table { }
 #anime table.list { margin-top:6px;  width:100% }
 #anime table.list th { height:40px;  }
-#anime table.list td { font-size:13px; padding:10px 4px; border-top-width: 1px; line-height: 1.5 }
+#anime table.list td { font-size:13px; padding:10px 4px; border-width: 1px 0; line-height: 1.5 }
 #anime table.list td.anime-no { text-align: center; width:60px; }
 #anime table.list td div.subject { font-size:15px; padding-top:2px; }
 #anime table.list td div.info { padding:4px 0 2px; }
 #anime table.list tr.sel td { font-weight: bold }
 
-#anime .view { padding: 8px 8px 40px; }
+#anime .view { padding: 0 8px 40px; border-bottom-width:1px }
 #anime .view table.view-info { min-width:400px }
 #anime .view .title { line-height: 2; font-size:20px; font-weight: bold; padding:8px 2px 12px; }
 #anime .view .in-tag:not(:first-child):before { content: ', ' }
@@ -272,9 +269,9 @@ export default class Anime extends Vue {
 #anime .view .caption table th,
 #anime .view .caption table td { border-width: 1px; padding:8px 16px; text-align: center }
 
-#anime .search { padding: 40px 40px; }
+#anime .search { padding: 6px 0 0; }
 #anime .search .search-box { }
-#anime .search .search-box input { width:100%; height:40px; padding:0 8px; font-size:16px; }
+#anime .search .search-box input { width:100%; height:40px; padding:0 8px; font-size:16px; border:0 }
 #anime .search .autocorrect { height:0; font-size:15px; }
 #anime .search .autocorrect .autocorrect-box { position: relative; backdrop-filter:blur(3px);border-width: 0 1px 1px;}
 #anime .search .autocorrect div.node { padding:8px 12px; }

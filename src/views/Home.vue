@@ -89,7 +89,7 @@ export default class Home extends Vue {
 </script>
 
 <style>
-#home .base-mat { padding: 8px 8px 0; }
+#home .base-mat { padding: 6px 0 0; }
 #home .active-panel-wrap { padding-bottom: 16px; }
 
 @media (max-width:800px) {

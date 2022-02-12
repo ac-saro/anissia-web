@@ -25,5 +25,5 @@ export default class Notice extends Vue {}
 </script>
 
 <style>
-#notice .base-mat { padding: 8px; }
+#notice .base-mat { padding: 8px 0; }
 </style>
